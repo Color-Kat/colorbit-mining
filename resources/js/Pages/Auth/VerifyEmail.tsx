@@ -1,7 +1,7 @@
 import { InertiaLink, useForm, Head } from '@inertiajs/inertia-react';
 import classNames from 'classnames';
 import React from 'react';
-import useRoute from '@/Hooks/useRoute';
+import useRoute from '@hooks/useRoute';
 import JetAuthenticationCard from '@/Jetstream/AuthenticationCard';
 import JetButton from '@/Jetstream/Button';
 

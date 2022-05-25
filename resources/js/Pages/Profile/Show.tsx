@@ -4,7 +4,7 @@ import LogoutOtherBrowserSessions from '@/Domains/Profile/LogoutOtherBrowserSess
 import TwoFactorAuthenticationForm from '@/Domains/Profile/TwoFactorAuthenticationForm';
 import UpdatePasswordForm from '@/Domains/Profile/UpdatePasswordForm';
 import UpdateProfileInformationForm from '@/Domains/Profile/UpdateProfileInformationForm';
-import useTypedPage from '@/Hooks/useTypedPage';
+import useTypedPage from '@hooks/useTypedPage';
 import JetSectionBorder from '@/Jetstream/SectionBorder';
 import AppLayout from '@/Layouts/AppLayout';
 import { Session } from '@/types';

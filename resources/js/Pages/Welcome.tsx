@@ -1,7 +1,7 @@
 import { InertiaLink } from '@inertiajs/inertia-react';
 import React from 'react';
-import useRoute from '@/Hooks/useRoute';
-import useTypedPage from '@/Hooks/useTypedPage';
+import useRoute from '@hooks/useRoute';
+import useTypedPage from '@hooks/useTypedPage';
 import { Head } from '@inertiajs/inertia-react';
 
 interface Props {

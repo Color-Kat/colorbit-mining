@@ -1,7 +1,7 @@
 import axios from 'axios';
 import classNames from 'classnames';
 import React, { PropsWithChildren, useRef, useState } from 'react';
-import useRoute from '@/Hooks/useRoute';
+import useRoute from '@hooks/useRoute';
 import JetButton from '@/Jetstream/Button';
 import JetDialogModal from '@/Jetstream/DialogModal';
 import JetInput from '@/Jetstream/Input';

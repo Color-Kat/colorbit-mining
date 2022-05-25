@@ -1,17 +1,34 @@
 {
-  "compilerOptions": {
-    "target": "es5",
-    "module": "commonjs",
-    "jsx": "react",
-    "rootDir": "./resources/js",
-    "strict": true,
-    "esModuleInterop": true,
-    "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true,
-    "paths": {
-      "@/*": ["./resources/js/*"],
-      "@/components/*": ["./resources/js/components/*"],
-      "@/hooks/*": ["./resources/js/hooks/*"],
+    "compilerOptions": {
+        "target": "es5",
+        "module": "commonjs",
+        "jsx": "react",
+        "rootDir": "./resources/js",
+        "strict": true,
+        "esModuleInterop": true,
+        "skipLibCheck": true,
+        "forceConsistentCasingInFileNames": true,
+//        "baseUrl": "./resources/js",
+        "paths": {
+            "@/*": [
+                "./resources/js/*"
+            ],
+            "@components/*": [
+                "./resources/js/components/*"
+            ],
+            "@hooks/*": [
+                "./resources/js/hooks/*"
+            ]
+
+//                    "@/*": [
+//                        "*"
+//                    ],
+//                    "@hooks/*": [
+//                        "hooks/*"
+//                    ],
+//                    "@components/*": [
+//                        "components/*"
+//                    ]
+        }
     }
-  }
 }

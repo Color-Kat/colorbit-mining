@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOMServer from 'react-dom/server';
 import { createInertiaApp } from '@inertiajs/inertia-react';
 import createServer from '@inertiajs/server';
-import { RouteContext } from '@/Hooks/useRoute';
+import { RouteContext } from '@hooks/useRoute';
 import route from 'ziggy-js';
 
 const appName = 'Laravel';
