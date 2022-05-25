@@ -12,17 +12,22 @@ const mix = require('laravel-mix');
  */
 
 mix
-  .ts('resources/js/app.tsx', 'public/js')
-  .react()
-  .postCss('resources/css/app.css', 'public/css', [
-    require('postcss-import'),
-    require('tailwindcss'),
-    require('autoprefixer'),
-  ])
-  .alias({
-    '@': 'resources/js',
-  });
+    .ts('resources/js/app.tsx', 'public/js')
+    .react()
+    .postCss('resources/css/app.css', 'public/css', [
+        require('postcss-import'),
+        require('tailwindcss'),
+        require('autoprefixer'),
+    ])
+    .alias({
+        '@': 'resources/js',
+        '@hooks': 'resources/js/hooks',
+        '@components': 'resources/js/components',
+    })
+    .browserSync();
 
 if (mix.inProduction()) {
-  mix.version();
+    mix.version();
+} else {
+    mix.sourceMaps();
 }
