@@ -38,10 +38,10 @@ export default function JetDropdown({
 
       {/* <!-- Full Screen Dropdown Overlay --> */}
       <div
-        className="fixed inset-0 z-40"
+        className="fixed inset-0"
         style={{ display: open ? 'block' : 'none' }}
         onClick={() => setOpen(false)}
-      ></div>
+      />
 
       <Transition
         show={open}
