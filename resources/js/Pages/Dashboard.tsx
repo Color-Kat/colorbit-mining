@@ -1,8 +1,11 @@
 import React from 'react';
 import Welcome from '@/Jetstream/Welcome';
 import AppLayout from '@/Layouts/AppLayout';
+import {usePage} from "@inertiajs/inertia-react";
 
 export default function Dashboard() {
+
+    console.log(usePage())
   return (
     <AppLayout
       title="Dashboard"
