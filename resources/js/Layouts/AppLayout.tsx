@@ -48,8 +48,7 @@ export default function AppLayout({
 
     return (
         <div>
-            <Head><title>{title}</title></Head>
-
+            <Head title={title}></Head>
             <JetBanner/>
 
             <div className="min-h-screen bg-gray-100">
@@ -75,8 +74,8 @@ export default function AppLayout({
                                     </JetNavLink>
 
                                     <JetNavLink
-                                        href={route('dashboard')}
-                                        active={route().current('dashboard')}
+                                        href={route('welcome')}
+                                        active={route().current('welcome')}
                                     >
                                         Avito
                                     </JetNavLink>

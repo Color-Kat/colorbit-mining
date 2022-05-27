@@ -972,12 +972,6 @@ select {
 .z-10 {
   z-index: 10;
 }
-.z-40 {
-  z-index: 40;
-}
-.z-30 {
-  z-index: 30;
-}
 .col-span-6 {
   grid-column: span 6 / span 6;
 }
