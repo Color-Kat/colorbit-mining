@@ -1,15 +1,17 @@
 import React from 'react';
 
-const Main: React.FC<{children: React.ReactElement}> = ({children}) => {
+const Main: React.FC<{ children: React.ReactElement }> = ({children}) => {
 
     return (
-        <div
-            className="bg-red-100"
+        <main
+            className="flex-auto flex-shrink-0 flex justify-center  bg-slate-700"
         >
 
-            {children}
+            <div className="container px-2 sm:px-5 flex justify-center">
+                {children}
+            </div>
 
-        </div>
+        </main>
     );
 }
 

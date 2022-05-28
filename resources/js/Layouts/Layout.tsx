@@ -7,7 +7,7 @@ const Layout: React.FC<{children: React.ReactElement}> = ({children}) => {
 
     return (
         <div
-            className="min-h-screen bg-gray-100"
+            className="flex flex-col h-screen overflow-auto overflow-x-hidden"
         >
 
             <Header />
