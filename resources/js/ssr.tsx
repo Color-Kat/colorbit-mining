@@ -4,6 +4,7 @@ import { createInertiaApp } from '@inertiajs/inertia-react';
 import createServer from '@inertiajs/server';
 import { RouteContext } from '@hooks/useRoute';
 import route from 'ziggy-js';
+import Layout from './Layouts/Layout';
 
 const appName = 'Laravel';
 
@@ -12,7 +13,12 @@ createServer(page =>
     page,
     render: ReactDOMServer.renderToString,
     title: title => `${title} - ${appName}`,
-    resolve: name => require(`./Pages/${name}.tsx`),
+    // resolve: name => require(`./Pages/${name}.tsx`),
+    resolve: name => {
+      const page = require(`./Pages/${name}.tsx`).default;
+      page.layout = page.layout || ((page: React.ReactElement) => <Layout children={page} />);
+      return page;
+  },
     setup: ({ App, props }) => {
       const ssrRoute = (name: any, params: any, absolute: any, config: any) => {
         return route(name, params, absolute, {

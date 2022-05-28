@@ -7,9 +7,9 @@
     "watch-poll": "mix watch -- --watch-options-poll=1000",
     "hot": "mix watch --hot",
     "prod": "npm run production",
-    "ssr": "mix watch --mix-config=webpack.ssr.mix.js",
+    "ssr": "mix --mix-config=webpack.ssr.mix.js",
     "routes": "php artisan ziggy:generate",
-    "production": "mix --production --mix-config=webpack.ssr.mix.js && mix --production"
+    "production": "mix --production --mix-config=webpack.ssr.mix.js && mix --production && node public/js/ssr.js"
   },
   "devDependencies": {
     "@babel/preset-react": "^7.17.12",
