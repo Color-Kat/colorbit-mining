@@ -1,13 +1,13 @@
 import React from 'react';
 
-const Header: React.FC<{children: React.ReactElement}> = ({children}) => {
+const Header: React.FC = () => {
 
     return (
         <header
             className=""
         >
 
-            {children}
+            Header
 
         </header>
     );

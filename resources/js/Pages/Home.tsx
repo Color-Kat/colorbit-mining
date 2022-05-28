@@ -2,29 +2,18 @@ import {InertiaLink, Link, usePage} from '@inertiajs/inertia-react';
 import React from 'react';
 import useRoute from '@hooks/useRoute';
 import useTypedPage from '@hooks/useTypedPage';
-import {Head} from '@inertiajs/inertia-react';
 import CLink from "../components/CLink";
 import Main from "../components/Main";
+import AppLayout from "../Layouts/AppLayout";
+import {IPage} from "../types/IPage";
 
 interface Props {
-    canLogin: boolean;
-    canRegister: boolean;
-    laravelVersion: string;
-    phpVersion: string;
+
 }
 
-export default function Welcome({
-                                    canLogin,
-                                    canRegister,
-                                    laravelVersion,
-                                    phpVersion,
-                                }: Props) {
+const Home: IPage = () => {
     const route = useRoute();
     const page = useTypedPage();
-
-    console.log(usePage())
-
-
     return (
         <Main>
 
@@ -33,3 +22,7 @@ export default function Welcome({
         </Main>
     );
 }
+
+// Home.layout = (page) => <AppLayout title="123" children={page} />;
+
+export default Home;
