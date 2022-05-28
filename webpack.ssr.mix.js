@@ -6,6 +6,7 @@ mix.ts('resources/js/ssr.tsx', 'public/js')
     .alias({
         '@': 'resources/js',
         '@hooks': 'resources/js/hooks',
+        '@assets': 'resources/js/assets',
         '@components': 'resources/js/components',
     })
     .webpackConfig({

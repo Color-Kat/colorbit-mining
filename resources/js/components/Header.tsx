@@ -1,7 +1,34 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
+import useRoute from '@/hooks/useRoute';
+import CLink from './CLink';
+
+// Assets
+import logo from '@assets/logo.png';
+
+const HeaderLink: React.FC<{ name: string, children: string }> = ({ name, children }) => {
+    const route = useRoute();
+    const isActive = route().current() === name;
+
+    return (
+        <CLink href={route(name)}>
+            <span
+                className={`
+                    font-play mx-3 text-lg text-gray-400 hover:text-gray-200
+                    ${isActive ? 'text-gray-200' : ''}
+                `}
+            >{children}</span>
+        </CLink>
+    );
+}
 
 const Header: React.FC = () => {
     const [showMobileMenu, setShowMobileMenu] = useState(false);
+
+    const linksList = [
+        { name: 'home', text: 'Ферма' },
+        { name: 'welcome', text: 'Магазины' },
+        { name: 'dashboard', text: 'Кошелёк' },
+    ]
 
     function toggleMenu() { setShowMobileMenu(prev => !prev) }
 
@@ -10,17 +37,18 @@ const Header: React.FC = () => {
     // }, [location]);
 
     return (
-        <header className="flex sticky top-0  w-full h-16 bg-slate-800 justify-center text-slate-400 shadow-xl z-10">
+        <header className="flex sticky top-0 w-full h-16 justify-center shadow-xl z-10 app-bg-dark text-app-light">
             <div className="container flex items-center justify-between px-5 z-30">
-                <a href="/">
-                    <img src="/assets/logo.png" alt="" className="h-12" />
-                </a>
+                <CLink href="/">
+                    <img src={logo} alt="ColorBit" className="h-11" />
+                </CLink>
 
-                {/* Conputer menu */}
+                {/* Computer menu */}
                 <nav className="hidden md:block">
                     <ul className="flex">
-                        <a href="/">Главная</a>
-                        <a href="/auctions">Аукционы</a>
+                        {linksList.map((link, i) => (
+                            <HeaderLink name={link.name} key={i}>{link.text}</HeaderLink>
+                        ))}
                     </ul>
                 </nav>
 
@@ -28,17 +56,14 @@ const Header: React.FC = () => {
                 {/* hover:text-slate-300 */}
 
                 {/* Mobile menu */}
-
                 <div
                     onClick={toggleMenu}
                     id="mobile-menu-toggle"
-                    className="flex md:hidden py-1  bg-gradient-to-r from-cyan-500 to-blue-500 w-8 h-8 rounded-md flex-col items-center justify-evenly hover:bg-sky-700">
-                    <div className="w-4/6 h-1 rounded bg-slate-200 hover:bg-slate-300"></div>
-                    <div className="w-4/6 h-1 rounded bg-slate-200 hover:bg-slate-300"></div>
-                    <div className="w-4/6 h-1 rounded bg-slate-200 hover:bg-slate-300"></div>
+                    className="relative flex md:hidden py-1 w-8 h-8 rounded-md flex-col items-center justify-evenly">
+                    <div className={`w-4/6 h-0.5 rounded app-bg-red transition-all ${showMobileMenu ? 'absolute rotate-45 top-1/2' : ''}`}></div>
+                    <div className={`w-4/6 h-0.5 rounded app-bg-red transition-all ${showMobileMenu ? 'absolute hidden' : ''}`}></div>
+                    <div className={`w-4/6 h-0.5 rounded app-bg-red transition-all ${showMobileMenu ? 'absolute -rotate-45 top-1/2' : ''}`}></div>
                 </div>
-
-
             </div>
 
             {/* Mobile menu */}
@@ -49,9 +74,9 @@ const Header: React.FC = () => {
                     `}
             >
                 <ul className="flex flex-col pl-5 ">
-                    <a href="/">Главная</a>
-                    <a href="/auctions">Аукционы</a>
-
+                    {linksList.map((link, i) => (
+                        <HeaderLink name={link.name} key={i}>{link.text}</HeaderLink>
+                    ))}
                 </ul>
 
                 <span className="text-center w-full absolute bottom-5">

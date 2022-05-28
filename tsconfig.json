@@ -13,6 +13,9 @@
             "@/*": [
                 "./resources/js/*"
             ],
+            "@assets/*": [
+                "./resources/js/assets/*"
+            ],
             "@components/*": [
                 "./resources/js/components/*"
             ],

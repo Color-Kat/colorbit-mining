@@ -1,4 +1,5 @@
 const mix = require('laravel-mix');
+const tailwindcss = require('tailwindcss');
 
 /*
  |--------------------------------------------------------------------------
@@ -14,17 +15,26 @@ const mix = require('laravel-mix');
 mix
     .ts('resources/js/app.tsx', 'public/js')
     .react()
-    .postCss('resources/css/app.css', 'public/css', [
-        require('postcss-import'),
-        require('tailwindcss'),
-        require('autoprefixer'),
-    ])
+    // .postCss('resources/css/app.css', 'public/css', [
+    //     require('postcss-import'),
+    //     require('tailwindcss'),
+    //     require('autoprefixer'),
+    // ])
+    .sass('resources/css/app.scss', 'public/css')
+    .options({
+        postCss: [
+            tailwindcss('./tailwind.config.js'),
+            require('postcss-import'),
+            require('autoprefixer'),
+        ]
+    })
     .alias({
         '@': 'resources/js',
+        '@assets': 'resources/js/assets',
         '@hooks': 'resources/js/hooks',
         '@components': 'resources/js/components',
     })
-    .browserSync();
+    .browserSync({injectChanges: true});
 
 if (mix.inProduction()) {
     mix.version();

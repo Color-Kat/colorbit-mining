@@ -1,0 +1,37 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+@import url('https://fonts.googleapis.com/css2?family=Play:wght@400;700&family=Roboto:wght@300;400;500;700&display=swap');
+
+.app-bg-red{
+    background: #CC3824;
+}
+
+.app-bg-dark{
+    background: #121212;
+}
+
+.app-bg{
+    background: #2B2B2B;
+}
+
+.text-app-light {
+    color: #E6E6E6;
+}
+
+.text-app{
+    color: #C9C9C9;
+}
+
+.text-app-dark{
+    color: #5B5B5B;
+}
+
+.font-play {
+    font-family: 'Play', sans-serif;
+}
+
+.font-roboto {
+    font-family: 'Roboto', sans-serif;
+}
