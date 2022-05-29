@@ -14,6 +14,9 @@ interface Props {
 const Home: IPage = () => {
     const route = useRoute();
     const page = useTypedPage();
+
+    console.log('render');
+
     return (
         <>
 
@@ -25,4 +28,4 @@ const Home: IPage = () => {
 
 // Home.layout = (page) => <AppLayout title="123" children={page} />;
 
-export default Home;
+export default (Home);
