@@ -4,7 +4,6 @@ import Main from "../components/Main";
 import Footer from "../components/Footer";
 
 const Layout: React.FC<{children: React.ReactElement}> = ({children}) => {
-
     return (
         <div
             className="flex flex-col h-screen overflow-auto overflow-x-hidden"
@@ -22,4 +21,4 @@ const Layout: React.FC<{children: React.ReactElement}> = ({children}) => {
     );
 }
 
-export default Layout;
+export default React.memo(Layout);

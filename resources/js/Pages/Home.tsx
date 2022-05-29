@@ -15,11 +15,11 @@ const Home: IPage = () => {
     const route = useRoute();
     const page = useTypedPage();
     return (
-        <Main>
+        <>
 
             <CLink href='/dashboard'>123123</CLink>
 
-        </Main>
+        </>
     );
 }
 

@@ -1,12 +1,10 @@
-import React from 'react';
+import React, {memo} from 'react';
 
-// TODO
-// @ts-ignore
 import logo from '@assets/logo.png';
 import CLink from './CLink';
 import useRoute from '@/hooks/useRoute';
 
-const FooterLink: React.FC<{ name: string, children: string }> = ({ name, children }) => {
+const FooterLink: React.FC<{ name: string, children: string }> = memo(({ name, children }) => {
     const route = useRoute();
 
     return (
@@ -18,7 +16,7 @@ const FooterLink: React.FC<{ name: string, children: string }> = ({ name, childr
             </CLink>
         </li>
     );
-}
+});
 
 const Footer: React.FC = () => {
     const linksList = [
@@ -62,4 +60,4 @@ const Footer: React.FC = () => {
     );
 }
 
-export default Footer;
+export default memo(Footer);
