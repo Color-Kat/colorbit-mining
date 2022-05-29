@@ -3,6 +3,8 @@ import useRoute from '@/hooks/useRoute';
 import CLink from './CLink';
 
 // Assets
+// TODO
+// @ts-ignore
 import logo from '@assets/logo.png';
 
 const HeaderLink: React.FC<{ name: string, children: string }> = ({ name, children }) => {
@@ -10,10 +12,11 @@ const HeaderLink: React.FC<{ name: string, children: string }> = ({ name, childr
     const isActive = route().current() === name;
 
     return (
-        <CLink href={route(name)}>
+        <CLink href={route(name)} className="relative mx-2 overflow-hidden rounded-lg flex justify-center">
+            <span className={`absolute bottom-0 bg-red-600 h-0.5 transition-all ${isActive ? 'w-full' : 'w-0 '}`}></span>
             <span
                 className={`
-                    font-play mx-3 text-lg text-gray-400 hover:text-gray-200
+                    font-play text-lg text-gray-400 hover:text-gray-200 px-4 pb-1
                     ${isActive ? 'text-gray-200' : ''}
                 `}
             >{children}</span>
@@ -26,7 +29,7 @@ const Header: React.FC = () => {
 
     const linksList = [
         { name: 'home', text: 'Ферма' },
-        { name: 'welcome', text: 'Магазины' },
+        { name: 'farms', text: 'Магазины' },
         { name: 'dashboard', text: 'Кошелёк' },
     ]
 

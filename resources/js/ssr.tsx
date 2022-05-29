@@ -18,7 +18,7 @@ createServer(page =>
       const page = require(`./Pages/${name}.tsx`).default;
       page.layout = page.layout || ((page: React.ReactElement) => <Layout children={page} />);
       return page;
-  },
+    },
     setup: ({ App, props }) => {
       const ssrRoute = (name: any, params: any, absolute: any, config: any) => {
         return route(name, params, absolute, {

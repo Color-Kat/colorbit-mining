@@ -19,6 +19,10 @@ Route::get('/', function () {
     return Inertia::render('Home');
 })->name('home');
 
+Route::get('/farms', function () {
+    return Inertia::render('Farms');
+})->name('farms');
+
 
 Route::get('/welcome', function () {
     return Inertia::render('Welcome', [

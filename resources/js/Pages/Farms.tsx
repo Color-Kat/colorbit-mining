@@ -1,0 +1,28 @@
+import { InertiaLink, Link, usePage } from '@inertiajs/inertia-react';
+import React from 'react';
+import useRoute from '@hooks/useRoute';
+import useTypedPage from '@hooks/useTypedPage';
+import CLink from "../components/CLink";
+import Main from "../components/Main";
+import AppLayout from "../Layouts/AppLayout";
+import { IPage } from "../types/IPage";
+
+interface Props {
+
+}
+
+const Farms: IPage = () => {
+    const route = useRoute();
+    const page = useTypedPage();
+    return (
+        <Main>
+
+            <CLink href='/dashboard'>Farms</CLink>
+
+        </Main>
+    );
+}
+
+// Home.layout = (page) => <AppLayout title="123" children={page} />;
+
+export default Farms;
