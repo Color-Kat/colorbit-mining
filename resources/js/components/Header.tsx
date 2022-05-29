@@ -31,7 +31,7 @@ const Header: React.FC = () => {
         { name: 'home', text: 'Ферма' },
         { name: 'farms', text: 'Магазины' },
         { name: 'dashboard', text: 'Кошелёк' },
-    ]
+    ];
 
     function toggleMenu() { setShowMobileMenu(prev => !prev) }
 

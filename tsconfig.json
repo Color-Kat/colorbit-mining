@@ -22,16 +22,6 @@
             "@hooks/*": [
                 "./resources/js/hooks/*"
             ]
-
-//                    "@/*": [
-//                        "*"
-//                    ],
-//                    "@hooks/*": [
-//                        "hooks/*"
-//                    ],
-//                    "@components/*": [
-//                        "components/*"
-//                    ]
         }
     }
 }

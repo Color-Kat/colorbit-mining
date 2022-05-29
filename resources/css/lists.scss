@@ -1,0 +1,14 @@
+ul.list-red{
+    list-style: none;
+
+    li{
+        display: flex;
+        
+    }
+
+    li::before {
+        content: "•"; 
+        color: #CC3824;
+        display: inline-block;
+    }
+}
