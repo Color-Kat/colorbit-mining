@@ -24,6 +24,28 @@ Route::get('/farms', function () {
 })->name('farms');
 
 
+
+
+
+
+Route::prefix('shops')->group(function () {
+    Route::get('/', function () {
+        return '/shops';
+        return Inertia::render('Shops');
+    })->name('shops');
+
+    Route::get('/{slug}', function ($slug) {
+        return 'shops/' . $slug;
+        return Inertia::render('Shop');
+    })->name('shop');
+
+    Route::get('/{slug}/{productId}', function ($slug, $productId) {
+        return 'shops/' . $slug . '/' . $productId;
+        return Inertia::render('Product');
+    })->name('shop');
+});
+
+
 Route::get('/welcome', function () {
     return Inertia::render('Welcome', [
         'canLogin' => Route::has('login'),
