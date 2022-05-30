@@ -10,7 +10,7 @@ import JetInput from '@/Jetstream/Input';
 import JetInputError from '@/Jetstream/InputError';
 import JetLabel from '@/Jetstream/Label';
 import JetSecondaryButton from '@/Jetstream/SecondaryButton';
-import { User } from '@/types';
+import { User } from '@/types/types';
 
 interface Props {
   user: User;

@@ -7,7 +7,7 @@ import UpdateProfileInformationForm from '@/Domains/Profile/UpdateProfileInforma
 import useTypedPage from '@hooks/useTypedPage';
 import JetSectionBorder from '@/Jetstream/SectionBorder';
 import AppLayout from '@/Layouts/AppLayout';
-import { Session } from '@/types';
+import { Session } from '@/types/types';
 
 interface Props {
   sessions: Session[];

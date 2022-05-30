@@ -15,7 +15,7 @@ import JetInputError from '@/Jetstream/InputError';
 import JetLabel from '@/Jetstream/Label';
 import JetSecondaryButton from '@/Jetstream/SecondaryButton';
 import JetSectionBorder from '@/Jetstream/SectionBorder';
-import { ApiToken } from '@/types';
+import { ApiToken } from '@/types/types';
 
 interface Props {
   tokens: ApiToken[];

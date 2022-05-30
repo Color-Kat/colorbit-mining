@@ -9,7 +9,7 @@ import JetDialogModal from '@/Jetstream/DialogModal';
 import JetInput from '@/Jetstream/Input';
 import JetInputError from '@/Jetstream/InputError';
 import JetSecondaryButton from '@/Jetstream/SecondaryButton';
-import { Session } from '@/types';
+import { Session } from '@/types/types';
 
 interface Props {
   sessions: Session[];

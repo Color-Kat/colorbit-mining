@@ -10,7 +10,7 @@ import JetDropdown from '@/Jetstream/Dropdown';
 import JetDropdownLink from '@/Jetstream/DropdownLink';
 import JetNavLink from '@/Jetstream/NavLink';
 import JetResponsiveNavLink from '@/Jetstream/ResponsiveNavLink';
-import {Team} from '@/types';
+import {Team} from '@/types/types';
 
 interface Props {
     title: string;
