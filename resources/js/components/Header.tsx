@@ -44,7 +44,7 @@ const MobileHeaderLink: React.FC<{ name: string, children: string }> =
         );
     }
 
-const Header: React.FC = (() => {
+const Header: React.FC = memo(() => {
     const [showMobileMenu, setShowMobileMenu] = useState(false);
     const route = useRoute();
     const location = route().current();
@@ -62,12 +62,19 @@ const Header: React.FC = (() => {
         setShowMobileMenu(false);
     }, [location]);
 
+    const [count, setCount] = useState(0);
+    useEffect(() => {
+        console.log(count)
+    }, [count]);
+
     return (
         <header className="flex sticky top-0 w-full h-16 justify-center shadow-xl z-10 app-bg-dark text-app-light">
             <div className="container flex items-center justify-between px-5 z-30">
                 <CLink href="/">
                     <img src={logo} alt="ColorBit" className="md:h-11 h-8" />
                 </CLink>
+
+                {/*<button onClick={()=>{setCount(prev => (prev + 1))}}>+</button>*/}
 
                 {/* Computer menu */}
                 <nav className="hidden md:block">
