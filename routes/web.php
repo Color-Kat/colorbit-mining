@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ShopController;
+use App\Http\Controllers\ShopsListController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -29,20 +32,11 @@ Route::get('/farms', function () {
 
 
 Route::prefix('shops')->group(function () {
-    Route::get('/', function () {
-        return '/shops';
-        return Inertia::render('Shops');
-    })->name('shops');
+    Route::get('/', [ShopsListController::class, 'index'])->name('shops');
 
-    Route::get('/{slug}', function ($slug) {
-        return 'shops/' . $slug;
-        return Inertia::render('Shop');
-    })->name('shop');
+    Route::get('/{shop_slug}', [ShopController::class, 'index'])->name('shop');
 
-    Route::get('/{slug}/{productId}', function ($slug, $productId) {
-        return 'shops/' . $slug . '/' . $productId;
-        return Inertia::render('Product');
-    })->name('shop');
+    Route::get('/{shop_slug}/{product_slug}', [ProductController::class, 'index'])->name('product');
 });
 
 

@@ -50,8 +50,9 @@ const Header: React.FC = (() => {
     const location = route().current();
 
     const linksList = [
-        { name: 'home', text: 'Ферма' },
-        { name: 'farms', text: 'Магазины' },
+        { name: 'home', text: 'Главная' },
+        { name: 'farms', text: 'Ферма' },
+        { name: 'shops', text: 'Магазины' },
         { name: 'dashboard', text: 'Кошелёк' },
     ];
 

@@ -7,7 +7,7 @@ const Main: React.FC<{ children: React.ReactElement }> = ({ children }) => {
         <main
             className="flex-auto flex-shrink-0 flex justify-center app-bg"
         >
-            <div className="container px-2 sm:px-5 flex justify-center">
+            <div className="container px-2 sm:px-5 flex justify-center text-app">
                 {children}
             </div>
         </main>
