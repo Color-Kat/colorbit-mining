@@ -52,7 +52,7 @@
 - TDP
 - Power consumption
 - Count fans
-- Fans efficiency (чтобы считать нагрев
+- Fans efficiency (чтобы считать нагрев)
 - VRAM frequency
 - VRAM Type (GDDR5, GDDR6X)
 - Work time (из магазина 0, с авито, например, 200 часов)
@@ -67,8 +67,6 @@
 - Processor frequency (Чтобы рассчитывать, хватает ли процессор для видеокарты)
 - CPU power consumption
 - Number of RAM slots
-- Max RAM count
-- Max RAM frequency
 - Work time
 - Wear (износ - зависит от времени работы, температуры, загрузки)
 
@@ -124,7 +122,14 @@
 - Таблица, связывающая магазин и комплектующие - ассортимент магазина по сути.
 - При покупке id комплектующего, `work_time`, `wear`, `warranty` добавляются в таблицу user_parts.
 Потом пользователь сможет продать это на авито, а другой пользователь получить железку, у которой есть какое-то время работы.
-
-
-
+  
+### Нужные таблицы
+- users
+- parts
+- shops
+- shop_part
+- user_shop_part (stocks, purchased)
+- cart
+- wishlist
+- rigs
 
