@@ -15,6 +15,12 @@ return new class extends Migration
     {
         Schema::create('part_shop', function (Blueprint $table) {
             $table->id();
+
+            $table->foreignId('part_id');
+            $table->foreignId('shop_id');
+
+            $table->unsignedBigInteger('count')->default(0);
+
             $table->timestamps();
         });
     }

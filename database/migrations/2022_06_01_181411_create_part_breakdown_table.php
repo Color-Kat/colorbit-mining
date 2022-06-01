@@ -15,6 +15,10 @@ return new class extends Migration
     {
         Schema::create('part_breakdown', function (Blueprint $table) {
             $table->id();
+
+            $table->foreignId('part_id');
+            $table->foreignId('breakdown_id');
+
             $table->timestamps();
         });
     }

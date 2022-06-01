@@ -15,6 +15,10 @@ return new class extends Migration
     {
         Schema::create('havings', function (Blueprint $table) {
             $table->id();
+
+            $table->foreignId('part_shop_id');
+            $table->foreignId('user_id');
+
             $table->timestamps();
         });
     }
