@@ -15,7 +15,15 @@ return new class extends Migration
     {
         Schema::create('shops', function (Blueprint $table) {
             $table->id();
+
+            $table->string('name');
+            $table->string('description');
+
+            $table->time('delivery_time');
+            $table->boolean('warranty');
+
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

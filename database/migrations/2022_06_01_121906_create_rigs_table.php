@@ -15,6 +15,17 @@ return new class extends Migration
     {
         Schema::create('rigs', function (Blueprint $table) {
             $table->id();
+
+            $table->string('name');
+            $table->string('state')->default('stopped'); // Work, stopped, broken
+
+            // Parts
+            $table->foreignId('GPU_id')->nullable();
+            $table->foreignId('RAM_id')->nullable();
+            $table->foreignId('power_supply_id')->nullable();
+            $table->foreignId('platform_id')->nullable();
+            $table->foreignId('case_id')->nullable();
+
             $table->timestamps();
         });
     }
