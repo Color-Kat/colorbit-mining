@@ -26,7 +26,7 @@ return new class extends Migration
 //            $table->unsignedInteger('GPU_frequency')->nullable(); // GPU core frequency
             $table->unsignedInteger('GPU_VRAM_size')->nullable(); // Video RAM
             $table->unsignedInteger('GPU_VRAM_frequency')->nullable(); // Video RAM frequency
-            $table->unsignedInteger('GPU_VRAM_type')->nullable(); // Video RAM frequency
+            $table->string('GPU_VRAM_type')->nullable(); // Video RAM frequency
             $table->unsignedInteger('GPU_fans_count')->nullable(); // Power consumption
             $table->unsignedInteger('GPU_fan_efficiency')->nullable(); // Power consumption
 
