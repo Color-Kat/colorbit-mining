@@ -19,6 +19,8 @@ return new class extends Migration
             $table->foreignId('part_shop_id');
             $table->foreignId('user_id');
 
+            $table->unsignedInteger('wear')->default(0); // Wear of part
+
             $table->timestamps();
         });
     }

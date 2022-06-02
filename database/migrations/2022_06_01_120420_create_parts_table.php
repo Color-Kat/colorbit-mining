@@ -23,7 +23,7 @@ return new class extends Migration
             $table->bigInteger('price')->unsigned(); // USD
 
             // Common properties
-            $table->unsignedInteger('wear')->default(0); // Wear of part
+//            $table->unsignedInteger('wear')->default(0); // Wear of part
             $table->unsignedInteger('TDP')->nullable();
             $table->unsignedInteger('power')->nullable(); // Power consumption
 

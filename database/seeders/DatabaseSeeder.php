@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\Breakdown;
 use App\Models\Part;
 use App\Models\Shop;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -89,6 +90,25 @@ class DatabaseSeeder extends Seeder
                     'breakdown_id' => $breakdown_id === 1 ? $breakdown_id + 1 : $breakdown_id - 1
                 ]);
             }
+        }
+
+        // Users
+        User::factory()->create([
+            'name' => 'ColorKat',
+            'email' => 'coco@co.co',
+            'email_verified_at' => now(),
+            'money' => rand(1000, 10000),
+            'password' => '$2y$10$7EydzZ2Uxx5Q9tm1zvLw4efStZvYHpQBgRZ1SbHCdVAl9Mzk1RP6G', // coco12
+            'remember_token' => Str::random(10),
+        ]);
+
+        // Havings table
+        for($i = 1; $i < 10; $i++) {
+            DB::table('havings')->insert([
+                'part_shop_id' => rand(1, 50),
+                'user_id' => 1,
+                'wear' => rand(0, 30)
+            ]);
         }
     }
 }
