@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Breakdown;
 use App\Models\Part;
 use App\Models\Shop;
 use Carbon\Carbon;
@@ -50,11 +51,25 @@ class DatabaseSeeder extends Seeder
         ]);
 
         // Part shop table
-        for($i=1; $i< 71; $i++) {
+        for($i = 1; $i < 71; $i++) {
             DB::table('part_shop')->insert([
                 'part_id' => $i,
                 'shop_id' => rand(1,3),
                 'count' => rand(1, 100)
+            ]);
+        }
+
+        // Breakdowns
+        $breakdowns = ['Перегрев', 'Отвал', 'Взрыв', 'Сломался вентилятор'];
+        $breakdown_conditions = ['t>90', 't>100', 't>120', 'work_time>50'];
+
+        for($i = 0; $i < count($breakdowns); $i++) {
+            Breakdown::factory()->create([
+                'title' => $breakdowns[$i],
+                'description' => 'Some description',
+                'chance' => rand(30, 50), // In %
+                'repair_chance' => rand(30, 70), // In %
+                'condition' => $breakdown_conditions[$i]
             ]);
         }
     }
