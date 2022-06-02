@@ -72,5 +72,23 @@ class DatabaseSeeder extends Seeder
                 'condition' => $breakdown_conditions[$i]
             ]);
         }
+
+        // Breakdown_part table
+        for($i = 1; $i < 71; $i++) {
+            $breakdown_id = rand(1,count($breakdowns)-1);
+
+            DB::table('breakdown_part')->insert([
+                'part_id' => $i,
+                'breakdown_id' => $breakdown_id
+            ]);
+
+            // Add more breakdown
+            if(rand(0, 8) === 8) {
+                DB::table('breakdown_part')->insert([
+                    'part_id' => $i,
+                    'breakdown_id' => $breakdown_id === 1 ? $breakdown_id + 1 : $breakdown_id - 1
+                ]);
+            }
+        }
     }
 }

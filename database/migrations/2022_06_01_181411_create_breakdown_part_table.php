@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('part_breakdown', function (Blueprint $table) {
+        Schema::create('breakdown_part', function (Blueprint $table) {
             $table->id();
 
             $table->foreignId('part_id');
