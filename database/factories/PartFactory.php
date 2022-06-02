@@ -25,7 +25,7 @@ class PartFactory extends Factory
      */
     public function definition()
     {
-        $types = ['GPU', 'platform', 'RAM', 'case', 'power_supply'];
+        $types = ['GPU', 'platform', 'power_supply', 'RAM', 'case'];
         $type = $types[rand(0, count($types))];
 
         $name = $type . ' '. $this->faker->name();
@@ -35,7 +35,7 @@ class PartFactory extends Factory
             'slug' => Str::slug($name),
             'type' => $type,
             'vendor' => $this->faker->streetName(),
-            'price' => rand(55, 3999),
+            'price' => rand(45, 3999), // $$$
         ];
 
         $part = [];
@@ -52,6 +52,45 @@ class PartFactory extends Factory
                 ]);
 
                 break;
+
+            case 'platform':
+                $part = array_merge($base, [
+                    'platform_cors_count' => rand(1, 24),
+                    'platform_threads_count' => rand(1, 48),
+                    'platform_frequency' => rand(200, 500)/100, // GHz
+                    'power' => rand(25, 200), // Watt
+                ]);
+
+                break;
+
+            case 'power_supply':
+                $part = array_merge($base, [
+                    'power_supply' => rand(200, 3000), // Watt
+                    'power_supply_efficiency' => array_rand(['none', 'bronze', 'silver', 'gold', 'platinum'])
+                ]);
+
+                break;
+
+            case 'RAM':
+                $part = array_merge($base, [
+                    'RAM_frequency' => rand(1666, 3600),
+                    'RAM_size' => rand(1, 64), // GB
+                    'RAM_channels' => rand(1, 2),
+                    'power' => rand(2, 5) // Watt
+                ]);
+
+                break;
+
+            case 'case':
+                $part = array_merge($base, [
+                    'case_material' => array_rand(['wooden', 'aluminum']),
+                    'case_GPUs_count' => rand(1, 10),
+                    'case_critical_temp' => rand(80, 200)
+                ]);
+
+                break;
         }
+
+        return $part;
     }
 }
