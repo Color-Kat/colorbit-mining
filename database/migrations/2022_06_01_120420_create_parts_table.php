@@ -22,6 +22,11 @@ return new class extends Migration
             $table->string('vendor'); // Asus, MSI, Palit
             $table->bigInteger('price')->unsigned(); // USD
 
+            // Common properties
+            $table->unsignedInteger('wear')->default(0); // Wear of part
+            $table->unsignedInteger('TDP')->nullable();
+            $table->unsignedInteger('power')->nullable(); // Power consumption
+
             // For GPU
 //            $table->unsignedInteger('GPU_frequency')->nullable(); // GPU core frequency
             $table->unsignedInteger('GPU_VRAM_size')->nullable(); // Video RAM
@@ -49,11 +54,6 @@ return new class extends Migration
             $table->string('case_material')->nullable();
             $table->unsignedInteger('case_GPUs_count')->nullable();
             $table->unsignedInteger('case_critical_temp')->nullable(); // Max critical temperature for case
-
-            // Common properties
-            $table->unsignedInteger('wear')->default(0); // Wear of part
-            $table->unsignedInteger('TDP')->nullable();
-            $table->unsignedInteger('power')->nullable(); // Power consumption
 
             $table->softDeletes();
             $table->timestamps();
