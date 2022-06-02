@@ -23,8 +23,8 @@ return new class extends Migration
             $table->bigInteger('price')->unsigned(); // USD
 
             // For GPU
-            $table->unsignedInteger('GPU_frequency')->nullable(); // GPU core frequency
-            $table->unsignedInteger('GPU_VRAM')->nullable(); // Video RAM
+//            $table->unsignedInteger('GPU_frequency')->nullable(); // GPU core frequency
+            $table->unsignedInteger('GPU_VRAM_size')->nullable(); // Video RAM
             $table->unsignedInteger('GPU_VRAM_frequency')->nullable(); // Video RAM frequency
             $table->unsignedInteger('GPU_VRAM_type')->nullable(); // Video RAM frequency
             $table->unsignedInteger('GPU_fans_count')->nullable(); // Power consumption
