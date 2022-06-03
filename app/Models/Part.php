@@ -9,6 +9,10 @@ class Part extends Model
 {
     use HasFactory;
 
+    public function shops() {
+        return $this->belongsToMany(Shop::class);
+    }
+
     public function breakdowns() {
         return $this->belongsToMany(Breakdown::class);
     }

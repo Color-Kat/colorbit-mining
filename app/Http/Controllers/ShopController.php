@@ -16,7 +16,7 @@ class ShopController extends Controller
 //            }])
             ->first();
 
-        $parts = $shop->parts()->with('breakdowns')->paginate(3);
+        $parts = $shop->parts()->paginate(3);
 
         return Inertia::render('Shop', [
             'shop' => $shop,
