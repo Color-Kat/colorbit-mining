@@ -15,6 +15,7 @@ const ShopsList: IPage = () => {
     const route = useRoute();
     const page = useTypedPage();
 
+    console.log(page.props.shopsList)
 
     return (
         <>
