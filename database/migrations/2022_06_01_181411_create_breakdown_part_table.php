@@ -16,8 +16,8 @@ return new class extends Migration
         Schema::create('breakdown_part', function (Blueprint $table) {
             $table->id();
 
-            $table->foreignId('part_id');
-            $table->foreignId('breakdown_id');
+            $table->foreignId('part_id')->constrained()->onDelete('cascade');
+            $table->foreignId('breakdown_id')->constrained()->onDelete('cascade');
 
             $table->timestamps();
         });

@@ -15,17 +15,18 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
+
             $table->string('name');
             $table->string('email')->unique();
+            $table->foreignId('role_id')->default(1);
+            $table->bigInteger('money')->unsigned()->default(0);
+
+
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
             $table->string('profile_photo_path', 2048)->nullable();
             // $table->foreignId('current_team_id')->nullable();
-
-
-            $table->bigInteger('money')->unsigned()->default(0);
-
 
             $table->timestamps();
         });

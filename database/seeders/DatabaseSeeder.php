@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Breakdown;
 use App\Models\Part;
+use App\Models\Role;
 use App\Models\Shop;
 use App\Models\User;
 use Carbon\Carbon;
@@ -113,5 +114,16 @@ class DatabaseSeeder extends Seeder
                 'wear' => rand(0, 30)
             ]);
         }
+
+        // Roles
+        Role::factory()->create([
+            'name' => 'Без прав',
+            'slug' => 'none'
+        ]);
+
+        Role::factory()->create([
+            'name' => 'Администратор',
+            'slug' => 'admin'
+        ]);
     }
 }
