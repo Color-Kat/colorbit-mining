@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Part extends Model
 {
     use HasFactory;
+
+    public function breakdowns() {
+        return $this->belongsToMany(Breakdown::class);
+    }
 }
