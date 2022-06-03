@@ -30,6 +30,7 @@ class DatabaseSeeder extends Seeder
         // DNS
         Shop::factory()->create([
             'name' => 'DNS',
+            'slug' => Str::slug('DNS'),
             'description' => 'Russian magazine',
             'warranty' => true,
             'delivery_time' => '00:00:00' // In hours
@@ -38,6 +39,7 @@ class DatabaseSeeder extends Seeder
         // Avito
         Shop::factory()->create([
             'name' => 'Avito',
+            'slug' => Str::slug('Avito'),
             'description' => 'Russian used market',
             'warranty' => false,
             'delivery_time' => '12:00:00' // In hours
@@ -46,6 +48,7 @@ class DatabaseSeeder extends Seeder
         // Aliexpress
         Shop::factory()->create([
             'name' => 'Aliexpress',
+            'slug' => Str::slug('Aliexpress'),
             'description' => 'Chinese store',
             'warranty' => false,
             'delivery_time' => '36:00:00' // In hours

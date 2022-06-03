@@ -20,7 +20,7 @@ const ShopsList: IPage = () => {
     return (
         <>
 
-            <span>ShopsList</span>
+            <h3>ShopsList</h3>
 
         </>
     );
