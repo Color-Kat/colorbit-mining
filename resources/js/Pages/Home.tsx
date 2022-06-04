@@ -15,6 +15,7 @@ const Home: IPage = () => {
     const route = useRoute();
     const page = useTypedPage();
 
+    console.log(page)
 
     return (
         <>

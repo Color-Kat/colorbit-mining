@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Illuminate\Http\Request;
 use Inertia\Middleware;
+use Laravel\Jetstream\Jetstream;
 use Tightenco\Ziggy\Ziggy;
 
 class HandleInertiaRequests extends Middleware
@@ -37,6 +38,19 @@ class HandleInertiaRequests extends Middleware
         return array_merge(parent::share($request), [
             'ziggy' => function () {
                 return (new Ziggy)->toArray();
+            },
+
+            // It override standard jetStream inertia user object.
+            // Code is from vendor/laravel/jetstream/src/Http/Middleware/ShareInertiaData.php
+            'user' => function () use ($request) {
+                if (! $request->user()) {
+                    return null;
+                }
+
+                return array_merge(
+                    $request->user()->with('role')->first()->toArray(),
+                    ['two_factor_enabled' => ! is_null($request->user()->two_factor_secret)]
+                );
             },
         ]);
     }

@@ -19,9 +19,6 @@ class ShopController extends Controller
 
         $parts = $shop->parts()->paginate(3);
 
-        dump(Auth::user()->hasRole('admin'));
-
-
         return Inertia::render('Shop', [
             'shop' => $shop,
             'parts' => $parts
