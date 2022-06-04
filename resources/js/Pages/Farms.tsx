@@ -11,18 +11,19 @@ interface Props {
 
 }
 
-const Farms: IPage = () => {
+const Farms: IPage = React.memo(() => {
     const route = useRoute();
     const page = useTypedPage();
+
     return (
-        <Main>
+        <div>
 
             <CLink href='/dashboard'>Farms</CLink>
 
-        </Main>
+        </div>
     );
-}
+});
 
-// Home.layout = (page) => <AppLayout title="123" children={page} />;
+// Farms.layout = (page) => <AppLayout title="123" children={page} />;
 
 export default Farms;

@@ -16,6 +16,7 @@ createInertiaApp({
     resolve: name => {
         const page = require(`./Pages/${name}.tsx`).default;
         page.layout = page.layout || ((page: React.ReactElement) => <Layout children={page} />);
+
         return page;
     },
     setup({ el, App, props }) {

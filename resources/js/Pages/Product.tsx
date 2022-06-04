@@ -11,7 +11,7 @@ interface Props {
 
 }
 
-const Product: IPage = () => {
+const Product: IPage = React.memo(() => {
     const route = useRoute();
     const page = useTypedPage();
 
@@ -24,6 +24,6 @@ const Product: IPage = () => {
 
         </>
     );
-}
+});
 
 export default Product;

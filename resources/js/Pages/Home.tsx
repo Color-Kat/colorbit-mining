@@ -11,11 +11,9 @@ interface Props {
 
 }
 
-const Home: IPage = () => {
+const Home: IPage = React.memo(() => {
     const route = useRoute();
     const page = useTypedPage();
-
-    console.log(page)
 
     return (
         <>
@@ -24,7 +22,7 @@ const Home: IPage = () => {
 
         </>
     );
-}
+})
 
 // Home.layout = (page) => <AppLayout title="123" children={page} />;
 
