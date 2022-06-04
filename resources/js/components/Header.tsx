@@ -70,7 +70,7 @@ const Header: React.FC = memo(() => {
     }, [location]);
 
     return (
-        <header className="flex sticky top-0 w-full h-16 justify-center shadow-xl z-10 app-bg-dark text-app-light">
+        <header className="flex sticky top-0 w-full h-16 justify-center shadow-xl z-10 app-bg-dark text-app-light shrink-0">
             <div className="container flex items-center justify-between px-5 z-30">
                 <CLink href="/">
                     <img src={logo} alt="ColorBit" className="md:h-11 h-8" />
