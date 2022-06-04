@@ -21,14 +21,14 @@ export default function Show({
   const page = useTypedPage();
 
   return (
-    <AppLayout
-      title={'Profile'}
-      renderHeader={() => (
-        <h2 className="font-semibold text-xl text-gray-800 leading-tight">
-          Profile
-        </h2>
-      )}
-    >
+    // <AppLayout
+    //   title={'Profile'}
+    //   renderHeader={() => (
+    //     <h2 className="font-semibold text-xl text-gray-800 leading-tight">
+    //       Profile
+    //     </h2>
+    //   )}
+    // >
       <div>
         <div className="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
           {page.props.jetstream.canUpdateProfileInformation ? (
@@ -72,6 +72,6 @@ export default function Show({
           ) : null}
         </div>
       </div>
-    </AppLayout>
+    // </AppLayout>
   );
 }

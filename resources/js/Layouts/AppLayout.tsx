@@ -59,7 +59,7 @@ export default function AppLayout({
                             <div className="flex">
                                 {/* <!-- Logo --> */}
                                 <div className="flex-shrink-0 flex items-center">
-                                    <InertiaLink href={route('dashboard')}>
+                                    <InertiaLink href={route('home')}>
                                         <JetApplicationMark className="block h-9 w-auto"/>
                                     </InertiaLink>
                                 </div>
@@ -67,17 +67,17 @@ export default function AppLayout({
                                 {/* <!-- Navigation Links --> */}
                                 <div className="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                                     <JetNavLink
-                                        href={route('dashboard')}
-                                        active={route().current('dashboard')}
+                                        href={route('home')}
+                                        active={route().current('home')}
                                     >
-                                        Dashboard
+                                        home
                                     </JetNavLink>
 
                                     <JetNavLink
-                                        href={route('welcome')}
-                                        active={route().current('welcome')}
+                                        href={route('shops')}
+                                        active={route().current('shops')}
                                     >
-                                        Avito
+                                        shops
                                     </JetNavLink>
                                 </div>
                             </div>

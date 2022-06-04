@@ -28,9 +28,6 @@ Route::get('/farms', function () {
 
 
 
-
-
-
 Route::prefix('shops')->group(function () {
     Route::get('/', [ShopsListController::class, 'index'])->name('shops');
 
@@ -40,21 +37,12 @@ Route::prefix('shops')->group(function () {
 });
 
 
-Route::get('/welcome', function () {
-    return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-    ]);
-})->name('welcome');
-
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
     'verified',
 ])->group(function () {
-    Route::get('/dashboard', function () {
-        return Inertia::render('Dashboard');
-    })->name('dashboard');
+//    Route::get('/dashboard', function () {
+//        return Inertia::render('Dashboard');
+//    })->name('dashboard');
 });

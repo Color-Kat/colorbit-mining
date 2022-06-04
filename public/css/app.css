@@ -1148,6 +1148,9 @@ select{
 .w-screen{
   width: 100vw;
 }
+.w-9{
+  width: 2.25rem;
+}
 .min-w-0{
   min-width: 0px;
 }
@@ -1394,6 +1397,10 @@ select{
 .border-gray-700{
   --tw-border-opacity: 1;
   border-color: rgb(55 65 81 / var(--tw-border-opacity));
+}
+.border-red-500{
+  --tw-border-opacity: 1;
+  border-color: rgb(239 68 68 / var(--tw-border-opacity));
 }
 .bg-white{
   --tw-bg-opacity: 1;

@@ -1,15 +1,20 @@
-import React, {memo, useEffect, useState} from 'react';
+import React, {createContext, memo, useContext, useEffect, useState} from 'react';
 import useRoute from '@/hooks/useRoute';
 import CLink from './CLink';
 
 // Assets
 import logo from '@assets/logo.png';
+import {RouteContext} from "../hooks/useRoute";
+import route from "ziggy-js";
+import AccountButton from "./AccountButton";
 
 
 const HeaderLink: React.FC<{ name: string, children: string }> =
     ({ name, children }) => {
         const route = useRoute();
         const isActive = route().current() === name;
+
+        console.log('HeaderLink')
 
         return (
             <CLink href={route(name)} className="relative mx-2 overflow-hidden rounded-lg flex justify-center">
@@ -44,7 +49,7 @@ const MobileHeaderLink: React.FC<{ name: string, children: string }> =
         );
     }
 
-const Header: React.FC = (() => {
+const Header: React.FC = memo(() => {
     const [showMobileMenu, setShowMobileMenu] = useState(false);
     const route = useRoute();
     const location = route().current();
@@ -53,7 +58,7 @@ const Header: React.FC = (() => {
         { name: 'home', text: 'Главная' },
         { name: 'farms', text: 'Ферма' },
         { name: 'shops', text: 'Магазины' },
-        { name: 'dashboard', text: 'Кошелёк' },
+        { name: 'home', text: 'Кошелёк' },
     ];
 
     console.log('header')
@@ -79,6 +84,8 @@ const Header: React.FC = (() => {
                         ))}
                     </ul>
                 </nav>
+
+                <AccountButton />
 
                 {/* Mobile menu */}
                 <div
