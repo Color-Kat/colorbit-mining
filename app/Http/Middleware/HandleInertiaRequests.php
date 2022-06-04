@@ -47,9 +47,14 @@ class HandleInertiaRequests extends Middleware
                     return null;
                 }
 
+                $user = $request->user()->with('role:id,name,slug')->first();
+
                 return array_merge(
-                    $request->user()->with('role')->first()->toArray(),
-                    ['two_factor_enabled' => ! is_null($request->user()->two_factor_secret)]
+                    $user->toArray(),
+                    [
+                        'two_factor_enabled' => ! is_null($request->user()->two_factor_secret),
+                        'isAdmin' => $user->hasRole('admin')
+                    ]
                 );
             },
         ]);
