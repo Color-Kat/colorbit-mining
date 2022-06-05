@@ -2,15 +2,18 @@ import { InertiaLink, useForm, Head } from '@inertiajs/inertia-react';
 import classNames from 'classnames';
 import React from 'react';
 import useRoute from '@hooks/useRoute';
-import JetAuthenticationCard from '@/Jetstream/AuthenticationCard';
-import JetButton from '@/Jetstream/Button';
-import JetCheckbox from '@/Jetstream/Checkbox';
+// import JetAuthenticationCard from '@/Jetstream/AuthenticationCard';
+// import JetButton from '@/Jetstream/Button';
+// import JetCheckbox from '@/Jetstream/Checkbox';
 // import JetInput from '@/Jetstream/Input';
 // import JetLabel from '@/Jetstream/Label';
 import JetValidationErrors from '@/Jetstream/ValidationErrors';
 import AuthenticationCard from "../../components/auth/AuthenticationCard";
 import Label from "../../components/auth/Label";
 import Input from "../../components/auth/Input";
+import Checkbox from "../../components/auth/Checkbox";
+import CLink from "../../components/CLink";
+import Button from "../../components/auth/Button";
 
 interface Props {
   canResetPassword: boolean;
@@ -71,7 +74,7 @@ export default function Login({ canResetPassword, status }: Props) {
 
         <div className="mt-4">
           <label className="flex items-center">
-            <JetCheckbox
+            <Checkbox
               name="remember"
               checked={form.data.remember === 'on'}
               onChange={e =>
@@ -85,29 +88,29 @@ export default function Login({ canResetPassword, status }: Props) {
         <div className="flex flex-col space-y-2 md:flex-row md:items-center md:justify-between md:space-y-0 mt-4">
           {canResetPassword && (
             <div>
-              <InertiaLink
+              <CLink
                 href={route('password.request')}
-                className="underline text-sm text-gray-600 hover:text-gray-900"
+                className="underline text-sm hover:text-gray-200"
               >
-                Forgot your password?
-              </InertiaLink>
+                Забыли пароль?
+              </CLink>
             </div>
           )}
 
           <div className="flex items-center justify-end">
-            <InertiaLink
+            <CLink
               href={route('register')}
-              className="underline text-sm text-gray-600 hover:text-gray-900"
+              className="underline text-sm hover:text-gray-200"
             >
-              Need an account?
-            </InertiaLink>
+              Создать аккаунт
+            </CLink>
 
-            <JetButton
-              className={classNames('ml-4', { 'opacity-25': form.processing })}
+            <Button
+              className={classNames('ml-4 font-sans font-bold', { 'opacity-25': form.processing })}
               disabled={form.processing}
             >
-              Log in
-            </JetButton>
+              Войти
+            </Button>
           </div>
         </div>
       </form>
