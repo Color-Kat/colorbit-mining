@@ -7,9 +7,9 @@ const Main: React.FC<{ children: React.ReactElement }> =
 
     return (
         <main
-            className="flex-auto flex-shrink-0 flex justify-center app-bg"
+            className="flex-auto flex-shrink-0 flex justify-center app-bg w-full"
         >
-            <div className="container px-2 sm:px-5 flex justify-center text-app">
+            <div className="container px-2 sm:px-5 flex justify-center text-app py-5">
                 {children}
             </div>
         </main>

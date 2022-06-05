@@ -5,9 +5,12 @@ import useRoute from '@hooks/useRoute';
 import JetAuthenticationCard from '@/Jetstream/AuthenticationCard';
 import JetButton from '@/Jetstream/Button';
 import JetCheckbox from '@/Jetstream/Checkbox';
-import JetInput from '@/Jetstream/Input';
-import JetLabel from '@/Jetstream/Label';
+// import JetInput from '@/Jetstream/Input';
+// import JetLabel from '@/Jetstream/Label';
 import JetValidationErrors from '@/Jetstream/ValidationErrors';
+import AuthenticationCard from "../../components/auth/AuthenticationCard";
+import Label from "../../components/auth/Label";
+import Input from "../../components/auth/Input";
 
 interface Props {
   canResetPassword: boolean;
@@ -30,8 +33,8 @@ export default function Login({ canResetPassword, status }: Props) {
   }
 
   return (
-    <JetAuthenticationCard>
-      <Head title="login" />
+    <AuthenticationCard>
+      <Head title="Вход" />
 
       <JetValidationErrors className="mb-4" />
 
@@ -41,8 +44,8 @@ export default function Login({ canResetPassword, status }: Props) {
 
       <form onSubmit={onSubmit}>
         <div>
-          <JetLabel htmlFor="email">Email</JetLabel>
-          <JetInput
+          <Label htmlFor="email">Почта</Label>
+          <Input
             id="email"
             type="email"
             className="mt-1 block w-full"
@@ -54,8 +57,8 @@ export default function Login({ canResetPassword, status }: Props) {
         </div>
 
         <div className="mt-4">
-          <JetLabel htmlFor="password">Password</JetLabel>
-          <JetInput
+          <Label htmlFor="password">Пароль</Label>
+          <Input
             id="password"
             type="password"
             className="mt-1 block w-full"
@@ -75,7 +78,7 @@ export default function Login({ canResetPassword, status }: Props) {
                 form.setData('remember', e.currentTarget.checked ? 'on' : '')
               }
             />
-            <span className="ml-2 text-sm text-gray-600">Remember me</span>
+            <span className="ml-2 text-md ">Запомнить меня</span>
           </label>
         </div>
 
@@ -108,6 +111,6 @@ export default function Login({ canResetPassword, status }: Props) {
           </div>
         </div>
       </form>
-    </JetAuthenticationCard>
+    </AuthenticationCard>
   );
 }

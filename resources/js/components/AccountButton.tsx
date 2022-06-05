@@ -20,7 +20,11 @@ const AccountButton: React.FC = () => {
 
     if (!isAuth) return (
         <div className="ml-3 relative">
-            <CLink href={route('login')}>Login</CLink>
+            <CLink href={route('login')}>
+                <span className="font-play text-lg text-gray-200 hover:text-gray-300 px-4 pb-1">
+                    Войти
+                </span>
+            </CLink>
         </div>
     )
 

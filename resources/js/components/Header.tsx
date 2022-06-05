@@ -10,7 +10,7 @@ import AccountButton from "./AccountButton";
 
 
 const HeaderLink: React.FC<{ name: string, children: string }> =
-    ({ name, children }) => {
+    memo(({ name, children }) => {
         const route = useRoute();
         const isActive = route().current() === name;
 
@@ -27,7 +27,7 @@ const HeaderLink: React.FC<{ name: string, children: string }> =
                 >{children}</span>
             </CLink>
         );
-    }
+    });
 
 const MobileHeaderLink: React.FC<{ name: string, children: string }> =
     ({ name, children }) => {
@@ -85,17 +85,21 @@ const Header: React.FC = memo(() => {
                     </ul>
                 </nav>
 
-                <AccountButton />
-
                 {/* Mobile menu */}
-                <div
-                    onClick={toggleMenu}
-                    id="mobile-menu-toggle"
-                    className="relative flex md:hidden py-1 w-8 h-8 rounded-md flex-col items-center justify-evenly">
-                    <div className={`w-4/6 h-0.5 rounded app-bg-red transition-all ${showMobileMenu ? 'absolute rotate-45 top-1/2' : ''}`}></div>
-                    <div className={`w-4/6 h-0.5 rounded app-bg-red transition-all ${showMobileMenu ? 'absolute hidden' : ''}`}></div>
-                    <div className={`w-4/6 h-0.5 rounded app-bg-red transition-all ${showMobileMenu ? 'absolute -rotate-45 top-1/2' : ''}`}></div>
+                <div className="flex items-center">
+
+                    <AccountButton />
+
+                    <div
+                        onClick={toggleMenu}
+                        id="mobile-menu-toggle"
+                        className="relative flex md:hidden py-1 w-8 h-8 rounded-md flex-col items-center justify-evenly">
+                        <div className={`w-4/6 h-0.5 rounded app-bg-red transition-all ${showMobileMenu ? 'absolute rotate-45 top-1/2' : ''}`}></div>
+                        <div className={`w-4/6 h-0.5 rounded app-bg-red transition-all ${showMobileMenu ? 'absolute hidden' : ''}`}></div>
+                        <div className={`w-4/6 h-0.5 rounded app-bg-red transition-all ${showMobileMenu ? 'absolute -rotate-45 top-1/2' : ''}`}></div>
+                    </div>
                 </div>
+
             </div>
 
             {/* Mobile menu */}
