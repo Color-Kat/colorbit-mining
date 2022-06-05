@@ -3,20 +3,15 @@ import classNames from 'classnames';
 import React from 'react';
 import useRoute from '@hooks/useRoute';
 import useTypedPage from '@hooks/useTypedPage';
-// import JetAuthenticationCard from '@/Jetstream/AuthenticationCard';
-// import JetButton from '@/Jetstream/Button';
-// import JetCheckbox from '@/Jetstream/Checkbox';
-// import JetInput from '@/Jetstream/Input';
-// import JetLabel from '@/Jetstream/Label';
-import JetValidationErrors from '@/Jetstream/ValidationErrors';
 import AuthenticationCard from "@components/auth/AuthenticationCard";
 import Label from "@components/auth/Label";
 import Input from "@components/auth/Input";
 import Checkbox from "@components/auth/Checkbox";
 import Button from "@components/auth/Button";
-import CLink from "../../components/CLink";
+import CLink from "@components/CLink";
+import ValidationErrors from "@components/auth/ValidationErrors";
 
-export default function Register() {
+export default React.memo(function Register() {
     const page = useTypedPage();
     const route = useRoute();
     const form = useForm({
@@ -38,7 +33,7 @@ export default function Register() {
         <AuthenticationCard>
             <Head title="Регистрация"/>
 
-            <JetValidationErrors className="mb-4"/>
+            <ValidationErrors className="mb-4"/>
 
             <form onSubmit={onSubmit}>
                 <div>
@@ -148,4 +143,4 @@ export default function Register() {
             </form>
         </AuthenticationCard>
     );
-}
+});

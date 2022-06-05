@@ -1,26 +1,21 @@
 import {InertiaLink, useForm, Head} from '@inertiajs/inertia-react';
 import classNames from 'classnames';
-import React from 'react';
+import React, {useEffect} from 'react';
 import useRoute from '@hooks/useRoute';
-// import JetAuthenticationCard from '@/Jetstream/AuthenticationCard';
-// import JetButton from '@/Jetstream/Button';
-// import JetCheckbox from '@/Jetstream/Checkbox';
-// import JetInput from '@/Jetstream/Input';
-// import JetLabel from '@/Jetstream/Label';
-import JetValidationErrors from '@/Jetstream/ValidationErrors';
-import AuthenticationCard from "../../components/auth/AuthenticationCard";
-import Label from "../../components/auth/Label";
-import Input from "../../components/auth/Input";
-import Checkbox from "../../components/auth/Checkbox";
-import CLink from "../../components/CLink";
-import Button from "../../components/auth/Button";
+import AuthenticationCard from "@components/auth/AuthenticationCard";
+import Label from "@components/auth/Label";
+import Input from "@components/auth/Input";
+import Checkbox from "@components/auth/Checkbox";
+import CLink from "@components/CLink";
+import Button from "@components/auth/Button";
+import ValidationErrors from "@components/auth/ValidationErrors";
 
 interface Props {
     canResetPassword: boolean;
     status: string;
 }
 
-export default function Login({canResetPassword, status}: Props) {
+export default React.memo(function Login({canResetPassword, status}: Props) {
     const route = useRoute();
     const form = useForm({
         email: '',
@@ -37,9 +32,9 @@ export default function Login({canResetPassword, status}: Props) {
 
     return (
         <AuthenticationCard>
-            <Head title="Вход"/>
+            <Head title="Войти"/>
 
-            <JetValidationErrors className="mb-4"/>
+            <ValidationErrors className="mb-4"/>
 
             {status && (
                 <div className="mb-4 font-medium text-sm text-green-600">{status}</div>
@@ -116,4 +111,4 @@ export default function Login({canResetPassword, status}: Props) {
             </form>
         </AuthenticationCard>
     );
-}
+});

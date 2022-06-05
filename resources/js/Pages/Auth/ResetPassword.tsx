@@ -2,22 +2,18 @@ import { useForm, Head } from '@inertiajs/inertia-react';
 import classNames from 'classnames';
 import React from 'react';
 import useRoute from '@hooks/useRoute';
-// import JetAuthenticationCard from '@/Jetstream/AuthenticationCard';
-// import JetButton from '@/Jetstream/Button';
-// import JetInput from '@/Jetstream/Input';
-// import JetLabel from '@/Jetstream/Label';
 import JetValidationErrors from '@/Jetstream/ValidationErrors';
 import AuthenticationCard from "../../components/auth/AuthenticationCard";
-import Label from "../../components/auth/Label";
-import Input from "../../components/auth/Input";
-import Button from "../../components/auth/Button";
+import Label from "@components/auth/Label";
+import Input from "@components/auth/Input";
+import Button from "@components/auth/Button";
 
 interface Props {
   token: string;
   email: string;
 }
 
-export default function ResetPassword({ token, email }: Props) {
+export default React.memo(function ResetPassword({ token, email }: Props) {
   const route = useRoute();
   const form = useForm({
     token,
@@ -92,4 +88,4 @@ export default function ResetPassword({ token, email }: Props) {
       </form>
     </AuthenticationCard>
   );
-}
+});

@@ -8,7 +8,6 @@ export default React.memo(function AuthenticationCard({
   return (
     <div className="w-full flex flex-col sm:justify-center items-center px-5">
         <div className="app-bg-dark rounded-full h-32 md:h-48 w-32 md:w-48 flex justify-center items-center translate-y-4 shadow-l">
-            {/*<JetAuthenticationCardLogo />*/}
             <img src={GPULogo} className="" alt=""/>
         </div>
 
