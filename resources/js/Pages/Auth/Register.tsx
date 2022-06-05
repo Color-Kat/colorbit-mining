@@ -95,8 +95,14 @@ export default function Register() {
                     />
                 </div>
 
-                {page.props.jetstream.hasTermsAndPrivacyPolicyFeature && (
-                    <div className="mt-4">
+                <div className="mt-4">
+
+                </div>
+
+                {/*<div className="flex items-center justify-end mt-4">*/}
+                {/*<div className="flex space-y-2 flex-row md:items-center justify-between md:space-y-0 mt-4">*/}
+                <div className="flex space-y-2 flex-col md:items-center justify-between md:space-y-0 mt-4">
+                    <div className="flex flex-col items-start self-start xsm:mb-3">
                         <Label htmlFor="terms">
                             <div className="flex items-center">
                                 <Checkbox
@@ -106,44 +112,44 @@ export default function Register() {
                                     onChange={e => form.setData('terms', e.currentTarget.checked)}
                                 />
 
-                                <div className="ml-2">
-                                    I agree to the
+                                <div className="ml-2 text-sm leading-4s text-gray-400">
+                                    Я принимаю&nbsp;
                                     <a
                                         target="_blank"
                                         href={route('terms.show')}
-                                        className="underline text-sm text-gray-600 hover:text-gray-900"
+                                        className="underline text-sm hover:text-gray-200"
                                     >
-                                        Terms of Service
+                                        Условия
                                     </a>
-                                    and
+                                    &nbsp;и&nbsp;
                                     <a
                                         target="_blank"
                                         href={route('policy.show')}
-                                        className="underline text-sm text-gray-600 hover:text-gray-900"
+                                        className="underline text-sm hover:text-gray-200"
                                     >
-                                        Privacy Policy
+                                        Политику использования
                                     </a>
                                 </div>
                             </div>
                         </Label>
                     </div>
-                )}
 
-                {/*<div className="flex items-center justify-end mt-4">*/}
-                <div className="flex flex-col mt-4 items-end justify-center">
-                    <CLink
-                        href={route('login')}
-                        className="underline text-sm text-gray-600 hover:text-gray-900 my-2"
-                    >
-                        Уже зарегистрированы?
-                    </CLink>
+                    <div className="flex xsm:justify-between w-full items-center flex-col xsm:flex-row">
+                        <CLink
+                            href={route('login')}
+                            className="underline text-sm hover:text-gray-200 self-start xsm:self-center flex"
+                        >
+                            Уже зарегистрированы?
+                        </CLink>
 
-                    <Button
-                        className={classNames('ml-4', {'opacity-25': form.processing})}
-                        disabled={form.processing}
-                    >
-                        Зарегистрироваться
-                    </Button>
+                        <Button
+                            className={classNames('xsm:ml-4 font-sans font-bold xsm:self-end w-full mt-3 xsm:mt-0 xsm:w-auto flex justify-center', {'opacity-25': form.processing})}
+                            disabled={form.processing}
+                        >
+                            Зарегистрироваться
+                        </Button>
+                    </div>
+
                 </div>
             </form>
         </AuthenticationCard>

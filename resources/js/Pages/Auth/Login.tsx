@@ -91,27 +91,27 @@ export default function Login({canResetPassword, status}: Props) {
                     <div className="flex justify-between md:flex-1 flex-col md:flex-row">
                         <CLink
                             href={route('password.request')}
-                            className="underline text-sm hover:text-gray-200"
+                            className="underline text-sm hover:text-gray-200 leading-4"
                         >
                             Забыли пароль?
                         </CLink>
 
                         <CLink
                             href={route('register')}
-                            className="underline text-sm hover:text-gray-200"
+                            className="underline text-sm hover:text-gray-200 leading-4"
                         >
                             Создать аккаунт
                         </CLink>
                     </div>
 
-                    <div className="flex items-center justify-end">
+                    {/*<div className="flex items-center justify-end">*/}
                         <Button
                             className={classNames('ml-4 font-sans font-bold', {'opacity-25': form.processing})}
                             disabled={form.processing}
                         >
                             Войти
                         </Button>
-                    </div>
+                    {/*</div>*/}
                 </div>
             </form>
         </AuthenticationCard>
