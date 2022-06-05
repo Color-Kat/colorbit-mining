@@ -2,11 +2,15 @@ import { useForm, Head } from '@inertiajs/inertia-react';
 import classNames from 'classnames';
 import React from 'react';
 import useRoute from '@hooks/useRoute';
-import JetAuthenticationCard from '@/Jetstream/AuthenticationCard';
-import JetButton from '@/Jetstream/Button';
-import JetInput from '@/Jetstream/Input';
-import JetLabel from '@/Jetstream/Label';
+// import JetAuthenticationCard from '@/Jetstream/AuthenticationCard';
+// import JetButton from '@/Jetstream/Button';
+// import JetInput from '@/Jetstream/Input';
+// import JetLabel from '@/Jetstream/Label';
 import JetValidationErrors from '@/Jetstream/ValidationErrors';
+import AuthenticationCard from "../../components/auth/AuthenticationCard";
+import Label from "../../components/auth/Label";
+import Input from "../../components/auth/Input";
+import Button from "../../components/auth/Button";
 
 interface Props {
   token: string;
@@ -30,15 +34,15 @@ export default function ResetPassword({ token, email }: Props) {
   }
 
   return (
-    <JetAuthenticationCard>
+    <AuthenticationCard>
       <Head title="Reset Password" />
 
       <JetValidationErrors className="mb-4" />
 
       <form onSubmit={onSubmit}>
         <div>
-          <JetLabel htmlFor="email">Email</JetLabel>
-          <JetInput
+          <Label htmlFor="email">Email</Label>
+          <Input
             id="email"
             type="email"
             className="mt-1 block w-full"
@@ -50,8 +54,8 @@ export default function ResetPassword({ token, email }: Props) {
         </div>
 
         <div className="mt-4">
-          <JetLabel htmlFor="password">Password</JetLabel>
-          <JetInput
+          <Label htmlFor="password">Password</Label>
+          <Input
             id="password"
             type="password"
             className="mt-1 block w-full"
@@ -63,8 +67,8 @@ export default function ResetPassword({ token, email }: Props) {
         </div>
 
         <div className="mt-4">
-          <JetLabel htmlFor="password_confirmation">Confirm Password</JetLabel>
-          <JetInput
+          <Label htmlFor="password_confirmation">Confirm Password</Label>
+          <Input
             id="password_confirmation"
             type="password"
             className="mt-1 block w-full"
@@ -78,14 +82,14 @@ export default function ResetPassword({ token, email }: Props) {
         </div>
 
         <div className="flex items-center justify-end mt-4">
-          <JetButton
+          <Button
             className={classNames({ 'opacity-25': form.processing })}
             disabled={form.processing}
           >
             Reset Password
-          </JetButton>
+          </Button>
         </div>
       </form>
-    </JetAuthenticationCard>
+    </AuthenticationCard>
   );
 }

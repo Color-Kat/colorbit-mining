@@ -36,7 +36,7 @@ export default function Register() {
 
     return (
         <AuthenticationCard>
-            <Head title="Register"/>
+            <Head title="Регистрация"/>
 
             <JetValidationErrors className="mb-4"/>
 
@@ -95,12 +95,6 @@ export default function Register() {
                     />
                 </div>
 
-                <div className="mt-4">
-
-                </div>
-
-                {/*<div className="flex items-center justify-end mt-4">*/}
-                {/*<div className="flex space-y-2 flex-row md:items-center justify-between md:space-y-0 mt-4">*/}
                 <div className="flex space-y-2 flex-col md:items-center justify-between md:space-y-0 mt-4">
                     <div className="flex flex-col items-start self-start xsm:mb-3">
                         <Label htmlFor="terms">

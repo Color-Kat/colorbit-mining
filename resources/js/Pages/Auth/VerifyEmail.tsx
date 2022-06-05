@@ -3,7 +3,8 @@ import classNames from 'classnames';
 import React from 'react';
 import useRoute from '@hooks/useRoute';
 import JetAuthenticationCard from '@/Jetstream/AuthenticationCard';
-import JetButton from '@/Jetstream/Button';
+import Button from "../../components/auth/Button";
+// import JetButton from '@/Jetstream/Button';
 
 interface Props {
   status: string;
@@ -38,12 +39,12 @@ export default function VerifyEmail({ status }: Props) {
 
       <form onSubmit={onSubmit}>
         <div className="mt-4 flex items-center justify-between">
-          <JetButton
+          <Button
             className={classNames({ 'opacity-25': form.processing })}
             disabled={form.processing}
           >
             Resend Verification Email
-          </JetButton>
+          </Button>
 
           <InertiaLink
             href={route('logout')}
