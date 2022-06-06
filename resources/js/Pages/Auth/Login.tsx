@@ -99,14 +99,12 @@ export default React.memo(function Login({canResetPassword, status}: Props) {
                         </CLink>
                     </div>
 
-                    {/*<div className="flex items-center justify-end">*/}
-                        <Button
-                            className={classNames('ml-4 font-sans font-bold', {'opacity-25': form.processing})}
-                            disabled={form.processing}
-                        >
-                            Войти
-                        </Button>
-                    {/*</div>*/}
+                    <Button
+                        className={classNames('ml-4 font-sans font-bold', {'opacity-25': form.processing})}
+                        disabled={form.processing}
+                    >
+                        Войти
+                    </Button>
                 </div>
             </form>
         </AuthenticationCard>

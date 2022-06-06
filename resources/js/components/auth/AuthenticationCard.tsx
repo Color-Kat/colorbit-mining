@@ -1,6 +1,5 @@
 import React, { PropsWithChildren } from 'react';
 import GPULogo from '@assets/GPU-logo.png';
-import JetAuthenticationCardLogo from '@/Jetstream/AuthenticationCardLogo';
 
 export default React.memo(function AuthenticationCard({
   children,

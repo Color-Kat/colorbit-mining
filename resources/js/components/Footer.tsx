@@ -26,7 +26,7 @@ const Footer: React.FC = () => {
     ];
 
     return (
-        <footer className="flex justify-center app-bg-dark text-app-light shadow-xl py-4 font-play text-gray-500">
+        <footer className="flex justify-center app-bg-dark text-app-light shadow-xl pb-5 pt-6 font-play text-gray-500">
             <div className="container px-5 flex-col md:flex-row flex justify-between">
                 <div className="footer__left-side flex flex-col items-center shrink-0">
                     <CLink href="/">

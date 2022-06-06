@@ -14,6 +14,9 @@ module.exports = {
             fontFamily: {
                 sans: ['Nunito', ...defaultTheme.fontFamily.sans],
             },
+            borderRadius:{
+                "smx": '0.3rem'
+            },
         },
         screens: {
             'xsm': '530px',

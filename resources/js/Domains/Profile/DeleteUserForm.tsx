@@ -5,9 +5,9 @@ import useRoute from '@hooks/useRoute';
 import JetActionSection from '@/Jetstream/ActionSection';
 import JetDangerButton from '@/Jetstream/DangerButton';
 import JetDialogModal from '@/Jetstream/DialogModal';
-import JetInput from '@/Jetstream/Input';
 import JetInputError from '@/Jetstream/InputError';
 import JetSecondaryButton from '@/Jetstream/SecondaryButton';
+import Input from "../../components/auth/Input";
 
 export default function DeleteUserForm() {
   const route = useRoute();
@@ -62,7 +62,7 @@ export default function DeleteUserForm() {
           Please enter your password to confirm you would like to permanently
           delete your account.
           <div className="mt-4">
-            <JetInput
+            <Input
               type="password"
               className="mt-1 block w-3/4"
               placeholder="Password"

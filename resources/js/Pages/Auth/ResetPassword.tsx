@@ -2,11 +2,11 @@ import { useForm, Head } from '@inertiajs/inertia-react';
 import classNames from 'classnames';
 import React from 'react';
 import useRoute from '@hooks/useRoute';
-import JetValidationErrors from '@/Jetstream/ValidationErrors';
 import AuthenticationCard from "../../components/auth/AuthenticationCard";
 import Label from "@components/auth/Label";
 import Input from "@components/auth/Input";
 import Button from "@components/auth/Button";
+import ValidationErrors from "@components/auth/ValidationErrors";
 
 interface Props {
   token: string;
@@ -33,7 +33,7 @@ export default React.memo(function ResetPassword({ token, email }: Props) {
     <AuthenticationCard>
       <Head title="Reset Password" />
 
-      <JetValidationErrors className="mb-4" />
+      <ValidationErrors className="mb-4" />
 
       <form onSubmit={onSubmit}>
         <div>

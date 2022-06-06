@@ -93,7 +93,7 @@ const Header: React.FC = memo(() => {
                     <div
                         onClick={toggleMenu}
                         id="mobile-menu-toggle"
-                        className="relative flex md:hidden py-1 w-8 h-8 rounded-md flex-col items-center justify-evenly">
+                        className="relative flex md:hidden py-1 w-8 h-8 rounded-md flex-col items-center justify-evenly ml-2">
                         <div className={`w-4/6 h-0.5 rounded app-bg-red transition-all ${showMobileMenu ? 'absolute rotate-45 top-1/2' : ''}`}></div>
                         <div className={`w-4/6 h-0.5 rounded app-bg-red transition-all ${showMobileMenu ? 'absolute hidden' : ''}`}></div>
                         <div className={`w-4/6 h-0.5 rounded app-bg-red transition-all ${showMobileMenu ? 'absolute -rotate-45 top-1/2' : ''}`}></div>

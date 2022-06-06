@@ -39,37 +39,37 @@ export default function Show({
             </div>
           ) : null}
 
-          {page.props.jetstream.canUpdatePassword ? (
-            <div className="mt-10 sm:mt-0">
-              <UpdatePasswordForm />
+          {/*{page.props.jetstream.canUpdatePassword ? (*/}
+          {/*  <div className="mt-10 sm:mt-0">*/}
+          {/*    <UpdatePasswordForm />*/}
 
-              <JetSectionBorder />
-            </div>
-          ) : null}
+          {/*    <JetSectionBorder />*/}
+          {/*  </div>*/}
+          {/*) : null}*/}
 
-          {page.props.jetstream.canManageTwoFactorAuthentication ? (
-            <div className="mt-10 sm:mt-0">
-              <TwoFactorAuthenticationForm
-                requiresConfirmation={confirmsTwoFactorAuthentication}
-              />
+          {/*{page.props.jetstream.canManageTwoFactorAuthentication ? (*/}
+          {/*  <div className="mt-10 sm:mt-0">*/}
+          {/*    <TwoFactorAuthenticationForm*/}
+          {/*      requiresConfirmation={confirmsTwoFactorAuthentication}*/}
+          {/*    />*/}
 
-              <JetSectionBorder />
-            </div>
-          ) : null}
+          {/*    <JetSectionBorder />*/}
+          {/*  </div>*/}
+          {/*) : null}*/}
 
-          <div className="mt-10 sm:mt-0">
-            <LogoutOtherBrowserSessions sessions={sessions} />
-          </div>
+          {/*<div className="mt-10 sm:mt-0">*/}
+          {/*  <LogoutOtherBrowserSessions sessions={sessions} />*/}
+          {/*</div>*/}
 
-          {page.props.jetstream.hasAccountDeletionFeatures ? (
-            <>
-              <JetSectionBorder />
+          {/*{page.props.jetstream.hasAccountDeletionFeatures ? (*/}
+          {/*  <>*/}
+          {/*    <JetSectionBorder />*/}
 
-              <div className="mt-10 sm:mt-0">
-                <DeleteUserForm />
-              </div>
-            </>
-          ) : null}
+          {/*    <div className="mt-10 sm:mt-0">*/}
+          {/*      <DeleteUserForm />*/}
+          {/*    </div>*/}
+          {/*  </>*/}
+          {/*) : null}*/}
         </div>
       </div>
     // </AppLayout>

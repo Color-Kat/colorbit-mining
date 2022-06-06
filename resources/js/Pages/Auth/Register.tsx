@@ -12,7 +12,6 @@ import CLink from "@components/CLink";
 import ValidationErrors from "@components/auth/ValidationErrors";
 
 export default React.memo(function Register() {
-    const page = useTypedPage();
     const route = useRoute();
     const form = useForm({
         name: '',
