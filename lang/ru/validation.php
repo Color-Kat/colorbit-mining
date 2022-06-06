@@ -89,12 +89,8 @@ return [
     ],
     'mimes'                => 'Файл в поле :attribute должен быть одного из следующих типов: :values.',
     'mimetypes'            => 'Файл в поле :attribute должен быть одного из следующих типов: :values.',
-    'min'                  => [
-        'array'   => 'Количество элементов в поле :attribute должно быть не меньше :min.',
-        'file'    => 'Размер файла в поле :attribute должен быть не меньше :min Килобайт(а).',
-        'numeric' => 'Значение поля :attribute должно быть не меньше :min.',
-        'string'  => 'Количество символов в поле :attribute должно быть не меньше :min.',
-    ],
+
+    'min' => 'Количество символов в поле :attribute должно быть не меньше :min.',
     'multiple_of'          => 'Значение поля :attribute должно быть кратным :value',
     'not_in'               => 'Выбранное значение для :attribute некорректно.',
     'not_regex'            => 'Значение поля :attribute некорректно.',
@@ -130,7 +126,13 @@ return [
     'uuid'                 => 'Значение поля :attribute должно быть корректным UUID.',
     'custom'               => [
         'attribute-name' => [
-            'rule-name' => 'custom-message',
+            'name' => 'ИМЯ',
         ],
     ],
+    'attributes' => [
+        'name' => 'имя',
+        'email' => 'email',
+        'password' => 'пароль',
+        'terms' => 'условия',
+    ]
 ];
