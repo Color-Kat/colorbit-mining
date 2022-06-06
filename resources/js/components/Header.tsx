@@ -55,7 +55,7 @@ const Header: React.FC = memo(() => {
     const location = route().current();
 
     const linksList = [
-        { name: 'home', text: 'Главная' },
+        // { name: 'home', text: 'Главная' },
         { name: 'farms', text: 'Ферма' },
         { name: 'shops', text: 'Магазины' },
         { name: 'home', text: 'Кошелёк' },

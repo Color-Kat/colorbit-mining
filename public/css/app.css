@@ -2335,6 +2335,9 @@ select:-webkit-autofill:focus {
   .md\:mt-0{
     margin-top: 0px;
   }
+  .md\:mt-5{
+    margin-top: 1.25rem;
+  }
   .md\:block{
     display: block;
   }
@@ -2409,6 +2412,12 @@ select:-webkit-autofill:focus {
 @media (min-width: 1024px){
   .lg\:col-span-4{
     grid-column: span 4 / span 4;
+  }
+  .lg\:block{
+    display: block;
+  }
+  .lg\:hidden{
+    display: none;
   }
   .lg\:px-8{
     padding-left: 2rem;

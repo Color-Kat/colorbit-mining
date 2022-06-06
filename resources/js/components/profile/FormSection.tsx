@@ -8,12 +8,10 @@ interface SectionTitleProps {
 
 const SectionTitle = React.memo( ({ title, description }: SectionTitleProps) => {
     return (
-        <div className="md:px-5 md:pt-5">
-            <div className="px-4 sm:px-0">
-                <h3 className="text-3xl font-medium font-play">{title}</h3>
+        <div className="px-5 pt-5">
+            <h3 className="text-3xl font-medium font-play">{title}</h3>
 
-                <p className="mt-1 text-md text-gray-400">{description}</p>
-            </div>
+            <p className="mt-1 text-md text-gray-400">{description}</p>
         </div>
     );
 });
@@ -38,7 +36,7 @@ export default React.memo(function FormSection({
     <div className="md:grid md:grid-cols-3 md:gap-6 rounded-lg app-bg-dark text-app">
       <SectionTitle title={title} description={description} />
 
-      <div className="mt-5 md:mt-0 md:col-span-2">
+      <div className="md:col-span-2">
         <form
           onSubmit={e => {
             e.preventDefault();
