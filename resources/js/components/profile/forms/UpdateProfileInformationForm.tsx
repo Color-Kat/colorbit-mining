@@ -10,15 +10,15 @@ import Button from "@components/profile/Button";
 import Label from "@components/profile/Label";
 import Input from "@components/profile/Input";
 import FormSection from "@components/profile/FormSection";
-import SecondaryButton from "../../components/profile/SecondaryButton";
-import InputError from "../../components/profile/InputError";
-import ActionMessage from "../../components/profile/ActionMessage";
+import SecondaryButton from "@components/profile/SecondaryButton";
+import InputError from "@components/profile/InputError";
+import ActionMessage from "@components/profile/ActionMessage";
 
 interface Props {
     user: User;
 }
 
-export default function UpdateProfileInformationForm({user}: Props) {
+export default React.memo(function UpdateProfileInformationForm({user}: Props) {
     const form = useForm({
         _method: 'PUT',
         name: user.name,
@@ -81,7 +81,7 @@ export default function UpdateProfileInformationForm({user}: Props) {
         <FormSection
             onSubmit={updateProfileInformation}
             title={'Данные аккаунта'}
-            description={`Обновите данные профиля и email адрес`}
+            description={`Обновите данные профиля и email адрес.`}
             renderActions={() => (
                 <>
                     <ActionMessage on={form.recentlySuccessful} className="mr-3">
@@ -182,4 +182,4 @@ export default function UpdateProfileInformationForm({user}: Props) {
             </div>
         </FormSection>
     );
-}
+})

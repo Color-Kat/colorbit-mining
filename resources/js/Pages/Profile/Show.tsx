@@ -1,13 +1,8 @@
 import React from 'react';
-import DeleteUserForm from '@/Domains/Profile/DeleteUserForm';
-import LogoutOtherBrowserSessions from '@/Domains/Profile/LogoutOtherBrowserSessionsForm';
-import TwoFactorAuthenticationForm from '@/Domains/Profile/TwoFactorAuthenticationForm';
-import UpdatePasswordForm from '@/Domains/Profile/UpdatePasswordForm';
-import UpdateProfileInformationForm from '@/Domains/Profile/UpdateProfileInformationForm';
+import UpdateProfileInformationForm from '@components/profile/forms/UpdateProfileInformationForm';
 import useTypedPage from '@hooks/useTypedPage';
-import JetSectionBorder from '@/Jetstream/SectionBorder';
-import AppLayout from '@/Layouts/AppLayout';
 import {Session} from '@/types/types';
+import UpdatePasswordForm from "@components/profile/forms/UpdatePasswordForm";
 
 interface Props {
     sessions: Session[];
@@ -29,9 +24,7 @@ export default function Show({
 
                 {page.props.jetstream.canUpdatePassword ? (
                   <div className="mt-10 sm:mt-0">
-                    {/*<UpdatePasswordForm />*/}
-
-                    {/*<JetSectionBorder />*/}
+                    <UpdatePasswordForm />
                   </div>
                 ) : null}
 

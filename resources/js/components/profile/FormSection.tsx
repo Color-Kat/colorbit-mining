@@ -26,16 +26,16 @@ interface FormSectionProps {
 }
 
 export default React.memo(function FormSection({
-                                                   onSubmit,
-                                                   renderActions,
-                                                   title,
-                                                   description,
-                                                   children,
-                                               }: PropsWithChildren<FormSectionProps>) {
+    onSubmit,
+    renderActions,
+    title,
+    description,
+    children,
+}: PropsWithChildren<FormSectionProps>) {
     const hasActions = !!renderActions;
 
     return (
-        <div className="md:grid md:grid-cols-3 md:gap-6 rounded-lg app-bg-dark text-app shadow-md">
+        <div className="md:grid md:grid-cols-3 md:gap-6 rounded-lg app-bg-dark text-app shadow-md mb-4">
             <SectionTitle title={title} description={description}/>
 
             <div className="md:col-span-2">

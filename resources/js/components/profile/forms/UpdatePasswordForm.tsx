@@ -2,14 +2,14 @@ import { useForm } from '@inertiajs/inertia-react';
 import classNames from 'classnames';
 import React, { useRef } from 'react';
 import useRoute from '@hooks/useRoute';
-import JetActionMessage from '@/Jetstream/ActionMessage';
-import JetButton from '@/Jetstream/Button';
-import JetFormSection from '@/Jetstream/FormSection';
-import JetInput from '@/Jetstream/Input';
-import JetInputError from '@/Jetstream/InputError';
-import JetLabel from '@/Jetstream/Label';
+import FormSection from "@components/profile/FormSection";
+import ActionMessage from "@components/profile/ActionMessage";
+import Button from "@components/profile/Button";
+import Label from "@components/profile/Label";
+import Input from "@components/profile/Input";
+import InputError from "@components/profile/InputError";
 
-export default function UpdatePasswordForm() {
+export default React.memo(function UpdatePasswordForm() {
   const route = useRoute();
   const form = useForm({
     current_password: '',
@@ -39,30 +39,30 @@ export default function UpdatePasswordForm() {
   }
 
   return (
-    <JetFormSection
+    <FormSection
       onSubmit={updatePassword}
-      title={'Update Password'}
+      title={'Сброс пароля'}
       description={
-        'Ensure your account is using a long, random password to stay secure.'
+        'Убедитесь в надёжности пароля, чтобы быть в безопасности.'
       }
       renderActions={() => (
         <>
-          <JetActionMessage on={form.recentlySuccessful} className="mr-3">
-            Saved.
-          </JetActionMessage>
+          <ActionMessage on={form.recentlySuccessful} className="mr-3">
+            Сохранено
+          </ActionMessage>
 
-          <JetButton
+          <Button
             className={classNames({ 'opacity-25': form.processing })}
             disabled={form.processing}
           >
-            Save
-          </JetButton>
+            Обновить
+          </Button>
         </>
       )}
     >
       <div className="col-span-6 sm:col-span-4">
-        <JetLabel htmlFor="current_password">Current Password</JetLabel>
-        <JetInput
+        <Label htmlFor="current_password">Текущий пароль</Label>
+        <Input
           id="current_password"
           type="password"
           className="mt-1 block w-full"
@@ -73,15 +73,15 @@ export default function UpdatePasswordForm() {
           }
           autoComplete="current-password"
         />
-        <JetInputError
+        <InputError
           message={form.errors.current_password}
           className="mt-2"
         />
       </div>
 
       <div className="col-span-6 sm:col-span-4">
-        <JetLabel htmlFor="password">New Password</JetLabel>
-        <JetInput
+        <Label htmlFor="password">Новый пароль</Label>
+        <Input
           id="password"
           type="password"
           className="mt-1 block w-full"
@@ -90,12 +90,12 @@ export default function UpdatePasswordForm() {
           autoComplete="new-password"
           ref={passwordRef}
         />
-        <JetInputError message={form.errors.password} className="mt-2" />
+        <InputError message={form.errors.password} className="mt-2" />
       </div>
 
       <div className="col-span-6 sm:col-span-4">
-        <JetLabel htmlFor="password_confirmation">Confirm Password</JetLabel>
-        <JetInput
+        <Label htmlFor="password_confirmation">Подтвердите пароль</Label>
+        <Input
           id="password_confirmation"
           type="password"
           className="mt-1 block w-full"
@@ -105,11 +105,11 @@ export default function UpdatePasswordForm() {
           }
           autoComplete="new-password"
         />
-        <JetInputError
+        <InputError
           message={form.errors.password_confirmation}
           className="mt-2"
         />
       </div>
-    </JetFormSection>
+    </FormSection>
   );
-}
+});
