@@ -37,7 +37,7 @@ const MobileHeaderLink: React.FC<{ name: string, children: string }> =
         return (
             <li className='mb-3 flex justify-center'>
                 <CLink href={route(name)} className="relative pb-1">
-                    <span className={`absolute bottom-0 left-0 bg-red-600 h-0.5 transition-all ${isActive ? 'w-full' : 'w-0 '}`}></span>
+                    <span className={`absolute bottom-0 left-0 bg-red-600 h-0.5 transition-all ${isActive ? 'w-full' : 'w-0 '}`}/>
                     <span
                         className={`
                     font-play text-2xl text-gray-400 hover:text-gray-200 px-4 pb-1

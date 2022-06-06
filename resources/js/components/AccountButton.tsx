@@ -4,8 +4,8 @@ import CLink from './CLink';
 import useRoute from '@/hooks/useRoute';
 import {Inertia} from "@inertiajs/inertia";
 import useTypedPage from "../hooks/useTypedPage";
-import JetDropdown from "../Jetstream/Dropdown";
 import JetDropdownLink from "../Jetstream/DropdownLink";
+import {Dropdown, DropdownLink} from "./Dropdown";
 
 const AccountButton: React.FC = () => {
     const page = useTypedPage();
@@ -30,14 +30,14 @@ const AccountButton: React.FC = () => {
 
     return (
         <div className="ml-3 relative">
-            <JetDropdown
+            <Dropdown
                 align="right"
                 width="48"
                 renderTrigger={() =>
-                    <span className="inline-flex rounded-md">
+                    <span className="inline-flex rounded-md ">
                         <button
                               type="button"
-                              className="inline-flex items-center px-3 py-2 border border-transparent text-md leading-4 font-medium rounded-md text-gray-300 app-bg-dark hover:text-gray-700 focus:outline-none transition"
+                              className="inline-flex items-center px-3 py-2 border border-transparent text-md leading-4 font-medium rounded-md text-gray-300 app-bg-dark hover:text-gray-200 focus:outline-none transition"
                         >
                             {page.props.user.name}
                         </button>
@@ -53,27 +53,19 @@ const AccountButton: React.FC = () => {
                 }
             >
                 {/* <!-- Account Management --> */}
-                <div className="block px-4 py-2 text-xs text-gray-400">
+                <div className="block px-4 py-2 text-xs md:text-sm text-black">
                     Управление аккаунтом
                 </div>
 
-                <JetDropdownLink href={route('profile.show')}>
-                    Profile
-                </JetDropdownLink>
-
-                {page.props.jetstream.hasApiFeatures ? (
-                    <JetDropdownLink href={route('api-tokens.index')}>
-                        API Tokens
-                    </JetDropdownLink>
-                ) : null}
-
-                <div className="border-t border-gray-100"></div>
+                <DropdownLink href={route('profile.show')}>
+                    Профиль
+                </DropdownLink>
 
                 {/* <!-- Authentication --> */}
                 <form onSubmit={logout}>
-                    <JetDropdownLink as="button">Log Out</JetDropdownLink>
+                    <DropdownLink>Выйти</DropdownLink>
                 </form>
-            </JetDropdown>
+            </Dropdown>
         </div>
     );
 }

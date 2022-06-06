@@ -1693,6 +1693,9 @@ select{
 .tracking-wider{
   letter-spacing: 0.05em;
 }
+.tracking-wide{
+  letter-spacing: 0.025em;
+}
 .text-gray-500{
   --tw-text-opacity: 1;
   color: rgb(107 114 128 / var(--tw-text-opacity));
@@ -1760,6 +1763,10 @@ select{
 .text-gray-300{
   --tw-text-opacity: 1;
   color: rgb(209 213 219 / var(--tw-text-opacity));
+}
+.text-black{
+  --tw-text-opacity: 1;
+  color: rgb(0 0 0 / var(--tw-text-opacity));
 }
 .underline{
   -webkit-text-decoration-line: underline;
@@ -1910,6 +1917,9 @@ ul.list-red li::before {
 .text-app-dark {
   color: #5B5B5B;
 }
+.text-app-black {
+  color: #2B2B2B;
+}
 .font-play {
   font-family: "Play", sans-serif;
 }
@@ -1958,6 +1968,10 @@ select:-webkit-autofill:focus {
 .hover\:bg-gray-50:hover{
   --tw-bg-opacity: 1;
   background-color: rgb(249 250 251 / var(--tw-bg-opacity));
+}
+.hover\:bg-gray-200:hover{
+  --tw-bg-opacity: 1;
+  background-color: rgb(229 231 235 / var(--tw-bg-opacity));
 }
 .hover\:text-gray-500:hover{
   --tw-text-opacity: 1;
@@ -2335,9 +2349,6 @@ select:-webkit-autofill:focus {
   .md\:mt-0{
     margin-top: 0px;
   }
-  .md\:mt-5{
-    margin-top: 1.25rem;
-  }
   .md\:block{
     display: block;
   }
@@ -2355,6 +2366,9 @@ select:-webkit-autofill:focus {
   }
   .md\:w-48{
     width: 12rem;
+  }
+  .md\:w-60{
+    width: 15rem;
   }
   .md\:flex-1{
     flex: 1 1 0%;
@@ -2385,39 +2399,24 @@ select:-webkit-autofill:focus {
   .md\:border-l{
     border-left-width: 1px;
   }
-  .md\:px-4{
-    padding-left: 1rem;
-    padding-right: 1rem;
-  }
-  .md\:px-5{
-    padding-left: 1.25rem;
-    padding-right: 1.25rem;
-  }
-  .md\:pt-4{
-    padding-top: 1rem;
-  }
-  .md\:pt-6{
-    padding-top: 1.5rem;
-  }
-  .md\:pt-5{
-    padding-top: 1.25rem;
-  }
   .md\:text-left{
     text-align: left;
   }
   .md\:text-center{
     text-align: center;
   }
+  .md\:text-lg{
+    font-size: 1.125rem;
+    line-height: 1.75rem;
+  }
+  .md\:text-sm{
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+  }
 }
 @media (min-width: 1024px){
   .lg\:col-span-4{
     grid-column: span 4 / span 4;
-  }
-  .lg\:block{
-    display: block;
-  }
-  .lg\:hidden{
-    display: none;
   }
   .lg\:px-8{
     padding-left: 2rem;
