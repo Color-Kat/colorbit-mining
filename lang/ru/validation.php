@@ -137,6 +137,7 @@ return [
         'name'     => 'имя',
         'email'    => 'email',
         'password' => 'пароль',
-        'name'     => 'условия',
+        'terms'     => 'условия',
+        'current_password' => 'текущий пароль'
     ]
 ];
