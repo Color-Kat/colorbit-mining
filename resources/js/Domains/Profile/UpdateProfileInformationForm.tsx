@@ -4,11 +4,6 @@ import classNames from 'classnames';
 import React, {useRef, useState} from 'react';
 import useRoute from '@hooks/useRoute';
 
-import JetActionMessage from '@/Jetstream/ActionMessage';
-import JetFormSection from '@/Jetstream/FormSection';
-import JetInputError from '@/Jetstream/InputError';
-import JetSecondaryButton from '@/Jetstream/SecondaryButton';
-
 import {User} from '@/types/types';
 
 import Button from "@components/profile/Button";
@@ -16,6 +11,8 @@ import Label from "@components/profile/Label";
 import Input from "@components/profile/Input";
 import FormSection from "@components/profile/FormSection";
 import SecondaryButton from "../../components/profile/SecondaryButton";
+import InputError from "../../components/profile/InputError";
+import ActionMessage from "../../components/profile/ActionMessage";
 
 interface Props {
     user: User;
@@ -87,9 +84,9 @@ export default function UpdateProfileInformationForm({user}: Props) {
             description={`Обновите данные профиля и email адрес`}
             renderActions={() => (
                 <>
-                    <JetActionMessage on={form.recentlySuccessful} className="mr-3">
+                    <ActionMessage on={form.recentlySuccessful} className="mr-3">
                         Сохранено
-                    </JetActionMessage>
+                    </ActionMessage>
 
                     <Button
                         className={classNames({'opacity-25': form.processing})}
@@ -110,7 +107,7 @@ export default function UpdateProfileInformationForm({user}: Props) {
                     onChange={updatePhotoPreview}
                 />
 
-                <Label htmlFor="photo" value="Photo"/>
+                <Label htmlFor="photo" value="Фото"/>
 
                 {photoPreview ? (
                     // <!-- New Profile Photo Preview -->
@@ -154,12 +151,12 @@ export default function UpdateProfileInformationForm({user}: Props) {
                     </SecondaryButton>
                 ) : null}
 
-                <JetInputError message={form.errors.photo} className="mt-2"/>
+                <InputError message={form.errors.photo} className="mt-2"/>
             </div>
 
             {/* <!-- Name --> */}
             <div className="col-span-6 sm:col-span-4">
-                <Label htmlFor="name" value="Name"/>
+                <Label htmlFor="name" value="Имя"/>
                 <Input
                     id="name"
                     type="text"
@@ -168,12 +165,12 @@ export default function UpdateProfileInformationForm({user}: Props) {
                     onChange={e => form.setData('name', e.currentTarget.value)}
                     autoComplete="name"
                 />
-                <JetInputError message={form.errors.name} className="mt-2"/>
+                <InputError message={form.errors.name} className="mt-2"/>
             </div>
 
             {/* <!-- Email --> */}
             <div className="col-span-6 sm:col-span-4">
-                <Label htmlFor="email" value="Email"/>
+                <Label htmlFor="email" value="Почта"/>
                 <Input
                     id="email"
                     type="email"
@@ -181,7 +178,7 @@ export default function UpdateProfileInformationForm({user}: Props) {
                     value={form.data.email}
                     onChange={e => form.setData('email', e.currentTarget.value)}
                 />
-                <JetInputError message={form.errors.email} className="mt-2"/>
+                <InputError message={form.errors.email} className="mt-2"/>
             </div>
         </FormSection>
     );
