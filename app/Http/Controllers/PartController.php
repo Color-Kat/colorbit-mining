@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
-class ProductController extends Controller
+class PartController extends Controller
 {
     public function index(Request $request, string $shop_slug, string $product_slug) {
         $part = Part::select('id', 'name', 'type')

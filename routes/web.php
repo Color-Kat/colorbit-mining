@@ -1,11 +1,14 @@
 <?php
 
-use App\Http\Controllers\ProductController;
-use App\Http\Controllers\ShopController;
-use App\Http\Controllers\ShopsListController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+
+use App\Http\Controllers\PartController;
+use App\Http\Controllers\ShopController;
+use App\Http\Controllers\ShopsListController;
+
+use App\Http\Controllers\Admin\PartController as AdminPartController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,7 +36,13 @@ Route::prefix('shops')->group(function () {
 
     Route::get('/{shop_slug}', [ShopController::class, 'index'])->name('shop');
 
-    Route::get('/{shop_slug}/{product_slug}', [ProductController::class, 'index'])->name('product');
+    Route::get('/{shop_slug}/{product_slug}', [PartController::class, 'index'])->name('product');
+});
+
+
+// Admin panel
+Route::middleware('admin')->prefix('admin')->name('admin')->group(function() {
+    Route::resource('/parts', AdminPartController::class)->names('parts');
 });
 
 
