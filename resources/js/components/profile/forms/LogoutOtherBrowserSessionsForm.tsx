@@ -11,6 +11,7 @@ import Input from "../Input";
 import InputError from "../InputError";
 import SecondaryButton from "../SecondaryButton";
 import ActionSection from "../ActionSection";
+import DialogModal from "../../modal/DialogModal";
 
 interface Props {
     sessions: Session[];
@@ -130,8 +131,8 @@ export default function LogoutOtherBrowserSessions({sessions}: Props) {
             </div>
 
             {/* <!-- Log Out Other Devices Confirmation Modal --> */}
-            <JetDialogModal isOpen={confirmingLogout} onClose={closeModal}>
-                <JetDialogModal.Content title={'Выйти на всех устройствах'}>
+            <DialogModal isOpen={confirmingLogout} onClose={closeModal}>
+                <DialogModal.Content title={'Выйти на всех устройствах'}>
                     Пожалуйста, введите пароль, чтобы подтвердить ваши действия.
                     <div className="mt-4">
                         <Input
@@ -145,9 +146,9 @@ export default function LogoutOtherBrowserSessions({sessions}: Props) {
 
                         <InputError message={form.errors.password} className="mt-2"/>
                     </div>
-                </JetDialogModal.Content>
+                </DialogModal.Content>
 
-                <JetDialogModal.Footer>
+                <DialogModal.Footer>
                     <SecondaryButton onClick={closeModal}>Отмена</SecondaryButton>
 
                     <Button
@@ -157,8 +158,8 @@ export default function LogoutOtherBrowserSessions({sessions}: Props) {
                     >
                         Выйти на всех устройствах
                     </Button>
-                </JetDialogModal.Footer>
-            </JetDialogModal>
+                </DialogModal.Footer>
+            </DialogModal>
         </ActionSection>
     );
 }
