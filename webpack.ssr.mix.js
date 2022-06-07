@@ -7,7 +7,7 @@ mix.ts('resources/js/ssr.tsx', 'public/js')
         '@': 'resources/js',
         '@hooks': 'resources/js/hooks',
         '@assets': 'resources/js/assets',
-        '@components': 'resources/js/components',
+        '@components': 'resources/js/components'
     })
     .webpackConfig({
         target: 'node',

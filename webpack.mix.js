@@ -32,7 +32,7 @@ mix
         '@': 'resources/js',
         '@assets': 'resources/js/assets',
         '@hooks': 'resources/js/hooks',
-        '@components': 'resources/js/components',
+        '@components': 'resources/js/components'
     })
     .browserSync({injectChanges: true});
 

@@ -3,18 +3,36 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Repositories\PartRepository;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
-class PartController extends Controller
+class PartController extends AdminBaseController
 {
+    /**
+     * @var PartRepository
+     */
+    private PartRepository $partRepository;
+
+    public function __construct()
+    {
+        parent::__construct();
+
+        $this->partRepository = new PartRepository();
+    }
+
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Inertia\Response
      */
     public function index()
     {
-        return 123123;
+        $parts = $this->partRepository->getAllWithPaginator();
+
+        return Inertia::render('Admin/Parts/Index', [
+            'parts' => $parts
+        ]);
     }
 
     /**
