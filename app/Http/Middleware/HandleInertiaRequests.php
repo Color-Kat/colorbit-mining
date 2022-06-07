@@ -47,7 +47,7 @@ class HandleInertiaRequests extends Middleware
                     return null;
                 }
 
-                $user = $request->user()->with('role:id,name,slug')->first();
+                $user = $request->user()->load('role:id,name,slug');
 
                 return array_merge(
                     $user->toArray(),

@@ -4,6 +4,7 @@ import useTypedPage from '@hooks/useTypedPage';
 import {Session} from '@/types/types';
 import UpdatePasswordForm from "@components/profile/forms/UpdatePasswordForm";
 import LogoutOtherBrowserSessions from "@components/profile/forms/LogoutOtherBrowserSessionsForm";
+import DeleteUserForm from "../../components/profile/forms/DeleteUserForm";
 
 interface Props {
     sessions: Session[];
@@ -31,15 +32,10 @@ export default function Show({
                   <LogoutOtherBrowserSessions sessions={sessions} />
                 </div>
 
-                {/*{page.props.jetstream.hasAccountDeletionFeatures ? (*/}
-                {/*  <>*/}
-                {/*    <JetSectionBorder />*/}
 
-                {/*    <div className="mt-10 sm:mt-0">*/}
-                {/*      <DeleteUserForm />*/}
-                {/*    </div>*/}
-                {/*  </>*/}
-                {/*) : null}*/}
+                <div className="mt-10 sm:mt-0">
+                  <DeleteUserForm />
+                </div>
             </div>
         </div>
     );

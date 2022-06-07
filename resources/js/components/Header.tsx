@@ -14,8 +14,6 @@ const HeaderLink: React.FC<{ name: string, children: string }> =
         const route = useRoute();
         const isActive = route().current() === name;
 
-        console.log('HeaderLink')
-
         return (
             <CLink href={route(name)} className="relative mx-2 overflow-hidden rounded-lg flex justify-center">
                 <span className={`absolute bottom-0 bg-red-600 h-0.5 transition-all ${isActive ? 'w-full' : 'w-0 '}`}/>
@@ -58,7 +56,7 @@ const Header: React.FC = memo(() => {
         // { name: 'home', text: 'Главная' },
         { name: 'farms', text: 'Ферма' },
         { name: 'shops', text: 'Магазины' },
-        { name: 'home', text: 'Кошелёк' },
+        { name: 'home', text: 'Кошелёк' }
     ];
 
     console.log('header')

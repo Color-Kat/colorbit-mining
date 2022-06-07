@@ -67,7 +67,7 @@ export default React.memo(function Modal({
           >
             <div
               className={classNames(
-                'inline-block align-bottom app-bg-dark text-app rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:w-full',
+                'inline-block align-bottom app-bg text-app rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:w-full',
                 maxWidthClass,
               )}
             >

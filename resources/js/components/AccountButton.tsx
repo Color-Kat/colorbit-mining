@@ -15,6 +15,7 @@ const AccountButton: React.FC = () => {
 
     function logout(e: React.FormEvent) {
         e.preventDefault();
+        console.log(123123)
         Inertia.post(route('logout'));
     }
 
@@ -62,9 +63,9 @@ const AccountButton: React.FC = () => {
                 </DropdownLink>
 
                 {/* <!-- Authentication --> */}
-                <form onSubmit={logout}>
+                <div onClick={logout}>
                     <DropdownLink>Выйти</DropdownLink>
-                </form>
+                </div>
             </Dropdown>
         </div>
     );

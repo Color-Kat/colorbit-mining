@@ -2,22 +2,20 @@ import {useForm} from '@inertiajs/inertia-react';
 import classNames from 'classnames';
 import React, {useRef, useState} from 'react';
 import useRoute from '@hooks/useRoute';
-import JetActionSection from '@/Jetstream/ActionSection';
-import JetDialogModal from '@/Jetstream/DialogModal';
 import {Session} from '@/types/types';
-import Button from "../Button";
-import ActionMessage from "../ActionMessage";
-import Input from "../Input";
-import InputError from "../InputError";
-import SecondaryButton from "../SecondaryButton";
-import ActionSection from "../ActionSection";
-import DialogModal from "../../modal/DialogModal";
+import Button from "@components/profile/Button";
+import ActionMessage from "@components/profile/ActionMessage";
+import Input from "@components/profile/Input";
+import InputError from "@components/profile/InputError";
+import SecondaryButton from "@components/profile/SecondaryButton";
+import ActionSection from "@components/profile/ActionSection";
+import DialogModal from "@components/modal/DialogModal";
 
 interface Props {
     sessions: Session[];
 }
 
-export default function LogoutOtherBrowserSessions({sessions}: Props) {
+export default React.memo(function LogoutOtherBrowserSessions({sessions}: Props) {
     const [confirmingLogout, setConfirmingLogout] = useState(false);
     const route = useRoute();
     const passwordRef = useRef<HTMLInputElement>(null);
@@ -53,7 +51,7 @@ export default function LogoutOtherBrowserSessions({sessions}: Props) {
                 'Отслеживайте и управляйте вашей активностью в других браузерах.'
             }
         >
-            <div className="max-w-xl text-base  text-gray-400 font-play">
+            <div className="max-w-xl text-base text-gray-400 font-play">
                 При необходимости вы можете выйти из аккаунта сразу на всех устройствах.
                 Список некоторых из ваших последних сеансов ниже;
                 однако этот список может быть не полным. Если вы чувствуете, что ваш
@@ -162,4 +160,4 @@ export default function LogoutOtherBrowserSessions({sessions}: Props) {
             </DialogModal>
         </ActionSection>
     );
-}
+});
