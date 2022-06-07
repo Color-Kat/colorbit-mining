@@ -15,6 +15,8 @@ interface Props {
     status: string;
 }
 
+// TODO ошибка The пароль must be at least :min characters
+
 export default React.memo(function Login({canResetPassword, status}: Props) {
     const route = useRoute();
     const form = useForm({

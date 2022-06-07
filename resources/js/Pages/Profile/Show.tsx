@@ -3,6 +3,7 @@ import UpdateProfileInformationForm from '@components/profile/forms/UpdateProfil
 import useTypedPage from '@hooks/useTypedPage';
 import {Session} from '@/types/types';
 import UpdatePasswordForm from "@components/profile/forms/UpdatePasswordForm";
+import LogoutOtherBrowserSessions from "@components/profile/forms/LogoutOtherBrowserSessionsForm";
 
 interface Props {
     sessions: Session[];
@@ -10,9 +11,9 @@ interface Props {
 }
 
 export default function Show({
-                                 sessions,
-                                 confirmsTwoFactorAuthentication,
-                             }: Props) {
+     sessions,
+     confirmsTwoFactorAuthentication,
+ }: Props) {
     const page = useTypedPage();
 
     return (
@@ -22,25 +23,13 @@ export default function Show({
                     <UpdateProfileInformationForm user={page.props.user}/>
                 </div>
 
-                {page.props.jetstream.canUpdatePassword ? (
-                  <div className="mt-10 sm:mt-0">
+                <div className="mt-10 sm:mt-0">
                     <UpdatePasswordForm />
-                  </div>
-                ) : null}
+                </div>
 
-                {/*{page.props.jetstream.canManageTwoFactorAuthentication ? (*/}
-                {/*  <div className="mt-10 sm:mt-0">*/}
-                {/*    <TwoFactorAuthenticationForm*/}
-                {/*      requiresConfirmation={confirmsTwoFactorAuthentication}*/}
-                {/*    />*/}
-
-                {/*    <JetSectionBorder />*/}
-                {/*  </div>*/}
-                {/*) : null}*/}
-
-                {/*<div className="mt-10 sm:mt-0">*/}
-                {/*  <LogoutOtherBrowserSessions sessions={sessions} />*/}
-                {/*</div>*/}
+                <div className="mt-10 sm:mt-0">
+                  <LogoutOtherBrowserSessions sessions={sessions} />
+                </div>
 
                 {/*{page.props.jetstream.hasAccountDeletionFeatures ? (*/}
                 {/*  <>*/}
