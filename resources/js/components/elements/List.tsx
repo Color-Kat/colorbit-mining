@@ -7,9 +7,9 @@ export const ListItem: React.FC<PropsWithChildren<{
     return (
         <li className={
             classNames(
-                "font-play text-lg text-app",
+                "font-play text-xl text-app my-1 border-gray-500",
                 hover ? 'hover:text-gray-400' : '',
-                {...props}
+                (props as any).className
             )
         }>
             {children}

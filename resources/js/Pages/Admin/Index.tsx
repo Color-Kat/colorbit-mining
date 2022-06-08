@@ -63,14 +63,26 @@ const AdminLinks = () => {
         <AdminDashboardSection title="Комплектующие" last>
             <div className="admin-parts md:max-w-md">
                 <List>
-                    <ListItem><CLink href={route('admin.parts')}>Видеокарты</CLink></ListItem>
-                    <ListItem>Процессоры</ListItem>
-                    <ListItem>Платформы</ListItem>
-                    <ListItem>Блоки питания</ListItem>
-                    <ListItem>Каркасы</ListItem>
-                </List>
+                    <ListItem>
+                        <CLink hover href={route('admin.parts.index')}>Видеокарты</CLink>
+                    </ListItem>
 
-                <CLink href={route('admin.parts.index')}>Видеокарта</CLink>
+                    <ListItem>
+                        <CLink hover href={route('admin.parts.index')}>Процессоры</CLink>
+                    </ListItem>
+
+                    <ListItem>
+                        <CLink hover href={route('admin.parts.index')}>Платформы</CLink>
+                    </ListItem>
+
+                    <ListItem>
+                        <CLink hover href={route('admin.parts.index')}>Блоки питания</CLink>
+                    </ListItem>
+
+                    <ListItem>
+                        <CLink hover href={route('admin.parts.index')}>Каркасы</CLink>
+                    </ListItem>
+                </List>
             </div>
         </AdminDashboardSection>
     );
