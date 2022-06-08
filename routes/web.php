@@ -8,6 +8,7 @@ use App\Http\Controllers\PartController;
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\ShopsListController;
 
+use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\PartController as AdminPartController;
 
 /*
@@ -41,7 +42,8 @@ Route::prefix('shops')->group(function () {
 
 
 // Admin panel
-Route::middleware('admin')->prefix('admin')->name('admin')->group(function() {
+Route::middleware('admin')->prefix('admin')->as('admin.')->group(function() {
+    Route::get('/dashboard', [AdminController::class, 'index'])->name('dashboard');
     Route::resource('/parts', AdminPartController::class)->names('parts');
 });
 

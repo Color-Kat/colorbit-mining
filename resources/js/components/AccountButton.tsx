@@ -11,11 +11,11 @@ const AccountButton: React.FC = () => {
     const page = useTypedPage();
     const route = useRoute();
 
-    const isAuth = page.props.user;
+    const isAuth = !!page.props.user;
+    const isAdmin = page.props.user.role?.slug === 'admin';
 
     function logout(e: React.FormEvent) {
         e.preventDefault();
-        console.log(123123)
         Inertia.post(route('logout'));
     }
 
@@ -62,8 +62,14 @@ const AccountButton: React.FC = () => {
                     Профиль
                 </DropdownLink>
 
+                {isAdmin && (
+                    <DropdownLink href={route('admin.dashboard')}>
+                        Админ панель
+                    </DropdownLink>
+                )}
+
                 {/* <!-- Authentication --> */}
-                <div onClick={logout}>
+                <div onClick={logout} className="border-gray-400 border-t-2">
                     <DropdownLink>Выйти</DropdownLink>
                 </div>
             </Dropdown>

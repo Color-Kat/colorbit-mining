@@ -32,22 +32,15 @@ export default React.memo(function FormSection({
                     }}
                 >
                     <div
-                        className={classNames(
-                            'px-4 py-5 sm:p-6',
-                            hasActions
-                                ? 'sm:rounded-tl-md sm:rounded-tr-md'
-                                : 'sm:rounded-md',
-                        )}
+                        className="px-4 py-5 sm:p-6"
                     >
                         <div className="grid grid-cols-6 gap-6">{children}</div>
                     </div>
 
-                    {hasActions && (
                         <div
                             className="flex items-center justify-end px-4 py-3 text-right sm:px-6 border-red-600 border-t-2">
                             {renderActions?.()}
                         </div>
-                    )}
                 </form>
             </div>
         </div>
