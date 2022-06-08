@@ -9,7 +9,7 @@ const AdminSection: IPage<{title: string, description: string}> =({title, descri
                 <p className="mt-1 text-md text-gray-400">{description}</p>
             </div>
 
-            <div className="px-4 py-5 sm:p-6">
+            <div className="px-4 py-5 sm:p-6 md:col-span-2">
                 {children}
             </div>
         </div>
