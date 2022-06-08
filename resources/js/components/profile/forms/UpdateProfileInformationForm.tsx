@@ -28,7 +28,7 @@ export default React.memo(function UpdateProfileInformationForm({user}: Props) {
     const route = useRoute();
     const [photoPreview, setPhotoPreview] = useState<string | null>(null);
     const photoRef = useRef<HTMLInputElement>(null);
-    const page = usePage<any>();
+    // const page = usePage<any>();
 
     function updateProfileInformation() {
         form.post(route('user-profile-information.update'), {
@@ -152,6 +152,12 @@ export default React.memo(function UpdateProfileInformationForm({user}: Props) {
                 ) : null}
 
                 <InputError message={form.errors.photo} className="mt-2"/>
+            </div>
+
+            {/* <!-- Yout ID --> */}
+            <div className="col-span-6 sm:col-span-4 flex">
+                <Label value="Ваш ID:"/>
+                <span className="font-medium font-play text-xl">&nbsp;{user.id}</span>
             </div>
 
             {/* <!-- Name --> */}

@@ -17,10 +17,8 @@ const AdminDashboard: IPage = React.memo(() => {
             title="Админ панель"
             description="Тут вы можете оздавать новые комплектующие, управлять другими игроками и накручивать деньги."
         >
-            fsdf
+
         </AdminSection>
-
-
     );
 });
 
