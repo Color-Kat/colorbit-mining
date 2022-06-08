@@ -2364,6 +2364,9 @@ select:-webkit-autofill:focus {
   .md\:block{
     display: block;
   }
+  .md\:flex{
+    display: flex;
+  }
   .md\:grid{
     display: grid;
   }

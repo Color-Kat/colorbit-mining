@@ -11,7 +11,7 @@ interface Props {
     confirmsTwoFactorAuthentication: boolean;
 }
 
-export default function Show({
+export default React.memo(function Show({
      sessions,
      confirmsTwoFactorAuthentication,
  }: Props) {
@@ -39,4 +39,4 @@ export default function Show({
             </div>
         </div>
     );
-}
+});
