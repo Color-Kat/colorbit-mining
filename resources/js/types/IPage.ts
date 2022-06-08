@@ -1,5 +1,7 @@
-import React from "react";
+import React, {PropsWithChildren, ReactNode} from "react";
 
-export interface IPage<P = {}> extends React.FC<P> {
+export interface IPage<P = {}> extends React.FC<PropsWithChildren<P>>
+{
     layout?: (page: React.ReactNode) => JSX.Element;
+
 }
