@@ -2,6 +2,8 @@ import React from "react";
 import useRoute from '@hooks/useRoute';
 import useTypedPage from '@hooks/useTypedPage';
 import {IPage} from "@/types/IPage";
+import {TabsLinks} from "../../../components/elements/TabsLink";
+import {AdminDashboardSection} from "../Index";
 
 interface Props {
 
@@ -14,11 +16,16 @@ const AdminPartsList: IPage = React.memo(() => {
     console.log(page)
 
     return (
-        <div>
+        <AdminDashboardSection title="Всё">
 
-            123
+            <TabsLinks links={[{
+                title: 'Всё',
+                href: 'fsad'
+            }]}>
+                das
+            </TabsLinks>
 
-        </div>
+        </AdminDashboardSection>
     );
 });
 

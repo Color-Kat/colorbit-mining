@@ -4,13 +4,13 @@ import {IPage} from "@/types/IPage";
 import AdminSection from "@components/admin/AdminSection";
 import Button from "@components/elements/Button";
 import Input from "@components/elements/Input";
-import CLink from "@components/CLink";
-import {List, ListItem} from "@components/elements/List";
+import classNames from "classnames";
 
-const AdminDashboardSection: React.FC<PropsWithChildren<{ title: string, last?: boolean }>>
+import PartsIndex from "./Parts/Index";
+
+export const AdminDashboardSection: React.FC<PropsWithChildren<{ title: string, last?: boolean }>>
     = ({title, last = false, children}) => {
     return (
-        // <div className="md:col-span-3">
         <div className={`border-red-600 ${last ? '' : 'border-b-2'} pb-7 mb-7`}>
             <h3 className="w-full text-3xl font-medium font-play mb-3">{title}</h3>
             <div>
@@ -56,48 +56,16 @@ const ChangeBalance: React.FC = () => {
     );
 }
 
-const AdminLinks = () => {
-    const route = useRoute();
-
-    return (
-        <AdminDashboardSection title="Комплектующие" last>
-            <div className="admin-parts md:max-w-md">
-                <List>
-                    <ListItem>
-                        <CLink hover href={route('admin.parts.index')}>Видеокарты</CLink>
-                    </ListItem>
-
-                    <ListItem>
-                        <CLink hover href={route('admin.parts.index')}>Процессоры</CLink>
-                    </ListItem>
-
-                    <ListItem>
-                        <CLink hover href={route('admin.parts.index')}>Платформы</CLink>
-                    </ListItem>
-
-                    <ListItem>
-                        <CLink hover href={route('admin.parts.index')}>Блоки питания</CLink>
-                    </ListItem>
-
-                    <ListItem>
-                        <CLink hover href={route('admin.parts.index')}>Каркасы</CLink>
-                    </ListItem>
-                </List>
-            </div>
-        </AdminDashboardSection>
-    );
-}
-
 const AdminDashboard: IPage = memo(() => {
     return (
         <AdminSection
             title="Админ панель"
-            description="Тут вы можете оздавать новые комплектующие, управлять другими игроками и накручивать деньги."
+            description="Тут вы можете создавать новые комплектующие, управлять другими игроками и накручивать деньги."
         >
 
             <ChangeBalance/>
 
-            <AdminLinks/>
+            <PartsIndex />
         </AdminSection>
     );
 });
