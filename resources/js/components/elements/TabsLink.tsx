@@ -24,19 +24,17 @@ export const TabLinks: React.FC<{
 }> =  ({links}) => {
     const route = useRoute();
 
-    console.log(123)
-
     return (
-        <ul className="tabs-link app-bg flex rounded-lg h-11 p-1 space-x-1 rounded-xl">
+        <ul className="tabs-link app-bg flex rounded-lg p-1 rounded-xl w-full flex-wrap">
             {links.map(link => {
                 const isActive = route().current() === link.hrefName;
 
                 const className =  classNames(
-                    'w-full flex justify-center items-center rounded-lg text-lg font-play leading-5',
+                    'flex justify-center items-center rounded-lg text-lg font-play leading-5 h-11 px-4 sm:px-5 m-0.5',
                     'ring-white ring-opacity-60 ring-offset-2 ring-offset-blue-400 focus:outline-none focus:ring-2',
                     isActive
                         ? 'app-bg-red shadow text-white'
-                        : 'text-gray-400 hover:bg-white/[0.12] hover:text-gray-100'
+                        : 'text-gray-400 bg-white/[0.08] hover:text-gray-100 hover:bg-white/[0.12]'
                 )
 
                 return (

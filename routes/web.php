@@ -44,6 +44,9 @@ Route::prefix('shops')->group(function () {
 // Admin panel
 Route::middleware('admin')->prefix('admin')->as('admin.')->group(function() {
     Route::get('/dashboard', [AdminController::class, 'index'])->name('dashboard');
+
+    Route::get('/change-balance', [AdminController::class, 'changeBalance'])->name('change-balance');
+
     Route::resource('/parts', AdminPartController::class)->names('parts');
 });
 

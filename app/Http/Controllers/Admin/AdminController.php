@@ -11,4 +11,8 @@ class AdminController extends Controller
     public function index() {
         return Inertia::render('Admin/Index');
     }
+
+    public function changeBalance() {
+        return Inertia::render('Admin/ChangeBalance');
+    }
 }

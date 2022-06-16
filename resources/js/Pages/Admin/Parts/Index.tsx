@@ -12,8 +12,6 @@ const AdminPartsList: IPage = React.memo(() => {
     const route = useRoute();
     const page = useTypedPage();
 
-    console.log(page)
-
     return (
         <AdminLayout title="Комплектующие" description="Управляйте списком комплектующих здесь">
             fsdf

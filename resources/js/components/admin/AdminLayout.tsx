@@ -25,7 +25,20 @@ const AdminLayout: IPage<{title: string, description: string}> =({title, descrip
             title: 'Комплектующие',
             hrefName: 'admin.parts.index'
         },
-
+        {
+            title: 'Накрутка',
+            hrefName: 'admin.change-balance'
+        },
+        {
+            title: 'Накрутка',
+            hrefName: 'admin.change-balance'
+        }, {
+            title: 'Накрутка',
+            hrefName: 'admin.change-balance'
+        }, {
+            title: 'Накрутка',
+            hrefName: 'admin.change-balance'
+        },
     ];
 
     return (

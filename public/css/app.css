@@ -942,6 +942,15 @@ select{
 .col-span-6{
   grid-column: span 6 / span 6;
 }
+.m-1{
+  margin: 0.25rem;
+}
+.m-0\.5{
+  margin: 0.125rem;
+}
+.m-0{
+  margin: 0px;
+}
 .mx-auto{
   margin-left: auto;
   margin-right: auto;
@@ -1520,6 +1529,21 @@ select{
 .bg-gray-700{
   --tw-bg-opacity: 1;
   background-color: rgb(55 65 81 / var(--tw-bg-opacity));
+}
+.bg-white\/\[0\.12\]{
+  background-color: rgb(255 255 255 / 0.12);
+}
+.bg-white\/\[0\.15\]{
+  background-color: rgb(255 255 255 / 0.15);
+}
+.bg-white\/\[0\.05\]{
+  background-color: rgb(255 255 255 / 0.05);
+}
+.bg-white\/\[0\.07\]{
+  background-color: rgb(255 255 255 / 0.07);
+}
+.bg-white\/\[0\.08\]{
+  background-color: rgb(255 255 255 / 0.08);
 }
 .bg-opacity-25{
   --tw-bg-opacity: 0.25;
@@ -2419,6 +2443,10 @@ select:-webkit-autofill:focus {
   .sm\:px-5{
     padding-left: 1.25rem;
     padding-right: 1.25rem;
+  }
+  .sm\:px-3{
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
   }
   .sm\:pt-0{
     padding-top: 0px;
