@@ -19,7 +19,7 @@ const ChangeBalance: IPage = React.memo(() => {
     }
 
     return (
-        <AdminLayout title="Комплектующие" description="Управляйте списком комплектующих здесь">
+        <AdminLayout title="Накрутка" description="Изменяйте баланс пользователей по их ID">
             <div className="flex justify-center">
                 <div className="admin-change-balance md:max-w-md w-full flex flex-col">
                     <Input

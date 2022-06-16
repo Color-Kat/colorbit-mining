@@ -29,16 +29,6 @@ const AdminLayout: IPage<{title: string, description: string}> =({title, descrip
             title: 'Накрутка',
             hrefName: 'admin.change-balance'
         },
-        {
-            title: 'Накрутка',
-            hrefName: 'admin.change-balance'
-        }, {
-            title: 'Накрутка',
-            hrefName: 'admin.change-balance'
-        }, {
-            title: 'Накрутка',
-            hrefName: 'admin.change-balance'
-        },
     ];
 
     return (
@@ -50,9 +40,9 @@ const AdminLayout: IPage<{title: string, description: string}> =({title, descrip
                 </div>
             </AdminDashboardSection>
 
-            <AdminDashboardSection>
+            <div className="rounded-lg app-bg-dark shadow-md mb-4">
                 <TabLinks links={adminLinks} />
-            </AdminDashboardSection>
+            </div>
 
             {children && <AdminDashboardSection>
                 {children}

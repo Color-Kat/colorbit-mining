@@ -25,7 +25,7 @@ export const TabLinks: React.FC<{
     const route = useRoute();
 
     return (
-        <ul className="tabs-link app-bg flex rounded-lg p-1 rounded-xl w-full flex-wrap">
+        <ul className="tabs-link app-bg-dark flex rounded-lg p-1 rounded-xl w-full flex-wrap">
             {links.map(link => {
                 const isActive = route().current() === link.hrefName;
 
