@@ -1,24 +1,12 @@
 import React, {ChangeEvent, memo, PropsWithChildren, useState} from "react";
 import useRoute from '@hooks/useRoute';
 import {IPage} from "@/types/IPage";
-import AdminSection from "@components/admin/AdminSection";
 import Button from "@components/elements/Button";
 import Input from "@components/elements/Input";
 import classNames from "classnames";
 
 import PartsIndex from "./Parts/Index";
-
-export const AdminDashboardSection: React.FC<PropsWithChildren<{ title: string, last?: boolean }>>
-    = ({title, last = false, children}) => {
-    return (
-        <div className={`border-red-600 ${last ? '' : 'border-b-2'} pb-7 mb-7`}>
-            <h3 className="w-full text-3xl font-medium font-play mb-3">{title}</h3>
-            <div>
-                {children}
-            </div>
-        </div>
-    );
-}
+import AdminLayout, {AdminDashboardSection} from "../../components/admin/AdminLayout";
 
 const ChangeBalance: React.FC = () => {
     const [userId, setUserId] = useState<number>();
@@ -33,7 +21,7 @@ const ChangeBalance: React.FC = () => {
     }
 
     return (
-        <AdminDashboardSection title="Изменить баланс">
+        // <AdminDashboardSection title="Изменить баланс">
             <div className="admin-change-balance md:max-w-md flex flex-col">
                 <Input
                     className="w-full mb-2"
@@ -52,21 +40,21 @@ const ChangeBalance: React.FC = () => {
 
                 <Button className="self-end">Ок</Button>
             </div>
-        </AdminDashboardSection>
+        // </AdminDashboardSection>
     );
 }
 
 const AdminDashboard: IPage = memo(() => {
     return (
-        <AdminSection
+        <AdminLayout
             title="Админ панель"
             description="Тут вы можете создавать новые комплектующие, управлять другими игроками и накручивать деньги."
         >
 
-            <ChangeBalance/>
+            {/*<ChangeBalance/>*/}
 
-            <PartsIndex />
-        </AdminSection>
+            {/*<PartsIndex />*/}
+        </AdminLayout>
     );
 });
 

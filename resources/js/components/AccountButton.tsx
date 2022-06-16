@@ -12,7 +12,7 @@ const AccountButton: React.FC = () => {
     const route = useRoute();
 
     const isAuth = !!page.props.user;
-    const isAdmin = page.props.user.role?.slug === 'admin';
+    const isAdmin = page.props.user?.role?.slug === 'admin';
 
     function logout(e: React.FormEvent) {
         e.preventDefault();
