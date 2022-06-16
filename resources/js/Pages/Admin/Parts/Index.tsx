@@ -6,15 +6,15 @@ import AdminLayout from "@components/admin/AdminLayout";
 import Paginator from "@components/elements/Paginator";
 import {IPaginator} from "../../../types/IPaginator";
 
+
 const AdminPartsList: IPage = React.memo(() => {
     const route = useRoute();
     const page = useTypedPage<{
-        parts: IPaginator<{}>
+        parts: IPaginator<IPart>
     }>();
 
     const paginator = page.props.parts;
-    const parts = page.props.parts.data;
-    console.log(paginator);
+    const parts: IPart[] = page.props.parts.data[0].;
 
     return (
         <AdminLayout title="Комплектующие" description="Управляйте списком комплектующих здесь">
