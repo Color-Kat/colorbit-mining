@@ -14,8 +14,6 @@ export const AdminDashboardSection: React.FC<{children: ReactNode}>
 }
 
 const AdminLayout: IPage<{title: string, description: string}> =({title, description, children}) => {
-    const route = useRoute();
-
     const adminLinks: TabLinksType = [
         {
             title: 'Главная',

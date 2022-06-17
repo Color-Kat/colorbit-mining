@@ -5,6 +5,8 @@ import {IPage} from "@/types/IPage";
 import AdminLayout from "@components/admin/AdminLayout";
 import Paginator from "@components/elements/Paginator";
 import {IPaginator} from "../../../types/IPaginator";
+import {IPart} from "../../../types/parts/IPart";
+import AdminPartsListLayout from "../../../components/admin/AdminPartsListLayout";
 
 
 const AdminPartsList: IPage = React.memo(() => {
@@ -14,16 +16,22 @@ const AdminPartsList: IPage = React.memo(() => {
     }>();
 
     const paginator = page.props.parts;
-    const parts: IPart[] = page.props.parts.data[0].;
+    const parts: IPart[] = page.props.parts.data;
 
     return (
-        <AdminLayout title="Комплектующие" description="Управляйте списком комплектующих здесь">
+        <AdminPartsListLayout title="Комплектующие" description="Управляйте списком комплектующих здесь">
             <div>
-                data
+                {parts.map(part => {
+                    return (
+                        <div>
+                            {part.name}
+                        </div>
+                    );
+                })}
             </div>
 
             <Paginator paginator={paginator} />
-        </AdminLayout>
+        </AdminPartsListLayout>
     );
 });
 
