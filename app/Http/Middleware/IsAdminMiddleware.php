@@ -16,6 +16,7 @@ class IsAdminMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
+        if(!$request->user()) return redirect()->route('login', 401);
         $userRole = $request->user()->load('role:id,slug')->role->slug;
 
         if($userRole === 'admin') return $next($request);

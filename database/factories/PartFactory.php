@@ -25,7 +25,7 @@ class PartFactory extends Factory
      */
     public function definition()
     {
-        $types = ['GPU', 'platform', 'power_supply', 'RAM', 'case'];
+        $types = ['GPU', 'platform', 'PSU', 'RAM', 'case'];
         $type = $types[rand(0, count($types) - 1)];
 
         $name = $type . ' '. $this->faker->name();
@@ -68,12 +68,12 @@ class PartFactory extends Factory
 
                 break;
 
-            case 'power_supply':
-                $power_supply_efficiency = ['none', 'bronze', 'silver', 'gold', 'platinum'];
+            case 'PSU':
+                $power_supply_efficiency = ['none', 'bronze', 'silver', 'gold', 'platinum', 'titanium'];
 
                 $part = array_merge($base, [
-                    'power_supply' => rand(200, 3000), // Watt
-                    'power_supply_efficiency' => $power_supply_efficiency[array_rand($power_supply_efficiency)]
+                    'PSU_power_supply' => rand(200, 3000), // Watt
+                    'PSU_efficiency' => $power_supply_efficiency[array_rand($power_supply_efficiency)]
                 ]);
 
                 break;

@@ -43,8 +43,8 @@ return new class extends Migration
             $table->unsignedInteger('platform_RAM_slots')->nullable(); // Number of RAM slots
 
             // Power Supply
-            $table->unsignedInteger('power_supply')->nullable(); // Power of power supply in Watt
-            $table->string('power_supply_efficiency')->nullable(); // Efficiency certificate of power supply
+            $table->unsignedInteger('PSU_power_supply')->nullable(); // Power of power supply in Watt
+            $table->string('PSU_efficiency')->nullable(); // Efficiency certificate of power supply
 
             // RAM
             $table->unsignedInteger('RAM_frequency')->nullable();
