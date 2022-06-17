@@ -69,11 +69,11 @@ class PartFactory extends Factory
                 break;
 
             case 'PSU':
-                $power_supply_efficiency = ['none', 'bronze', 'silver', 'gold', 'platinum', 'titanium'];
+                $PSU_efficiency = ['none', 'bronze', 'silver', 'gold', 'platinum', 'titanium'];
 
                 $part = array_merge($base, [
                     'PSU_power_supply' => rand(200, 3000), // Watt
-                    'PSU_efficiency' => $power_supply_efficiency[array_rand($power_supply_efficiency)]
+                    'PSU_efficiency' => $PSU_efficiency[array_rand($PSU_efficiency)]
                 ]);
 
                 break;
@@ -89,8 +89,11 @@ class PartFactory extends Factory
                 break;
 
             case 'case':
+                $case_material_rus = ['осина', 'алюминий', 'железо', 'олово', 'дуб', 'берёза'];
+
                 $part = array_merge($base, [
                     'case_material' => rand(0,1) ? 'wooden' : 'aluminum',
+                    'case_material_rus' => $case_material_rus[array_rand($case_material_rus)],
                     'case_GPUs_count' => rand(1, 10),
                     'case_critical_temp' => rand(80, 200)
                 ]);

@@ -53,6 +53,7 @@ return new class extends Migration
 
             // Case (frame, carcass)
             $table->string('case_material')->nullable();
+            $table->string('case_material_rus')->nullable();
             $table->unsignedInteger('case_GPUs_count')->nullable();
             $table->unsignedInteger('case_critical_temp')->nullable(); // Max critical temperature for case
 
