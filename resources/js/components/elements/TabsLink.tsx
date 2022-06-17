@@ -21,7 +21,7 @@ export type TabLinksType = {title: string, hrefName: string}[];
 
 export const TabLinks: React.FC<{
     links: TabLinksType,
-    small: boolean
+    small?: boolean
 }> =  ({links, small= false}) => {
     const route = useRoute();
 
@@ -31,7 +31,7 @@ export const TabLinks: React.FC<{
                 const isActive = route().current() === link.hrefName;
 
                 const className =  classNames(
-                    'flex justify-center items-center rounded-lg font-play leading-5 px-4 sm:px-5 m-0.5',
+                    'flex justify-center items-center rounded-lg font-play leading-5 m-0.5',
                     'ring-white ring-opacity-60 ring-offset-2 ring-offset-blue-400 focus:outline-none focus:ring-2',
                     small ? 'h-9 text-base' : 'h-11 text-lg',
                     isActive
@@ -41,7 +41,7 @@ export const TabLinks: React.FC<{
 
                 return (
                     <li key={link.hrefName} className={className}>
-                        <CLink href={route(link.hrefName)} className="w-full h-full">{link.title}</CLink>
+                        <CLink href={route(link.hrefName)} className="w-full h-full px-4 sm:px-5">{link.title}</CLink>
                     </li>
                 )
             })}

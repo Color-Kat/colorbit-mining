@@ -13,22 +13,22 @@ const AdminPartsListLayout: IPage<{title: string, description: string}> =({title
             title: 'Видеокарты',
             hrefName: 'admin.dashboard'
         },
-        {
-            title: 'Платформы',
-            hrefName: 'admin.dashboard'
-        },
-        {
-            title: 'ОЗУ',
-            hrefName: 'admin.dashboard'
-        },
-        {
-            title: 'БП',
-            hrefName: 'admin.dashboard'
-        },
-        {
-            title: 'Каркас',
-            hrefName: 'admin.dashboard'
-        },
+        // {
+        //     title: 'Платформы',
+        //     hrefName: 'admin.dashboard'
+        // },
+        // {
+        //     title: 'ОЗУ',
+        //     hrefName: 'admin.dashboard'
+        // },
+        // {
+        //     title: 'БП',
+        //     hrefName: 'admin.dashboard'
+        // },
+        // {
+        //     title: 'Каркас',
+        //     hrefName: 'admin.dashboard'
+        // },
     ];
 
     return (

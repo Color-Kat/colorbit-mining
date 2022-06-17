@@ -16,7 +16,7 @@ const Pagination: React.FC<{ paginator: IPaginator<any> }> = memo(({paginator}) 
 
                     const classes = classNames(
                         'p-2 md:py-2 md:px-3 leading-tight h-11 w-11',
-                        isActive ? 'app-bg-red text-gray-100' : 'hover:bg-neutral-600',
+                        isActive ? 'app-bg-red text-gray-100 shadow' : 'hover:bg-neutral-600',
                         isDisabled ? 'bg-neutral-600/[0.5]' : ''
                     );
 

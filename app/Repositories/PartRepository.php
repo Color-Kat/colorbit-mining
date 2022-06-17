@@ -25,7 +25,7 @@ class PartRepository extends CoreRepository
      * Return all with paginator
      */
     public function getAllWithPaginator() {
-        $result = $this->startConditions()::select(['id', 'name', 'image', 'slug', 'type', 'price'])->orderBy('id', 'DESC')->paginate(10);
+        $result = $this->startConditions()::select(['id', 'name', 'vendor', 'image', 'slug', 'type', 'price'])->orderBy('id', 'DESC')->paginate(10);
         return $result;
     }
 }

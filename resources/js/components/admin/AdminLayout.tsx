@@ -1,7 +1,6 @@
-import React, {PropsWithChildren, ReactNode} from "react";
+import React, {ReactNode} from "react";
 import {IPage} from "@/types/IPage";
 import {TabLinks, TabLinksType} from "../elements/TabsLink";
-import useRoute from "../../hooks/useRoute";
 
 // Black background
 export const AdminDashboardSection: React.FC<{children: ReactNode}>

@@ -1,4 +1,4 @@
-export type PartType = 'GPU' | 'platform' | 'RAM' | 'power_supply' | 'case';
+export type PartType = 'GPU' | 'platform' | 'RAM' | 'PSU' | 'case';
 
 export interface IBasePart {
     id: number;
