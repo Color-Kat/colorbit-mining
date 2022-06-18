@@ -108,11 +108,11 @@ class PartController extends AdminBaseController
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Inertia\Response
      */
     public function create()
     {
-        return 'create';
+        return Inertia::render('Admin/Parts/Create');
     }
 
     /**
@@ -140,13 +140,14 @@ class PartController extends AdminBaseController
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param  Part  $part
+     * @return \Inertia\Response
      */
-    public function edit(Request $request, Part $part)
+    public function edit(Part $part)
     {
-        dump($part);
-        return 'edit - ';
+        return Inertia::render('Admin/Parts/Edit', [
+            'part' => $part
+        ]);
     }
 
     /**

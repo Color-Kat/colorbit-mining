@@ -8,18 +8,21 @@ import AdminPartsListLayout from "@components/admin/AdminPartsListLayout";
 import {IBasePart} from "@/types/parts/IBasePart";
 import {CreateButton} from "../../../components/admin/CreateButton";
 import {PartsList} from "../../../components/admin/PartsList";
+import {Inertia} from "@inertiajs/inertia";
+import useRoute from "../../../hooks/useRoute";
 
 
 const AdminPartsList: IPage = React.memo(() => {
     const page = useTypedPage<{
-        parts: IPaginator<IPart>
+        parts: IPaginator<IBasePart>
     }>();
+    const route = useRoute();
 
     const paginator = page.props.parts;
     const parts: IBasePart[] = page.props.parts.data;
 
     const createPart = () => {
-        console.log('create');
+        Inertia.get(route('admin.parts.create'));
     }
 
     return (
