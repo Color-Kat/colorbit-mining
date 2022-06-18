@@ -17,7 +17,7 @@ import useRoute from "../../hooks/useRoute";
 //     )
 // });
 
-export type TabLinksType = {title: string, hrefName: string}[];
+export type TabLinksType = {title: string, hrefName: string, current?: string }[];
 
 export const TabLinks: React.FC<{
     links: TabLinksType,
@@ -28,7 +28,7 @@ export const TabLinks: React.FC<{
     return (
         <ul className="tabs-link flex rounded-lg p-1 rounded-xl w-full flex-wrap">
             {links.map(link => {
-                const isActive = route().current() === link.hrefName;
+                const isActive = route().current(link.current ?? link.hrefName);
 
                 const className =  classNames(
                     'flex justify-center items-center rounded-lg font-play leading-5 m-0.5',

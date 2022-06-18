@@ -20,7 +20,8 @@ const AdminLayout: IPage<{title: string, description: string}> =({title, descrip
         },
         {
             title: 'Комплектующие',
-            hrefName: 'admin.parts.index'
+            hrefName: 'admin.parts.index',
+            current: 'admin.parts.*'
         },
         {
             title: 'Накрутка',

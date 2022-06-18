@@ -40,7 +40,6 @@ Route::prefix('shops')->group(function () {
     Route::get('/{shop_slug}/{product_slug}', [PartController::class, 'index'])->name('product');
 });
 
-
 // Admin panel
 Route::middleware('admin')->prefix('admin')->as('admin.')->group(function() {
     Route::get('/dashboard', [AdminController::class, 'index'])->name('dashboard');
@@ -48,14 +47,16 @@ Route::middleware('admin')->prefix('admin')->as('admin.')->group(function() {
     Route::get('/change-balance', [AdminController::class, 'changeBalance'])->name('change-balance');
 
 
-    Route::get('/parts/gpu', [AdminPartController::class, 'GPU'])->name('parts.GPU');
-    Route::get('/parts/platform', [AdminPartController::class, 'platform'])->name('parts.platform');
-    Route::get('/parts/ram', [AdminPartController::class, 'RAM'])->name('parts.RAM');
-    Route::get('/parts/psu', [AdminPartController::class, 'PSU'])->name('parts.PSU');
-    Route::get('/parts/case', [AdminPartController::class, 'case'])->name('parts.case');
+    Route::prefix('parts')->as('parts.')->group(function() {
+        Route::get('/gpu', [AdminPartController::class, 'GPU'])->name('GPU');
+        Route::get('/platform', [AdminPartController::class, 'platform'])->name('platform');
+        Route::get('/ram', [AdminPartController::class, 'RAM'])->name('RAM');
+        Route::get('/psu', [AdminPartController::class, 'PSU'])->name('PSU');
+        Route::get('/case', [AdminPartController::class, 'case'])->name('case');
 
-    Route::resource('/parts', AdminPartController::class)->names('parts');
-   });
+        Route::resource('/', AdminPartController::class)->names('');
+    });
+});
 
 
 Route::middleware([
