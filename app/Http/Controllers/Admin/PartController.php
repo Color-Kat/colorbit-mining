@@ -111,7 +111,7 @@ class PartController extends AdminBaseController
      */
     public function create()
     {
-        //
+        return 'create';
     }
 
     /**
@@ -144,7 +144,7 @@ class PartController extends AdminBaseController
      */
     public function edit($id)
     {
-        //
+        return 'edit - ' . $id;
     }
 
     /**
