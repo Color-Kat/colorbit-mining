@@ -11,24 +11,24 @@ const AdminPartsListLayout: IPage<{title: string, description: string}> =({title
         },
         {
             title: 'Видеокарты',
-            hrefName: 'admin.parts.GPUs',
+            hrefName: 'admin.parts.GPU',
         },
         {
             title: 'Платформы',
-            hrefName: 'admin.parts.platforms'
+            hrefName: 'admin.parts.platform'
         },
-        // {
-        //     title: 'ОЗУ',
-        //     hrefName: 'admin.dashboard'
-        // },
-        // {
-        //     title: 'БП',
-        //     hrefName: 'admin.dashboard'
-        // },
-        // {
-        //     title: 'Каркас',
-        //     hrefName: 'admin.dashboard'
-        // },
+        {
+            title: 'ОЗУ',
+            hrefName: 'admin.parts.RAM'
+        },
+        {
+            title: 'БП',
+            hrefName: 'admin.parts.PSU'
+        },
+        {
+            title: 'Каркас',
+            hrefName: 'admin.parts.case'
+        },
     ];
 
     return (

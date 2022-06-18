@@ -21,7 +21,7 @@ class PartController extends AdminBaseController
     }
 
     /**
-     * Display a listing of the resource.
+     * Display a listing of the resource with paginator.
      *
      * @return \Inertia\Response
      */
@@ -35,11 +35,11 @@ class PartController extends AdminBaseController
     }
 
     /**
-     * Display only videocards (GPU).
+     * Display only videocards (GPU) with paginator.
      *
      * @return \Inertia\Response
      */
-    public function GPUs()
+    public function GPU()
     {
         $parts = $this->partRepository->getByTypeWithPaginator('GPU');
 
@@ -49,13 +49,55 @@ class PartController extends AdminBaseController
     }
 
     /**
-     * Display only platforms.
+     * Display only platforms with paginator.
      *
      * @return \Inertia\Response
      */
-    public function platforms()
+    public function platform()
     {
         $parts = $this->partRepository->getByTypeWithPaginator('platform');
+
+        return Inertia::render('Admin/Parts/Index', [
+            'parts' => $parts
+        ]);
+    }
+
+    /**
+     * Display only RAMs with paginator.
+     *
+     * @return \Inertia\Response
+     */
+    public function RAM()
+    {
+        $parts = $this->partRepository->getByTypeWithPaginator('RAM');
+
+        return Inertia::render('Admin/Parts/Index', [
+            'parts' => $parts
+        ]);
+    }
+
+    /**
+     * Display only PSUs with paginator.
+     *
+     * @return \Inertia\Response
+     */
+    public function PSU()
+    {
+        $parts = $this->partRepository->getByTypeWithPaginator('PSU');
+
+        return Inertia::render('Admin/Parts/Index', [
+            'parts' => $parts
+        ]);
+    }
+
+    /**
+     * Display only cases with paginator.
+     *
+     * @return \Inertia\Response
+     */
+    public function case()
+    {
+        $parts = $this->partRepository->getByTypeWithPaginator('case');
 
         return Inertia::render('Admin/Parts/Index', [
             'parts' => $parts
