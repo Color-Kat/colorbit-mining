@@ -28,4 +28,18 @@ class PartRepository extends CoreRepository
         $result = $this->startConditions()::select(['id', 'name', 'vendor', 'image', 'slug', 'type', 'price'])->orderBy('id', 'DESC')->paginate(10);
         return $result;
     }
+
+    /**
+     * Return all parts by type with paginator
+     */
+    public function getByTypeWithPaginator(string $type) {
+        $select = ['id', 'name', 'vendor', 'image', 'slug', 'type', 'price'];
+
+        $result = $this->startConditions()::select($select)
+            ->where('type', $type)
+            ->orderBy('id', 'DESC')
+            ->paginate(10);
+
+        return $result;
+    }
 }

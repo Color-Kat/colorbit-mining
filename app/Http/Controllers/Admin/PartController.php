@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
 use App\Repositories\PartRepository;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -29,6 +28,34 @@ class PartController extends AdminBaseController
     public function index()
     {
         $parts = $this->partRepository->getAllWithPaginator();
+
+        return Inertia::render('Admin/Parts/Index', [
+            'parts' => $parts
+        ]);
+    }
+
+    /**
+     * Display only videocards (GPU).
+     *
+     * @return \Inertia\Response
+     */
+    public function GPUs()
+    {
+        $parts = $this->partRepository->getByTypeWithPaginator('GPU');
+
+        return Inertia::render('Admin/Parts/Index', [
+            'parts' => $parts
+        ]);
+    }
+
+    /**
+     * Display only platforms.
+     *
+     * @return \Inertia\Response
+     */
+    public function platforms()
+    {
+        $parts = $this->partRepository->getByTypeWithPaginator('platform');
 
         return Inertia::render('Admin/Parts/Index', [
             'parts' => $parts

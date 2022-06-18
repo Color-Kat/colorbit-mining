@@ -47,8 +47,12 @@ Route::middleware('admin')->prefix('admin')->as('admin.')->group(function() {
 
     Route::get('/change-balance', [AdminController::class, 'changeBalance'])->name('change-balance');
 
+
+    Route::get('/parts/gpus', [AdminPartController::class, 'GPUs'])->name('parts.GPUs');
+    Route::get('/parts/platforms', [AdminPartController::class, 'platforms'])->name('parts.platforms');
     Route::resource('/parts', AdminPartController::class)->names('parts');
-});
+
+   });
 
 
 Route::middleware([

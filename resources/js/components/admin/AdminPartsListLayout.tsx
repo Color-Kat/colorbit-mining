@@ -11,12 +11,12 @@ const AdminPartsListLayout: IPage<{title: string, description: string}> =({title
         },
         {
             title: 'Видеокарты',
-            hrefName: 'admin.dashboard'
+            hrefName: 'admin.parts.GPUs',
         },
-        // {
-        //     title: 'Платформы',
-        //     hrefName: 'admin.dashboard'
-        // },
+        {
+            title: 'Платформы',
+            hrefName: 'admin.parts.platforms'
+        },
         // {
         //     title: 'ОЗУ',
         //     hrefName: 'admin.dashboard'
