@@ -4,7 +4,7 @@ export const EditButton: React.FC<{onClick: (e?: React.MouseEvent<HTMLButtonElem
     return (
         <button
             onClick={onClick}
-            className='inline-flex items-center px-4 py-2 bg-violet-600 rounded-smx font-bold text-xs text-gray-100 uppercase tracking-widest hover:bg-violet-500 active:bg-violet-600 focus:outline-none'
+            className='inline-flex items-center px-4 py-2 rounded-smx font-bold text-xs uppercase tracking-widest bg-gray-300/[0.8] hover:bg-gray-300/[0.9] text-app-black'
         >
             Изменить
         </button>

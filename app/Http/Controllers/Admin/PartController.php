@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\Part;
 use App\Repositories\PartRepository;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -142,9 +143,10 @@ class PartController extends AdminBaseController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request, Part $part)
     {
-        return 'edit - ' . $id;
+        dump($part);
+        return 'edit - ';
     }
 
     /**
@@ -163,10 +165,12 @@ class PartController extends AdminBaseController
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function destroy($id)
+    public function destroy(Part $part)
     {
-        //
+        dump($part);
+
+        return redirect()->back();
     }
 }

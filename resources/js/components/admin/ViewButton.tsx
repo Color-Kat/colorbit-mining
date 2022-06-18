@@ -4,7 +4,7 @@ export const ViewButton: React.FC<{onClick: (e?: React.MouseEvent<HTMLButtonElem
     return (
         <button
             onClick={onClick}
-            className='inline-flex items-center px-4 py-2 bg-sky-600 rounded-smx font-bold text-xs text-white uppercase tracking-widest hover:bg-sky-500/[0.95] active:bg-sky-500 focus:outline-none'
+            className='inline-flex items-center px-4 py-2 rounded-smx font-bold text-xs  uppercase tracking-widest bg-gray-300/[0.8] hover:bg-gray-300/[0.9] text-app-black'
         >
             Открыть
         </button>
