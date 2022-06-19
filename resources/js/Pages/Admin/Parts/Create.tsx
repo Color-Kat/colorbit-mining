@@ -1,4 +1,4 @@
-import React, {useRef, useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import {IPage} from "@/types/IPage";
 import AdminPartsListLayout from "@components/admin/AdminPartsListLayout";
 import Label from "../../../components/elements/form/Label";
@@ -9,6 +9,11 @@ import {Inertia} from "@inertiajs/inertia";
 import {InertiaFormProps, useForm} from "@inertiajs/inertia-react";
 import useRoute from "@hooks/useRoute";
 import {PhotoInput} from "../../../components/elements/form/PhotoInput";
+import {IPart} from "../../../types/parts/IPart";
+import {IBasePart} from "../../../types/parts/IBasePart";
+import {PSU_EfficiencyType} from "../../../types/parts/IPSU";
+import {CaseMaterialType} from "../../../types/parts/ICase";
+import {Part} from "../../../classes/Part";
 
 interface AdminInputProps {
     title: string;
@@ -21,16 +26,14 @@ interface AdminInputProps {
     errors: { [key: string]: string };
 }
 
-const ControlInput: React.FC<AdminInputProps> = React.memo(({
-                                                                name,
-                                                                title,
-                                                                type = 'text',
-                                                                data,
-                                                                setData,
-                                                                errors
-                                                            }) => {
-    console.log('input')
-
+const ControlledInput: React.FC<AdminInputProps> = ({
+    name,
+    title,
+    type = 'text',
+    data,
+    setData,
+    errors
+}) => {
     return (
         <div className="control-input">
             <Label htmlFor={name} value={title}/>
@@ -44,19 +47,14 @@ const ControlInput: React.FC<AdminInputProps> = React.memo(({
             <InputError message={errors[name]} className="mt-2"/>
         </div>
     );
-});
+};
+
+
 
 const AdminPartCreate: IPage = React.memo(() => {
     const route = useRoute();
-    const {data, setData, post, processing, errors} = useForm({
-        name: '',
-        vendor: '',
-        email: '',
-        image: '',
-        _image: null as File | null,
-    });
 
-    console.log('parent')
+    let {data, setData, post, processing, errors} = useForm<IPart>(new Part());
 
     const createPart = () => {
         console.log('update', data);
@@ -79,15 +77,15 @@ const AdminPartCreate: IPage = React.memo(() => {
             <div className="space-y-4">
                 <PhotoInput data={data} setData={setData} errors={errors}/>
 
-                <ControlInput
+                <ControlledInput
                     data={data} setData={setData} errors={errors}
                     title="Название"
                     name="name"
                 />
 
-                <ControlInput
+                <ControlledInput
                     data={data} setData={setData} errors={errors}
-                    title="Название"
+                    title="Вендор"
                     name="vendor"
                 />
 

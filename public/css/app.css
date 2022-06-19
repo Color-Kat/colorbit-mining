@@ -1131,12 +1131,6 @@ select{
 .h-full{
   height: 100%;
 }
-.h-60{
-  height: 15rem;
-}
-.max-h-60{
-  max-height: 15rem;
-}
 .min-h-screen{
   min-height: 100vh;
 }
@@ -2363,9 +2357,6 @@ select:-webkit-autofill:focus {
   }
   .sm\:w-1\/2{
     width: 50%;
-  }
-  .sm\:w-60{
-    width: 15rem;
   }
   .sm\:max-w-md{
     max-width: 28rem;

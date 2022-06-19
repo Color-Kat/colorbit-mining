@@ -11,7 +11,7 @@ interface PhotoInputProps {
     data: {
         name?: string
         image: string,
-        _image: File | null
+        _image?: File | null
     };
     setData: (name: string, data: any) => void;
     errors: {image: string};
