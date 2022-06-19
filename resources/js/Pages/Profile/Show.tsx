@@ -12,8 +12,7 @@ interface Props {
 }
 
 export default React.memo(function Show({
-     sessions,
-     confirmsTwoFactorAuthentication,
+     sessions
  }: Props) {
     const page = useTypedPage();
 

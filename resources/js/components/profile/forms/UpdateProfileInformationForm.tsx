@@ -45,9 +45,7 @@ export default React.memo(function UpdateProfileInformationForm({user}: Props) {
     function updatePhotoPreview() {
         const photo = photoRef.current?.files?.[0];
 
-        if (!photo) {
-            return;
-        }
+        if (!photo) return;
 
         form.setData('photo', photo);
 

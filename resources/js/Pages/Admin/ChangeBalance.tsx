@@ -1,8 +1,8 @@
 import React, {ChangeEvent, useState} from "react";
 import {IPage} from "@/types/IPage";
 import AdminLayout from "@components/admin/AdminLayout";
-import Input from "../../components/elements/Input";
-import Button from "../../components/elements/Button";
+import Input from "@components/elements/form/Input";
+import Button from "@components/elements/Button";
 
 const ChangeBalance: IPage = React.memo(() => {
     const [userId, setUserId] = useState<number>();
