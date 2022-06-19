@@ -17,9 +17,10 @@ interface PhotoInputProps {
 }
 
 export const PhotoInput: React.FC<PhotoInputProps> = React.memo(({data, setData, errors}) => {
-    const route = useRoute();
     const [photoPreview, setPhotoPreview] = useState<string | null>(null);
     const photoRef = useRef<HTMLInputElement>(null);
+
+    console.log('photo')
 
     function selectNewPhoto() {
         photoRef.current?.click();
@@ -61,7 +62,7 @@ export const PhotoInput: React.FC<PhotoInputProps> = React.memo(({data, setData,
     }
 
     return (
-        <div className="col-span-6 sm:col-span-4">
+        <div className="photo-upload">
             {/* <!-- Part Image File Input --> */}
             <input
                 type="file"
@@ -77,7 +78,7 @@ export const PhotoInput: React.FC<PhotoInputProps> = React.memo(({data, setData,
                 <div className="mt-2">
                     <img
                         src={photoPreview}
-                        alt={data.name}
+                        alt="Фото товара"
                         className="w-full xsm:w-60 object-cover"
                     />
                 </div>
@@ -86,7 +87,7 @@ export const PhotoInput: React.FC<PhotoInputProps> = React.memo(({data, setData,
                 <div className="mt-2">
                     <img
                         src={data.image ? data.image : noImage}
-                        alt={data.name}
+                        alt="Фото товара"
                         className="w-full xsm:w-60 object-cover"
                     />
                 </div>
@@ -113,4 +114,6 @@ export const PhotoInput: React.FC<PhotoInputProps> = React.memo(({data, setData,
             <InputError message={errors.image} className="mt-2"/>
         </div>
     );
+}, (prev, next) => {
+    return prev.data._image !== next.data._image || prev.data.image !== next.data.image;
 });
