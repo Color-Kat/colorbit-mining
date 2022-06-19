@@ -5,6 +5,7 @@ import InputError from "./InputError";
 import useRoute from "@hooks/useRoute";
 
 import noImage from '@assets/no-image/part.png';
+import {Inertia} from "@inertiajs/inertia";
 
 interface PhotoInputProps {
     data: {
@@ -13,10 +14,11 @@ interface PhotoInputProps {
         _image: File | null
     };
     setData: (name: string, data: any) => void;
-    errors: {image: string}
+    errors: {image: string};
+    destroyRoute?: string;
 }
 
-export const PhotoInput: React.FC<PhotoInputProps> = React.memo(({data, setData, errors}) => {
+export const PhotoInput: React.FC<PhotoInputProps> = React.memo(({data, setData, errors, destroyRoute}) => {
     const [photoPreview, setPhotoPreview] = useState<string | null>(null);
     const photoRef = useRef<HTMLInputElement>(null);
 
@@ -43,13 +45,15 @@ export const PhotoInput: React.FC<PhotoInputProps> = React.memo(({data, setData,
     }
 
     function deletePhoto() {
-        // Inertia.delete(route('current-user-photo.destroy'), {
-        //     preserveScroll: true,
-        //     onSuccess: () => {
-        setPhotoPreview(null);
-        clearPhotoFileInput();
-        // },
-        // });
+        if(!destroyRoute) return;
+
+        Inertia.delete(destroyRoute, {
+            preserveScroll: true,
+            onSuccess: () => {
+                setPhotoPreview(null);
+                clearPhotoFileInput();
+            },
+        });
     }
 
     function clearPhotoFileInput() {
@@ -115,5 +119,5 @@ export const PhotoInput: React.FC<PhotoInputProps> = React.memo(({data, setData,
         </div>
     );
 }, (prev, next) => {
-    return prev.data._image !== next.data._image || prev.data.image !== next.data.image;
+    return prev.data._image === next.data._image || prev.data.image === next.data.image;
 });
