@@ -1,6 +1,5 @@
 import React, {useState} from "react";
 import {useForm} from "@inertiajs/inertia-react";
-import useRoute from "@hooks/useRoute";
 
 import {IPage} from "@/types/IPage";
 import {PartT} from "@/types/parts/IPart";
@@ -13,8 +12,7 @@ import {ControlledInput} from "@components/elements/form/ControlledInput";
 
 
 import Label from "@components/elements/form/Label";
-import Input from "@components/elements/form/Input";
-import InputError from "@components/elements/form/InputError";
+
 import Button from "../../../components/elements/Button";
 import SecondaryButton from "../../../components/elements/SecondaryButton";
 
@@ -24,19 +22,25 @@ interface ControlledSelectProps {
     options: {
         title: string,
         value: string,
-        selected?: boolean
-    }[]
+    }[];
+    data: {
+        [key: string]: any
+    };
+    setData: (name: string, data: any) => void;
 }
 
-const ControlledSelect: React.FC<ControlledSelectProps> = ({name, title, options}) => {
+const ControlledSelect: React.FC<ControlledSelectProps> = ({name, title, options, data, setData}) => {
     return (
-        <div className="control-select">
+        <div className="control-select relative">
             <Label htmlFor={name} value={title}/>
 
-            <select name={name}>
-                {options.map((option, i) => (
+            <span className="text-red-600 absolute right-2 top-1/2 text-xl">&#8628;</span>
+
+            <select name={name} className="w-full mt-1 app-bg border-gray-500 rounded-md focus:border-red-500 focus:ring focus:ring-red-500 focus:ring-opacity-0 text-app">
+                {options.map((option) => (
                     <option
-                        selected={option.selected}
+                        key={option.title}
+                        selected={data[name] === option.value}
                         value={option.value}
                     >{option.title}</option>
                 ))}
@@ -53,8 +57,31 @@ const ControlledSelect: React.FC<ControlledSelectProps> = ({name, title, options
     );
 }
 
+const typesList = [
+    {
+        title: 'Видеокарта',
+        value: 'GPU'
+    },
+    {
+        title: 'Платформа',
+        value: 'platform'
+    },
+    {
+        title: 'ОЗУ',
+        value: 'RAM'
+    },
+    {
+        title: 'Блок Питания',
+        value: 'PSU'
+    },
+    {
+        title: 'Каркас',
+        value: 'case'
+    }
+]
+
+
 const AdminPartCreate: IPage = React.memo(() => {
-    const route = useRoute();
     let {data, setData, post, processing, errors} = useForm<PartT<PartType> | IBasePart>(new Part());
 
     const [stage, setStage] = useState<number>(1);
@@ -113,6 +140,13 @@ const AdminPartCreate: IPage = React.memo(() => {
                     data={data} setData={setData} errors={errors}
                     title="Идентификатор"
                     name="slug"
+                />
+
+                <ControlledSelect
+                    data={data} setData={setData}
+                    name="type"
+                    title="Тип"
+                    options={typesList}
                 />
             </div>
 
