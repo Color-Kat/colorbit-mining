@@ -1,6 +1,8 @@
 import {IBasePart, PartType} from "@/types/parts/IBasePart";
 import {PartT} from "@/types/parts/IPart";
 import {GPU_VRAM_type} from "../types/parts/IGPU";
+import {PSU_EfficiencyType} from "../types/parts/IPSU";
+import {CaseMaterialType} from "../types/parts/ICase";
 
 export class Part implements IBasePart {
     public name: string = '';
@@ -10,41 +12,10 @@ export class Part implements IBasePart {
     public slug: string = '';
     public price: number = 100;
 
+    public created_at?: string;
+    public updated_at?: string;
+
     public _image?: File | null;
-
-    // public name: string = '';
-    // image: string;
-    // vendor: string;
-    // slug: string;
-    // type: PartType;
-    // price: number; // In $$$
-    // created_at?: string;
-    // updated_at?: string;
-    //
-    // _image?: File | null;
-
-    // GPU_VRAM_size = 0;
-    // GPU_VRAM_frequency = 0;
-    // GPU_VRAM_type = 0;
-    // GPU_fans_count = 0;
-    // GPU_fans_efficiency = 0;
-    //
-    // platform_cors_count = 0;
-    // platform_threads_count = 0;
-    // platform_frequency = 0;
-    // platform_RAM_slots = 0;
-    //
-    // RAM_frequency = 0;
-    // RAM_size = 0;
-    // RAM_channels = 0;
-    //
-    // PSU_power_supply = 0;
-    // PSU_efficiency: PSU_EfficiencyType = 'none';
-    //
-    // case_material: CaseMaterialType = 'wood';
-    // case_material_rus = 'дерево';
-    // case_GPUs_slots = 1;
-    // case_critical_temp = 100;
 
     constructor(partData?: IBasePart) {
         if(!partData) return;
@@ -70,3 +41,53 @@ export class GPU extends Part implements PartT<'GPU'> {
         super(partData);
     }
 }
+
+export class Platform extends Part implements PartT<'platform'> {
+    public type: "platform" = "platform";
+
+    public platform_cors_count: number = 1;
+    public platform_threads_count: number = 1;
+    public platform_frequency: number = 333;
+    public platform_RAM_slots: number = 1;
+
+    constructor(partData?: IBasePart | PartT<'platform'>) {
+        super(partData);
+    }
+}
+
+export class RAM extends Part implements PartT<'RAM'> {
+    public type: "RAM" = "RAM";
+
+    public RAM_frequency: number = 1666;
+    public RAM_size: number = 1;
+    public RAM_channels: number = 1;
+
+    constructor(partData?: IBasePart | PartT<'RAM'>) {
+        super(partData);
+    }
+}
+
+export class PSU extends Part implements PartT<'PSU'> {
+    public type: "PSU" = "PSU";
+
+    public PSU_power_supply: number = 100;
+    public PSU_efficiency: PSU_EfficiencyType = 'none';
+
+    constructor(partData?: IBasePart | PartT<'PSU'>) {
+        super(partData);
+    }
+}
+
+export class Case extends Part implements PartT<'case'> {
+    public type: "case" = "case";
+
+    public case_material: CaseMaterialType = 'wood';
+    public case_material_rus: string = 'дерево';
+    public case_GPUs_slots: number = 1;
+    public case_critical_temp: number = 100;
+
+    constructor(partData?: IBasePart | PartT<'case'>) {
+        super(partData);
+    }
+}
+

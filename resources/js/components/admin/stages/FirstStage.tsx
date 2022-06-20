@@ -2,7 +2,7 @@ import React, {useEffect} from "react";
 import {ControlledSelect} from "../../elements/form/ControlledSelect";
 import {ControlledInput} from "../../elements/form/ControlledInput";
 import {PhotoInput} from "../../elements/form/PhotoInput";
-import {GPU} from "../../../classes/Part";
+import {Case, GPU, Platform, PSU, RAM} from "../../../classes/Part";
 import {IBasePart} from "../../../types/parts/IBasePart";
 
 const type_options = [
@@ -42,16 +42,17 @@ export const FirstStage: React.FC<{
     // Update available fields (for GPU, RAM,..)
     const typeChangeHandler = (name: string, value: any) => {
         setData(name, value)
+
         setData((prev: IBasePart) => {
             switch (value){
                 case 'GPU': return new GPU(prev);
-                case 'platform': return new GPU(prev);
-                case 'RAM': return new GPU(prev);
-                case 'PSU': return new GPU(prev);
-                case 'case': return new GPU(prev);
+                case 'platform': return new Platform(prev);
+                case 'RAM': return new RAM(prev);
+                case 'PSU': return new PSU(prev);
+                case 'case': return new Case(prev);
             }
-
         });
+
     }
 
     return (
