@@ -14,31 +14,8 @@ import {ControlledInput} from "@components/elements/form/ControlledInput";
 import Button from "../../../components/elements/Button";
 import SecondaryButton from "../../../components/elements/SecondaryButton";
 import {ControlledSelect} from "../../../components/elements/form/ControlledSelect";
+import {FirstStage} from "../../../components/admin/stages/FirstStage";
 
-
-
-const typesList = [
-    {
-        title: 'Видеокарта',
-        value: 'GPU'
-    },
-    {
-        title: 'Платформа',
-        value: 'platform'
-    },
-    {
-        title: 'ОЗУ',
-        value: 'RAM'
-    },
-    {
-        title: 'Блок Питания',
-        value: 'PSU'
-    },
-    {
-        title: 'Каркас',
-        value: 'case'
-    }
-]
 
 
 const AdminPartCreate: IPage = React.memo(() => {
@@ -80,35 +57,7 @@ const AdminPartCreate: IPage = React.memo(() => {
             {/* Use CSS hidden/visible to save PhotoInput state */}
             <div className={`space-y-4 ${stage == 1 ? 'visible' : 'hidden'}`}>
 
-                <PhotoInput data={data} setData={setData} errors={errors}/>
-
-                {/* NAME */}
-                <ControlledInput
-                    data={data} setData={setData} errors={errors}
-                    title="Название"
-                    name="name"
-                />
-
-                {/* VENDOR */}
-                <ControlledInput
-                    data={data} setData={setData} errors={errors}
-                    title="Вендор"
-                    name="vendor"
-                />
-
-                {/* SLUG */}
-                <ControlledInput
-                    data={data} setData={setData} errors={errors}
-                    title="Идентификатор"
-                    name="slug"
-                />
-
-                <ControlledSelect
-                    data={data} setData={setData}
-                    name="type"
-                    title="Тип"
-                    options={typesList}
-                />
+                <FirstStage data={data} setData={setData} errors={errors}/>
 
             </div>
 
