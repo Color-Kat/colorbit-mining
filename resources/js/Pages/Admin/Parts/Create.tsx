@@ -7,20 +7,18 @@ import {IBasePart, PartType} from "@/types/parts/IBasePart";
 import {Part} from "@/classes/Part";
 
 import AdminPartsListLayout from "@components/admin/AdminPartsListLayout";
-import {PhotoInput} from "@components/elements/form/PhotoInput";
 import {ControlledInput} from "@components/elements/form/ControlledInput";
 
 
 import Button from "../../../components/elements/Button";
 import SecondaryButton from "../../../components/elements/SecondaryButton";
-import {ControlledSelect} from "../../../components/elements/form/ControlledSelect";
 import {FirstStage} from "../../../components/admin/stages/FirstStage";
 import {SecondStage} from "../../../components/admin/stages/SecondStage";
 
 
 
 const AdminPartCreate: IPage = React.memo(() => {
-    let {data, setData, post, processing, errors} = useForm<PartT<PartType> | IBasePart>(new Part());
+    let {data, setData, post, processing, errors, transform} = useForm<PartT<PartType> | IBasePart>(new Part());
 
     const [stage, setStage] = useState<number>(1);
 

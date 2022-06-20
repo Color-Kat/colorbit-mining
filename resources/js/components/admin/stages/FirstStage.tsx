@@ -1,7 +1,9 @@
-import React from "react";
+import React, {useEffect} from "react";
 import {ControlledSelect} from "../../elements/form/ControlledSelect";
 import {ControlledInput} from "../../elements/form/ControlledInput";
 import {PhotoInput} from "../../elements/form/PhotoInput";
+import {GPU} from "../../../classes/Part";
+import {IBasePart} from "../../../types/parts/IBasePart";
 
 const type_options = [
     {
@@ -28,10 +30,29 @@ const type_options = [
 
 export const FirstStage: React.FC<{
     data: any,
-    setData: (name: string, data: any) => void,
+    setData: ((name: string, data: any) => void) & ((prev: any) => any),
     errors: any
 }>
     = ({data, setData, errors}) => {
+
+    useEffect(() => {
+        typeChangeHandler('type', data.type);
+    }, []);
+
+    // Update available fields (for GPU, RAM,..)
+    const typeChangeHandler = (name: string, value: any) => {
+        setData(name, value)
+        setData((prev: IBasePart) => {
+            switch (value){
+                case 'GPU': return new GPU(prev);
+                case 'platform': return new GPU(prev);
+                case 'RAM': return new GPU(prev);
+                case 'PSU': return new GPU(prev);
+                case 'case': return new GPU(prev);
+            }
+
+        });
+    }
 
     return (
         <>
@@ -61,8 +82,9 @@ export const FirstStage: React.FC<{
                 name="slug"
             />
 
+            {/* TYPE */}
             <ControlledSelect
-                data={data} setData={setData}
+                data={data} setData={typeChangeHandler}
                 name="type"
                 title="Тип"
                 options={type_options}
