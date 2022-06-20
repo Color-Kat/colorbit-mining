@@ -6,6 +6,7 @@ export interface IBasePart {
     image: string;
     vendor: string;
     slug: string;
+    type: PartType;
     price: number; // In $$$
     created_at?: string;
     updated_at?: string;

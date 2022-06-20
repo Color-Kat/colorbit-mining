@@ -1,5 +1,4 @@
 import {IBasePart, PartType} from "@/types/parts/IBasePart";
-import { CaseMaterialType } from "@/types/parts/ICase";
 import {PartT} from "@/types/parts/IPart";
 import {GPU_VRAM_type} from "../types/parts/IGPU";
 
@@ -7,6 +6,7 @@ export class Part implements IBasePart {
     public name: string = '';
     public image: string = '';
     public vendor: string = '';
+    public type: PartType = 'GPU';
     public slug: string = '';
     public price: number = 100;
 
@@ -52,6 +52,7 @@ export class Part implements IBasePart {
         this.name = partData.name;
         this.slug = partData.slug;
         this.vendor = partData.vendor;
+        this.type = partData.type;
         this.price = partData.price;
         this.image = partData.name;
     }

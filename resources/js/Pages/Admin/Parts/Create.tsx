@@ -11,51 +11,11 @@ import {PhotoInput} from "@components/elements/form/PhotoInput";
 import {ControlledInput} from "@components/elements/form/ControlledInput";
 
 
-import Label from "@components/elements/form/Label";
-
 import Button from "../../../components/elements/Button";
 import SecondaryButton from "../../../components/elements/SecondaryButton";
+import {ControlledSelect} from "../../../components/elements/form/ControlledSelect";
 
-interface ControlledSelectProps {
-    name: string;
-    title: string;
-    options: {
-        title: string,
-        value: string,
-    }[];
-    data: {
-        [key: string]: any
-    };
-    setData: (name: string, data: any) => void;
-}
 
-const ControlledSelect: React.FC<ControlledSelectProps> = ({name, title, options, data, setData}) => {
-    return (
-        <div className="control-select relative">
-            <Label htmlFor={name} value={title}/>
-
-            <span className="text-red-600 absolute right-2 top-1/2 text-xl">&#8628;</span>
-
-            <select name={name} className="w-full mt-1 app-bg border-gray-500 rounded-md focus:border-red-500 focus:ring focus:ring-red-500 focus:ring-opacity-0 text-app">
-                {options.map((option) => (
-                    <option
-                        key={option.title}
-                        selected={data[name] === option.value}
-                        value={option.value}
-                    >{option.title}</option>
-                ))}
-            </select>
-
-            {/*<Input*/}
-            {/*    id={name}*/}
-            {/*    type={type}*/}
-            {/*    className="mt-1 block w-full"*/}
-            {/*    value={data[name]}*/}
-            {/*    onChange={e => setData(name, e.currentTarget.value)}*/}
-            {/*/>*/}
-        </div>
-    );
-}
 
 const typesList = [
     {
@@ -119,6 +79,7 @@ const AdminPartCreate: IPage = React.memo(() => {
             {/* STAGE 1 */}
             {/* Use CSS hidden/visible to save PhotoInput state */}
             <div className={`space-y-4 ${stage == 1 ? 'visible' : 'hidden'}`}>
+
                 <PhotoInput data={data} setData={setData} errors={errors}/>
 
                 {/* NAME */}
@@ -148,6 +109,7 @@ const AdminPartCreate: IPage = React.memo(() => {
                     title="Тип"
                     options={typesList}
                 />
+
             </div>
 
 
@@ -160,13 +122,13 @@ const AdminPartCreate: IPage = React.memo(() => {
             {/* STAGE 3 */}
             {stage == 3 && <div className="space-y-4">
 
-
                 {/* Price */}
                 <ControlledInput
                     data={data} setData={setData} errors={errors}
                     title="Цена"
                     name="price"
                 />
+
             </div>}
 
 
@@ -179,7 +141,10 @@ const AdminPartCreate: IPage = React.memo(() => {
                     : <div/>
                 }
 
-                <Button onClick={nextStage} className="h-9 sm:text-base font-medium xsm:px-6">
+                <Button
+                    onClick={nextStage}
+                    className="h-9 sm:text-base font-medium xsm:px-6"
+                >
                     Далее
                 </Button>
             </div>
