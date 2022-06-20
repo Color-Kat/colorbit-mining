@@ -89,7 +89,9 @@ const AdminPartCreate: IPage = React.memo(() => {
             description="Изменяйте свойства комплектующих здесь"
         >
 
-            <div className="space-y-4">
+            {/* STAGE 1 */}
+            {/* Use CSS hidden/visible to save PhotoInput state */}
+            <div className={`space-y-4 ${stage == 1 ? 'visible' : 'hidden'}`}>
                 <PhotoInput data={data} setData={setData} errors={errors}/>
 
                 {/* NAME */}
@@ -112,6 +114,17 @@ const AdminPartCreate: IPage = React.memo(() => {
                     title="Идентификатор"
                     name="slug"
                 />
+            </div>
+
+
+            {/* STAGE 2 */}
+            {stage == 2 && <div className="space-y-4">
+
+            </div>}
+
+
+            {/* STAGE 3 */}
+            {stage == 3 && <div className="space-y-4">
 
 
                 {/* Price */}
@@ -120,10 +133,10 @@ const AdminPartCreate: IPage = React.memo(() => {
                     title="Цена"
                     name="price"
                 />
+            </div>}
 
 
-            </div>
-
+            {/* STAGES CONTROL */}
             <div className="admin-stages w-full flex justify-between mt-7">
                 {stage > 1
                     ? <SecondaryButton onClick={prevStage} className="h-9 sm:text-base font-medium xsm:px-6">
