@@ -22,8 +22,6 @@ export const PhotoInput: React.FC<PhotoInputProps> = React.memo(({data, setData,
     const [photoPreview, setPhotoPreview] = useState<string | null>(null);
     const photoRef = useRef<HTMLInputElement>(null);
 
-    console.log('photo')
-
     function selectNewPhoto() {
         photoRef.current?.click();
     }
