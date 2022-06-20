@@ -65,6 +65,7 @@ export class GPU extends Part implements PartT<'GPU'> {
     public GPU_fans_count: number = 1;
     public GPU_fans_efficiency: number = 50;
 
-
-
+    constructor(partData?: PartT<'GPU'>) {
+        super(partData);
+    }
 }

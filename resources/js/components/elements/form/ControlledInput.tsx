@@ -15,7 +15,7 @@ interface ControlledInputProps {
     errors: { [key: string]: string };
 }
 
-export const ControlledInput: React.FC<ControlledInputProps> = ({
+export const ControlledInput: React.FC<ControlledInputProps> = React.memo(({
     name,
     title,
     type = 'text',
@@ -36,4 +36,4 @@ export const ControlledInput: React.FC<ControlledInputProps> = ({
             <InputError message={errors[name]} className="mt-2"/>
         </div>
     );
-};
+});

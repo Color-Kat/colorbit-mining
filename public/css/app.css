@@ -1056,6 +1056,9 @@ select{
 .mb-5{
   margin-bottom: 1.25rem;
 }
+.mt-7{
+  margin-top: 1.75rem;
+}
 .block{
   display: block;
 }
@@ -2292,6 +2295,10 @@ select:-webkit-autofill:focus {
   .xsm\:self-center{
     align-self: center;
   }
+  .xsm\:px-6{
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
 }
 @media (min-width: 640px){
   .sm\:col-span-4{
@@ -2456,6 +2463,10 @@ select:-webkit-autofill:focus {
   }
   .sm\:align-middle{
     vertical-align: middle;
+  }
+  .sm\:text-base{
+    font-size: 1rem;
+    line-height: 1.5rem;
   }
 }
 @media (min-width: 768px){
