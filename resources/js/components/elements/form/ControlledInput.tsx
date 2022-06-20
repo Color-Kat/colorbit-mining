@@ -15,13 +15,14 @@ interface ControlledInputProps {
     errors: { [key: string]: string };
 }
 
-export const ControlledInput: React.FC<ControlledInputProps> = React.memo(({
+export const ControlledInput: React.FC<ControlledInputProps & InputHTMLAttributes<any>> = React.memo(({
     name,
     title,
     type = 'text',
     data,
     setData,
-    errors
+    errors,
+    ...props
 }) => {
     return (
         <div className="control-input">
@@ -32,6 +33,7 @@ export const ControlledInput: React.FC<ControlledInputProps> = React.memo(({
                 className="mt-1 block w-full"
                 value={data[name]}
                 onChange={e => setData(name, e.currentTarget.value)}
+                {...props}
             />
             <InputError message={errors[name]} className="mt-2"/>
         </div>

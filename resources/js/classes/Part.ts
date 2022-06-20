@@ -6,7 +6,7 @@ export class Part implements IBasePart {
     public name: string = '';
     public image: string = '';
     public vendor: string = '';
-    public type: PartType = 'GPU';
+    public type: PartType = 'RAM';
     public slug: string = '';
     public price: number = 100;
 

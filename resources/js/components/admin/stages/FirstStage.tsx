@@ -1,9 +1,9 @@
-import React, {ReactNode} from "react";
+import React from "react";
 import {ControlledSelect} from "../../elements/form/ControlledSelect";
 import {ControlledInput} from "../../elements/form/ControlledInput";
 import {PhotoInput} from "../../elements/form/PhotoInput";
 
-const typesList = [
+const type_options = [
     {
         title: 'Видеокарта',
         value: 'GPU'
@@ -24,7 +24,7 @@ const typesList = [
         title: 'Каркас',
         value: 'case'
     }
-]
+];
 
 export const FirstStage: React.FC<{
     data: any,
@@ -41,6 +41,7 @@ export const FirstStage: React.FC<{
             <ControlledInput
                 data={data} setData={setData} errors={errors}
                 title="Название"
+                placeholder="GTX 1050Ti"
                 name="name"
             />
 
@@ -48,6 +49,7 @@ export const FirstStage: React.FC<{
             <ControlledInput
                 data={data} setData={setData} errors={errors}
                 title="Вендор"
+                placeholder="MSI"
                 name="vendor"
             />
 
@@ -55,6 +57,7 @@ export const FirstStage: React.FC<{
             <ControlledInput
                 data={data} setData={setData} errors={errors}
                 title="Идентификатор"
+                placeholder="msi-gtx-1050ti"
                 name="slug"
             />
 
@@ -62,7 +65,7 @@ export const FirstStage: React.FC<{
                 data={data} setData={setData}
                 name="type"
                 title="Тип"
-                options={typesList}
+                options={type_options}
             />
         </>
     );

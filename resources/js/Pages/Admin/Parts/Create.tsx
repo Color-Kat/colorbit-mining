@@ -15,6 +15,7 @@ import Button from "../../../components/elements/Button";
 import SecondaryButton from "../../../components/elements/SecondaryButton";
 import {ControlledSelect} from "../../../components/elements/form/ControlledSelect";
 import {FirstStage} from "../../../components/admin/stages/FirstStage";
+import {SecondStage} from "../../../components/admin/stages/SecondStage";
 
 
 
@@ -64,7 +65,7 @@ const AdminPartCreate: IPage = React.memo(() => {
 
             {/* STAGE 2 */}
             {stage == 2 && <div className="space-y-4">
-
+                <SecondStage data={data} setData={setData} errors={errors} />
             </div>}
 
 
