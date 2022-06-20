@@ -37,31 +37,34 @@ const AdminPartCreate: IPage = React.memo(() => {
             <div className="space-y-4">
                 <PhotoInput data={data} setData={setData} errors={errors}/>
 
+                {/* NAME */}
                 <ControlledInput
                     data={data} setData={setData} errors={errors}
                     title="Название"
                     name="name"
                 />
 
+                {/* VENDOR */}
                 <ControlledInput
                     data={data} setData={setData} errors={errors}
                     title="Вендор"
                     name="vendor"
                 />
 
-                {/* <!-- Name --> */}
-                <div className="col-span-6 sm:col-span-4">
-                    <Label htmlFor="name" value="Имя"/>
-                    <Input
-                        id="name"
-                        type="text"
-                        className="mt-1 block w-full"
-                        value={data.name}
-                        onChange={e => setData('name', e.currentTarget.value)}
-                        autoComplete="name"
-                    />
-                    <InputError message={errors.name} className="mt-2"/>
-                </div>
+                {/* SLUG */}
+                <ControlledInput
+                    data={data} setData={setData} errors={errors}
+                    title="Идентификатор"
+                    name="slug"
+                />
+
+                {/* Price */}
+                <ControlledInput
+                    data={data} setData={setData} errors={errors}
+                    title="Цена"
+                    name="price"
+                />
+
             </div>
 
         </AdminPartsListLayout>
