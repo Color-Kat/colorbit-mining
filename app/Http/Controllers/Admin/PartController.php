@@ -139,11 +139,13 @@ class PartController extends AdminBaseController
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(Request $request)
     {
-        //
+        dump($request->all());
+
+        return redirect()->route('admin.parts.index');
     }
 
     /**

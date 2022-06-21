@@ -14,38 +14,24 @@ import {ThirdStage} from "@components/admin/stages/ThirdStage";
 
 import Button from "../../../components/elements/Button";
 import SecondaryButton from "../../../components/elements/SecondaryButton";
+import useRoute from "../../../hooks/useRoute";
+import {StageControl} from "../../../components/admin/stages/StageControll";
 
 
 const AdminPartCreate: IPage = React.memo(() => {
-    let {data, setData, post, processing, errors, transform} = useForm<PartT<PartType> | IBasePart>(new Part());
+    const route = useRoute();
+    let {data, setData, post, processing, errors} = useForm<PartT<PartType> | IBasePart>(new Part());
 
     const [stage, setStage] = useState<number>(3);
-
-    const nextStage = () => {
-        setStage(prev => {
-            if (prev < 3) return prev + 1;
-            else {
-                createPart();
-                return prev;
-            }
-        });
-    }
-
-    const prevStage = () => {
-        setStage(prev => {
-            if (prev > 1) return prev - 1;
-            else return prev;
-        })
-    }
 
     const createPart = () => {
         console.log('update', data);
 
-        // post(route('user-profile-information.update'), {
-        //     errorBag: 'updateProfileInformation',
-        //     preserveScroll: true,
-        //     onSuccess: () => clearPhotoFileInput(),
-        // });
+        post(route('user-profile-information.update'), {
+            errorBag: 'updateProfileInformation',
+            preserveScroll: true,
+            // onSuccess: () => clearPhotoFileInput(),
+        });
     }
 
     return (
@@ -57,9 +43,7 @@ const AdminPartCreate: IPage = React.memo(() => {
             {/* STAGE 1 */}
             {/* Use CSS hidden/visible to save PhotoInput state */}
             <div className={`space-y-4 ${stage == 1 ? 'visible' : 'hidden'}`}>
-
                 <FirstStage data={data} setData={setData} errors={errors}/>
-
             </div>
 
 
@@ -76,21 +60,7 @@ const AdminPartCreate: IPage = React.memo(() => {
 
 
             {/* STAGES CONTROL */}
-            <div className="admin-stages w-full flex justify-between mt-7">
-                {stage > 1
-                    ? <SecondaryButton onClick={prevStage} className="h-9 sm:text-base font-medium xsm:px-6">
-                        Назад
-                    </SecondaryButton>
-                    : <div/>
-                }
-
-                <Button
-                    onClick={nextStage}
-                    className="h-9 sm:text-base font-medium xsm:px-6"
-                >
-                    {stage < 3 ? 'Далее' : 'Создать'}
-                </Button>
-            </div>
+            <StageControl stage={stage} setStage={setStage}/>
 
         </AdminPartsListLayout>
     );

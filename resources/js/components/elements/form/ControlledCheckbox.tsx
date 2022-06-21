@@ -1,6 +1,5 @@
 import React from 'react';
 import Label from "./Label";
-import {IPart} from "../../../types/parts/IPart";
 
 interface ControlledCheckboxProps {
     name: string;
