@@ -1,5 +1,6 @@
 import React from 'react';
 import Label from "./Label";
+import {IPart} from "../../../types/parts/IPart";
 
 interface ControlledCheckboxProps {
     name: string;
@@ -11,13 +12,26 @@ interface ControlledCheckboxProps {
     data: {
         [key: string]: any
     };
-    setData: (name: string, data: any) => void;
+    setData: ((name: string, data: any) => void) & ((prev: any) => any),
 }
 
 export const ControlledCheckbox: React.FC<ControlledCheckboxProps> = ({name, title, options, data, setData}) => {
+    // Add or delete value from list
     const handle = (e: any) => {
-        console.log(e.target)
-        // setData();
+        const checkedValue = e.target.value;
+
+        setData((prev: IPart) => {
+            let breakdowns = prev.breakdowns;
+            let find = breakdowns.indexOf(checkedValue);
+
+            if (find > -1) breakdowns.splice(find, 1);
+            else breakdowns.push(checkedValue);
+
+            return {
+                ...prev,
+                breakdowns: breakdowns,
+            }
+        });
     }
 
     return (
@@ -30,7 +44,7 @@ export const ControlledCheckbox: React.FC<ControlledCheckboxProps> = ({name, tit
                 >
                     <input
                         type="checkbox"
-                        // name={name}
+                        name={name}
                         value={option.value}
                         checked={data[name].includes(option.value)}
                         onChange={handle}

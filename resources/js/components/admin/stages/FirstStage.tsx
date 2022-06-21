@@ -2,8 +2,8 @@ import React, {useEffect} from "react";
 import {ControlledSelect} from "../../elements/form/ControlledSelect";
 import {ControlledInput} from "../../elements/form/ControlledInput";
 import {PhotoInput} from "../../elements/form/PhotoInput";
-import {Case, GPU, Platform, PSU, RAM} from "../../../classes/Part";
-import {IBasePart} from "../../../types/parts/IBasePart";
+import {Case, GPU, Platform, PSU, RAM} from "@/classes/Part";
+import {IPart} from "@/types/parts/IPart";
 
 const type_options = [
     {
@@ -43,7 +43,7 @@ export const FirstStage: React.FC<{
     const typeChangeHandler = (name: string, value: any) => {
         setData(name, value)
 
-        setData((prev: IBasePart) => {
+        setData((prev: IPart) => {
             switch (value){
                 case 'GPU': return new GPU(prev);
                 case 'platform': return new Platform(prev);
