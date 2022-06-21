@@ -10,10 +10,8 @@ export type BreakdownsPartType = {
 }[];
 
 export type ShopsPartType = {
-    name: string,
-    image?: string,
-    used_market: boolean,
-    warranty: boolean
+    id: number;
+    name: string;
 }[];
 
 /**

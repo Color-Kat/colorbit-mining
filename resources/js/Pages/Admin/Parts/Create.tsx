@@ -24,8 +24,11 @@ const AdminPartCreate: IPage = React.memo(() => {
     const nextStage = () => {
         setStage(prev => {
             if (prev < 3) return prev + 1;
-            else return prev;
-        })
+            else {
+                createPart();
+                return prev;
+            }
+        });
     }
 
     const prevStage = () => {
@@ -85,7 +88,7 @@ const AdminPartCreate: IPage = React.memo(() => {
                     onClick={nextStage}
                     className="h-9 sm:text-base font-medium xsm:px-6"
                 >
-                    Далее
+                    {stage < 3 ? 'Далее' : 'Создать'}
                 </Button>
             </div>
 

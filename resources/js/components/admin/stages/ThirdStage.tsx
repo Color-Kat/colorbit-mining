@@ -3,10 +3,11 @@ import {ControlledInput} from "@components/elements/form/ControlledInput";
 import useTypedPage from "@hooks/useTypedPage";
 import {BreakdownsPartType, ShopsPartType} from "@/types/parts/IPart";
 import {ControlledCheckbox} from "@components/elements/form/ControlledCheckbox";
+import {IPart} from "../../../types/parts/IPart";
 
 export const ThirdStage: React.FC<{
     data: any,
-    setData: (name: string, data: any) => void,
+    setData: ((name: string, data: any) => void) & ((prev: any) => any),
     errors: any
 }>
     = ({data, setData, errors}) => {
@@ -17,24 +18,33 @@ export const ThirdStage: React.FC<{
     }>().props;
 
     // Transform to {title, value} format
-    const breakdowns = pageProps.breakdowns.map(breakdown => ({
-        title: breakdown.title,
+    const breakdownOptions = pageProps.breakdowns.map(breakdown => ({
+        title: breakdown.title + ` (условие - ${breakdown.condition})`,
         value: breakdown.id.toString()
     }));
-    const shops = pageProps.shops;
 
-    console.log(pageProps);
+    const shopOptions = pageProps.shops.map(shop => ({
+        title: shop.name,
+        value: shop.id.toString()
+    }));
 
     return (
         <>
             {/* Breakdowns */}
             <ControlledCheckbox
                 data={data} setData={setData}
-                name="breakdowns"
+                name="breakdown_ids"
                 title="Частые поломки"
-                options={breakdowns}
+                options={breakdownOptions}
             />
 
+            {/* Shops */}
+            <ControlledCheckbox
+                data={data} setData={setData}
+                name="shop_ids"
+                title="Продаётся в"
+                options={shopOptions}
+            />
 
             {/* Price */}
             <ControlledInput

@@ -79,7 +79,7 @@ export const FirstStage: React.FC<{
             <ControlledInput
                 data={data} setData={setData} errors={errors}
                 title="Идентификатор"
-                placeholder="msi-gtx-1050ti"
+                placeholder="Генерируется автоматически"
                 name="slug"
             />
 

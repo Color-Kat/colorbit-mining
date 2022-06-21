@@ -14,7 +14,10 @@ export class Part implements IPart {
     public price: number = 100;
 
     public breakdowns: BreakdownsPartType = [];
+    public breakdown_ids: number[] = [];
+
     public shops: ShopsPartType = [];
+    public shop_ids: number[] = [];
 
     public created_at?: string;
     public updated_at?: string;

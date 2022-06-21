@@ -12,24 +12,33 @@ interface ControlledCheckboxProps {
     data: {
         [key: string]: any
     };
-    setData: ((name: string, data: any) => void) & ((prev: any) => any),
+    setData: (prev: any) => any,
+    onChange?: (checkedValue: string) => void | null
 }
 
-export const ControlledCheckbox: React.FC<ControlledCheckboxProps> = ({name, title, options, data, setData}) => {
+export const ControlledCheckbox: React.FC<ControlledCheckboxProps> = ({
+    name,
+    title,
+    options,
+    data,
+    setData,
+    onChange = null
+}) => {
     // Add or delete value from list
-    const handle = (e: any) => {
+    const handleDefault = (e: any) => {
         const checkedValue = e.target.value;
 
-        setData((prev: IPart) => {
-            let breakdowns = prev.breakdowns;
-            let find = breakdowns.indexOf(checkedValue);
+        setData((prev: any) => {
+            let list = prev[name];
 
-            if (find > -1) breakdowns.splice(find, 1);
-            else breakdowns.push(checkedValue);
+            let find = list.indexOf(checkedValue);
+
+            if (find > -1) list.splice(find, 1);
+            else list.push(checkedValue);
 
             return {
                 ...prev,
-                breakdowns: breakdowns,
+                [name]: list
             }
         });
     }
@@ -47,7 +56,7 @@ export const ControlledCheckbox: React.FC<ControlledCheckboxProps> = ({name, tit
                         name={name}
                         value={option.value}
                         checked={data[name].includes(option.value)}
-                        onChange={handle}
+                        onChange={onChange ? () => onChange(option.value) : handleDefault}
                         className="mr-1 rounded app-bg border-gray-500 text-red-600 shadow-sm focus:border-red-500 focus:ring focus:ring-red-500 focus:ring-opacity-0 outline-none"
                     />
                     {option.title}
