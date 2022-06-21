@@ -1,5 +1,8 @@
 export type PartType = 'GPU' | 'platform' | 'RAM' | 'PSU' | 'case';
 
+/**
+ * Base part fields. Can be used in list
+ */
 export interface IBasePart {
     id?: number;
     name: string;
@@ -11,5 +14,4 @@ export interface IBasePart {
     created_at?: string;
     updated_at?: string;
 
-    _image?: File | null;
 }

@@ -1,10 +1,11 @@
-import {IBasePart, PartType} from "@/types/parts/IBasePart";
-import {PartT} from "@/types/parts/IPart";
-import {GPU_VRAM_type} from "../types/parts/IGPU";
-import {PSU_EfficiencyType} from "../types/parts/IPSU";
-import {CaseMaterialType} from "../types/parts/ICase";
+import {PartType} from "@/types/parts/IBasePart";
+import {PartT} from "@/types/parts/PartT";
+import {GPU_VRAM_type} from "@/types/parts/IGPU";
+import {PSU_EfficiencyType} from "@/types/parts/IPSU";
+import {CaseMaterialType} from "@/types/parts/ICase";
+import {BreakdownsPartType, IPart, ShopsPartType} from "../types/parts/IPart";
 
-export class Part implements IBasePart {
+export class Part implements IPart {
     public name: string = '';
     public image: string = '';
     public vendor: string = '';
@@ -12,12 +13,15 @@ export class Part implements IBasePart {
     public slug: string = '';
     public price: number = 100;
 
+    public breakdowns: BreakdownsPartType = [];
+    public shops: ShopsPartType = [];
+
     public created_at?: string;
     public updated_at?: string;
 
     public _image?: File | null;
 
-    constructor(partData?: IBasePart) {
+    constructor(partData?: IPart) {
         if(!partData) return;
 
         this.name = partData.name;
@@ -26,6 +30,9 @@ export class Part implements IBasePart {
         this.type = partData.type;
         this.price = partData.price;
         this.image = partData.name;
+
+        this.breakdowns = partData.breakdowns;
+        this.shops = partData.shops;
     }
 }
 
@@ -37,7 +44,7 @@ export class GPU extends Part implements PartT<'GPU'> {
     public GPU_fans_count: number = 1;
     public GPU_fans_efficiency: number = 50;
 
-    constructor(partData?: IBasePart | PartT<'GPU'>) {
+    constructor(partData?: IPart | PartT<'GPU'>) {
         super(partData);
     }
 }
@@ -50,7 +57,7 @@ export class Platform extends Part implements PartT<'platform'> {
     public platform_frequency: number = 333;
     public platform_RAM_slots: number = 1;
 
-    constructor(partData?: IBasePart | PartT<'platform'>) {
+    constructor(partData?: IPart | PartT<'platform'>) {
         super(partData);
     }
 }
@@ -62,7 +69,7 @@ export class RAM extends Part implements PartT<'RAM'> {
     public RAM_size: number = 1;
     public RAM_channels: number = 1;
 
-    constructor(partData?: IBasePart | PartT<'RAM'>) {
+    constructor(partData?: IPart | PartT<'RAM'>) {
         super(partData);
     }
 }
@@ -73,7 +80,7 @@ export class PSU extends Part implements PartT<'PSU'> {
     public PSU_power_supply: number = 100;
     public PSU_efficiency: PSU_EfficiencyType = 'none';
 
-    constructor(partData?: IBasePart | PartT<'PSU'>) {
+    constructor(partData?: IPart | PartT<'PSU'>) {
         super(partData);
     }
 }
@@ -86,7 +93,7 @@ export class Case extends Part implements PartT<'case'> {
     public case_GPUs_slots: number = 1;
     public case_critical_temp: number = 100;
 
-    constructor(partData?: IBasePart | PartT<'case'>) {
+    constructor(partData?: IPart | PartT<'case'>) {
         super(partData);
     }
 }

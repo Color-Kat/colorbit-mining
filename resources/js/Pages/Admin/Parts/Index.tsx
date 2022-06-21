@@ -3,13 +3,12 @@ import useTypedPage from '@hooks/useTypedPage';
 import {IPage} from "@/types/IPage";
 import Paginator from "@components/elements/Paginator";
 import {IPaginator} from "@/types/IPaginator";
-import {IPart} from "@/types/parts/IPart";
 import AdminPartsListLayout from "@components/admin/AdminPartsListLayout";
 import {IBasePart} from "@/types/parts/IBasePart";
-import {CreateButton} from "../../../components/admin/CreateButton";
-import {PartsList} from "../../../components/admin/PartsList";
+import {CreateButton} from "@components/admin/CreateButton";
+import {PartsList} from "@components/admin/PartsList";
 import {Inertia} from "@inertiajs/inertia";
-import useRoute from "../../../hooks/useRoute";
+import useRoute from "@hooks/useRoute";
 
 
 const AdminPartsList: IPage = React.memo(() => {

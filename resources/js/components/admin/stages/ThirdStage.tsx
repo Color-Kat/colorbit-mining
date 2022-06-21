@@ -2,6 +2,8 @@ import React from "react";
 import {ControlledInput} from "../../elements/form/ControlledInput";
 import useTypedPage from "../../../hooks/useTypedPage";
 
+
+
 export const ThirdStage: React.FC<{
     data: any,
     setData: (name: string, data: any) => void,

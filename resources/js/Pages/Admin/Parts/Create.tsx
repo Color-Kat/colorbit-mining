@@ -2,20 +2,18 @@ import React, {useState} from "react";
 import {useForm} from "@inertiajs/inertia-react";
 
 import {IPage} from "@/types/IPage";
-import {PartT} from "@/types/parts/IPart";
+import {PartT} from "@/types/parts/PartT";
 import {IBasePart, PartType} from "@/types/parts/IBasePart";
 import {Part} from "@/classes/Part";
 
 import AdminPartsListLayout from "@components/admin/AdminPartsListLayout";
-import {ControlledInput} from "@components/elements/form/ControlledInput";
 
+import {FirstStage} from "@components/admin/stages/FirstStage";
+import {SecondStage} from "@components/admin/stages/SecondStage";
+import {ThirdStage} from "@components/admin/stages/ThirdStage";
 
 import Button from "../../../components/elements/Button";
 import SecondaryButton from "../../../components/elements/SecondaryButton";
-import {FirstStage} from "../../../components/admin/stages/FirstStage";
-import {SecondStage} from "../../../components/admin/stages/SecondStage";
-import {ThirdStage} from "../../../components/admin/stages/ThirdStage";
-
 
 
 const AdminPartCreate: IPage = React.memo(() => {
