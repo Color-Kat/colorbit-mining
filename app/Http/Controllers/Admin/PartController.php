@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Part;
+use App\Repositories\BreakdownRepository;
 use App\Repositories\PartRepository;
+use App\Repositories\ShopRepository;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -14,11 +16,23 @@ class PartController extends AdminBaseController
      */
     private PartRepository $partRepository;
 
+    /**
+     * @var BreakdownRepository
+     */
+    private BreakdownRepository $breakdownRepository;
+
+    /**
+     * @var ShopRepository
+     */
+    private ShopRepository $shopRepository;
+
     public function __construct()
     {
         parent::__construct();
 
         $this->partRepository = new PartRepository();
+        $this->breakdownRepository = new BreakdownRepository();
+        $this->shopRepository = new ShopRepository();
     }
 
     /**
@@ -112,7 +126,13 @@ class PartController extends AdminBaseController
      */
     public function create()
     {
-        return Inertia::render('Admin/Parts/Create');
+        $breakdowns = $this->breakdownRepository->getAll();
+        $shops = $this->shopRepository->getAllForAdmin();
+
+        return Inertia::render('Admin/Parts/Create', [
+            'breakdowns' => $breakdowns,
+            'shops' => $shops
+        ]);
     }
 
     /**

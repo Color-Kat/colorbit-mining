@@ -34,6 +34,7 @@ class DatabaseSeeder extends Seeder
             'slug' => Str::slug('DNS'),
             'description' => 'Russian magazine',
             'warranty' => true,
+            'used_market' => false,
             'delivery_time' => '00:00:00' // In hours
         ]);
 
@@ -43,6 +44,7 @@ class DatabaseSeeder extends Seeder
             'slug' => Str::slug('Avito'),
             'description' => 'Russian used market',
             'warranty' => false,
+            'used_market' => true,
             'delivery_time' => '12:00:00' // In hours
         ]);
 
@@ -52,6 +54,7 @@ class DatabaseSeeder extends Seeder
             'slug' => Str::slug('Aliexpress'),
             'description' => 'Chinese store',
             'warranty' => false,
+            'used_market' => false,
             'delivery_time' => '36:00:00' // In hours
         ]);
 
@@ -102,6 +105,7 @@ class DatabaseSeeder extends Seeder
             'email' => 'coco@co.co',
             'email_verified_at' => now(),
             'money' => rand(1000, 10000),
+            'role_id' => 2,
             'password' => '$2y$10$7EydzZ2Uxx5Q9tm1zvLw4efStZvYHpQBgRZ1SbHCdVAl9Mzk1RP6G', // coco12
             'remember_token' => Str::random(10),
         ]);

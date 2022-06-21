@@ -23,6 +23,7 @@ return new class extends Migration
 
             $table->time('delivery_time');
             $table->boolean('warranty');
+            $table->boolean('used_market');
 
             $table->timestamps();
             $table->softDeletes();

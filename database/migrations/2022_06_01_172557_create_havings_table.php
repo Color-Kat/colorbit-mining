@@ -19,7 +19,10 @@ return new class extends Migration
             $table->foreignId('part_shop_id');
             $table->foreignId('user_id');
 
+            $table->boolean('in_use')->default(false); // In rig or not
+            $table->unsignedInteger('temperature')->default(0); // Temperature of part
             $table->unsignedInteger('wear')->default(0); // Wear of part
+            $table->unsignedInteger('dust')->default(0); // Degree of dust pollution
 
             $table->timestamps();
         });

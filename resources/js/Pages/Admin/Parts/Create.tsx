@@ -14,13 +14,14 @@ import Button from "../../../components/elements/Button";
 import SecondaryButton from "../../../components/elements/SecondaryButton";
 import {FirstStage} from "../../../components/admin/stages/FirstStage";
 import {SecondStage} from "../../../components/admin/stages/SecondStage";
+import {ThirdStage} from "../../../components/admin/stages/ThirdStage";
 
 
 
 const AdminPartCreate: IPage = React.memo(() => {
     let {data, setData, post, processing, errors, transform} = useForm<PartT<PartType> | IBasePart>(new Part());
 
-    const [stage, setStage] = useState<number>(1);
+    const [stage, setStage] = useState<number>(3);
 
     const nextStage = () => {
         setStage(prev => {
@@ -69,14 +70,7 @@ const AdminPartCreate: IPage = React.memo(() => {
 
             {/* STAGE 3 */}
             {stage == 3 && <div className="space-y-4">
-
-                {/* Price */}
-                <ControlledInput
-                    data={data} setData={setData} errors={errors}
-                    title="Цена"
-                    name="price"
-                />
-
+                <ThirdStage data={data} setData={setData} errors={errors} />
             </div>}
 
 

@@ -42,4 +42,6 @@ class PartRepository extends CoreRepository
 
         return $result;
     }
+
+
 }
