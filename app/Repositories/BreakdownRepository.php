@@ -30,7 +30,6 @@ class BreakdownRepository extends CoreRepository
         $result = $this
             ->startConditions()
             ::select($fields)
-            ->orderBy('id', 'DESC')
             ->get();
 
         return $result;

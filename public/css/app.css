@@ -1065,6 +1065,9 @@ select{
 .mt-7{
   margin-top: 1.75rem;
 }
+.mr-1{
+  margin-right: 0.25rem;
+}
 .block{
   display: block;
 }

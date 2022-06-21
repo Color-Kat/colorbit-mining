@@ -1,6 +1,7 @@
 import {IBasePart} from "./IBasePart";
 
 export type BreakdownsPartType = {
+    id: number;
     title: string,
     description: string,
     chance: number,
