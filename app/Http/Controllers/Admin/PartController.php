@@ -145,7 +145,7 @@ class PartController extends AdminBaseController
     {
         dump($request->all());
 
-        return redirect()->route('admin.parts.index');
+//        return redirect()->back()->withInput();
     }
 
     /**

@@ -5,7 +5,7 @@ import React from "react";
 export const StageControl: React.FC<{stage: number, setStage:  React.Dispatch<React.SetStateAction<number>>}> = ({stage, setStage}) => {
     const nextStage = () => {
         setStage((prev: number) => {
-            if (prev < 3) return prev + 1;
+            if (prev < 4) return prev + 1;
             else return prev;
         });
     }
@@ -30,7 +30,7 @@ export const StageControl: React.FC<{stage: number, setStage:  React.Dispatch<Re
                 onClick={nextStage}
                 className="h-9 sm:text-base font-medium xsm:px-6"
             >
-                {stage < 3 ? 'Далее' : 'Создать'}
+                {stage < 3 && stage < 5 ? 'Далее' : 'Создать'}
             </Button>
         </div>
     );

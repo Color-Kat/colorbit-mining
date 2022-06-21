@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {useForm} from "@inertiajs/inertia-react";
 
 import {IPage} from "@/types/IPage";
@@ -12,27 +12,37 @@ import {FirstStage} from "@components/admin/stages/FirstStage";
 import {SecondStage} from "@components/admin/stages/SecondStage";
 import {ThirdStage} from "@components/admin/stages/ThirdStage";
 
-import Button from "../../../components/elements/Button";
-import SecondaryButton from "../../../components/elements/SecondaryButton";
-import useRoute from "../../../hooks/useRoute";
-import {StageControl} from "../../../components/admin/stages/StageControll";
+import useRoute from "@hooks/useRoute";
+import {StageControl} from "@components/admin/stages/StageControll";
 
 
 const AdminPartCreate: IPage = React.memo(() => {
     const route = useRoute();
-    let {data, setData, post, processing, errors} = useForm<PartT<PartType> | IBasePart>(new Part());
+    let {data, setData, post, processing, errors} = useForm<PartT<PartType> | IBasePart>(new Part({
+        name: 'gtx 1050',
+        vendor: 'msi',
+        breakdowns: [],
+        slug: '',
+        shops: [],
+        image: '123',
+        type: 'GPU',
+        price: 100
+    }));
 
     const [stage, setStage] = useState<number>(3);
 
     const createPart = () => {
-        console.log('update', data);
+        if(stage === 4) {
+            console.log('update', data);
 
-        post(route('user-profile-information.update'), {
-            errorBag: 'updateProfileInformation',
-            preserveScroll: true,
-            // onSuccess: () => clearPhotoFileInput(),
-        });
+            post(route('admin.parts.store'), {
+                preserveScroll: true,
+                onSuccess: () => setStage(4),
+            });
+        }
     }
+
+    useEffect(createPart, [stage])
 
     return (
         <AdminPartsListLayout
