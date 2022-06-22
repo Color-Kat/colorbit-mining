@@ -25,6 +25,33 @@ const VRAM_type_options = [
     }
 ];
 
+const PSU_efficiency_options = [
+    {
+        title: 'Отсутствует',
+        value: 'none'
+    },
+    {
+        title: 'Bronze',
+        value: 'bronze'
+    },
+    {
+        title: 'Silver',
+        value: 'silver'
+    },
+    {
+        title: 'Gold',
+        value: 'gold'
+    },
+    {
+        title: 'Platinum',
+        value: 'platinum'
+    },
+    {
+        title: 'titanium',
+        value: 'titanium'
+    }
+];
+
 export const SecondStage: React.FC<{
     data: any,
     setData: (name: string, data: any) => void,
@@ -160,6 +187,29 @@ export const SecondStage: React.FC<{
                         type="number"
                         min="1"
                         name="RAM_channels"
+                    />
+                </>
+            );
+
+        case 'PSU':
+            return (
+                <>
+                    {/* power supply */}
+                    <ControlledInput
+                        data={data} setData={setData} errors={errors}
+                        title="Мощность"
+                        placeholder="В Ватт"
+                        type="number"
+                        min="1"
+                        name="PSU_power_supply"
+                    />
+
+                    {/* frequency */}
+                    <ControlledSelect
+                        data={data} setData={setData}
+                        title="Сертификат"
+                        name="PSU_efficiency"
+                        options={PSU_efficiency_options}
                     />
                 </>
             );

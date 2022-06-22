@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Requests\PartStoreRequest;
 use App\Models\Part;
 use App\Repositories\BreakdownRepository;
 use App\Repositories\PartRepository;
@@ -138,14 +139,14 @@ class PartController extends AdminBaseController
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param PartStoreRequest $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(Request $request)
+    public function store(PartStoreRequest $request)
     {
-        dump($request->all());
+//        dump($request->all());
 
-//        return redirect()->back()->withInput();
+        return redirect()->back();
     }
 
     /**

@@ -9,7 +9,7 @@ export class Part implements IPart {
     public name: string = '';
     public image: string = '';
     public vendor: string = '';
-    public type: PartType = 'RAM';
+    public type: PartType = 'PSU';
     public slug: string = '';
     public price: number = 100;
 

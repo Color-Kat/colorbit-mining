@@ -25,11 +25,13 @@ const AdminPartCreate: IPage = React.memo(() => {
         slug: '',
         shops: [],
         image: '123',
-        type: 'GPU',
+        type: 'PSU',
         price: 100
     }));
 
-    const [stage, setStage] = useState<number>(3);
+    console.log(errors)
+
+    const [stage, setStage] = useState<number>(1);
 
     const createPart = () => {
         if(stage === 4) {
@@ -37,13 +39,15 @@ const AdminPartCreate: IPage = React.memo(() => {
 
             post(route('admin.parts.store'), {
                 preserveScroll: true,
-                onSuccess: () => setStage(4),
+
             });
         }
     }
 
     useEffect(createPart, [stage])
 
+    // @ts-ignore
+    // @ts-ignore
     return (
         <AdminPartsListLayout
             title="Редактирование"
@@ -68,6 +72,13 @@ const AdminPartCreate: IPage = React.memo(() => {
                 <ThirdStage data={data} setData={setData} errors={errors} />
             </div>}
 
+            {/* STAGE 4 - RESULT */}
+            {stage == 4 && <div className="space-y-4">
+                {processing
+                    ? 'Загрузка'
+                    : (Object.keys(errors).length ? (errors as any)[Object.keys(errors)[0]] : 'Отлично!')
+                }
+            </div>}
 
             {/* STAGES CONTROL */}
             <StageControl stage={stage} setStage={setStage}/>
