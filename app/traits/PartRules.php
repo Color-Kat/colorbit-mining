@@ -15,7 +15,7 @@ trait PartRules
             '_image' => 'nullable|mimes:jpg,jpeg,png|max:1024',
             'vendor' => 'required|max:100',
             'type' => 'required',
-            'slug' => 'nullable|unique:parts,slug',
+            'slug' => 'nullable|unique:parts',
             'price' => 'required|numeric|min:0',
 
             'TDP' => 'numeric|min:0',
