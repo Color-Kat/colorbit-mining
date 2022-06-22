@@ -144,7 +144,6 @@ class PartController extends AdminBaseController
      */
     public function store(PartStoreRequest $request)
     {
-//        Part::create($request->all());
         $this->partRepository->create($request);
 
         return redirect()->back();

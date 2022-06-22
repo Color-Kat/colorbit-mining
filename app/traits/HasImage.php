@@ -17,10 +17,10 @@ trait HasImage
     {
         tap($this[$field], function ($previous) use ($photo, $field, $folder) {
             $this->forceFill([
-                [$field] => $photo->storePublicly(
+                $field => $photo->storePublicly(
                     $folder, ['disk' => $this->ImageDisk()]
                 ),
-            ])->save();
+            ])->update();
 
             if ($previous) {
                 Storage::disk($this->ImageDisk())->delete($previous);
@@ -42,7 +42,7 @@ trait HasImage
         Storage::disk($this->profilePhotoDisk())->delete($this->profile_photo_path);
 
         $this->forceFill([
-            [$field] => null,
+            $field => null,
         ])->save();
     }
 
@@ -54,7 +54,7 @@ trait HasImage
     public function getImageUrlAttribute()
     {
         return $this->profile_photo_path
-            ? Storage::disk($this->profilePhotoDisk())->url($this->profile_photo_path)
+            ? Storage::disk($this->ImageDisk())->url($this->profile_photo_path)
             : $this->defaultProfilePhotoUrl();
     }
 
@@ -65,7 +65,7 @@ trait HasImage
      */
     protected function ImageDisk()
     {
-        return isset($_ENV['VAPOR_ARTIFACT_NAME']) ? 's3' : 'public';
+        return 'public';
     }
 }
 

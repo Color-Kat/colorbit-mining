@@ -2,12 +2,14 @@
 
 namespace App\Models;
 
+use App\traits\HasImage;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Part extends Model
 {
     use HasFactory;
+    use HasImage;
 
     // Instead of $fillable
     protected $guarded = ['id'];

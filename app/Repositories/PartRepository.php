@@ -56,22 +56,21 @@ class PartRepository extends CoreRepository
 
         // Create slug
         if(empty($data['slug'])) $data['slug'] = Str::slug($data['name']);
+        else $data['slug'] = Str::slug($data['slug']);
 
         // Create base part
         $result = $this->startConditions()->create($data);
 
         // Relationships
-        foreach ($data['breakdown_ids'] as $breakdown_id) {
-            $result
-                ->breakdowns()
-                ->attach($breakdown_id);
-        }
+        $result
+            ->breakdowns()
+            ->attach($data['breakdown_ids']);
 
-        foreach ($data['shop_ids'] as $shop_id) {
-            $result
-                ->shops()
-                ->attach($shop_id);
-        }
+        $result
+            ->shops()
+            ->attach($data['shop_ids']);
+
+        $result->updateImage($data['_image'], 'image', 'parts');
 
         return $result;
     }
