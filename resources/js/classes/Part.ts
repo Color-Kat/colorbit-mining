@@ -41,6 +41,9 @@ export class Part implements IPart {
 
 export class GPU extends Part implements PartT<'GPU'> {
     public type: "GPU" = "GPU";
+
+    public TDP: number = 100;
+    public power: number = 100;
     public GPU_VRAM_size: number = 1024;
     public GPU_VRAM_frequency: number = 999;
     public GPU_VRAM_type: GPU_VRAM_type = 'GDDR5';
@@ -55,6 +58,8 @@ export class GPU extends Part implements PartT<'GPU'> {
 export class Platform extends Part implements PartT<'platform'> {
     public type: "platform" = "platform";
 
+    public TDP: number = 30;
+    public power: number = 100;
     public platform_cors_count: number = 1;
     public platform_threads_count: number = 1;
     public platform_frequency: number = 333;
@@ -68,6 +73,8 @@ export class Platform extends Part implements PartT<'platform'> {
 export class RAM extends Part implements PartT<'RAM'> {
     public type: "RAM" = "RAM";
 
+    public TDP: number = 20;
+    public power: number = 4;
     public RAM_frequency: number = 1666;
     public RAM_size: number = 1;
     public RAM_channels: number = 1;
@@ -80,6 +87,7 @@ export class RAM extends Part implements PartT<'RAM'> {
 export class PSU extends Part implements PartT<'PSU'> {
     public type: "PSU" = "PSU";
 
+    public TDP: number = 18;
     public PSU_power_supply: number = 100;
     public PSU_efficiency: PSU_EfficiencyType = 'none';
 

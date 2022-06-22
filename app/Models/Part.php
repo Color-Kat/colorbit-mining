@@ -9,6 +9,9 @@ class Part extends Model
 {
     use HasFactory;
 
+    // Instead of $fillable
+    protected $guarded = ['id'];
+
     public function shops() {
         return $this->belongsToMany(Shop::class);
     }

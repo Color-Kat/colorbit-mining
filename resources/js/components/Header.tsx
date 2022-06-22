@@ -8,7 +8,7 @@ import AccountButton from "./AccountButton";
 import logo from '@assets/logo.png';
 
 const HeaderLink: React.FC<{ name: string, children: string }> =
-    memo(({ name, children }) => {
+    ({ name, children }) => {
         const route = useRoute();
         const isActive = route().current() === name;
 
@@ -23,7 +23,7 @@ const HeaderLink: React.FC<{ name: string, children: string }> =
                 >{children}</span>
             </CLink>
         );
-    });
+    }
 
 const MobileHeaderLink: React.FC<{ name: string, children: string }> =
     ({ name, children }) => {
@@ -45,7 +45,7 @@ const MobileHeaderLink: React.FC<{ name: string, children: string }> =
         );
     }
 
-const Header: React.FC = memo(() => {
+const Header: React.FC = () => {
     const [showMobileMenu, setShowMobileMenu] = useState(false);
     const route = useRoute();
     const location = route().current();
@@ -56,8 +56,6 @@ const Header: React.FC = memo(() => {
         { name: 'shops', text: 'Магазины' },
         { name: 'home', text: 'Кошелёк' }
     ];
-
-    console.log('header')
 
     function toggleMenu() { setShowMobileMenu(prev => !prev) }
 
@@ -122,6 +120,6 @@ const Header: React.FC = memo(() => {
             />
         </header>
     );
-});
+}
 
 export default Header;

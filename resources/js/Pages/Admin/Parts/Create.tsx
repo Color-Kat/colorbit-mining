@@ -32,7 +32,7 @@ const AdminPartCreate: IPage = React.memo(() => {
 
     const createPart = () => {
         if(stage === 4) {
-            console.log('update', data);
+            console.log('create', data);
 
             post(route('admin.parts.store'), {
                 preserveScroll: true,

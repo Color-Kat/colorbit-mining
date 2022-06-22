@@ -12,11 +12,14 @@ trait PartRules
     protected function partsRules() {
         return [
             'name' => 'required|max:100',
-            'image' => 'nullable|string',
+            '_image' => 'nullable|mimes:jpg,jpeg,png|max:1024',
             'vendor' => 'required|max:100',
             'type' => 'required',
             'slug' => 'nullable|unique:parts,slug',
             'price' => 'required|numeric|min:0',
+
+            'TDP' => 'numeric|min:0',
+            'power' => 'numeric|min:0',
 
             'shop_ids' => 'array',
             'breakdown_ids' => 'array',
