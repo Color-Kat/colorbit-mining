@@ -92,7 +92,7 @@ export class Case extends Part implements PartT<'case'> {
     public type: "case" = "case";
 
     public case_material: CaseMaterialType = 'wood';
-    public case_material_rus: string = 'дерево';
+    public case_material_rus: string = 'Липа';
     public case_GPUs_slots: number = 1;
     public case_critical_temp: number = 100;
 

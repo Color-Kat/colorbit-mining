@@ -15,7 +15,6 @@ import {ThirdStage} from "@components/admin/stages/ThirdStage";
 import useRoute from "@hooks/useRoute";
 import {StageControl} from "@components/admin/stages/StageControll";
 
-
 const AdminPartCreate: IPage = React.memo(() => {
     const route = useRoute();
     let {data, setData, post, processing, errors} = useForm<PartT<PartType> | IBasePart>(new Part({
@@ -28,8 +27,6 @@ const AdminPartCreate: IPage = React.memo(() => {
         type: 'PSU',
         price: 100
     }));
-
-    console.log(errors)
 
     const [stage, setStage] = useState<number>(1);
 

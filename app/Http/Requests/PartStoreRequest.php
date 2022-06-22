@@ -29,6 +29,17 @@ class PartStoreRequest extends FormRequest
     }
 
     /**
+     * Aliases for attributes
+     *
+     * @return string[]
+     */
+    public function attributes()
+    {
+        return $this->partsAliases();
+
+    }
+
+    /**
      * Get the validation messages
      *
      * @return array|string[]

@@ -52,6 +52,25 @@ const PSU_efficiency_options = [
     }
 ];
 
+const case_material_options = [
+    {
+        title: 'Дерево',
+        value: 'wood'
+    },
+    {
+        title: 'Железо',
+        value: 'iron'
+    },
+    {
+        title: 'Алюминий',
+        value: 'aluminium'
+    },
+    {
+        title: 'титан',
+        value: 'titanium'
+    },
+];
+
 export const SecondStage: React.FC<{
     data: any,
     setData: (name: string, data: any) => void,
@@ -197,7 +216,7 @@ export const SecondStage: React.FC<{
                     {/* power supply */}
                     <ControlledInput
                         data={data} setData={setData} errors={errors}
-                        title="Мощность"
+                        title="Мощность БП"
                         placeholder="В Ватт"
                         type="number"
                         min="1"
@@ -207,9 +226,49 @@ export const SecondStage: React.FC<{
                     {/* frequency */}
                     <ControlledSelect
                         data={data} setData={setData}
-                        title="Сертификат"
+                        title="Сертификат БП"
                         name="PSU_efficiency"
                         options={PSU_efficiency_options}
+                    />
+                </>
+            );
+
+        case 'case':
+            return (
+                <>
+                    {/* case material */}
+                    <ControlledSelect
+                        data={data} setData={setData}
+                        title="Материал каркаса"
+                        name="case_material"
+                        options={case_material_options}
+                    />
+
+                    {/* case material on rus */}
+                    <ControlledInput
+                        data={data} setData={setData} errors={errors}
+                        title="Название материала"
+                        placeholder="Осина, дуб"
+                        name="case_material_rus"
+                    />
+
+                    {/* GPUs_slots */}
+                    <ControlledInput
+                        data={data} setData={setData} errors={errors}
+                        title="Кол-во слотов для видеокарты"
+                        type="number"
+                        min="1"
+                        name="case_GPUs_slots"
+                    />
+
+                    {/* critical_temp of the case */}
+                    <ControlledInput
+                        data={data} setData={setData} errors={errors}
+                        title="Критическая температура"
+                        placeholder="В градусах"
+                        type="number"
+                        min="1"
+                        name="case_critical_temp"
                     />
                 </>
             );

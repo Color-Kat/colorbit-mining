@@ -1,6 +1,6 @@
 import {IBasePart} from "./IBasePart";
 
-export type CaseMaterialType = 'wood' | 'iron' | 'aluminium';
+export type CaseMaterialType = 'wood' | 'iron' | 'aluminium' | 'titanium';
 
 export interface ICase extends IBasePart {
     type: 'case';
