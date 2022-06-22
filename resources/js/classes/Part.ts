@@ -22,7 +22,7 @@ export class Part implements IPart {
     public created_at?: string;
     public updated_at?: string;
 
-    public _image?: File | null;
+    public _image?: File | null = null;
 
     constructor(partData?: IPart) {
         if(!partData) return;

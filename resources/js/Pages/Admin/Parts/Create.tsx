@@ -23,7 +23,7 @@ const AdminPartCreate: IPage = React.memo(() => {
         breakdowns: [],
         slug: '',
         shops: [],
-        image: '123',
+        image: '',
         type: 'PSU',
         price: 100
     }));
@@ -32,11 +32,8 @@ const AdminPartCreate: IPage = React.memo(() => {
 
     const createPart = () => {
         if(stage === 4) {
-            console.log('create', data);
-
             post(route('admin.parts.store'), {
                 preserveScroll: true,
-
             });
         }
     }
@@ -62,7 +59,6 @@ const AdminPartCreate: IPage = React.memo(() => {
             {stage == 2 && <div className="space-y-4">
                 <SecondStage data={data} setData={setData} errors={errors} />
             </div>}
-
 
             {/* STAGE 3 */}
             {stage == 3 && <div className="space-y-4">

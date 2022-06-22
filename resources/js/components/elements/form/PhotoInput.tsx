@@ -13,12 +13,12 @@ interface PhotoInputProps {
         image: string,
         _image?: File | null
     };
-    setData: (name: string, data: any) => void;
+    setData: ((name: string, data: any) => void) & ((prev: any) => any);
     errors: {image: string};
     destroyRoute?: string;
 }
 
-export const PhotoInput: React.FC<PhotoInputProps> = React.memo(({data, setData, errors, destroyRoute}) => {
+export const PhotoInput: React.FC<PhotoInputProps> = ({data, setData, errors, destroyRoute}) => {
     const [photoPreview, setPhotoPreview] = useState<string | null>(null);
     const photoRef = useRef<HTMLInputElement>(null);
 
@@ -116,6 +116,4 @@ export const PhotoInput: React.FC<PhotoInputProps> = React.memo(({data, setData,
             <InputError message={errors.image} className="mt-2"/>
         </div>
     );
-}, (prev, next) => {
-    return prev.data._image === next.data._image || prev.data.image === next.data.image;
-});
+}
