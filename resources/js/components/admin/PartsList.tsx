@@ -3,7 +3,6 @@ import {EditButton} from "./EditButton";
 import {DeleteButton} from "./DeleteButton";
 import {IBasePart} from "../../types/parts/IBasePart";
 import {partTypeRus} from "../../types/toRus";
-import {ViewButton} from "./ViewButton";
 import {Inertia} from "@inertiajs/inertia";
 import useRoute from "../../hooks/useRoute";
 
@@ -29,7 +28,10 @@ const PartsListItem: React.FC<{ part: IBasePart }> = ({part}) => {
         <li key={part.id} className="parts-list__item flex app-bg rounded-lg p-3 flex-col md:flex-row">
             {/* IMAGE */}
             <div className="parts-list__image md:block flex justify-center mb-3 md:mb-0 cursor-pointer" onClick={openPart}>
-                <img className="h-48 w-48 md:h-32 md:w-32 object-cover rounded-md" src={image} alt=""/>
+                <img
+                    className="h-48 w-48 md:h-32 md:w-32 object-cover rounded-md"
+                    src={image}
+                    alt=""/>
             </div>
 
             <div className="parts-list__info text-right flex-1 flex flex-col">

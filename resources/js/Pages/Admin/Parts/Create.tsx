@@ -18,13 +18,13 @@ import {StageControl} from "@components/admin/stages/StageControll";
 const AdminPartCreate: IPage = React.memo(() => {
     const route = useRoute();
     let {data, setData, post, processing, errors} = useForm<PartT<PartType> | IBasePart>(new Part({
-        name: 'gtx 1050',
-        vendor: 'msi',
+        name: 'GTX 1050',
+        vendor: 'MSI',
         breakdowns: [],
         slug: '',
         shops: [],
         image: '',
-        type: 'PSU',
+        type: 'GPU',
         price: 100
     }));
 

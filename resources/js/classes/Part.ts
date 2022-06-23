@@ -9,7 +9,7 @@ export class Part implements IPart {
     public name: string = '';
     public image: string = '';
     public vendor: string = '';
-    public type: PartType = 'PSU';
+    public type: PartType = 'GPU';
     public slug: string = '';
     public price: number = 100;
 
@@ -32,7 +32,7 @@ export class Part implements IPart {
         this.vendor = partData.vendor;
         this.type = partData.type;
         this.price = partData.price;
-        this.image = partData.name;
+        this.image = partData.image;
 
         this.breakdowns = partData.breakdowns;
         this.shops = partData.shops;
@@ -44,11 +44,11 @@ export class GPU extends Part implements PartT<'GPU'> {
 
     public TDP: number = 100;
     public power: number = 100;
-    public GPU_VRAM_size: number = 1024;
+    public GPU_VRAM_size: number = 1;
     public GPU_VRAM_frequency: number = 999;
     public GPU_VRAM_type: GPU_VRAM_type = 'GDDR5';
     public GPU_fans_count: number = 1;
-    public GPU_fans_efficiency: number = 50;
+    public GPU_fan_efficiency: number = 50;
 
     constructor(partData?: IPart | PartT<'GPU'>) {
         super(partData);
@@ -101,7 +101,7 @@ export class Case extends Part implements PartT<'case'> {
 
     public case_material: CaseMaterialType = 'wood';
     public case_material_rus: string = 'Липа';
-    public case_GPUs_slots: number = 1;
+    public case_GPUs_count: number = 1;
     public case_critical_temp: number = 100;
 
     constructor(partData?: IPart | PartT<'case'>) {

@@ -8,5 +8,5 @@ export interface IGPU extends IBasePart {
     GPU_VRAM_frequency: number;
     GPU_VRAM_type: GPU_VRAM_type;
     GPU_fans_count: number;
-    GPU_fans_efficiency: number;
+    GPU_fan_efficiency: number;
 }

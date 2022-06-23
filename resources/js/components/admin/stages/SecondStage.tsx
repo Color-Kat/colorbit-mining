@@ -128,7 +128,7 @@ export const SecondStage: React.FC<{
                         type="number"
                         min="0"
                         max="100"
-                        name="GPU_fans_efficiency"
+                        name="GPU_fan_efficiency"
                     />
                 </>
             );
@@ -258,7 +258,7 @@ export const SecondStage: React.FC<{
                         title="Кол-во слотов для видеокарты"
                         type="number"
                         min="1"
-                        name="case_GPUs_slots"
+                        name="case_GPUs_count"
                     />
 
                     {/* critical_temp of the case */}

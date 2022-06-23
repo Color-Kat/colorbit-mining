@@ -2,22 +2,25 @@
 
 namespace App\traits;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 
 trait HasImage
 {
+    protected $imageField = 'image';
+
     /**
      * Update the image.
      *
      * @param  \Illuminate\Http\UploadedFile  $photo
      * @return void
      */
-    public function updateImage(UploadedFile $photo, $field, $folder)
+    public function updateImage(UploadedFile $photo, $folder)
     {
-        tap($this[$field], function ($previous) use ($photo, $field, $folder) {
+        tap($this[$this->imageField], function ($previous) use ($photo, $folder) {
             $this->forceFill([
-                $field => $photo->storePublicly(
+                $this->imageField => $photo->storePublicly(
                     $folder, ['disk' => $this->ImageDisk()]
                 ),
             ])->update();
@@ -33,30 +36,39 @@ trait HasImage
      *
      * @return void
      */
-    public function deleteProfilePhoto(string $field = 'image')
+    public function deleteProfilePhoto()
     {
-        if (is_null($this->profile_photo_path)) {
+        if (is_null($this->image)) {
             return;
         }
 
-        Storage::disk($this->profilePhotoDisk())->delete($this->profile_photo_path);
+        Storage::disk($this->profilePhotoDisk())->delete($this->image);
 
         $this->forceFill([
-            $field => null,
+            $this->imageField => null,
         ])->save();
     }
 
     /**
-     * Get the URL to the image.
+     * Return full url for image
      *
-     * @return string
+     * @return  \Illuminate\Database\Eloquent\Casts\Attribute
      */
-    public function getImageUrlAttribute()
+    protected function image(): Attribute
     {
-        return $this->profile_photo_path
-            ? Storage::disk($this->ImageDisk())->url($this->profile_photo_path)
-            : $this->defaultProfilePhotoUrl();
+        return Attribute::make(
+            get: function ($value, $attributes) {
+//                dump($value, $attributes);
+                return $value
+                    ? Storage::disk($this->ImageDisk())->url($value)
+                    : Storage::disk($this->ImageDisk())->url($this->defaultImageUrl());
+            }
+        );
     }
+
+   public function defaultImageUrl(){
+        return 'default-images/no-image.png';
+   }
 
     /**
      * Get the disk that image should be stored on.

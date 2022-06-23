@@ -70,7 +70,7 @@ class PartRepository extends CoreRepository
             ->shops()
             ->attach($data['shop_ids']);
 
-        $result->updateImage($data['_image'], 'image', 'parts');
+        if ($data['_image']) $result->updateImage($data['_image'], 'image', 'parts');
 
         return $result;
     }

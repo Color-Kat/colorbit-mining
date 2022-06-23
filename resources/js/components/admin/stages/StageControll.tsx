@@ -26,12 +26,13 @@ export const StageControl: React.FC<{stage: number, setStage:  React.Dispatch<Re
                 : <div/>
             }
 
-            <Button
-                onClick={nextStage}
-                className="h-9 sm:text-base font-medium xsm:px-6"
-            >
-                {stage < 3 && stage < 5 ? 'Далее' : 'Создать'}
-            </Button>
+            {stage < 4 && <Button
+                    onClick={nextStage}
+                    className="h-9 sm:text-base font-medium xsm:px-6"
+                >
+                    {stage < 3 ? 'Далее' : 'Создать'}
+                </Button>
+            }
         </div>
     );
 }
