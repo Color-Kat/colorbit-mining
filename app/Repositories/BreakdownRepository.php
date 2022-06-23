@@ -24,8 +24,8 @@ class BreakdownRepository extends CoreRepository
     /**
      * Return all with paginator
      */
-    public function getAll() {
-        $fields = ['id', 'title', 'description', 'chance', 'repair_chance', 'condition'];
+    public function getAllForAdmin() {
+        $fields = ['id', 'title', 'condition'];
 
         $result = $this
             ->startConditions()

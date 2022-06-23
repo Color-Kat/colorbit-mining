@@ -21,4 +21,5 @@ class Part extends Model
     public function breakdowns() {
         return $this->belongsToMany(Breakdown::class);
     }
+
 }

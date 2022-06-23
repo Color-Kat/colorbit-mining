@@ -127,7 +127,7 @@ class PartController extends AdminBaseController
      */
     public function create()
     {
-        $breakdowns = $this->breakdownRepository->getAll();
+        $breakdowns = $this->breakdownRepository->getAllForAdmin();
         $shops = $this->shopRepository->getAllForAdmin();
 
         return Inertia::render('Admin/Parts/Create', [
@@ -163,13 +163,19 @@ class PartController extends AdminBaseController
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  Part  $part
+     * @param  int $id
      * @return \Inertia\Response
      */
-    public function edit(Part $part)
+    public function edit(int $id)
     {
+        $part = $this->partRepository->getForEdit($id);
+        $breakdowns = $this->breakdownRepository->getAllForAdmin();
+        $shops = $this->shopRepository->getAllForAdmin();
+
         return Inertia::render('Admin/Parts/Edit', [
-            'part' => $part
+            'part' => $part,
+            'breakdowns' => $breakdowns,
+            'shops' => $shops
         ]);
     }
 

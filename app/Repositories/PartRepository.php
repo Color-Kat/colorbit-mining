@@ -79,5 +79,18 @@ class PartRepository extends CoreRepository
         return $result;
     }
 
+    /**
+     * Get prepared data for edit form
+     */
+    public function getForEdit($id) {
+        $result = $this
+            ->startConditions()
+            ->where('id', $id)
+            ->first();
 
+        $result['breakdown_ids'] = $result->breakdowns()->pluck('breakdown_id');
+        $result['breakdown_ids'] = $result->shops()->pluck('shop_id');
+
+        return $result;
+    }
 }

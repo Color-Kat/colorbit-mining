@@ -35,7 +35,9 @@ export class Part implements IPart {
         this.image = partData.image;
 
         this.breakdowns = partData.breakdowns;
+        this.breakdown_ids = partData.breakdown_ids ?? [];
         this.shops = partData.shops;
+        this.shop_ids = partData.shop_ids ?? [];
     }
 
     static createByType(part: PartT<PartType>) {

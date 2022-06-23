@@ -10,7 +10,6 @@ import {PartsList} from "@components/admin/PartsList";
 import {Inertia} from "@inertiajs/inertia";
 import useRoute from "@hooks/useRoute";
 
-
 const AdminPartsList: IPage = React.memo(() => {
     const page = useTypedPage<{
         parts: IPaginator<IBasePart>
