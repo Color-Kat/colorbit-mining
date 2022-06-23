@@ -4,6 +4,7 @@ export type PSU_EfficiencyType = 'none' | 'bronze' | 'silver' | 'gold' | 'platin
 
 export interface IPSU extends IBasePart {
     type: 'PSU';
+    TDP: number;
     PSU_power_supply: number; // WATT
     PSU_efficiency: PSU_EfficiencyType;
 }

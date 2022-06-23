@@ -130,6 +130,26 @@ export const SecondStage: React.FC<{
                         max="100"
                         name="GPU_fan_efficiency"
                     />
+
+                    {/* TDP */}
+                    <ControlledInput
+                        data={data} setData={setData} errors={errors}
+                        title="TDP"
+                        placeholder="В Ватт"
+                        type="number"
+                        min="0"
+                        name="TDP"
+                    />
+
+                    {/* Power */}
+                    <ControlledInput
+                        data={data} setData={setData} errors={errors}
+                        title="Потребление энергии"
+                        placeholder="В Ватт"
+                        type="number"
+                        min="0"
+                        name="power"
+                    />
                 </>
             );
 
@@ -173,6 +193,25 @@ export const SecondStage: React.FC<{
                         name="platform_RAM_slots"
                     />
 
+                    {/* TDP */}
+                    <ControlledInput
+                        data={data} setData={setData} errors={errors}
+                        title="TDP"
+                        placeholder="В Ватт"
+                        type="number"
+                        min="0"
+                        name="TDP"
+                    />
+
+                    {/* Power */}
+                    <ControlledInput
+                        data={data} setData={setData} errors={errors}
+                        title="Потребление энергии"
+                        placeholder="В Ватт"
+                        type="number"
+                        min="0"
+                        name="power"
+                    />
                 </>
             );
 
@@ -207,6 +246,26 @@ export const SecondStage: React.FC<{
                         min="1"
                         name="RAM_channels"
                     />
+
+                    {/* TDP */}
+                    <ControlledInput
+                        data={data} setData={setData} errors={errors}
+                        title="TDP"
+                        placeholder="В Ватт"
+                        type="number"
+                        min="0"
+                        name="TDP"
+                    />
+
+                    {/* Power */}
+                    <ControlledInput
+                        data={data} setData={setData} errors={errors}
+                        title="Потребление энергии"
+                        placeholder="В Ватт"
+                        type="number"
+                        min="0"
+                        name="power"
+                    />
                 </>
             );
 
@@ -229,6 +288,16 @@ export const SecondStage: React.FC<{
                         title="Сертификат БП"
                         name="PSU_efficiency"
                         options={PSU_efficiency_options}
+                    />
+
+                    {/* TDP */}
+                    <ControlledInput
+                        data={data} setData={setData} errors={errors}
+                        title="TDP"
+                        placeholder="В Ватт"
+                        type="number"
+                        min="0"
+                        name="TDP"
                     />
                 </>
             );

@@ -19,9 +19,6 @@ export type ShopsPartType = {
  */
 // TODO TDP and power
 export interface IPart extends IBasePart{
-    TDP?: number;
-    power?: number;
-
     breakdowns: BreakdownsPartType;
     shops: ShopsPartType;
 }
