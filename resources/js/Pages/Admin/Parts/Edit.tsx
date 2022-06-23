@@ -13,13 +13,14 @@ import {SecondStage} from "@components/admin/stages/SecondStage";
 import {ThirdStage} from "@components/admin/stages/ThirdStage";
 import {StageControl} from "@components/admin/stages/StageControll";
 import useTypedPage from "../../../hooks/useTypedPage";
+import {Part} from "../../../classes/Part";
 
 const AdminPartEdit: IPage = React.memo(() => {
     const route = useRoute();
-    const pageProps = useTypedPage().props;
-    console.log(pageProps);
+    const part = useTypedPage<{part: PartT<PartType>}>().props.part;
 
-    let {data, setData, post, processing, errors} = useForm<PartT<PartType> | IBasePart>();
+    let {data, setData, post, processing, errors} = useForm<PartT<PartType> | IBasePart>(Part.createByType(part));
+    console.log(data)
 
     const [stage, setStage] = useState<number>(1);
 

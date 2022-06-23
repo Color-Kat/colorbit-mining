@@ -37,6 +37,16 @@ export class Part implements IPart {
         this.breakdowns = partData.breakdowns;
         this.shops = partData.shops;
     }
+
+    static createByType(part: PartT<PartType>) {
+        switch (part.type) {
+            case 'GPU': return new GPU(part);
+            case 'platform': return new Platform(part);
+            case 'RAM': return new RAM(part);
+            case 'PSU': return new PSU(part);
+            case 'case': return new Case(part);
+        }
+    }
 }
 
 export class GPU extends Part implements PartT<'GPU'> {
@@ -50,8 +60,17 @@ export class GPU extends Part implements PartT<'GPU'> {
     public GPU_fans_count: number = 1;
     public GPU_fan_efficiency: number = 50;
 
-    constructor(partData?: IPart | PartT<'GPU'>) {
+    constructor(partData?: PartT<'GPU'>) {
         super(partData);
+
+        if(!partData) return;
+        this.TDP = partData.TDP;
+        this.power = partData.power;
+        this.GPU_VRAM_size = partData.GPU_VRAM_size;
+        this.GPU_VRAM_frequency = partData.GPU_VRAM_frequency;
+        this.GPU_VRAM_type = partData.GPU_VRAM_type;
+        this.GPU_fans_count = partData.GPU_fans_count;
+        this.GPU_fan_efficiency = partData.GPU_fan_efficiency;
     }
 }
 
