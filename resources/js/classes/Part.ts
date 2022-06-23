@@ -84,8 +84,16 @@ export class Platform extends Part implements PartT<'platform'> {
     public platform_frequency: number = 333;
     public platform_RAM_slots: number = 1;
 
-    constructor(partData?: IPart | PartT<'platform'>) {
+    constructor(partData?: PartT<'platform'>) {
         super(partData);
+
+        if(!partData) return;
+        this.TDP = partData.TDP;
+        this.power = partData.power;
+        this.platform_cors_count = partData.platform_cors_count;
+        this.platform_threads_count = partData.platform_threads_count;
+        this.platform_frequency = partData.platform_frequency;
+        this.platform_RAM_slots = partData.platform_RAM_slots;
     }
 }
 
@@ -98,8 +106,15 @@ export class RAM extends Part implements PartT<'RAM'> {
     public RAM_size: number = 1;
     public RAM_channels: number = 1;
 
-    constructor(partData?: IPart | PartT<'RAM'>) {
+    constructor(partData?: PartT<'RAM'>) {
         super(partData);
+
+        if(!partData) return;
+        this.TDP = partData.TDP;
+        this.power = partData.power;
+        this.RAM_frequency = partData.RAM_frequency;
+        this.RAM_size = partData.RAM_size;
+        this.RAM_channels = partData.RAM_channels;
     }
 }
 
@@ -110,8 +125,13 @@ export class PSU extends Part implements PartT<'PSU'> {
     public PSU_power_supply: number = 100;
     public PSU_efficiency: PSU_EfficiencyType = 'none';
 
-    constructor(partData?: IPart | PartT<'PSU'>) {
+    constructor(partData?: PartT<'PSU'>) {
         super(partData);
+
+        if(!partData) return;
+        this.TDP = partData.TDP;
+        this.PSU_power_supply = partData.PSU_power_supply;
+        this.PSU_efficiency = partData.PSU_efficiency;
     }
 }
 
@@ -123,8 +143,14 @@ export class Case extends Part implements PartT<'case'> {
     public case_GPUs_count: number = 1;
     public case_critical_temp: number = 100;
 
-    constructor(partData?: IPart | PartT<'case'>) {
+    constructor(partData?: PartT<'case'>) {
         super(partData);
+
+        if(!partData) return;
+        this.case_material = partData.case_material;
+        this.case_material_rus = partData.case_material_rus;
+        this.case_GPUs_count = partData.case_GPUs_count;
+        this.case_critical_temp = partData.case_critical_temp;
     }
 }
 
