@@ -57,8 +57,7 @@ trait HasImage
     protected function image(): Attribute
     {
         return Attribute::make(
-            get: function ($value, $attributes) {
-//                dump($value, $attributes);
+            get: function ($value) {
                 return $value
                     ? Storage::disk($this->ImageDisk())->url($value)
                     : Storage::disk($this->ImageDisk())->url($this->defaultImageUrl());

@@ -58,6 +58,9 @@ class PartRepository extends CoreRepository
         if(empty($data['slug'])) $data['slug'] = Str::slug($data['name']);
         else $data['slug'] = Str::slug($data['slug']);
 
+        // Set default image url
+        if(!$data['_image']) $data['image'] = 'default-images/' . $data['type'] . '-default.png';
+
         // Create base part
         $result = $this->startConditions()->create($data);
 
@@ -71,6 +74,7 @@ class PartRepository extends CoreRepository
             ->attach($data['shop_ids']);
 
         if ($data['_image']) $result->updateImage($data['_image'], 'image', 'parts');
+
 
         return $result;
     }
