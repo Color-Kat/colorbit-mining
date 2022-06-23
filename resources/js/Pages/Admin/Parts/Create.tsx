@@ -14,6 +14,7 @@ import {ThirdStage} from "@components/admin/stages/ThirdStage";
 
 import useRoute from "@hooks/useRoute";
 import {StageControl} from "@components/admin/stages/StageControll";
+import {FourthStage} from "../../../components/admin/stages/FourthStage";
 
 const AdminPartCreate: IPage = React.memo(() => {
     const route = useRoute();
@@ -67,14 +68,11 @@ const AdminPartCreate: IPage = React.memo(() => {
 
             {/* STAGE 4 - RESULT */}
             {stage == 4 && <div className="space-y-4">
-                {processing
-                    ? 'Загрузка'
-                    : (Object.keys(errors).length ? (errors as any)[Object.keys(errors)[0]] : 'Отлично!')
-                }
+                <FourthStage processing={processing} errors={errors} />
             </div>}
 
             {/* STAGES CONTROL */}
-            <StageControl stage={stage} setStage={setStage}/>
+            <StageControl stage={stage} setStage={setStage} errors={errors}/>
 
         </AdminPartsListLayout>
     );
