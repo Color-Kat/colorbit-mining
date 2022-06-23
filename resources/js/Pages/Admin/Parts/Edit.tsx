@@ -1,69 +1,35 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import {useForm} from "@inertiajs/inertia-react";
 import useRoute from "@hooks/useRoute";
 
 import {IPage} from "@/types/IPage";
-import {PartT} from "@/types/parts/IPart";
+import {PartT} from "@/types/parts/PartT";
 import {IBasePart, PartType} from "@/types/parts/IBasePart";
-import {Part} from "@/classes/Part";
 
 import AdminPartsListLayout from "@components/admin/AdminPartsListLayout";
-import {PhotoInput} from "@components/elements/form/PhotoInput";
-import {ControlledInput} from "@components/elements/form/ControlledInput";
-
-
-import Label from "@components/elements/form/Label";
-import Input from "@components/elements/form/Input";
-import InputError from "@components/elements/form/InputError";
-
-interface ControlledSelectProps {
-    name: string;
-    title: string;
-    options: {
-        title: string,
-        value: string,
-        selected?: boolean
-    }[]
-}
-
-const ControlledSelect: React.FC<ControlledSelectProps> = ({name, title, options}) => {
-    return (
-        <div className="control-select">
-            <Label htmlFor={name} value={title}/>
-
-            <select name={name}>
-                {options.map((option, i) => (
-                    <option
-                        selected={option.selected}
-                        value={option.value}
-                    >{option.title}</option>
-                ))}
-            </select>
-
-            {/*<Input*/}
-            {/*    id={name}*/}
-            {/*    type={type}*/}
-            {/*    className="mt-1 block w-full"*/}
-            {/*    value={data[name]}*/}
-            {/*    onChange={e => setData(name, e.currentTarget.value)}*/}
-            {/*/>*/}
-        </div>
-    );
-}
+import {FourthStage} from "@components/admin/stages/FourthStage";
+import {FirstStage} from "@components/admin/stages/FirstStage";
+import {SecondStage} from "@components/admin/stages/SecondStage";
+import {ThirdStage} from "@components/admin/stages/ThirdStage";
+import {StageControl} from "@components/admin/stages/StageControll";
+import useTypedPage from "../../../hooks/useTypedPage";
 
 const AdminPartEdit: IPage = React.memo(() => {
     const route = useRoute();
-    let {data, setData, post, processing, errors} = useForm<PartT<PartType> | IBasePart>(new Part());
+    const pageProps = useTypedPage().props;
+    console.log(pageProps);
 
-    const createPart = () => {
-        console.log('update', data);
+    let {data, setData, post, processing, errors} = useForm<PartT<PartType> | IBasePart>();
 
-        // post(route('user-profile-information.update'), {
-        //     errorBag: 'updateProfileInformation',
-        //     preserveScroll: true,
-        //     onSuccess: () => clearPhotoFileInput(),
-        // });
+    const [stage, setStage] = useState<number>(1);
+
+    const updatePart = () => {
+        if(stage === 4) {
+            post(route('admin.parts.update'));
+        }
     }
+
+    useEffect(updatePart, [stage]);
 
     return (
         <AdminPartsListLayout
@@ -71,40 +37,30 @@ const AdminPartEdit: IPage = React.memo(() => {
             description="Изменяйте свойства комплектующих здесь"
         >
 
-            <div className="space-y-4">
-                <PhotoInput data={data} setData={setData} errors={errors}/>
-
-                {/* NAME */}
-                <ControlledInput
-                    data={data} setData={setData} errors={errors}
-                    title="Название"
-                    name="name"
-                />
-
-                {/* VENDOR */}
-                <ControlledInput
-                    data={data} setData={setData} errors={errors}
-                    title="Вендор"
-                    name="vendor"
-                />
-
-                {/* SLUG */}
-                <ControlledInput
-                    data={data} setData={setData} errors={errors}
-                    title="Идентификатор"
-                    name="slug"
-                />
-
-
-
-                {/* Price */}
-                <ControlledInput
-                    data={data} setData={setData} errors={errors}
-                    title="Цена"
-                    name="price"
-                />
-
+            {/* STAGE 1 */}
+            {/* Use CSS hidden/visible to save PhotoInput state */}
+            <div className={`space-y-4 ${stage == 1 ? 'visible' : 'hidden'}`}>
+                <FirstStage data={data} setData={setData} errors={errors}/>
             </div>
+
+
+            {/* STAGE 2 */}
+            {stage == 2 && <div className="space-y-4">
+                <SecondStage data={data} setData={setData} errors={errors} />
+            </div>}
+
+            {/* STAGE 3 */}
+            {stage == 3 && <div className="space-y-4">
+                <ThirdStage data={data} setData={setData} errors={errors} />
+            </div>}
+
+            {/* STAGE 4 - RESULT */}
+            {stage == 4 && <div className="space-y-4">
+                <FourthStage processing={processing} errors={errors} />
+            </div>}
+
+            {/* STAGES CONTROL */}
+            <StageControl stage={stage} setStage={setStage} errors={errors}/>
 
         </AdminPartsListLayout>
     );

@@ -41,12 +41,10 @@ const AdminPartCreate: IPage = React.memo(() => {
 
     useEffect(createPart, [stage])
 
-    // @ts-ignore
-    // @ts-ignore
     return (
         <AdminPartsListLayout
-            title="Редактирование"
-            description="Изменяйте свойства комплектующих здесь"
+            title="Создание"
+            description="Создавайте здесь разные типы комплектующих"
         >
 
             {/* STAGE 1 */}
