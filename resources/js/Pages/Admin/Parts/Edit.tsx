@@ -13,20 +13,23 @@ import {SecondStage} from "@components/admin/stages/SecondStage";
 import {ThirdStage} from "@components/admin/stages/ThirdStage";
 import {StageControl} from "@components/admin/stages/StageControll";
 import useTypedPage from "../../../hooks/useTypedPage";
-import {Part} from "../../../classes/Part";
+import {Part} from "@/classes/Part";
 
 const AdminPartEdit: IPage = React.memo(() => {
     const route = useRoute();
     const part = useTypedPage<{part: PartT<PartType>}>().props.part;
 
-    let {data, setData, post, processing, errors} = useForm<PartT<PartType> | IBasePart>(Part.createByType(part));
-    console.log(data)
+    let {data, setData, patch, processing, errors} = useForm<PartT<PartType> | IBasePart>(Part.createByType(part));
 
     const [stage, setStage] = useState<number>(1);
+    console.log(data)
 
     const updatePart = () => {
         if(stage === 4) {
-            post(route('admin.parts.update'));
+            console.log(data)
+            patch(route('admin.parts.update', part.id), {
+
+            });
         }
     }
 

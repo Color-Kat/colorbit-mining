@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\PartStoreRequest;
+use App\Http\Requests\PartUpdateRequest;
 use App\Models\Part;
 use App\Repositories\BreakdownRepository;
 use App\Repositories\PartRepository;
@@ -144,7 +145,7 @@ class PartController extends AdminBaseController
      */
     public function store(PartStoreRequest $request)
     {
-        $this->partRepository->create($request);
+        $this->partRepository->createPart($request);
 
         return redirect()->back();
     }
@@ -182,13 +183,16 @@ class PartController extends AdminBaseController
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\PartUpdateRequest $request
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request, $id)
+    public function update(PartUpdateRequest $request, $id)
     {
-        //
+//        dd($request->all());
+        $this->partRepository->editPart($request, $id);
+
+        return redirect()->back();
     }
 
     /**

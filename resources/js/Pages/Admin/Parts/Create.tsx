@@ -14,16 +14,16 @@ import {ThirdStage} from "@components/admin/stages/ThirdStage";
 
 import useRoute from "@hooks/useRoute";
 import {StageControl} from "@components/admin/stages/StageControll";
-import {FourthStage} from "../../../components/admin/stages/FourthStage";
+import {FourthStage} from "@components/admin/stages/FourthStage";
 
 const AdminPartCreate: IPage = React.memo(() => {
     const route = useRoute();
     let {data, setData, post, processing, errors} = useForm<PartT<PartType> | IBasePart>(new Part({
         name: 'GTX 1050',
         vendor: 'MSI',
-        breakdowns: [],
+        breakdown_ids: [],
         slug: '',
-        shops: [],
+        shop_ids: [],
         image: '',
         type: 'GPU',
         price: 100

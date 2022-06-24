@@ -34,9 +34,11 @@ export class Part implements IPart {
         this.price = partData.price;
         this.image = partData.image;
 
-        this.breakdowns = partData.breakdowns;
+        console.log(partData.breakdown_ids)
+        this.breakdowns = partData.breakdowns ?? [];
         this.breakdown_ids = partData.breakdown_ids ?? [];
-        this.shops = partData.shops;
+
+        this.shops = partData.shops ?? [];
         this.shop_ids = partData.shop_ids ?? [];
     }
 

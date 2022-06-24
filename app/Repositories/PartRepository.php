@@ -49,9 +49,9 @@ class PartRepository extends CoreRepository
     }
 
     /**
-     * Return all parts by type with paginator
+     * Create part in DB from $request data
      */
-    public function create($request) {
+    public function createPart($request) {
         $data = $request->all();
 
         // Create slug
@@ -89,7 +89,46 @@ class PartRepository extends CoreRepository
             ->first();
 
         $result['breakdown_ids'] = $result->breakdowns()->pluck('breakdown_id')->toArray();
-        $result['breakdown_ids'] = $result->shops()->pluck('shop_id')->toArray();
+        $result['shop_ids'] = $result->shops()->pluck('shop_id')->toArray();
+
+        return $result;
+    }
+
+    /**
+     * Edit existing part in db by $request data
+     */
+    public function editPart($request, $id) {
+        $data = $request->all();
+        dump($data);
+        $part = $this
+            ->startConditions()
+            ->find($id);
+//            ->where('id', $id)
+//            ->first();
+
+        // Create slug
+        if(empty($data['slug'])) $data['slug'] = Str::slug($data['name']);
+        else $data['slug'] = Str::slug($data['slug']);
+
+        // Update base part
+        $result = $part->update($data);
+
+        // Relationships
+        $part
+            ->breakdowns()
+            ->sync($data['breakdown_ids']);
+
+        $part
+            ->shops()
+            ->sync($data['shop_ids']);
+
+//        if ($data['_image']) $part->updateImage($data['_image'], 'parts');
+
+
+
+
+
+
 
         return $result;
     }
