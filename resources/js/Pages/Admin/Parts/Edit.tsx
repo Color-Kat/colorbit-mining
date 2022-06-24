@@ -22,7 +22,6 @@ const AdminPartEdit: IPage = React.memo(() => {
     let {data, setData, patch, processing, errors} = useForm<PartT<PartType> | IBasePart>(Part.createByType(part));
 
     const [stage, setStage] = useState<number>(1);
-    console.log(data)
 
     const updatePart = () => {
         if(stage === 4) {

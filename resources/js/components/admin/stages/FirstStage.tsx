@@ -4,6 +4,7 @@ import {ControlledInput} from "../../elements/form/ControlledInput";
 import {PhotoInput} from "../../elements/form/PhotoInput";
 import {Case, GPU, Platform, PSU, RAM} from "@/classes/Part";
 import {IPart} from "@/types/parts/IPart";
+import {PartT} from "../../../types/parts/PartT";
 
 const type_options = [
     {
@@ -45,11 +46,11 @@ export const FirstStage: React.FC<{
 
         setData((prev: IPart) => {
             switch (value){
-                case 'GPU': return new GPU(prev);
-                case 'platform': return new Platform(prev);
-                case 'RAM': return new RAM(prev);
-                case 'PSU': return new PSU(prev);
-                case 'case': return new Case(prev);
+                case 'GPU': return new GPU(prev as PartT<'GPU'>);
+                case 'platform': return new Platform(prev as PartT<'platform'>);
+                case 'RAM': return new RAM(prev as PartT<'RAM'>);
+                case 'PSU': return new PSU(prev as PartT<'PSU'>);
+                case 'case': return new Case(prev as PartT<'case'>);
             }
         });
 
