@@ -145,7 +145,7 @@ class PartController extends AdminBaseController
      */
     public function store(PartStoreRequest $request)
     {
-        $this->partRepository->createPart($request);
+        $this->partRepository->storePart($request);
 
         return redirect()->back();
     }
@@ -181,7 +181,8 @@ class PartController extends AdminBaseController
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update the part in DB.
+     * Image updating is moved to update-image method because patch method doesn't support upload files
      *
      * @param  \App\Http\Requests\PartUpdateRequest $request
      * @param  int  $id
@@ -189,11 +190,24 @@ class PartController extends AdminBaseController
      */
     public function update(PartUpdateRequest $request, $id)
     {
-        dd($request->all());
-        $this->partRepository->editPart($request, $id);
+        $this->partRepository->updatePart($request, $id);
 
-//        return redirect()->back();
+        return redirect()->back();
     }
+
+//    /**
+//     * Update the image of the part
+//     *
+//     * @param  \App\Http\Requests\PartUpdateRequest $request
+//     * @param  int  $id
+//     * @return \Illuminate\Http\RedirectResponse
+//     */
+//    public function updateImage(Request $request, $id)
+//    {
+//        $this->partRepository->updatePartImage($request, $id);
+//
+//        return redirect()->back();
+//    }
 
     /**
      * Remove the specified resource from storage.

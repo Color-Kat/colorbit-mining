@@ -25,7 +25,8 @@ class PartRepository extends CoreRepository
     /**
      * Return all with paginator
      */
-    public function getAllWithPaginator() {
+    public function getAllWithPaginator()
+    {
         $result = $this
             ->startConditions()
             ->select(['id', 'name', 'vendor', 'image', 'slug', 'type', 'price'])
@@ -37,7 +38,8 @@ class PartRepository extends CoreRepository
     /**
      * Return all parts by type with paginator
      */
-    public function getByTypeWithPaginator(string $type) {
+    public function getByTypeWithPaginator(string $type)
+    {
         $select = ['id', 'name', 'vendor', 'image', 'slug', 'type', 'price'];
 
         $result = $this->startConditions()->select($select)
@@ -51,15 +53,16 @@ class PartRepository extends CoreRepository
     /**
      * Create part in DB from $request data
      */
-    public function createPart($request) {
+    public function storePart($request)
+    {
         $data = $request->all();
 
         // Create slug
-        if(empty($data['slug'])) $data['slug'] = Str::slug($data['name']);
+        if (empty($data['slug'])) $data['slug'] = Str::slug($data['name']);
         else $data['slug'] = Str::slug($data['slug']);
 
         // Set default image url
-        if(!$data['_image']) $data['image'] = 'default-images/' . $data['type'] . '-default.png';
+        if (!$data['_image']) $data['image'] = 'default-images/' . $data['type'] . '-default.png';
 
         // Create base part
         $result = $this->startConditions()->create($data);
@@ -82,7 +85,8 @@ class PartRepository extends CoreRepository
     /**
      * Get prepared data for edit form
      */
-    public function getForEdit($id) {
+    public function getForEdit($id)
+    {
         $result = $this
             ->startConditions()
             ->where('id', $id)
@@ -97,17 +101,15 @@ class PartRepository extends CoreRepository
     /**
      * Edit existing part in db by $request data
      */
-    public function editPart($request, $id) {
+    public function updatePart($request, $id)
+    {
         $data = $request->all();
-        dump($data);
         $part = $this
             ->startConditions()
             ->find($id);
-//            ->where('id', $id)
-//            ->first();
 
         // Create slug
-        if(empty($data['slug'])) $data['slug'] = Str::slug($data['name']);
+        if (empty($data['slug'])) $data['slug'] = Str::slug($data['name']);
         else $data['slug'] = Str::slug($data['slug']);
 
         // Delete image url to not rewrite it
@@ -120,14 +122,13 @@ class PartRepository extends CoreRepository
         // Relationships
         $part
             ->breakdowns()
-            ->sync($data['breakdown_ids']);
+            ->sync($data['breakdown_ids'] ?? []);
 
         $part
             ->shops()
-            ->sync($data['shop_ids']);
+            ->sync($data['shop_ids'] ?? []);
 
-//        if ($data['_image']) $part->updateImage($data['_image'], 'parts');
-
+        if ($data['_image']) $part->updateImage($data['_image'], 'parts');
 
         return $result;
     }
