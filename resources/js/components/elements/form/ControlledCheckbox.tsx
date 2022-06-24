@@ -6,13 +6,13 @@ interface ControlledCheckboxProps {
     title: string;
     options: {
         title: string,
-        value: string,
+        value: string|number,
     }[];
     data: {
         [key: string]: any
     };
     setData: (prev: any) => any,
-    onChange?: (checkedValue: string) => void | null
+    onChange?: (checkedValue: string|number) => void | null
 }
 
 export const ControlledCheckbox: React.FC<ControlledCheckboxProps> = ({
@@ -25,7 +25,7 @@ export const ControlledCheckbox: React.FC<ControlledCheckboxProps> = ({
 }) => {
     // Add or delete value from list
     const handleDefault = (e: any) => {
-        const checkedValue = e.target.value;
+        const checkedValue = parseInt(e.target.value) ?? e.target.value;
 
         setData((prev: any) => {
             let list = prev[name];

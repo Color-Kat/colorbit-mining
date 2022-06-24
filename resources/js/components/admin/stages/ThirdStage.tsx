@@ -3,7 +3,6 @@ import {ControlledInput} from "@components/elements/form/ControlledInput";
 import useTypedPage from "@hooks/useTypedPage";
 import {BreakdownsPartType, ShopsPartType} from "@/types/parts/IPart";
 import {ControlledCheckbox} from "@components/elements/form/ControlledCheckbox";
-import {IPart} from "../../../types/parts/IPart";
 
 export const ThirdStage: React.FC<{
     data: any,
@@ -20,12 +19,12 @@ export const ThirdStage: React.FC<{
     // Transform to {title, value} format
     const breakdownOptions = pageProps.breakdowns.map(breakdown => ({
         title: breakdown.title + ` (условие - ${breakdown.condition})`,
-        value: breakdown.id.toString()
+        value: breakdown.id
     }));
 
     const shopOptions = pageProps.shops.map(shop => ({
         title: shop.name,
-        value: shop.id.toString()
+        value: shop.id
     }));
 
     return (

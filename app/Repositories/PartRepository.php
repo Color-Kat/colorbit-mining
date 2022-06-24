@@ -88,8 +88,8 @@ class PartRepository extends CoreRepository
             ->where('id', $id)
             ->first();
 
-        $result['breakdown_ids'] = $result->breakdowns()->pluck('breakdown_id');
-        $result['breakdown_ids'] = $result->shops()->pluck('shop_id');
+        $result['breakdown_ids'] = $result->breakdowns()->pluck('breakdown_id')->toArray();
+        $result['breakdown_ids'] = $result->shops()->pluck('shop_id')->toArray();
 
         return $result;
     }
