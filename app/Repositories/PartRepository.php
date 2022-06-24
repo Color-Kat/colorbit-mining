@@ -110,6 +110,10 @@ class PartRepository extends CoreRepository
         if(empty($data['slug'])) $data['slug'] = Str::slug($data['name']);
         else $data['slug'] = Str::slug($data['slug']);
 
+        // Delete image url to not rewrite it
+        // New image is stored in _image
+        unset($data['image']);
+
         // Update base part
         $result = $part->update($data);
 
@@ -123,11 +127,6 @@ class PartRepository extends CoreRepository
             ->sync($data['shop_ids']);
 
 //        if ($data['_image']) $part->updateImage($data['_image'], 'parts');
-
-
-
-
-
 
 
         return $result;

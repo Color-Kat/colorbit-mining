@@ -192,7 +192,7 @@ class PartController extends AdminBaseController
 //        dd($request->all());
         $this->partRepository->editPart($request, $id);
 
-        return redirect()->back();
+//        return redirect()->back();
     }
 
     /**
