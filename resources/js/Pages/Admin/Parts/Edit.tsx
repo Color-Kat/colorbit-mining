@@ -20,38 +20,16 @@ const AdminPartEdit: IPage = React.memo(() => {
     const route = useRoute();
     const part = useTypedPage<{ part: PartT<PartType> }>().props.part;
 
-    let {data, setData, put, processing, errors} =
+    let {data, setData, processing, errors} =
         useForm<(PartT<PartType> | IBasePart) & { _image?: File | null }>(Part.createByType(part));
-
-    let imageData = useForm<{image: File | null}>({
-        image: null
-    });
 
     const [stage, setStage] = useState<number>(1);
 
     const updatePart = () => {
         if (stage === 4) {
-            // Move image file
-            // because patch method doesn't support upload images
-            // const imageFile = data._image ?? null;
-
-
-            // if(imageFile) {
-            //     imageData.setData('image', imageFile);
-            //     setData('_image', null); // Remove from main query
-            //
-            //     console.log(imageData.data)
-            //     // Update image query
-            //     imageData.post(route('admin.parts.update-image', part.id));
-            // }
-            //
-            // setTimeout(()=>{
-            //
-            //
-            //     // Update part
-            //     // put(route('admin.parts.update', part.id));
-            // }, 500)
-
+            // Change method from post to patch in this way
+            // because patch doesn't support upload images
+            // and laravel understand _method
             Inertia.post(route('admin.parts.update', part.id), {
                 _method: 'patch',
                 ...data as any

@@ -192,22 +192,8 @@ class PartController extends AdminBaseController
     {
         $this->partRepository->updatePart($request, $id);
 
-//        return redirect()->back();
+        return redirect()->back();
     }
-
-//    /**
-//     * Update the image of the part
-//     *
-//     * @param  \App\Http\Requests\PartUpdateRequest $request
-//     * @param  int  $id
-//     * @return \Illuminate\Http\RedirectResponse
-//     */
-//    public function updateImage(Request $request, $id)
-//    {
-//        $this->partRepository->updatePartImage($request, $id);
-//
-//        return redirect()->back();
-//    }
 
     /**
      * Remove the specified resource from storage.

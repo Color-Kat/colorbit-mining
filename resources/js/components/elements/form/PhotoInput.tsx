@@ -30,7 +30,6 @@ export const PhotoInput: React.FC<PhotoInputProps> = ({data, setData, errors, de
         const image = photoRef.current?.files?.[0];
 
         if (!image) return;
-
         setData('_image', image);
 
         const reader = new FileReader();

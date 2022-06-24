@@ -119,8 +119,6 @@ class PartRepository extends CoreRepository
         // Update base part
         $result = $part->update($data);
 
-        dump($data);
-
         // Relationships
         $part
             ->breakdowns()
