@@ -192,7 +192,7 @@ class PartController extends AdminBaseController
     {
         $this->partRepository->updatePart($request, $id);
 
-        return redirect()->back();
+//        return redirect()->back();
     }
 
 //    /**

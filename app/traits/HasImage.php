@@ -19,15 +19,17 @@ trait HasImage
     public function updateImage(UploadedFile $photo, $folder)
     {
         tap($this[$this->imageField], function ($previous) use ($photo, $folder) {
+            // Delete previous image
+            if ($previous) {
+                Storage::disk($this->ImageDisk())->delete($this->getRawOriginal($this->imageField));
+            }
+
+            // Create new image
             $this->forceFill([
                 $this->imageField => $photo->storePublicly(
                     $folder, ['disk' => $this->ImageDisk()]
                 ),
             ])->update();
-
-            if ($previous) {
-                Storage::disk($this->ImageDisk())->delete($previous);
-            }
         });
     }
 
