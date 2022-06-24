@@ -19,14 +19,14 @@ const AdminPartEdit: IPage = React.memo(() => {
     const route = useRoute();
     const part = useTypedPage<{part: PartT<PartType>}>().props.part;
 
-    let {data, setData, patch, processing, errors} = useForm<PartT<PartType> | IBasePart>(Part.createByType(part));
+    let {data, setData, patch, post, processing, errors} = useForm<PartT<PartType> | IBasePart>(Part.createByType(part));
 
     const [stage, setStage] = useState<number>(1);
 
     const updatePart = () => {
         if(stage === 4) {
             console.log(data)
-            patch(route('admin.parts.update', part.id), {
+            post(route('admin.parts.store'), {
 
             });
         }

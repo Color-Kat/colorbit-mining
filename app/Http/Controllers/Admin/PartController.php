@@ -145,6 +145,7 @@ class PartController extends AdminBaseController
      */
     public function store(PartStoreRequest $request)
     {
+        dd($request->all());
         $this->partRepository->createPart($request);
 
         return redirect()->back();
@@ -187,9 +188,9 @@ class PartController extends AdminBaseController
      * @param  int  $id
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(PartUpdateRequest $request, $id)
+    public function update(Request $request, $id)
     {
-//        dd($request->all());
+        dd($request->all());
         $this->partRepository->editPart($request, $id);
 
 //        return redirect()->back();

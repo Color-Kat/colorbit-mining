@@ -11,23 +11,14 @@ import AdminPartsListLayout from "@components/admin/AdminPartsListLayout";
 import {FirstStage} from "@components/admin/stages/FirstStage";
 import {SecondStage} from "@components/admin/stages/SecondStage";
 import {ThirdStage} from "@components/admin/stages/ThirdStage";
+import {FourthStage} from "@components/admin/stages/FourthStage";
+import {StageControl} from "@components/admin/stages/StageControll";
 
 import useRoute from "@hooks/useRoute";
-import {StageControl} from "@components/admin/stages/StageControll";
-import {FourthStage} from "@components/admin/stages/FourthStage";
 
 const AdminPartCreate: IPage = React.memo(() => {
     const route = useRoute();
-    let {data, setData, post, processing, errors} = useForm<PartT<PartType> | IBasePart>(new Part({
-        name: 'GTX 1050',
-        vendor: 'MSI',
-        breakdown_ids: [],
-        slug: '',
-        shop_ids: [],
-        image: '',
-        type: 'GPU',
-        price: 100
-    }));
+    let {data, setData, post, processing, errors} = useForm<PartT<PartType> | IBasePart>(new Part());
 
     const [stage, setStage] = useState<number>(1);
 

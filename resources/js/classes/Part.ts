@@ -5,13 +5,16 @@ import {PSU_EfficiencyType} from "@/types/parts/IPSU";
 import {CaseMaterialType} from "@/types/parts/ICase";
 import {BreakdownsPartType, IPart, ShopsPartType} from "../types/parts/IPart";
 
+/**
+ *
+ */
 export class Part implements IPart {
-    public name: string = '';
+    public name: string = 'GTX 1050 TI';
     public image: string = '';
-    public vendor: string = '';
+    public vendor: string = 'MSI';
     public type: PartType = 'GPU';
     public slug: string = '';
-    public price: number = 100;
+    public price: number = 200;
 
     public breakdowns: BreakdownsPartType = [];
     public breakdown_ids: number[] = [];
@@ -25,6 +28,7 @@ export class Part implements IPart {
     public _image?: File | null = null;
 
     constructor(partData?: IPart) {
+        // Fill base properties
         if(!partData) return;
 
         this.name = partData.name;
@@ -42,13 +46,20 @@ export class Part implements IPart {
     }
 
     static createByType(part: PartT<PartType>) {
+        let partInstance: PartT<PartType>;
+
         switch (part.type) {
-            case 'GPU': return new GPU(part);
-            case 'platform': return new Platform(part);
-            case 'RAM': return new RAM(part);
-            case 'PSU': return new PSU(part);
-            case 'case': return new Case(part);
+            case 'GPU': partInstance = new GPU(part); break;
+            case 'platform': partInstance = new Platform(part); break;
+            case 'RAM': partInstance = new RAM(part); break;
+            case 'PSU': partInstance = new PSU(part); break;
+            case 'case': partInstance = new Case(part); break;
         }
+
+        // Fill additional properties for specially part: GPU, platform,..
+        (partInstance as any).fillProperties(part);
+
+        return partInstance;
     }
 }
 
@@ -63,10 +74,13 @@ export class GPU extends Part implements PartT<'GPU'> {
     public GPU_fans_count: number = 1;
     public GPU_fan_efficiency: number = 50;
 
-    constructor(partData?: PartT<'GPU'>) {
+    constructor(partData?: IPart) {
         super(partData);
+    }
 
-        if(!partData) return;
+    protected fillProperties(partData: PartT<'GPU'>) {
+        if(!partData.GPU_VRAM_size) return;
+
         this.TDP = partData.TDP;
         this.power = partData.power;
         this.GPU_VRAM_size = partData.GPU_VRAM_size;
@@ -87,11 +101,14 @@ export class Platform extends Part implements PartT<'platform'> {
     public platform_frequency: number = 333;
     public platform_RAM_slots: number = 1;
 
-    constructor(partData?: PartT<'platform'>) {
+    constructor(partData?: IPart) {
         super(partData);
+    }
 
-        if(!partData) return;
-        this.TDP = partData.TDP;
+    protected fillProperties(partData: PartT<'platform'>) {
+        if(!partData.platform_cors_count) return;
+
+        this.TDP = partData.TDP ?? this.TDP;
         this.power = partData.power;
         this.platform_cors_count = partData.platform_cors_count;
         this.platform_threads_count = partData.platform_threads_count;
@@ -109,10 +126,13 @@ export class RAM extends Part implements PartT<'RAM'> {
     public RAM_size: number = 1;
     public RAM_channels: number = 1;
 
-    constructor(partData?: PartT<'RAM'>) {
+    constructor(partData?: IPart) {
         super(partData);
+    }
 
-        if(!partData) return;
+    protected fillProperties(partData: PartT<'RAM'>) {
+        if(!partData.RAM_frequency) return;
+
         this.TDP = partData.TDP;
         this.power = partData.power;
         this.RAM_frequency = partData.RAM_frequency;
@@ -128,10 +148,13 @@ export class PSU extends Part implements PartT<'PSU'> {
     public PSU_power_supply: number = 100;
     public PSU_efficiency: PSU_EfficiencyType = 'none';
 
-    constructor(partData?: PartT<'PSU'>) {
+    constructor(partData?: IPart) {
         super(partData);
+    }
 
-        if(!partData) return;
+    protected fillProperties(partData: PartT<'PSU'>) {
+        if(!partData.PSU_power_supply) return;
+
         this.TDP = partData.TDP;
         this.PSU_power_supply = partData.PSU_power_supply;
         this.PSU_efficiency = partData.PSU_efficiency;
@@ -146,10 +169,13 @@ export class Case extends Part implements PartT<'case'> {
     public case_GPUs_count: number = 1;
     public case_critical_temp: number = 100;
 
-    constructor(partData?: PartT<'case'>) {
+    constructor(partData?: IPart) {
         super(partData);
+    }
 
-        if(!partData) return;
+    protected fillProperties(partData: PartT<'case'>) {
+        if(!partData.case_material) return;
+
         this.case_material = partData.case_material;
         this.case_material_rus = partData.case_material_rus;
         this.case_GPUs_count = partData.case_GPUs_count;

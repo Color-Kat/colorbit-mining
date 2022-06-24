@@ -5,6 +5,8 @@ import {PhotoInput} from "../../elements/form/PhotoInput";
 import {Case, GPU, Platform, PSU, RAM} from "@/classes/Part";
 import {IPart} from "@/types/parts/IPart";
 import {PartT} from "../../../types/parts/PartT";
+import {Part} from "../../../classes/Part";
+import {PartType} from "../../../types/parts/IBasePart";
 
 const type_options = [
     {
@@ -42,22 +44,17 @@ export const FirstStage: React.FC<{
 
     // Update available fields (for GPU, RAM,..)
     const typeChangeHandler = (name: string, value: any) => {
-        setData(name, value)
+        setData(name, value); // Update type
 
+        // Fill properties for new type
         setData((prev: IPart) => {
-            switch (value){
-                case 'GPU': return new GPU(prev as PartT<'GPU'>);
-                case 'platform': return new Platform(prev as PartT<'platform'>);
-                case 'RAM': return new RAM(prev as PartT<'RAM'>);
-                case 'PSU': return new PSU(prev as PartT<'PSU'>);
-                case 'case': return new Case(prev as PartT<'case'>);
-            }
+            return Part.createByType(prev as PartT<PartType>);
         });
-
     }
 
     return (
         <>
+            {/* Image */}
             <PhotoInput data={data} setData={setData} errors={errors}/>
 
             {/* NAME */}
