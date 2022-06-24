@@ -59,6 +59,7 @@ export const PhotoInput: React.FC<PhotoInputProps> = ({data, setData, errors, de
 
         if (photoRef.current?.value) {
             photoRef.current.value = '';
+            photoRef.current.value = '';
             setData('_image', null);
         }
     }

@@ -24,9 +24,7 @@ const AdminPartCreate: IPage = React.memo(() => {
 
     const createPart = () => {
         if(stage === 4) {
-            post(route('admin.parts.store'), {
-                preserveScroll: true,
-            });
+            post(route('admin.parts.store'));
         }
     }
 
@@ -43,7 +41,6 @@ const AdminPartCreate: IPage = React.memo(() => {
             <div className={`space-y-4 ${stage == 1 ? 'visible' : 'hidden'}`}>
                 <FirstStage data={data} setData={setData} errors={errors}/>
             </div>
-
 
             {/* STAGE 2 */}
             {stage == 2 && <div className="space-y-4">
