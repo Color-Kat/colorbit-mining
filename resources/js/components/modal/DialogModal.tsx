@@ -1,6 +1,11 @@
 import React, {memo, PropsWithChildren} from 'react';
-import JetModal, { ModalProps } from '@/Jetstream/Modal';
 import Modal from "./Modal";
+
+export interface ModalProps {
+    isOpen: boolean;
+    onClose(): void;
+    maxWidth?: string;
+}
 
 DialogModal.Content = memo(function DialogModalContent({
   title,

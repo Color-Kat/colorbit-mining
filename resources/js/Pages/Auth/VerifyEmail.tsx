@@ -2,9 +2,8 @@ import { InertiaLink, useForm, Head } from '@inertiajs/inertia-react';
 import classNames from 'classnames';
 import React from 'react';
 import useRoute from '@hooks/useRoute';
-import JetAuthenticationCard from '@/Jetstream/AuthenticationCard';
-import Button from "../../components/auth/Button";
-// import JetButton from '@/Jetstream/Button';
+import Button from "@components/auth/Button";
+import AuthenticationCard from "@components/auth/AuthenticationCard";
 
 interface Props {
   status: string;
@@ -21,7 +20,7 @@ export default function VerifyEmail({ status }: Props) {
   }
 
   return (
-    <JetAuthenticationCard>
+    <AuthenticationCard>
       <Head title="Email Verification" />
 
       <div className="mb-4 text-sm text-gray-600">
@@ -56,6 +55,6 @@ export default function VerifyEmail({ status }: Props) {
           </InertiaLink>
         </div>
       </form>
-    </JetAuthenticationCard>
+    </AuthenticationCard>
   );
 }

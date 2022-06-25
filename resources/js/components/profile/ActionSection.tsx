@@ -1,5 +1,4 @@
 import React, { PropsWithChildren } from 'react';
-import JetSectionTitle from '@/Jetstream/SectionTitle';
 import {SectionTitle} from "./SectionTitle";
 
 interface Props {

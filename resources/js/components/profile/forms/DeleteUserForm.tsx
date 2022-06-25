@@ -2,8 +2,6 @@ import {useForm} from '@inertiajs/inertia-react';
 import classNames from 'classnames';
 import React, {useRef, useState} from 'react';
 import useRoute from '@hooks/useRoute';
-import JetDangerButton from '@/Jetstream/DangerButton';
-import JetInputError from '@/Jetstream/InputError';
 import ActionSection from "../ActionSection";
 import DialogModal from "../../modal/DialogModal";
 import Input from "../Input";

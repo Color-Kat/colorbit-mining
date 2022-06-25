@@ -1,10 +1,9 @@
 import React, {memo} from 'react';
 import useTypedPage from "@hooks/useTypedPage";
-import {User} from "../../types/types";
+import {IUser} from "@/types/IUser";
 
 const Balance: React.FC = () => {
-    const page = useTypedPage<User>();
-
+    const page = useTypedPage<IUser>();
 
     return (
         <div className="ml-3 relative">

@@ -1,5 +1,4 @@
 import React from 'react';
-import JetAuthenticationCardLogo from '@/Jetstream/AuthenticationCardLogo';
 import { Head } from '@inertiajs/inertia-react';
 
 interface Props {
@@ -15,7 +14,7 @@ export default React.memo(function PrivacyPolicy({ policy }: Props) {
                 <div className="pt-4 bg-gray-100">
                     <div className="min-h-screen flex flex-col items-center pt-6 sm:pt-0">
                         <div>
-                            <JetAuthenticationCardLogo />
+                            {/*<JetAuthenticationCardLogo />*/}
                         </div>
 
                         <div

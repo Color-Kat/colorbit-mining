@@ -1,10 +1,9 @@
 import {Inertia} from '@inertiajs/inertia';
-import {useForm, usePage} from '@inertiajs/inertia-react';
+import {useForm} from '@inertiajs/inertia-react';
 import classNames from 'classnames';
 import React, {useRef, useState} from 'react';
 import useRoute from '@hooks/useRoute';
-
-import {User} from '@/types/types';
+import {IUser} from '@/types/IUser';
 
 import Button from "@components/profile/Button";
 import Label from "@components/profile/Label";
@@ -15,7 +14,7 @@ import InputError from "@components/profile/InputError";
 import ActionMessage from "@components/profile/ActionMessage";
 
 interface Props {
-    user: User;
+    user: IUser;
 }
 
 export default React.memo(function UpdateProfileInformationForm({user}: Props) {
