@@ -9,4 +9,4 @@ export const ViewButton: React.FC<{onClick: (e?: React.MouseEvent<HTMLButtonElem
             Открыть
         </button>
     );
-})
+});

@@ -3,7 +3,7 @@ import React from 'react';
 import useRoute from '@hooks/useRoute';
 import useTypedPage from '@hooks/useTypedPage';
 import CLink from "../components/CLink";
-import Main from "../components/Main";
+import Main from "../components/page/Main";
 import AppLayout from "../Layouts/AppLayout";
 import { IPage } from "../types/IPage";
 

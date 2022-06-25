@@ -5,28 +5,22 @@ export type Nullable<T> = T | null;
 export interface User {
     id: number;
     name: string;
+    money: number;
     email: string;
+
+    isAdmin?: boolean;
+    role?: Role;
+
     profile_photo_path: Nullable<string>;
     profile_photo_url: string;
+
     created_at: DateTime;
-    role?: Role;
+
     // email_verified_at: Nullable<DateTime>;
     // updated_at: DateTime;
 }
 
 export type InertiaSharedProps<T = {}> = T & {
-    jetstream: {
-        canCreateTeams: boolean;
-        canManageTwoFactorAuthentication: boolean;
-        canUpdatePassword: boolean;
-        canUpdateProfileInformation: boolean;
-        flash: any;
-        hasAccountDeletionFeatures: boolean;
-        hasApiFeatures: boolean;
-        hasTeamFeatures: boolean;
-        hasTermsAndPrivacyPolicyFeature: boolean;
-        managesProfilePhotos: boolean;
-    };
     user: User & {
         role?: Role
     };

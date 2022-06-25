@@ -1,21 +1,7 @@
 import classNames from 'classnames';
-import React, {PropsWithChildren, ReactNode} from 'react';
+import React from 'react';
 import CLink from "../CLink";
-import useRoute from "../../hooks/useRoute";
-
-// export const TabsLink: React.FC =  React.memo(() => {
-//     return (
-//         <li className={
-//             classNames(
-//                 "font-play text-xl text-app my-1 border-gray-500",
-//                 hover ? 'hover:text-gray-400' : '',
-//                 (props as any).className
-//             )
-//         }>
-//
-//         </li>
-//     )
-// });
+import useRoute from "@hooks/useRoute";
 
 export type TabLinksType = {title: string, hrefName: string, current?: string }[];
 

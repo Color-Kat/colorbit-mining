@@ -25,8 +25,6 @@ const AdminPartEdit: IPage = React.memo(() => {
 
     const [stage, setStage] = useState<number>(1);
 
-    console.log(part)
-
     const updatePart = () => {
         if (stage === 4) {
             // Change method from post to patch in this way

@@ -52,7 +52,7 @@ const PartsListItem: React.FC<{ part: IBasePart }> = ({part}) => {
                 </div>
 
                 {/* CONTROL BUTTONS */}
-                <div className="parts-list__control space-x-2 mt-2">
+                <div className="parts-list__control space-y-2 space-x-2 mt-2">
                     {/*<ViewButton onClick={openPart}/>*/}
                     <EditButton onClick={editPart}/>
                     <DeleteButton onClick={deletePart}/>
@@ -69,4 +69,4 @@ export const PartsList: React.FC<{ parts: IBasePart[] }> = React.memo(({parts}) 
             {parts.map(part => (<PartsListItem part={part} key={part.id}/>))}
         </ul>
     );
-})
+});
