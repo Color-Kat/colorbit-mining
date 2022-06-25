@@ -70,13 +70,13 @@ class PartRepository extends CoreRepository
         // Relationships
         $result
             ->breakdowns()
-            ->attach($data['breakdown_ids']);
+            ->attach($data['breakdown_ids'] ?? []);
 
         $result
             ->shops()
-            ->attach($data['shop_ids']);
+            ->attach($data['shop_ids'] ?? [], ['count' => $data['count']]);
 
-        if ($data['_image']) $result->updateImage($data['_image'], 'image', 'parts');
+        if ($data['_image']) $result->updateImage($data['_image'], 'parts');
 
 
         return $result;
@@ -90,10 +90,16 @@ class PartRepository extends CoreRepository
         $result = $this
             ->startConditions()
             ->where('id', $id)
+
+//            ->with(['shops', 'breakdowns'])
+
             ->first();
 
-        $result['breakdown_ids'] = $result->breakdowns()->pluck('breakdown_id')->toArray();
-        $result['shop_ids'] = $result->shops()->pluck('shop_id')->toArray();
+        $shopsQuery = $result->shops()->select(['shop_id', 'count'])->get();
+
+        $result['breakdown_ids'] = $result->breakdowns()->pluck('breakdown_id')->toArray(); // Get breakdown ids list
+        $result['shop_ids'] = $shopsQuery->pluck('shop_id')->toArray(); // Get shop ids list
+        $result['count'] = min($shopsQuery->pluck('count')->toArray()); // Get min count for shops
 
         return $result;
     }
@@ -126,7 +132,7 @@ class PartRepository extends CoreRepository
 
         $part
             ->shops()
-            ->sync($data['shop_ids'] ?? []);
+            ->sync($data['shop_ids'] ?? [], ['count' => $data['count']]);
 
         if ($data['_image']) $part->updateImage($data['_image'], 'parts');
 

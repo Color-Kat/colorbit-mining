@@ -45,6 +45,15 @@ export const ThirdStage: React.FC<{
                 options={shopOptions}
             />
 
+            {/* Count */}
+            <ControlledInput
+                data={data} setData={setData} errors={errors}
+                title="Количество"
+                type="number"
+                placeholder="Кол-во в выбранных магазинах (Шт.)"
+                name="count"
+            />
+
             {/* Price */}
             <ControlledInput
                 data={data} setData={setData} errors={errors}

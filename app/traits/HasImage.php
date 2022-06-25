@@ -20,8 +20,9 @@ trait HasImage
     {
         tap($this[$this->imageField], function ($previous) use ($photo, $folder) {
             // Delete previous image
-            if ($previous) {
-                Storage::disk($this->ImageDisk())->delete($this->getRawOriginal($this->imageField));
+            $prevImage = $this->getRawOriginal($this->imageField);
+            if ($prevImage) {
+                Storage::disk($this->ImageDisk())->delete($prevImage);
             }
 
             // Create new image
@@ -45,7 +46,7 @@ trait HasImage
         }
 
         // Delete image from the storage
-        Storage::disk($this->ImageDisk())->delete($this->getRawOriginal($this->imageField));
+        Storage::disk($this->ImageDisk())->delete($this->getRawOriginal($this->imageField) ?? '');
 
         $this->forceFill([
             $this->imageField => null,

@@ -14,6 +14,7 @@ export class Part implements IPart {
     public vendor: string = 'MSI';
     public type: PartType = 'GPU';
     public slug: string = '';
+    public count: number = 10;
     public price: number = 200;
 
     public breakdowns: BreakdownsPartType = [];
@@ -36,6 +37,7 @@ export class Part implements IPart {
         this.vendor = partData.vendor;
         this.type = partData.type;
         this.price = partData.price;
+        this.count = partData.count ?? 10;
         this.image = partData.image;
 
         this.breakdowns = partData.breakdowns ?? [];

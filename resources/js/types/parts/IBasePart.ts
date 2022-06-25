@@ -10,8 +10,8 @@ export interface IBasePart {
     vendor: string;
     slug: string;
     type: PartType;
+    count?: number;
     price: number; // In $$$
     created_at?: string;
     updated_at?: string;
-
 }
