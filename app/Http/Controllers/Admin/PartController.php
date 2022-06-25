@@ -196,14 +196,14 @@ class PartController extends AdminBaseController
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the specified resource from db.
      *
      * @param  int  $id
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function destroy(Part $part)
+    public function destroy(int $id)
     {
-        dump($part);
+        $this->partRepository->deletePart($id);
 
         return redirect()->back();
     }

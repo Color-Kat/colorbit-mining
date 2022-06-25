@@ -132,4 +132,21 @@ class PartRepository extends CoreRepository
 
         return $result;
     }
+
+    /**
+     * Delete existing part in db
+     */
+    public function deletePart($id)
+    {
+        $part = $this
+            ->startConditions()
+            ->find($id);
+
+
+        $part->deleteImage(); // Delete image from storage
+
+        $result = $part->delete(); // Soft delete
+
+        return $result;
+    }
 }

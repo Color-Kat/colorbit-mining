@@ -38,13 +38,14 @@ trait HasImage
      *
      * @return void
      */
-    public function deleteProfilePhoto()
+    public function deleteImage()
     {
-        if (is_null($this->image)) {
+        if (is_null($this[$this->imageField])) {
             return;
         }
 
-        Storage::disk($this->profilePhotoDisk())->delete($this->image);
+        // Delete image from the storage
+        Storage::disk($this->ImageDisk())->delete($this->getRawOriginal($this->imageField));
 
         $this->forceFill([
             $this->imageField => null,
