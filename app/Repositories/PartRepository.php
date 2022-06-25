@@ -99,7 +99,7 @@ class PartRepository extends CoreRepository
 
         $result['breakdown_ids'] = $result->breakdowns()->pluck('breakdown_id')->toArray(); // Get breakdown ids list
         $result['shop_ids'] = $shopsQuery->pluck('shop_id')->toArray(); // Get shop ids list
-        $result['count'] = min($shopsQuery->pluck('count')->toArray()); // Get min count for shops
+        $result['count'] = min([0], ...$shopsQuery->pluck('count')->toArray()); // Get min count for shops
 
         return $result;
     }
@@ -132,7 +132,7 @@ class PartRepository extends CoreRepository
 
         $part
             ->shops()
-            ->sync($data['shop_ids'] ?? [], ['count' => $data['count']]);
+            ->syncWithPivotValues($data['shop_ids'] ?? [], ['count' => $data['count']]);
 
         if ($data['_image']) $part->updateImage($data['_image'], 'parts');
 
