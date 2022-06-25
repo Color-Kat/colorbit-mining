@@ -1,4 +1,4 @@
-import React, {createContext, memo, useContext, useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import useRoute from '@/hooks/useRoute';
 
 import CLink from '../CLink';
@@ -6,6 +6,7 @@ import AccountButton from "./AccountButton";
 
 // Assets
 import logo from '@assets/logo.png';
+import Balance from "./Balance";
 
 const HeaderLink: React.FC<{ name: string, children: string }> =
     ({ name, children }) => {
@@ -66,6 +67,7 @@ const Header: React.FC = () => {
     return (
         <header className="flex sticky top-0 w-full h-16 justify-center shadow-xl z-10 app-bg-dark text-app-light shrink-0">
             <div className="container relative flex items-center justify-between px-5 z-30">
+                {/* LOGO */}
                 <CLink href="/">
                     <img src={logo} alt="ColorBit" className="md:h-11 h-8" />
                 </CLink>
@@ -79,7 +81,7 @@ const Header: React.FC = () => {
                     </ul>
                 </nav>
 
-                {/* Mobile menu */}
+                {/* Mobile menu burger */}
                 <div className="flex items-center">
 
                     <AccountButton />
@@ -93,11 +95,11 @@ const Header: React.FC = () => {
                         <div className={`w-4/6 h-0.5 rounded app-bg-red transition-all ${showMobileMenu ? 'absolute -rotate-45 top-1/2' : ''}`}/>
                     </div>
                 </div>
-
-
             </div>
 
 
+            {/* Balance */}
+            <Balance />
 
             {/* Mobile menu */}
             <nav

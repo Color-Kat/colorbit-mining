@@ -5,8 +5,8 @@ import Input from "@components/elements/form/Input";
 import Button from "@components/elements/Button";
 
 const ChangeBalance: IPage = React.memo(() => {
-    const [userId, setUserId] = useState<number>();
-    const [balance, setBalance] = useState<number>();
+    const [userId, setUserId] = useState<number>(1);
+    const [balance, setBalance] = useState<number>(1000);
 
     const changeUserIdHandler = (e: ChangeEvent<HTMLInputElement>) => {
         setUserId(+e.target.value);
