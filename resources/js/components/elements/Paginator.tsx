@@ -3,7 +3,6 @@ import {IPaginator} from "../../types/IPaginator";
 import CLink from "../CLink";
 import classNames from "classnames";
 
-
 const Pagination: React.FC<{ paginator: IPaginator<any> }> = memo(({paginator}) => {
     if (paginator.links.length <= 3) return null;
 

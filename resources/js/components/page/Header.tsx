@@ -14,15 +14,17 @@ const HeaderLink: React.FC<{ name: string, children: string }> =
         const isActive = route().current() === name;
 
         return (
-            <CLink href={route(name)} className="relative mx-2 overflow-hidden rounded-lg flex justify-center">
-                <span className={`absolute bottom-0 bg-red-600 h-0.5 transition-all ${isActive ? 'w-full' : 'w-0 '}`}/>
-                <span
-                    className={`
+            <li>
+                <CLink href={route(name)} className="relative mx-2 overflow-hidden rounded-lg flex justify-center">
+                    <span className={`absolute bottom-0 bg-red-600 h-0.5 transition-all ${isActive ? 'w-full' : 'w-0 '}`}/>
+                    <span
+                        className={`
                     font-play text-lg text-gray-400 hover:text-gray-200 px-4 pb-1
                     ${isActive ? 'text-gray-200' : ''}
                 `}
-                >{children}</span>
-            </CLink>
+                    >{children}</span>
+                </CLink>
+            </li>
         );
     }
 
