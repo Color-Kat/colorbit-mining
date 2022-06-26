@@ -6,6 +6,7 @@ import CLink from "../components/CLink";
 import Main from "../components/page/Main";
 import AppLayout from "../Layouts/AppLayout";
 import {IPage} from "../types/IPage";
+import {Section} from "../components/page/Section";
 
 interface Props {
 
@@ -18,11 +19,12 @@ const ShopsList: IPage = React.memo(() => {
     console.log(page.props.shopsList)
 
     return (
-        <>
+        <div className="admin-dashboard max-w-3xl w-full">
+            <Section>
+                <h3>ShopsList</h3>
+            </Section>
 
-            <h3>ShopsList</h3>
-
-        </>
+        </div>
     );
 });
 

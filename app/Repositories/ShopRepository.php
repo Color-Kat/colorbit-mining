@@ -35,4 +35,21 @@ class ShopRepository extends CoreRepository
 
         return $result;
     }
+
+    public function getAllWithPaginator() {
+        $select = [
+            'id',
+            'slug',
+            'image',
+            'name',
+            'used_market',
+            'description',
+            'warranty',
+            'delivery_time'
+        ];
+
+        $shopsList = Shop::select($select)->paginate(1);
+
+        return $shopsList;
+    }
 }

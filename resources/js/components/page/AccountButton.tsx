@@ -42,7 +42,7 @@ const AccountButton: React.FC = () => {
                             {page.props.user.name}
                         </button>
 
-                        <button className="hidden sm:flex text-sm border-2 border-transparent rounded-full transition border-red-500">
+                        <button className="hidden md:flex text-sm border-2 border-transparent rounded-full transition border-red-500">
                             <img
                                 className="h-9 w-9 rounded-full object-cover"
                                 src={page.props.user.profile_photo_url}

@@ -933,6 +933,9 @@ select{
 .right-2{
   right: 0.5rem;
 }
+.left-5{
+  left: 1.25rem;
+}
 .z-0{
   z-index: 0;
 }
@@ -2541,6 +2544,9 @@ select:-webkit-autofill:focus {
   }
   .md\:block{
     display: block;
+  }
+  .md\:flex{
+    display: flex;
   }
   .md\:grid{
     display: grid;
