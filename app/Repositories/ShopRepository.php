@@ -43,7 +43,6 @@ class ShopRepository extends CoreRepository
             'image',
             'name',
             'used_market',
-            'description',
             'warranty',
             'delivery_time'
         ];
