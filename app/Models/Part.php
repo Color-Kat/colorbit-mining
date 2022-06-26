@@ -24,4 +24,12 @@ class Part extends Model
         return $this->belongsToMany(Breakdown::class);
     }
 
+    /**
+     * Set default image url for HasImage trait
+     *
+     * @return string
+     */
+    public function defaultImageUrl(){
+        return 'default-images/' . $this->type . '-default.png';
+    }
 }

@@ -61,8 +61,8 @@ class PartRepository extends CoreRepository
         if (empty($data['slug'])) $data['slug'] = Str::slug($data['name']);
         else $data['slug'] = Str::slug($data['slug']);
 
-        // Set default image url
-        if (!$data['_image']) $data['image'] = 'default-images/' . $data['type'] . '-default.png';
+        // Set default image url (Accessor returns default image for any type)
+        if (!$data['_image']) $data['image'] = '';
 
         // Create base part
         $result = $this->startConditions()->create($data);

@@ -915,6 +915,9 @@ select{
 .top-0{
   top: 0px;
 }
+.right-5{
+  right: 1.25rem;
+}
 .bottom-0{
   bottom: 0px;
 }
@@ -929,9 +932,6 @@ select{
 }
 .right-2{
   right: 0.5rem;
-}
-.right-5{
-  right: 1.25rem;
 }
 .z-0{
   z-index: 0;
@@ -1241,9 +1241,6 @@ select{
 }
 .shrink-0{
   flex-shrink: 0;
-}
-.flex-grow-0{
-  flex-grow: 0;
 }
 .origin-top-left{
   transform-origin: top left;
@@ -1694,10 +1691,6 @@ select{
 .px-7{
   padding-left: 1.75rem;
   padding-right: 1.75rem;
-}
-.py-1\.5{
-  padding-top: 0.375rem;
-  padding-bottom: 0.375rem;
 }
 .py-0\.5{
   padding-top: 0.125rem;

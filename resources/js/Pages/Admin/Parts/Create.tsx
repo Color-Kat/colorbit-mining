@@ -24,6 +24,7 @@ const AdminPartCreate: IPage = React.memo(() => {
 
     const createPart = () => {
         if(stage === 4) {
+            console.log(data)
             post(route('admin.parts.store'));
         }
     }
