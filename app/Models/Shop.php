@@ -19,6 +19,9 @@ class Shop extends Model
 
     public function parts()
     {
-        return $this->belongsToMany(Part::class)->withPivot('count');
+        return $this
+            ->belongsToMany(Part::class)
+            ->withPivot('count')
+            ->orderBy('part_id', 'DESC');
     }
 }

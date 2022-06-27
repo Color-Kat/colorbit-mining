@@ -32,6 +32,7 @@ class PartRepository extends CoreRepository
             ->select(['id', 'name', 'vendor', 'image', 'slug', 'type', 'price'])
             ->orderBy('id', 'DESC')
             ->paginate(10);
+
         return $result;
     }
 
@@ -90,9 +91,6 @@ class PartRepository extends CoreRepository
         $result = $this
             ->startConditions()
             ->where('id', $id)
-
-//            ->with(['shops', 'breakdowns'])
-
             ->first();
 
         $shopsQuery = $result->shops()->select(['shop_id', 'count'])->get();

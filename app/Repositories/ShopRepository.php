@@ -76,7 +76,20 @@ class ShopRepository extends CoreRepository
             'part_id', 'name', 'image', 'slug', 'type', 'vendor', 'price'
         ];
 
-        $shop['parts'] = $shop->parts()->select($partSelect)->withPivot('count')->paginate(3);
+        // $shop['parts'] = $shop->with(
+        //            ['parts' => function ($query) use ($partSelect) {
+        //                $query->select($partSelect)->withPivot('count');
+        //            }]
+        //        )->paginate(3);
+
+        // TODO add select with paginator for relationship
+
+        // Get parts for this shop with paginator
+        $shop['parts'] = $shop->parts()->select($partSelect)->paginate(3);
+
+//        $shop['parts'] = $shop->load( ['parts' => function ($query) use ($partSelect) {
+//            $query->select($partSelect);
+//        }]);
 
         return $shop;
     }
