@@ -18,28 +18,28 @@ const ShopPartItem: React.FC<{part: IShopPart, shopSlug: string}> = ({part, shop
     }
 
     return (
-        <li onClick={goToProduct} className="cursor-pointer">
+        <li onClick={goToProduct} className="cursor-pointer col-span-2 -mb-4 sm:m-0">
             <Section>
-                <div className="shop-list__item flex flex-col sm:flex-row sm:justify-between">
-                    <div className="shrink-0 flex justify-center mb-3 sm:mb-0">
-                        <img
-                            className="xsm:h-24 xsm:w-auto w-full rounded-md "
-                            src={part.image}
-                            alt={part.name}
-                        />
-                    </div>
+                <div className="shop-list__item flex sm:justify-between flex-col sm:flex-row">
+                    <div className="flex justify-between">
+                        <div className="shrink-0 flex justify-center mb-3 mr-3 sm:mb-0">
+                            <img
+                                className="xsm:h-24 xsm:w-auto w-24 rounded-md "
+                                src={part.image}
+                                alt={part.name}
+                            />
+                        </div>
 
-                    <div className="shop-list__item-info flex-1 sm:ml-5 flex flex-col justify-between">
-                        <h3 className="text-xl tracking-wide font-play">{part.name}</h3>
-                        <div className="tracking-wider whitespace-nowrap flex flex-wrap items-end text-sm">
-                            {/*{shop.warranty ? <span className="bg-gray-400 text-gray-900 py-1 px-2 rounded-md mr-2 mt-2">Гарантия</span> : null}*/}
-                            {/*{shop.used_market ? <span className="bg-gray-400 text-gray-900 py-1 px-2 rounded-md mr-2 mt-2">Б/y</span> : null}*/}
-                            {/*<span className="bg-gray-400 text-gray-900 py-1 px-2 rounded-md mt-2">123</span>*/}
+                        <div className="shop-list__item-info flex-1 sm:ml-5 flex flex-col justify-between">
+                            <h3 className="text-base sm:text-lg tracking-wide font-roboto leading-5 sm:leading-6">{part.name}</h3>
+                            <div className="tracking-wider whitespace-nowrap flex flex-wrap items-end text-sm">
+
+                            </div>
                         </div>
                     </div>
 
-                    <div className="flex flex-col justify-between items-end">
-                        <h3 className="text-2xl tracking-wide font-play font-bold mb-2">{part.price} $</h3>
+                    <div className="flex sm:flex-col justify-between items-center sm:items-end mt-3 sm:m-0">
+                        <h3 className="text-2xl tracking-wide font-roboto font-bold sm:mb-2">{part.price}$</h3>
 
                         <Button className="self-end" onClick={goToProduct}>Перейти</Button>
                     </div>
@@ -61,7 +61,7 @@ const Shop: IPage = React.memo(() => {
         <div className="shops-list-page max-w-3xl w-full">
             <PageTitle title={shop.name} description={shop.description}/>
 
-            <ul>
+            <ul className="grid sm:block grid-cols-2 gap-2">
                 {partsPaginator.data.map(part => {
                     return (
                         <ShopPartItem key={part.part_id} part={part} shopSlug={shop.slug}/>

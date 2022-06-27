@@ -13,8 +13,11 @@ const PartsListItem: React.FC<{ part: IBasePart }> = ({part}) => {
     const image = part.image || no_image;
 
     const openPart = () => {
-        console.log('open');
+        // console.log('open');
     }
+
+    console.log(part)
+
 
     const editPart = () => {
         console.log()
@@ -39,7 +42,7 @@ const PartsListItem: React.FC<{ part: IBasePart }> = ({part}) => {
                 {/* NAME */}
                 <div className="text-xl font-play flex-col flex mb-2">
                     <h3 className="cursor-pointer" onClick={openPart}>
-                        <span className="text-2xl text-gray-500">{part.vendor}: </span>
+                        {/*<span className="text-2xl text-gray-500">{part.vendor}: </span>*/}
                         {part.name}
                     </h3>
 
