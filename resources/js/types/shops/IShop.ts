@@ -10,6 +10,10 @@ export interface IShopPart {
     slug: string;
     price: number;
     type: PartType;
+
+    pivot: {
+        count: number;
+    }
 }
 
 export interface IShop {

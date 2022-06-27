@@ -990,6 +990,10 @@ select{
   margin-left: 2.5rem;
   margin-right: 2.5rem;
 }
+.my-2{
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
 .ml-3{
   margin-left: 0.75rem;
 }
@@ -1426,6 +1430,16 @@ select{
   margin-top: calc(1rem * calc(1 - var(--tw-space-y-reverse)));
   margin-bottom: calc(1rem * var(--tw-space-y-reverse));
 }
+.space-x-1 > :not([hidden]) ~ :not([hidden]){
+  --tw-space-x-reverse: 0;
+  margin-right: calc(0.25rem * var(--tw-space-x-reverse));
+  margin-left: calc(0.25rem * calc(1 - var(--tw-space-x-reverse)));
+}
+.space-x-1\.5 > :not([hidden]) ~ :not([hidden]){
+  --tw-space-x-reverse: 0;
+  margin-right: calc(0.375rem * var(--tw-space-x-reverse));
+  margin-left: calc(0.375rem * calc(1 - var(--tw-space-x-reverse)));
+}
 .self-start{
   align-self: flex-start;
 }
@@ -1475,6 +1489,9 @@ select{
 }
 .rounded-xl{
   border-radius: 0.75rem;
+}
+.rounded-sm{
+  border-radius: 0.125rem;
 }
 .rounded-l-md{
   border-top-left-radius: 0.375rem;
@@ -2397,6 +2414,9 @@ select:-webkit-autofill:focus {
   .xsm\:h-24{
     height: 6rem;
   }
+  .xsm\:h-32{
+    height: 8rem;
+  }
   .xsm\:w-auto{
     width: auto;
   }
@@ -2488,6 +2508,9 @@ select:-webkit-autofill:focus {
   .sm\:h-screen{
     height: 100vh;
   }
+  .sm\:h-32{
+    height: 8rem;
+  }
   .sm\:w-10{
     width: 2.5rem;
   }
@@ -2496,6 +2519,9 @@ select:-webkit-autofill:focus {
   }
   .sm\:w-1\/2{
     width: 50%;
+  }
+  .sm\:w-auto{
+    width: auto;
   }
   .sm\:max-w-md{
     max-width: 28rem;
@@ -2654,6 +2680,9 @@ select:-webkit-autofill:focus {
   }
   .md\:h-11{
     height: 2.75rem;
+  }
+  .md\:h-36{
+    height: 9rem;
   }
   .md\:w-32{
     width: 8rem;
