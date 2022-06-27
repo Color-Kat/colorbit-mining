@@ -1,6 +1,7 @@
 import React, {ReactNode} from "react";
 import {IPage} from "@/types/IPage";
 import {TabLinks, TabLinksType} from "../elements/TabsLink";
+import {PageTitle} from "../page/PageTitle";
 
 // Black background
 export const AdminDashboardSection: React.FC<{children: ReactNode}>
@@ -31,12 +32,7 @@ const AdminLayout: IPage<{title: string, description: string}> =({title, descrip
 
     return (
         <div className="admin-dashboard max-w-3xl w-full">
-            <AdminDashboardSection>
-                <div className="max-w-xl">
-                    <h2 className="text-3xl font-medium font-play">{title}</h2>
-                    <p className="mt-1 text-md text-gray-400">{description}</p>
-                </div>
-            </AdminDashboardSection>
+            <PageTitle title={title} description={description}/>
 
             <div className="rounded-lg app-bg-dark shadow-md mb-4">
                 <TabLinks links={adminLinks} />

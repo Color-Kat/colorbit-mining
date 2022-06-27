@@ -9,6 +9,7 @@ import Checkbox from "@components/auth/Checkbox";
 import CLink from "@components/CLink";
 import Button from "@components/auth/Button";
 import ValidationErrors from "@components/auth/ValidationErrors";
+import {PageTitle} from "../../components/page/PageTitle";
 
 interface Props {
     canResetPassword: boolean;
@@ -34,7 +35,11 @@ export default React.memo(function Login({canResetPassword, status}: Props) {
 
     return (
         <AuthenticationCard>
-            <Head title="Войти"/>
+            {/* @ts-ignore */}
+            <Head>
+                <title>Войти</title>
+                <meta name="description" content="Вход в аккаунт colorbit-mining - онлайн симулятор майнинга" />
+            </Head>
 
             <ValidationErrors className="mb-4"/>
 

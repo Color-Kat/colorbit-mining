@@ -1,26 +1,28 @@
-import {InertiaLink, Link, usePage} from '@inertiajs/inertia-react';
 import React from 'react';
 import useRoute from '@hooks/useRoute';
 import useTypedPage from '@hooks/useTypedPage';
-import CLink from "../components/CLink";
-import Main from "../components/page/Main";
-import AppLayout from "../Layouts/AppLayout";
 import {IPage} from "../types/IPage";
-
-interface Props {
-
-}
+import {PageTitle} from "../components/page/PageTitle";
+import Paginator from "../components/elements/Paginator";
 
 const Shop: IPage = React.memo(() => {
     const route = useRoute();
     const page = useTypedPage();
 
+    const shop = page.props.shop;
+    // const part = page.props.shop;
+    console.log(shop);
+
     return (
-        <>
+        <div className="shops-list-page max-w-3xl w-full">
+            <PageTitle title={shop.name} description={shop.description}/>
 
-            <span>Shop</span>
 
-        </>
+
+            <div className="relative rounded-lg app-bg-dark shadow -m-s p-2 pt-0.5">
+                {/*<Paginator paginator={shopsListPaginator}/>*/}
+            </div>
+        </div>
     );
 });
 

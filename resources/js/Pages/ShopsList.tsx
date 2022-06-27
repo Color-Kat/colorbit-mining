@@ -6,9 +6,8 @@ import {IPaginator} from "@/types/IPaginator";
 import {IShopListItem} from "@/types/shops/IShopListItem";
 import Paginator from "@components/elements/Paginator";
 import {PageTitle} from "@components/page/PageTitle";
-import Button from "../components/elements/Button";
-import CLink from "../components/CLink";
-import useRoute from "../hooks/useRoute";
+import Button from "@components/elements/Button";
+import useRoute from "@hooks/useRoute";
 import {Inertia} from "@inertiajs/inertia";
 
 const ShopListItem: React.FC<{shop: IShopListItem}> = ({shop}) => {

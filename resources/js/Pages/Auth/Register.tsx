@@ -30,7 +30,11 @@ export default React.memo(function Register() {
 
     return (
         <AuthenticationCard>
-            <Head title="Регистрация"/>
+            {/* @ts-ignore */}
+            <Head>
+                <title>Регистрация</title>
+                <meta name="description" content="Регистрация colorbit-mining - онлайн симулятор майнинга. Регистрация полностью бесплатна и без подтверждения почты." />
+            </Head>
 
             <ValidationErrors className="mb-4"/>
 

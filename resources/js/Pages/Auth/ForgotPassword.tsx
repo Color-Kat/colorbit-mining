@@ -25,7 +25,11 @@ export default React.memo(function ForgotPassword({status}: Props) {
 
     return (
         <AuthenticationCard>
-            <Head title="Восстановление пароля"/>
+            {/* @ts-ignore */}
+            <Head>
+                <title>Востановление пароля</title>
+                <meta name="description" content="Сброс пароля. Colorbit-mining - онлайн симулятор майнинга." />
+            </Head>
 
             <div className="mb-4 text-md text-gray-400">
                 Забыли пароль? Нет проблем. Укажите вашу почту, и мы отправим вам письму для сброса пароля.
