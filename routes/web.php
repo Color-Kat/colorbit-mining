@@ -31,7 +31,7 @@ Route::get('/farms', function () {
 })->name('farms');
 
 
-
+// Shops & products
 Route::prefix('shops')->group(function () {
     Route::get('/', [ShopsListController::class, 'index'])->name('shops');
 
@@ -39,6 +39,7 @@ Route::prefix('shops')->group(function () {
 
     Route::get('/{shop_slug}/{product_slug}', [PartController::class, 'index'])->name('product');
 });
+
 
 // Admin panel
 Route::middleware('admin')->prefix('admin')->as('admin.')->group(function() {
