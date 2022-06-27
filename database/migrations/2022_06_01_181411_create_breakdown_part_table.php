@@ -19,7 +19,7 @@ return new class extends Migration
             $table->foreignId('part_id')->constrained()->onDelete('cascade');
             $table->foreignId('breakdown_id')->constrained()->onDelete('cascade');
 
-            $table->timestamps();
+//            $table->timestamps();
         });
     }
 

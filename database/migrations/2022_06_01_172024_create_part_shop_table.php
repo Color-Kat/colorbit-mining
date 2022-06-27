@@ -21,7 +21,7 @@ return new class extends Migration
 
             $table->unsignedBigInteger('count')->default(0);
 
-            $table->timestamps();
+//            $table->timestamps();
         });
     }
 

@@ -11,7 +11,7 @@ const Shop: IPage = React.memo(() => {
 
     const shop = page.props.shop;
     // const part = page.props.shop;
-    console.log(shop);
+    console.log(page.props);
 
     return (
         <div className="shops-list-page max-w-3xl w-full">

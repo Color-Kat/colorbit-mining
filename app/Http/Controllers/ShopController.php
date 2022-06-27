@@ -3,25 +3,29 @@
 namespace App\Http\Controllers;
 
 use App\Models\Shop;
+use App\Repositories\ShopRepository;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
-class ShopController extends Controller
+class ShopController extends BaseController
 {
-    public function index(Request $request, string $shop_slug) {
-        $shop = Shop::select('id', 'name', 'description', 'warranty', 'delivery_time')
-            ->where('slug', $shop_slug)
-//            ->with(['parts' => function($q) {
-//                return $q->paginate(3);
-//            }])
-            ->first();
+    /**
+     * @var ShopRepository
+     */
+    private ShopRepository $shopRepository;
 
-        $parts = $shop->parts()->paginate(3);
+    public function __construct()
+    {
+        parent::__construct();
+
+        $this->shopRepository = new ShopRepository();
+    }
+
+    public function index(Request $request, string $shop_slug) {
+        $shop = $this->shopRepository->getShopWithParts($shop_slug);
 
         return Inertia::render('Shop', [
-            'shop' => $shop,
-            'parts' => $parts
+            'shop' => $shop
         ]);
     }
 }

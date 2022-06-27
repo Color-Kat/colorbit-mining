@@ -2,7 +2,6 @@
 
 namespace App\Repositories;
 
-use App\Models\Breakdown;
 use App\Models\Shop;
 
 /**
@@ -15,6 +14,7 @@ class ShopRepository extends CoreRepository
 {
     /**
      * Define model class
+     *
      * @return string
      */
     protected function getModelClass(): string
@@ -23,7 +23,7 @@ class ShopRepository extends CoreRepository
     }
 
     /**
-     * Return all with paginator
+     * Return all shops for admin.parts.create
      */
     public function getAllForAdmin() {
         $result = $this
@@ -36,6 +36,11 @@ class ShopRepository extends CoreRepository
         return $result;
     }
 
+    /**
+     * Return all shops with paginator
+     *
+     * @return mixed
+     */
     public function getAllWithPaginator() {
         $select = [
             'id',
@@ -50,5 +55,29 @@ class ShopRepository extends CoreRepository
         $shopsList = Shop::select($select)->paginate(2);
 
         return $shopsList;
+    }
+
+    /**
+     * Return shop data with shop's parts paginator
+     *
+     * @param string $shop_slug
+     */
+    public function getShopWithParts(string $shop_slug){
+        $shopSelect = [
+            'id', 'name', 'description', 'used_market', 'warranty', 'delivery_time'
+        ];
+
+        $shop = Shop::select($shopSelect)
+            ->where('slug', $shop_slug)
+            ->first();
+
+        // TODO price from pivot!
+        $partSelect = [
+            'part_id', 'name', 'image', 'slug', 'type', 'vendor', 'price'
+        ];
+
+        $shop['parts'] = $shop->parts()->select($partSelect)->withPivot('count')->paginate(3);
+
+        return $shop;
     }
 }

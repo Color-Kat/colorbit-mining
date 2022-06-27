@@ -23,7 +23,7 @@ return new class extends Migration
             $table->unsignedInteger('repair_chance');
             $table->string('condition'); // Some defined strings: 'T>90', 'work_time>100000', 'Load>80'
 
-            $table->timestamps();
+//            $table->timestamps();
         });
     }
 
