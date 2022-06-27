@@ -179,7 +179,7 @@ export const SecondStage: React.FC<{
                         data={data} setData={setData} errors={errors}
                         title="Частота ЦП"
                         type="number"
-                        min="100"
+                        min="0.1"
                         placeholder="В ГГц"
                         name="platform_frequency"
                     />

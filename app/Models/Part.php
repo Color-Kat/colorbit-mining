@@ -18,48 +18,100 @@ class Part extends Model
     // Instead of $fillable
     protected $guarded = ['id'];
 
-    /**
-     * Return full url for image
-     *
-     * @return  \Illuminate\Database\Eloquent\Casts\Attribute
-     */
-    protected function name(): Attribute
+    public function shops()
     {
-        return Attribute::make(
-            get: function ($value) {
-                switch ($this->type){
-                    case 'GPU':
-                        $prefix = 'Видеокарта';
-                        break;
-
-                    case 'platform':
-                        $prefix = 'Платформа';
-                        break;
-
-                    case 'RAM':
-                        $prefix = 'Оперативная память';
-                        break;
-
-                    case 'PSU':
-                        $prefix = 'Блок питания';
-                        break;
-
-                    default:
-                        $prefix = '';
-                        break;
-                }
-
-                return $prefix . ' ' . $this->vendor . ' ' . $value;
-            }
-        );
-    }
-
-    public function shops() {
         return $this->belongsToMany(Shop::class);
     }
 
-    public function breakdowns() {
+    public function breakdowns()
+    {
         return $this->belongsToMany(Breakdown::class);
+    }
+
+    /**
+     * Return processed name of part
+     *
+     * @return string
+     */
+    public function getNameAttribute($value): string
+    {
+        $postfix = '';
+
+        switch ($this->type) {
+            case 'GPU':
+                $prefix = 'Видеокарта';
+
+                // Add part info if it exists
+                if(!$this->GPU_VRAM_size) break;
+                $postfix = join(', ', [
+                    $this->GPU_VRAM_size . ' ГБ',
+                    $this->GPU_VRAM_type,
+                    $this->GPU_VRAM_frequency . ' МГц'
+                ]);
+                break;
+
+            case 'platform':
+                $prefix = 'Платформа';
+
+                // Add part info if it exists
+                if(!$this->platform_cors_count) break;
+                $postfix = join(', ', [
+                    $this->platform_cors_count . ' x ' . $this->platform_frequency . 'ГГц',
+                    'TDP '. $this->TDP . ' Вт'
+                ]);
+                break;
+
+            case 'RAM':
+                $prefix = 'Оперативная память';
+
+                // Add part info if it exists
+                if(!$this->RAM_size) break;
+                $postfix = join(', ', [
+                    $this->RAM_size . ' ГБx'. $this->RAM_channels. " шт",
+                    $this->RAM_frequency . ' МГц',
+                ]);
+                break;
+
+            case 'PSU':
+                $prefix = 'Блок питания';
+
+                // Add part info if it exists
+                if(!$this->PSU_power_supply) break;
+                $postfix = join(', ', [
+                    $this->PSU_power_supply . ' Вт',
+                    $this->PSU_efficiency !== 'none' ? "80+ $this->PSU_efficiency" : "без сертификата",
+                ]);
+                break;
+
+            case 'case':
+                $prefix = '';
+
+                // Add part info if it exists
+                if(!$this->case_material) break;
+                $postfix = join(', ', [
+                    $this->case_materil_rus ,
+                    "вместимость $this->case_GPUs_count видеокарт",
+                    "до $this->case_critical_temp"."°C"
+                ]);
+                break;
+
+            default:
+                $prefix = '';
+                break;
+        }
+
+        return "$prefix $this->vendor $value " . ($postfix ? "[$postfix] ": "");
+    }
+
+    /**
+     * Return raw name
+     *
+     * @param $value
+     * @return array|mixed
+     */
+    protected function getRawNameAttribute($value)
+    {
+        return $this->getRawOriginal('name');
     }
 
     /**
@@ -67,7 +119,8 @@ class Part extends Model
      *
      * @return string
      */
-    public function defaultImageUrl(){
+    public function defaultImageUrl()
+    {
         return 'default-images/' . $this->type . '-default.png';
     }
 }

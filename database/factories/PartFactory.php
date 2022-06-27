@@ -46,7 +46,7 @@ class PartFactory extends Factory
                 $fans_count = [1, 2, 3, 4];
 
                 $part = array_merge($base, [
-                   'GPU_VRAM_size' => rand(512, 24576),
+                   'GPU_VRAM_size' => rand(0.5, 12),
                    'GPU_VRAM_frequency' => rand(6000, 20000), // Mhz
                    'GPU_VRAM_type' => 'GDDR'.$vram_type[array_rand($vram_type)],
                    'GPU_fans_count' => $fans_count[array_rand($fans_count)], // If it's turbine, set little efficiency

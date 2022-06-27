@@ -99,6 +99,14 @@ class PartRepository extends CoreRepository
         $result['shop_ids'] = $shopsQuery->pluck('shop_id')->toArray(); // Get shop ids list
         $result['count'] = min([0], ...$shopsQuery->pluck('count')->toArray()); // Get min count for shops
 
+
+//        $result->getOriginal('name');
+        $result->setAppends(['rawName']);
+//        dd($result->rawName);
+
+        $result->name = $result->getRawOriginal('name');
+
+
         return $result;
     }
 

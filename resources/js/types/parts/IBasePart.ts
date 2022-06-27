@@ -6,6 +6,7 @@ export type PartType = 'GPU' | 'platform' | 'RAM' | 'PSU' | 'case';
 export interface IBasePart {
     id?: number;
     name: string;
+    rawName?: string;
     image: string;
     vendor: string;
     slug: string;

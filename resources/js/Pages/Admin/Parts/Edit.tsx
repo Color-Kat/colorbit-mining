@@ -21,7 +21,10 @@ const AdminPartEdit: IPage = React.memo(() => {
     const part = useTypedPage<{ part: PartT<PartType> }>().props.part;
 
     let {data, setData, processing, errors} =
-        useForm<(PartT<PartType> | IBasePart) & { _image?: File | null }>(Part.createByType(part));
+        useForm<(PartT<PartType> | IBasePart) & { _image?: File | null }>(Part.createByType({
+            ...part,
+            name: part.rawName ?? part.name
+        }));
 
     const [stage, setStage] = useState<number>(1);
 
