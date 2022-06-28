@@ -5,9 +5,9 @@ import {Head} from "@inertiajs/inertia-react";
 // Black background
 export const PageTitle: React.FC<{
     title: string,
-    description: string
+    description?: string
 }>
-    = React.memo(({title, description}) => {
+    = React.memo(({title, description = ""}) => {
     return (
         <Section>
             <div className="max-w-xl">

@@ -23,9 +23,11 @@ class GoodController extends BaseController
     public function index($shop_slug, $product_slug)
     {
         $good = $this->goodRepository->getGood($shop_slug, $product_slug);
+        $ownerShop = $this->goodRepository->getOwnerShop($shop_slug, $product_slug);
 
         return Inertia::render('Good', [
-            'good' => $good
+            'good' => $good,
+            'ownerShop' => $ownerShop
         ]);
     }
 }
