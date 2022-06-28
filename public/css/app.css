@@ -987,6 +987,10 @@ select{
   margin-left: 2.5rem;
   margin-right: 2.5rem;
 }
+.my-5{
+  margin-top: 1.25rem;
+  margin-bottom: 1.25rem;
+}
 .ml-3{
   margin-left: 0.75rem;
 }
@@ -1238,6 +1242,9 @@ select{
 }
 .max-w-3xl{
   max-width: 48rem;
+}
+.max-w-5xl{
+  max-width: 64rem;
 }
 .flex-1{
   flex: 1 1 0%;

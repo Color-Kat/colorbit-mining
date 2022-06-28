@@ -13,6 +13,7 @@ export interface IBasePart {
     type: PartType;
     count?: number;
     price: number; // In $$$
-    created_at?: string;
-    updated_at?: string;
+
+    // created_at?: string;
+    // updated_at?: string;
 }

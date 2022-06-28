@@ -24,7 +24,7 @@ class GoodController extends BaseController
     {
         $good = $this->goodRepository->getGood($shop_slug, $product_slug);
 
-        return Inertia::render('Product', [
+        return Inertia::render('Good', [
             'good' => $good
         ]);
     }
