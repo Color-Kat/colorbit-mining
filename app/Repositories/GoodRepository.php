@@ -43,6 +43,8 @@ class GoodRepository extends CoreRepository
             if($shop->slug == $shop_slug) $good['count'] = $shop->pivot->count;
         });
 
+        $good->setAppends(['rawName']);
+
         return $good;
     }
 

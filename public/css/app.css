@@ -1162,6 +1162,9 @@ select{
 .h-0{
   height: 0px;
 }
+.h-auto{
+  height: auto;
+}
 .min-h-screen{
   min-height: 100vh;
 }
@@ -1248,6 +1251,9 @@ select{
 }
 .max-w-5xl{
   max-width: 64rem;
+}
+.max-w-full{
+  max-width: 100%;
 }
 .flex-1{
   flex: 1 1 0%;
@@ -1832,6 +1838,9 @@ select{
 }
 .pl-5{
   padding-left: 1.25rem;
+}
+.pl-4{
+  padding-left: 1rem;
 }
 .text-left{
   text-align: left;
@@ -2666,6 +2675,9 @@ select:-webkit-autofill:focus {
   }
   .md\:mb-0{
     margin-bottom: 0px;
+  }
+  .md\:mr-3{
+    margin-right: 0.75rem;
   }
   .md\:block{
     display: block;
