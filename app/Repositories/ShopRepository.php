@@ -64,7 +64,7 @@ class ShopRepository extends CoreRepository
      */
     public function getShopWithParts(string $shop_slug){
         $shopSelect = [
-            'id', 'name', 'description', 'used_market', 'warranty', 'delivery_time'
+            'id', 'name', 'slug', 'description', 'used_market', 'warranty', 'delivery_time'
         ];
 
         $shop = Shop::select($shopSelect)

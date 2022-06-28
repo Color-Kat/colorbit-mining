@@ -16,9 +16,6 @@ const PartsListItem: React.FC<{ part: IBasePart }> = ({part}) => {
         // console.log('open');
     }
 
-    console.log(part)
-
-
     const editPart = () => {
         console.log()
         Inertia.get(route('admin.parts.edit', part.id));

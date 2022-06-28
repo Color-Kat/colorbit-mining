@@ -4,7 +4,7 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
-use App\Http\Controllers\PartController;
+use App\Http\Controllers\GoodController;
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\ShopsListController;
 
@@ -37,7 +37,7 @@ Route::prefix('shops')->group(function () {
 
     Route::get('/{shop_slug}', [ShopController::class, 'index'])->name('shop');
 
-    Route::get('/{shop_slug}/{product_slug}', [PartController::class, 'index'])->name('product');
+    Route::get('/{shop_slug}/{product_slug}', [GoodController::class, 'index'])->name('good');
 });
 
 

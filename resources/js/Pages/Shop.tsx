@@ -6,17 +6,18 @@ import {PageTitle} from "@components/page/PageTitle";
 import Paginator from "@components/elements/Paginator";
 import {IShop, IShopPart} from "@/types/shops/IShop";
 import {Inertia} from "@inertiajs/inertia";
-import {Section} from "../components/page/Section";
-import Button from "../components/elements/Button";
+import {Section} from "@components/page/Section";
+import Button from "@components/elements/Button";
 
 
-const ShopPartItem: React.FC<{part: IShopPart, shop: IShop}> = ({part, shop}) => {
+const ShopPartItem: React.FC<{ part: IShopPart, shop: IShop }> = ({part, shop}) => {
     const route = useRoute();
 
-    console.log(part)
-
     const goToProduct = () => {
-        Inertia.get(route('product', [shop.slug, part.slug]));
+        Inertia.get(route('good', {
+            shop_slug: shop.slug,
+            product_slug: part.slug
+        }));
     }
 
     return (
@@ -35,16 +36,22 @@ const ShopPartItem: React.FC<{part: IShopPart, shop: IShop}> = ({part, shop}) =>
                         <div className="shop-list__item-info flex-1 sm:ml-5 flex flex-col justify-between">
                             <h3 className="text-base sm:text-lg tracking-wide font-roboto leading-5 sm:leading-6">{part.name}</h3>
 
-                            <div className="hidden sm:flex tracking-wider whitespace-nowrap flex-wrap items-end text-sm space-x-1.5">
-                                {shop.warranty ? <span className="px-2 py-0.5 rounded-md border-gray-500 border">Гарантия</span> : null}
-                                <span className="px-2 py-0.5 rounded-md border-gray-500 border">В наличии: {part.pivot.count}</span>
+                            <div
+                                className="hidden sm:flex tracking-wider whitespace-nowrap flex-wrap items-end text-sm space-x-1.5">
+                                {shop.warranty ? <span
+                                    className="px-2 py-0.5 rounded-md border-gray-500 border">Гарантия</span> : null}
+                                <span
+                                    className="px-2 py-0.5 rounded-md border-gray-500 border">В наличии: {part.pivot.count}</span>
                             </div>
                         </div>
                     </div>
 
-                    <div className="flex sm:hidden tracking-wider whitespace-nowrap flex-wrap justify-end text-sm mt-2 space-x-1">
-                        {shop.warranty ? <span className="px-2 py-0.5 rounded-md border-gray-500 border">Гарантия</span> : null}
-                        <span className="px-2 py-0.5 rounded-md border-gray-500 border">В наличии: {part.pivot.count}</span>
+                    <div
+                        className="flex sm:hidden tracking-wider whitespace-nowrap flex-wrap justify-end text-sm mt-2 space-x-1">
+                        {shop.warranty ?
+                            <span className="px-2 py-0.5 rounded-md border-gray-500 border">Гарантия</span> : null}
+                        <span
+                            className="px-2 py-0.5 rounded-md border-gray-500 border">В наличии: {part.pivot.count}</span>
                     </div>
 
                     <div className="flex sm:flex-col justify-between items-center sm:items-end mt-3 sm:m-0">
@@ -61,7 +68,7 @@ const ShopPartItem: React.FC<{part: IShopPart, shop: IShop}> = ({part, shop}) =>
 }
 
 const Shop: IPage = React.memo(() => {
-    const page = useTypedPage<{shop: IShop}>();
+    const page = useTypedPage<{ shop: IShop }>();
 
     const shop = page.props.shop;
     const partsPaginator = page.props.shop.parts;

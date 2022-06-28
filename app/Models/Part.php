@@ -15,12 +15,17 @@ class Part extends Model
     use SoftDeletes;
     use HasImage;
 
+    /**
+     * The attributes that should be hidden for arrays.
+     */
+    protected $hidden = ['created_at', 'updated_at', 'deleted_at'];
+
     // Instead of $fillable
     protected $guarded = ['id'];
 
     public function shops()
     {
-        return $this->belongsToMany(Shop::class);
+        return $this->belongsToMany(Shop::class)->withPivot('count');
     }
 
     public function breakdowns()
