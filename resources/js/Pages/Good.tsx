@@ -14,6 +14,7 @@ import {Section} from "@components/page/Section";
 import Button from "@components/elements/Button";
 import {PageTitle} from "@components/page/PageTitle";
 import {Inertia} from "@inertiajs/inertia";
+import {Dropdown} from "../components/elements/Dropdown";
 
 const SpecLine: React.FC<{title: string, value: string|number, description?: string}> = React.memo(({title, value, description}) => {
     const [isShowTooltip, setIsShowTooltip] = useState(false);
@@ -26,13 +27,31 @@ const SpecLine: React.FC<{title: string, value: string|number, description?: str
         <div className="relative specs-line flex justify-between py-3 odd:bg-[#121212] even:bg-[#1c1c1c] md:even:bg-transparent -mx-5 px-5">
             <div className="specs__title flex grow md:border-b border-gray-600 border-dotted text-base pb-1 capitalize rounded-tl-none">
                 <span>{title}</span>
-                <button className="text-xl ml-3 hover:text-red-500" onClick={showTooltip}>&#128712;</button>
+                {/*<button className="text-xl ml-3 hover:text-red-500" onClick={showTooltip}>&#128712;</button>*/}
+
+                <div className="z-10">
+                    <Dropdown
+                        align="left"
+                        width="48"
+                        contentClasses="rounded-md rounded-tl-none text-base leading-5 px-1.5 ml-7 -mt-5"
+                        renderTrigger={() =>
+                            <button className="text-xl ml-3 hover:text-red-500 z-0" onClick={showTooltip}>&#128712;</button>
+                        }
+                    >
+                        <div className={`specs-line__tooltip  p-2 max-w-sm mx-2`}>
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores corporis officiis omnis ratione? Ab doloremque eius facilis hic minus modi nisi nulla, pariatur praesentium provident repellendus sed tempora velit voluptas.
+                        </div>
+                    </Dropdown>
+                </div>
             </div>
+
             <div className="specs__value md:w-1/2 pl-4 text-base capitalize">{value}</div>
 
-            <div className={`specs-line__tooltip ${isShowTooltip ? 'flex' : 'hidden'} absolute left-1/4 top-3 app-bg rounded-md rounded-tl-none p-2 max-w-sm mx-2 z-10`}>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores corporis officiis omnis ratione? Ab doloremque eius facilis hic minus modi nisi nulla, pariatur praesentium provident repellendus sed tempora velit voluptas.
-            </div>
+            {/*<div className={`specs-line__tooltip ${isShowTooltip ? 'flex' : 'hidden'} absolute left-1/4 top-3 app-bg rounded-md rounded-tl-none p-2 max-w-sm mx-2 z-10`}>*/}
+            {/*    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores corporis officiis omnis ratione? Ab doloremque eius facilis hic minus modi nisi nulla, pariatur praesentium provident repellendus sed tempora velit voluptas.*/}
+            {/*</div>*/}
+
+
         </div>
     );
 });
