@@ -118,6 +118,22 @@ const MainSpecs: React.FC<{good: PartT<PartType>}> = ({good}) => {
                 </>
             );
 
+        case 'PSU':
+            return (
+                <>
+                    <div className="mb-4">
+                        <h5 className="spec-header font-bold text-xl mb-1.5 font-sans">Основные параметры</h5>
+
+                        <SpecLine title="Мощность (номинал)" value={good.PSU_power_supply + ' Вт'}/>
+                        <SpecLine title="Сертификат 90 PLUS" value={good.PSU_efficiency}/>
+                        <SpecLine title="Тепловыделение" value={good.TDP + ' Вт'} description="Тепло, которое не рассеивается кулером. Чем больше остаточное тепловыделение, тем больше общий нагрев фермы."/>
+
+                    </div>
+                </>
+            );
+
+
+
         default:
             return <span>123</span>;
     }
