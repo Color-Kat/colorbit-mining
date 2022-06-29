@@ -1,22 +1,55 @@
 import React from 'react';
 import useRoute from '@hooks/useRoute';
 import useTypedPage from '@hooks/useTypedPage';
-import {IPage} from "../types/IPage";
 import {Head} from "@inertiajs/inertia-react";
-import {Part} from "../classes/Part";
-import {Section} from "../components/page/Section";
-import Button from "../components/elements/Button";
-import {PageTitle} from "../components/page/PageTitle";
-import {IShop} from "../types/shops/IShop";
-import {partTypeRus} from "../types/toRus";
 
-const SpecLine: React.FC<{title: string, value: string}> = ({title, value}) => {
+import {IPage} from "@/types/IPage";
+import {Part} from "@/classes/Part";
+import {IShop} from "@/types/shops/IShop";
+import {partTypeRus} from "@/types/toRus";
+import {PartType} from "@/types/parts/IBasePart";
+import {PartT} from "@/types/parts/PartT";
+
+import {Section} from "@components/page/Section";
+import Button from "@components/elements/Button";
+import {PageTitle} from "@components/page/PageTitle";
+import {Inertia} from "@inertiajs/inertia";
+
+const SpecLine: React.FC<{title: string, value: string|number}> = ({title, value}) => {
     return (
-        <div className="specs-line flex justify-between my-3">
-            <div className="specs__title flex grow border-b border-gray-500 text-base pb-1 capitalize">{title}</div>
+        <div className="specs-line flex justify-between py-3 relative odd:bg-[#121212] even:bg-[#1c1c1c] md:even:bg-transparent -mx-5 px-5">
+            <div className="specs__title flex grow md:border-b border-gray-600 border-dotted text-base pb-1 capitalize">{title}</div>
             <div className="specs__value w-1/2 pl-4 text-base capitalize">{value}</div>
         </div>
     );
+}
+
+const MainSpecs: React.FC<{good: PartT<PartType>}> = ({good}) => {
+    switch (good.type){
+        case 'GPU':
+            return (
+                <>
+                    <div className="mb-4">
+                        <h5 className="spec-header font-bold text-xl mb-1.5 font-sans">Основные параметры</h5>
+
+                        <SpecLine title="Количество видеопамяти" value={good.GPU_VRAM_size + ' ГБ'}/>
+                        <SpecLine title="Частота видеопамяти" value={good.GPU_VRAM_frequency + ' МГц'}/>
+                        <SpecLine title="Тип видеопамяти" value={good.GPU_VRAM_type}/>
+                        <SpecLine title="Тепловыделение" value={good.TDP + ' Вт'}/>
+                        <SpecLine title="Потребление энергии" value={good.power + ' Вт'}/>
+                    </div>
+
+                    <div className="mb-4">
+                        <h5 className="spec-header font-bold text-xl mb-1.5 font-sans">Система охлаждения</h5>
+
+                        <SpecLine title="Тип охлаждения" value={good.GPU_fans_count == 0 ? 'пассивное' : 'активное'}/>
+                        <SpecLine title="Количество вентиляторов" value={good.GPU_fans_count}/>
+                    </div>
+                </>
+            );
+        default:
+            return <span>123</span>;
+    }
 }
 
 const Good: IPage = React.memo(() => {
@@ -28,6 +61,10 @@ const Good: IPage = React.memo(() => {
     const good = Part.createByType(page.props.good);
     const shop = page.props.ownerShop;
 
+    const toShop = () => {
+        Inertia.visit(route('shop', shop.slug));
+    }
+
     return (
         <div className="good-page max-w-5xl w-full">
             {/* @ts-ignore*/}
@@ -36,7 +73,9 @@ const Good: IPage = React.memo(() => {
                 <meta name="description" content={`${good.name} в магазине электроники ${shop.name}.`} />
             </Head>
 
-            <PageTitle title={shop.name} description="" />
+            <div onClick={toShop} className="cursor-pointer">
+                <PageTitle title={shop.name} description="" />
+            </div>
 
             {/* Overview section */}
             <Section>
@@ -88,16 +127,16 @@ const Good: IPage = React.memo(() => {
 
                     <div className="good-specs specs">
                         <div className="mb-4">
-                            <h5 className="specs-header font-bold text-lg font-sans">Общие параметры</h5>
+                            <h5 className="specs-header font-bold text-xl mb-1.5 font-sans">Общие параметры</h5>
 
                             <SpecLine title="Тип" value={partTypeRus[good.type]}/>
                             <SpecLine title="Вендор" value={good.vendor}/>
                             <SpecLine title="Название" value={page.props.good.rawName ?? good.name}/>
                         </div>
 
-                        <div className="">
-                            <h5 className="spec-header font-bold text-lg font-sans">Основные параметры</h5>
-                        </div>
+
+
+                        <MainSpecs good={good}/>
                     </div>
                 </div>
             </Section>
