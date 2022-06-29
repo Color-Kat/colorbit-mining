@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import useRoute from '@hooks/useRoute';
 import useTypedPage from '@hooks/useTypedPage';
 import {Head} from "@inertiajs/inertia-react";
@@ -15,14 +15,27 @@ import Button from "@components/elements/Button";
 import {PageTitle} from "@components/page/PageTitle";
 import {Inertia} from "@inertiajs/inertia";
 
-const SpecLine: React.FC<{title: string, value: string|number}> = ({title, value}) => {
+const SpecLine: React.FC<{title: string, value: string|number, description?: string}> = React.memo(({title, value, description}) => {
+    const [isShowTooltip, setIsShowTooltip] = useState(false);
+
+    const showTooltip = () => {
+        setIsShowTooltip(prev => !prev);
+    }
+
     return (
-        <div className="specs-line flex justify-between py-3 relative odd:bg-[#121212] even:bg-[#1c1c1c] md:even:bg-transparent -mx-5 px-5">
-            <div className="specs__title flex grow md:border-b border-gray-600 border-dotted text-base pb-1 capitalize">{title}</div>
-            <div className="specs__value w-1/2 pl-4 text-base capitalize">{value}</div>
+        <div className="relative specs-line flex justify-between py-3 odd:bg-[#121212] even:bg-[#1c1c1c] md:even:bg-transparent -mx-5 px-5">
+            <div className="specs__title flex grow md:border-b border-gray-600 border-dotted text-base pb-1 capitalize rounded-tl-none">
+                <span>{title}</span>
+                <button className="text-xl ml-3 hover:text-red-500" onClick={showTooltip}>&#128712;</button>
+            </div>
+            <div className="specs__value md:w-1/2 pl-4 text-base capitalize">{value}</div>
+
+            <div className={`specs-line__tooltip ${isShowTooltip ? 'flex' : 'hidden'} absolute left-1/4 top-3 app-bg rounded-md rounded-tl-none p-2 max-w-sm mx-2 z-10`}>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores corporis officiis omnis ratione? Ab doloremque eius facilis hic minus modi nisi nulla, pariatur praesentium provident repellendus sed tempora velit voluptas.
+            </div>
         </div>
     );
-}
+});
 
 const MainSpecs: React.FC<{good: PartT<PartType>}> = ({good}) => {
     switch (good.type){
@@ -47,6 +60,28 @@ const MainSpecs: React.FC<{good: PartT<PartType>}> = ({good}) => {
                     </div>
                 </>
             );
+
+        case 'platform':
+            return (
+                <>
+                    <div className="mb-4">
+                        <h5 className="spec-header font-bold text-xl mb-1.5 font-sans">Процессор</h5>
+
+                        <SpecLine title="Количество ядер" value={good.platform_cors_count + ' ГБ'}/>
+                        <SpecLine title="Количество потоков" value={good.platform_threads_count + ' МГц'}/>
+                        <SpecLine title="Частота" value={good.platform_frequency}/>
+                        <SpecLine title="Потребление энергии" value={good.power + ' Вт'}/>
+                    </div>
+
+                    <div className="mb-4">
+                        <h5 className="spec-header font-bold text-xl mb-1.5 font-sans">Материнская плата</h5>
+
+                        <SpecLine title="Количество каналов памяти" value={good.platform_RAM_slots}/>
+                        <SpecLine title="Остаточное тепловыделение" value={good.TDP + ' Вт'} description="Тепло, которое не рассеивается кулером. Чем больше остаточное тепловыделение, тем больше общий нагрев фермы."/>
+                    </div>
+                </>
+            );
+
         default:
             return <span>123</span>;
     }
@@ -131,7 +166,7 @@ const Good: IPage = React.memo(() => {
 
                             <SpecLine title="Тип" value={partTypeRus[good.type]}/>
                             <SpecLine title="Вендор" value={good.vendor}/>
-                            <SpecLine title="Название" value={page.props.good.rawName ?? good.name}/>
+                            <SpecLine title="Модель" value={page.props.good.rawName ?? good.name}/>
                         </div>
 
 
