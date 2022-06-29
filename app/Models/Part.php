@@ -3,11 +3,9 @@
 namespace App\Models;
 
 use App\traits\HasImage;
-use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Support\Facades\Storage;
 
 class Part extends Model
 {
@@ -94,8 +92,8 @@ class Part extends Model
                 // Add part info if it exists
                 if(!$this->case_material) break;
                 $postfix = join(', ', [
-                    $this->case_materil_rus ,
-                    "вместимость $this->case_GPUs_count видеокарт",
+                    $this->case_material_rus ,
+                    "вместимость видеокарт $this->case_GPUs_count",
                     "до $this->case_critical_temp"."°C"
                 ]);
                 break;

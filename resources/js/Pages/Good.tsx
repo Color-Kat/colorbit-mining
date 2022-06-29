@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import useRoute from '@hooks/useRoute';
 import useTypedPage from '@hooks/useTypedPage';
 import {Head} from "@inertiajs/inertia-react";
@@ -125,14 +125,25 @@ const MainSpecs: React.FC<{good: PartT<PartType>}> = ({good}) => {
                         <h5 className="spec-header font-bold text-xl mb-1.5 font-sans">Основные параметры</h5>
 
                         <SpecLine title="Мощность (номинал)" value={good.PSU_power_supply + ' Вт'}/>
-                        <SpecLine title="Сертификат 90 PLUS" value={good.PSU_efficiency}/>
-                        <SpecLine title="Тепловыделение" value={good.TDP + ' Вт'} description="Тепло, которое не рассеивается кулером. Чем больше остаточное тепловыделение, тем больше общий нагрев фермы."/>
+                        <SpecLine title="Сертификат 80 PLUS" value={good.PSU_efficiency}/>
+                        <SpecLine title="Тепловыделение" value={good.TDP + ' Вт'} description="Нерассеянное тепло, выделяемое БП. Может повлиять на общую температуру майнинг фермы."/>
 
                     </div>
                 </>
             );
 
+        case 'case':
+            return (
+                <>
+                    <div className="mb-4">
+                        <h5 className="spec-header font-bold text-xl mb-1.5 font-sans">Основные параметры</h5>
 
+                        <SpecLine title="Материал" value={good.case_material_rus + ' Вт'}/>
+                        <SpecLine title="Критическая температура" value={good.case_critical_temp + '°C'} description="Максимальная температура, которую выдерживает каркас"/>
+                        <SpecLine title="Вместимость видеокарт" value={good.case_GPUs_count + ' шт.'}/>
+                    </div>
+                </>
+            );
 
         default:
             return <span>123</span>;
