@@ -40,11 +40,11 @@ const Good: IPage = React.memo(() => {
 
             {/* Overview section */}
             <Section>
-                <div className="good-overview flex justify-between">
+                <div className="good-overview flex justify-between md:flex-row flex-col">
                     {/* Image Block */}
                     <div className="good-overview__image flex flex-col md:mr-3">
                         <img className="flex flex-1 max-w-full h-auto" src={good.image} alt={good.name}/>
-                        <span className="text-gray-500 mt-2">Код товара: {page.props.good.id}</span>
+                        <span className="text-gray-500 mt-2 hidden md:block">Код товара: {page.props.good.id}</span>
                     </div>
 
                     {/* Info Block */}
@@ -52,7 +52,7 @@ const Good: IPage = React.memo(() => {
                         {/* Name & Vendor */}
                         <div className="flex justify-between">
                             <h2 className="font-play text-2xl mr-1.5">{good.name}</h2>
-                            <h3 className="font-roboto text-lg text-gray-500">{good.vendor}</h3>
+                            <h3 className="font-roboto text-lg text-gray-500 hidden md:block">{good.vendor}</h3>
                         </div>
 
                         {/* Buy section */}
@@ -71,6 +71,12 @@ const Good: IPage = React.memo(() => {
                                     className="px-2 py-1 rounded-md border-gray-500 border">В наличии: {good.count}</span>
                             </div>
                         </div>
+                    </div>
+
+                    {/*  Good ID and Vendor for mobile  */}
+                    <div className="flex md:hidden justify-between items-center">
+                        <h3 className="font-roboto text-xl text-gray-500">{good.vendor}</h3>
+                        <span className="text-gray-500">Код товара: {page.props.good.id}</span>
                     </div>
                 </div>
             </Section>
