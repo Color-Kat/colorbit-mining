@@ -71,6 +71,7 @@ export const Dropdown = React.memo(({
                 <div
                     className={classNames(
                         'absolute z-50 mt-2 rounded-md shadow-lg w-48 md:w-60',
+                        `w-${width}`,
                         // widthClass,
                         alignmentClasses,
                     )}

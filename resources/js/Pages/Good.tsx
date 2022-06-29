@@ -17,41 +17,28 @@ import {Inertia} from "@inertiajs/inertia";
 import {Dropdown} from "../components/elements/Dropdown";
 
 const SpecLine: React.FC<{title: string, value: string|number, description?: string}> = React.memo(({title, value, description}) => {
-    const [isShowTooltip, setIsShowTooltip] = useState(false);
-
-    const showTooltip = () => {
-        setIsShowTooltip(prev => !prev);
-    }
-
     return (
         <div className="relative specs-line flex justify-between py-3 odd:bg-[#121212] even:bg-[#1c1c1c] md:even:bg-transparent -mx-5 px-5">
             <div className="specs__title flex grow md:border-b border-gray-600 border-dotted text-base pb-1 capitalize rounded-tl-none">
                 <span>{title}</span>
-                {/*<button className="text-xl ml-3 hover:text-red-500" onClick={showTooltip}>&#128712;</button>*/}
 
-                <div className="z-10">
+                {description && <div className="z-10">
                     <Dropdown
-                        align="left"
-                        width="48"
-                        contentClasses="rounded-md rounded-tl-none text-base leading-5 px-1.5 ml-7 -mt-5"
+                        align="right"
+                        width="64"
+                        contentClasses="rounded-md rounded-tr-none text-base leading-5 px-1.5 mr-7 -mt-5"
                         renderTrigger={() =>
-                            <button className="text-xl ml-3 hover:text-red-500 z-0" onClick={showTooltip}>&#128712;</button>
+                            <button className="text-xl ml-3 hover:text-red-500 z-0">&#128712;</button>
                         }
                     >
-                        <div className={`specs-line__tooltip  p-2 max-w-sm mx-2`}>
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores corporis officiis omnis ratione? Ab doloremque eius facilis hic minus modi nisi nulla, pariatur praesentium provident repellendus sed tempora velit voluptas.
+                        <div className={`specs-line__tooltip max-w-sm mx-2 py-1.5 text-base leading-5 normal-case`}>
+                            {description}
                         </div>
                     </Dropdown>
-                </div>
+                </div>}
             </div>
 
             <div className="specs__value md:w-1/2 pl-4 text-base capitalize">{value}</div>
-
-            {/*<div className={`specs-line__tooltip ${isShowTooltip ? 'flex' : 'hidden'} absolute left-1/4 top-3 app-bg rounded-md rounded-tl-none p-2 max-w-sm mx-2 z-10`}>*/}
-            {/*    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores corporis officiis omnis ratione? Ab doloremque eius facilis hic minus modi nisi nulla, pariatur praesentium provident repellendus sed tempora velit voluptas.*/}
-            {/*</div>*/}
-
-
         </div>
     );
 });
@@ -97,6 +84,36 @@ const MainSpecs: React.FC<{good: PartT<PartType>}> = ({good}) => {
 
                         <SpecLine title="Количество каналов памяти" value={good.platform_RAM_slots}/>
                         <SpecLine title="Остаточное тепловыделение" value={good.TDP + ' Вт'} description="Тепло, которое не рассеивается кулером. Чем больше остаточное тепловыделение, тем больше общий нагрев фермы."/>
+                    </div>
+                </>
+            );
+
+        case 'RAM':
+            let RAM_type = 'DDR';
+
+            if (good.RAM_frequency < 400) RAM_type = 'DDR';
+            else if (good.RAM_frequency < 1066) RAM_type = 'DDR2';
+            else if (good.RAM_frequency < 2100) RAM_type = 'DDR3';
+            else if (good.RAM_frequency < 3600) RAM_type = 'DDR4';
+            else RAM_type = 'DDR5';
+
+            return (
+                <>
+                    <div className="mb-4">
+                        <h5 className="spec-header font-bold text-xl mb-1.5 font-sans">Основные параметры</h5>
+
+                        <SpecLine title="Тип памяти" value={RAM_type}/>
+                        <SpecLine title="Суммарный объём памяти всего комплекта" value={good.RAM_size + ' ГБ'}/>
+                        <SpecLine title="Объём одного модуля памяти" value={good.RAM_size / good.RAM_channels + ' ГБ'}/>
+                        <SpecLine title="Тактовая частота" value={good.RAM_frequency + ' МГц'}/>
+                    </div>
+
+                    <div className="mb-4">
+                        <h5 className="spec-header font-bold text-xl mb-1.5 font-sans">Прочие параметры</h5>
+
+                        <SpecLine title="Тепловыделение" value={good.TDP + ' Вт'}/>
+                        <SpecLine title="Потребление энергии" value={good.power + ' Вт'}/>
+
                     </div>
                 </>
             );
