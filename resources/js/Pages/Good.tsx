@@ -171,8 +171,15 @@ const Good: IPage = React.memo(() => {
         setIsConfirmBuy(true);
     }
 
+    const closeConfirmBuy = () => {
+        setIsConfirmBuy(false);
+    }
+
     const buy = () => {
-        console.log('buy')
+        console.log('buy');
+        window.axios.post();
+
+        closeConfirmBuy();
     }
 
     return (
@@ -256,7 +263,7 @@ const Good: IPage = React.memo(() => {
             </Section>
 
             {/* Buy confirmation modal */}
-            <DialogModal isOpen={isConfirmBuy} onClose={()=>{setIsConfirmBuy(false)}}>
+            <DialogModal isOpen={isConfirmBuy} onClose={closeConfirmBuy}>
                 <DialogModal.Content title={'Delete Account'}>
                     <span>
                         Вы уверены, что хотите купить {good.name}?<br/>
@@ -264,7 +271,7 @@ const Good: IPage = React.memo(() => {
                     </span>
                 </DialogModal.Content>
                 <DialogModal.Footer>
-                    <SecondaryButton onClick={()=>{setIsConfirmBuy(false)}}>Отмена</SecondaryButton>
+                    <SecondaryButton onClick={closeConfirmBuy}>Отмена</SecondaryButton>
 
                     <Button
                         onClick={buy}
