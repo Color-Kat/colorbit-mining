@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import useRoute from '@hooks/useRoute';
 import useTypedPage from '@hooks/useTypedPage';
 import {Head} from "@inertiajs/inertia-react";
@@ -12,9 +12,12 @@ import {PartT} from "@/types/parts/PartT";
 
 import {Section} from "@components/page/Section";
 import Button from "@components/elements/Button";
-import {PageTitle} from "@components/page/PageTitle";
 import {Inertia} from "@inertiajs/inertia";
 import {Dropdown} from "../components/elements/Dropdown";
+import {BiArrowBack} from "react-icons/all";
+import DialogModal from "../components/modal/DialogModal";
+import SecondaryButton from "../components/profile/SecondaryButton";
+import {Shop} from "@/classes/Shop";
 
 const SpecLine: React.FC<{title: string, value: string|number, description?: string}> = React.memo(({title, value, description}) => {
     return (
@@ -52,7 +55,7 @@ const MainSpecs: React.FC<{good: PartT<PartType>}> = ({good}) => {
                         <h5 className="spec-header font-bold text-xl mb-1.5 font-sans">Основные параметры</h5>
 
                         <SpecLine title="Количество видеопамяти" value={good.GPU_VRAM_size + ' ГБ'}/>
-                        <SpecLine title="Частота видеопамяти" value={good.GPU_VRAM_frequency + ' МГц'}/>
+                        <SpecLine title="Частота видеочипа" value={good.GPU_VRAM_frequency + ' МГц'}/>
                         <SpecLine title="Тип видеопамяти" value={good.GPU_VRAM_type}/>
                         <SpecLine title="Тепловыделение" value={good.TDP + ' Вт'}/>
                         <SpecLine title="Потребление энергии" value={good.power + ' Вт'}/>
@@ -119,13 +122,14 @@ const MainSpecs: React.FC<{good: PartT<PartType>}> = ({good}) => {
             );
 
         case 'PSU':
+            let PSU_efficiency = good.PSU_efficiency == 'none' ? 'Отсутствует' : good.PSU_efficiency;
             return (
                 <>
                     <div className="mb-4">
                         <h5 className="spec-header font-bold text-xl mb-1.5 font-sans">Основные параметры</h5>
 
                         <SpecLine title="Мощность (номинал)" value={good.PSU_power_supply + ' Вт'}/>
-                        <SpecLine title="Сертификат 80 PLUS" value={good.PSU_efficiency}/>
+                        <SpecLine title="Сертификат 80 PLUS" value={PSU_efficiency}/>
                         <SpecLine title="Тепловыделение" value={good.TDP + ' Вт'} description="Нерассеянное тепло, выделяемое БП. Может повлиять на общую температуру майнинг фермы."/>
 
                     </div>
@@ -154,13 +158,21 @@ const Good: IPage = React.memo(() => {
     const route = useRoute();
     const page = useTypedPage<{good: any, ownerShop: IShop}>();
 
-    console.log(page)
-
     const good = Part.createByType(page.props.good);
-    const shop = page.props.ownerShop;
+    const shop = new Shop(page.props.ownerShop);
 
     const toShop = () => {
         Inertia.visit(route('shop', shop.slug));
+    }
+
+    const [isConfirmBuy, setIsConfirmBuy] = useState(false);
+
+    function confirmBuy() {
+        setIsConfirmBuy(true);
+    }
+
+    const buy = () => {
+        console.log('buy')
     }
 
     return (
@@ -171,9 +183,12 @@ const Good: IPage = React.memo(() => {
                 <meta name="description" content={`${good.name} в магазине электроники ${shop.name}.`} />
             </Head>
 
-            <div onClick={toShop} className="cursor-pointer">
-                <PageTitle title={shop.name} description="" />
-            </div>
+            <Section>
+                <div className="flex items-center cursor-pointer w-max">
+                    <BiArrowBack size="30" onClick={toShop}/>
+                    <h2 onClick={toShop} className="text-3xl font-medium font-play ml-3">{shop.name}</h2>
+                </div>
+            </Section>
 
             {/* Overview section */}
             <Section>
@@ -197,7 +212,10 @@ const Good: IPage = React.memo(() => {
                             {/* Price & buy */}
                             <div className="good-overview__price-section flex">
                                 <div className="flex grow text-2xl tracking-wide font-roboto font-bold flex items-center mr-2 rounded-md bg-gradient-to-br from-transparent to-[#121212]">{good.price}$</div>
-                                <Button className="py-2 px-3 text-base font-sans md:w-36 flex items-center justify-center capitalize">Купить</Button>
+                                <Button
+                                    className="py-2 px-3 text-base font-sans md:w-36 flex items-center justify-center capitalize"
+                                    onClick={confirmBuy}
+                                >Купить</Button>
                             </div>
 
                             <div
@@ -221,7 +239,7 @@ const Good: IPage = React.memo(() => {
             {/* Specifications section */}
             <Section>
                 <div className="good-specs lex flex-col">
-                    <h2 className="good-specs_title font-play text-2xl mb-5 tracking-wide">Характеристики {good.name}</h2>
+                    <h2 className="good-specs_title font-roboto text-2xl mb-5 tracking-wide">Характеристики {good.name}</h2>
 
                     <div className="good-specs specs">
                         <div className="mb-4">
@@ -232,12 +250,30 @@ const Good: IPage = React.memo(() => {
                             <SpecLine title="Модель" value={page.props.good.rawName ?? good.name}/>
                         </div>
 
-
-
                         <MainSpecs good={good}/>
                     </div>
                 </div>
             </Section>
+
+            {/* Buy confirmation modal */}
+            <DialogModal isOpen={isConfirmBuy} onClose={()=>{setIsConfirmBuy(false)}}>
+                <DialogModal.Content title={'Delete Account'}>
+                    <span>
+                        Вы уверены, что хотите купить {good.name}?<br/>
+                        Время доставки {shop.deliveryTime}ч.
+                    </span>
+                </DialogModal.Content>
+                <DialogModal.Footer>
+                    <SecondaryButton onClick={()=>{setIsConfirmBuy(false)}}>Отмена</SecondaryButton>
+
+                    <Button
+                        onClick={buy}
+                        className="ml-2"
+                    >
+                        Купить
+                    </Button>
+                </DialogModal.Footer>
+            </DialogModal>
         </div>
     );
 });

@@ -9,10 +9,10 @@ import {PageTitle} from "@components/page/PageTitle";
 import Button from "@components/elements/Button";
 import useRoute from "@hooks/useRoute";
 import {Inertia} from "@inertiajs/inertia";
+import {Shop} from "@/classes/Shop";
 
-const ShopListItem: React.FC<{shop: IShopListItem}> = ({shop}) => {
+const ShopListItem: React.FC<{shop: Shop}> = ({shop}) => {
     const route = useRoute();
-    const deliveryTime = shop.delivery_time.split(':')[0];
 
     const goToShop = () => {
         Inertia.get(route('shop', shop.slug));
@@ -35,7 +35,7 @@ const ShopListItem: React.FC<{shop: IShopListItem}> = ({shop}) => {
                         <div className="tracking-wider whitespace-nowrap flex flex-wrap items-end text-sm">
                             {shop.warranty ? <span className="bg-gray-400 text-gray-900 py-1 px-2 rounded-md mr-2 mt-2">Гарантия</span> : null}
                             {shop.used_market ? <span className="bg-gray-400 text-gray-900 py-1 px-2 rounded-md mr-2 mt-2">Б/y</span> : null}
-                            <span className="bg-gray-400 text-gray-900 py-1 px-2 rounded-md mt-2">Время доставки: {deliveryTime}ч.</span>
+                            <span className="bg-gray-400 text-gray-900 py-1 px-2 rounded-md mt-2">Время доставки: {shop.deliveryTime}ч.</span>
                         </div>
                     </div>
                 </div>
@@ -64,7 +64,7 @@ const ShopsList: IPage = React.memo(() => {
 
             <ul className="shop-list">
                 {currentShops.map(shop => (
-                    <ShopListItem shop={shop} key={shop.id}/>
+                    <ShopListItem shop={new Shop(shop)} key={shop.id}/>
                 ))}
             </ul>
 

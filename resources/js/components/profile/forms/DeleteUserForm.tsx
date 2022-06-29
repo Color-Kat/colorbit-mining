@@ -54,7 +54,7 @@ export default React.memo(function DeleteUserForm() {
 
             {/* <!-- Delete Account Confirmation Modal --> */}
             <DialogModal isOpen={confirmingUserDeletion} onClose={closeModal}>
-                <DialogModal.Content title={'Delete Account'}>
+                <DialogModal.Content title={'Удаление аккаунта'}>
                     Вы уверены, что хотите удалить ваш аккаунт?
                     Это удалит все ваши игровые данные
                     Введите пароль, чтобы подтвердить ваши действия

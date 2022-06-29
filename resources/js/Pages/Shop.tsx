@@ -9,6 +9,8 @@ import {Inertia} from "@inertiajs/inertia";
 import {Section} from "@components/page/Section";
 import Button from "@components/elements/Button";
 
+import {Shop as ShopClass} from "@/classes/Shop";
+
 
 const ShopPartItem: React.FC<{ part: IShopPart, shop: IShop }> = ({part, shop}) => {
     const route = useRoute();
@@ -68,9 +70,9 @@ const ShopPartItem: React.FC<{ part: IShopPart, shop: IShop }> = ({part, shop}) 
 }
 
 const Shop: IPage = React.memo(() => {
-    const page = useTypedPage<{ shop: IShop }>();
+    const page = useTypedPage<{shop: IShop}>();
 
-    const shop = page.props.shop;
+    const shop = new ShopClass(page.props.shop);
     const partsPaginator = page.props.shop.parts;
 
     return (

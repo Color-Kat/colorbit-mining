@@ -27,5 +27,5 @@ export interface IShop {
     warranty: boolean;
     delivery_time: DateTime;
 
-    parts: IPaginator<IShopPart>
+    parts: IPaginator<IShopPart>;
 }

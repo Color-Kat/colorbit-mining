@@ -1,8 +1,9 @@
 <?php
 
-use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+
+use \App\Http\Controllers\UserController;
 
 use App\Http\Controllers\GoodController;
 use App\Http\Controllers\ShopController;
@@ -40,6 +41,8 @@ Route::prefix('shops')->group(function () {
     Route::get('/{shop_slug}/{product_slug}', [GoodController::class, 'index'])->name('good');
 });
 
+// Buy good in shop
+Route::post('user/buy-good', [UserController::class, 'buyGood'])->name('buy-good');
 
 // Admin panel
 Route::middleware('admin')->prefix('admin')->as('admin.')->group(function() {
@@ -60,12 +63,12 @@ Route::middleware('admin')->prefix('admin')->as('admin.')->group(function() {
 });
 
 
-Route::middleware([
-    'auth:sanctum',
-    config('jetstream.auth_session'),
-    'verified',
-])->group(function () {
+//Route::middleware([
+//    'auth:sanctum',
+//    config('jetstream.auth_session'),
+//    'verified',
+//])->group(function () {
 //    Route::get('/dashboard', function () {
 //        return Inertia::render('Dashboard');
 //    })->name('dashboard');
-});
+//});
