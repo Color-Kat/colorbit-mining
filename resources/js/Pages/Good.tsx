@@ -177,7 +177,10 @@ const Good: IPage = React.memo(() => {
 
     const buy = () => {
         console.log('buy');
-        window.axios.post();
+        window.axios.post(route('user.buy-good'), {
+            shop_slug: shop.slug,
+            good_slug: good.slug
+        });
 
         closeConfirmBuy();
     }

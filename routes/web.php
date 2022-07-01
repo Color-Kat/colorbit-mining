@@ -41,8 +41,10 @@ Route::prefix('shops')->group(function () {
     Route::get('/{shop_slug}/{product_slug}', [GoodController::class, 'index'])->name('good');
 });
 
-// Buy good in shop
-Route::post('user/buy-good', [UserController::class, 'buyGood'])->name('buy-good');
+Route::middleware('auth:sanctum')->prefix('user')->as('user.')->group(function () {
+    // Buy good in shop
+    Route::post('/buy-good', [UserController::class, 'buyGood'])->name('buy-good');
+});
 
 // Admin panel
 Route::middleware('admin')->prefix('admin')->as('admin.')->group(function() {
