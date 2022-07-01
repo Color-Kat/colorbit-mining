@@ -18,6 +18,7 @@ import {BiArrowBack} from "react-icons/all";
 import DialogModal from "../components/modal/DialogModal";
 import SecondaryButton from "../components/profile/SecondaryButton";
 import {Shop} from "@/classes/Shop";
+import {Response} from "../types/Response";
 
 const SpecLine: React.FC<{title: string, value: string|number, description?: string}> = React.memo(({title, value, description}) => {
     return (
@@ -175,12 +176,17 @@ const Good: IPage = React.memo(() => {
         setIsConfirmBuy(false);
     }
 
-    const buy = () => {
+    const buy = async () => {
         console.log('buy');
-        window.axios.post(route('user.buy-good'), {
+
+        const result = await window.axios.post<any, Response<any>>(route('user.buy-good'), {
             shop_slug: shop.slug,
             good_slug: good.slug
         });
+
+        console.log(result, 123)
+
+        if (result.message === 'Unauthenticated') alert('Вы не авторизованны!');
 
         closeConfirmBuy();
     }

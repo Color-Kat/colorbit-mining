@@ -41,7 +41,7 @@ Route::prefix('shops')->group(function () {
     Route::get('/{shop_slug}/{product_slug}', [GoodController::class, 'index'])->name('good');
 });
 
-Route::middleware('auth:sanctum')->prefix('user')->as('user.')->group(function () {
+Route::middleware('auth')->prefix('user')->as('user.')->group(function () {
     // Buy good in shop
     Route::post('/buy-good', [UserController::class, 'buyGood'])->name('buy-good');
 });
