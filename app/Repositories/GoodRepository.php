@@ -5,6 +5,7 @@ namespace App\Repositories;
 use App\Models\Part;
 use App\Models\Shop;
 use Illuminate\Support\Str;
+use phpDocumentor\Reflection\Types\This;
 
 /**
  * Class PartRepository
@@ -29,7 +30,7 @@ class GoodRepository extends CoreRepository
      */
     public function getGood($shop_slug, $good_slug)
     {
-        $good = Part::where('slug', $good_slug) // Select a part by a slug
+        $good = $this->startConditions()::where('slug', $good_slug) // Select a part by a slug
             ->with('shops')
             ->whereHas('shops', function ($query) use ($shop_slug) {
                 $query->where('slug', $shop_slug); // the part belongs to the shop with a slug
