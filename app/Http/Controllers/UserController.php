@@ -20,12 +20,7 @@ class UserController extends BaseController
     }
 
     public function buyGood(Request $request) {
-        $requestData = $request->all();
-
-        $result = $this->userRepository->buyGood(
-            $requestData['shop_slug'],
-            $requestData['good_slug']
-        );
+        $result = $this->userRepository->buyGood($request);
 
         return $result;
     }
