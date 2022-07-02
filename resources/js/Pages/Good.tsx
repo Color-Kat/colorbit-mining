@@ -19,6 +19,7 @@ import DialogModal from "../components/modal/DialogModal";
 import SecondaryButton from "../components/profile/SecondaryButton";
 import {Shop} from "@/classes/Shop";
 import {Response} from "../types/Response";
+import LoginModal from "../components/page/LoginModal";
 
 const SpecLine: React.FC<{title: string, value: string|number, description?: string}> = React.memo(({title, value, description}) => {
     return (
@@ -159,6 +160,7 @@ const Good: IPage = React.memo(() => {
     const route = useRoute();
     const page = useTypedPage<{good: any, ownerShop: IShop}>();
 
+    const auth = page.props.user;
     const good = Part.createByType(page.props.good);
     const shop = new Shop(page.props.ownerShop);
 
@@ -167,9 +169,11 @@ const Good: IPage = React.memo(() => {
     }
 
     const [isConfirmBuy, setIsConfirmBuy] = useState(false);
+    const [loginModal, setLoginModal] = useState(false);
 
     function confirmBuy() {
-        setIsConfirmBuy(true);
+        setLoginModal(true);
+        if(auth) setIsConfirmBuy(true);
     }
 
     const closeConfirmBuy = () => {
@@ -177,16 +181,12 @@ const Good: IPage = React.memo(() => {
     }
 
     const buy = async () => {
-        console.log('buy');
-
         const result = await window.axios.post<any, Response<any>>(route('user.buy-good'), {
             shop_slug: shop.slug,
             good_slug: good.slug
         });
 
         console.log(result, 123)
-
-        if (result.message === 'Unauthenticated') alert('Вы не авторизованны!');
 
         closeConfirmBuy();
     }
@@ -273,7 +273,7 @@ const Good: IPage = React.memo(() => {
 
             {/* Buy confirmation modal */}
             <DialogModal isOpen={isConfirmBuy} onClose={closeConfirmBuy}>
-                <DialogModal.Content title={'Delete Account'}>
+                <DialogModal.Content title={'Подтверждение'}>
                     <span>
                         Вы уверены, что хотите купить {good.name}?<br/>
                         Время доставки {shop.deliveryTime}ч.
@@ -290,6 +290,8 @@ const Good: IPage = React.memo(() => {
                     </Button>
                 </DialogModal.Footer>
             </DialogModal>
+
+            <LoginModal loginModal={loginModal} setLoginModal={setLoginModal} />
         </div>
     );
 });
