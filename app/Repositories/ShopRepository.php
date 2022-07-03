@@ -85,7 +85,11 @@ class ShopRepository extends CoreRepository
         // TODO add select with paginator for relationship
 
         // Get parts for this shop with paginator
-        $shop['parts'] = $shop->parts()->select($partSelect)->paginate(10);
+        $shop['parts'] = $shop
+            ->parts()
+            ->withPivot('count')
+            ->select($partSelect)
+            ->paginate(10);
 
 //        $shop['parts'] = $shop->load( ['parts' => function ($query) use ($partSelect) {
 //            $query->select($partSelect);

@@ -25,8 +25,8 @@ class Part extends Model
     {
         return $this
             ->belongsToMany(Shop::class)
-            ->using(PartShopPivot::class)
-            ->withPivot('count');
+            ->withPivot('count')
+            ->using(PartShopPivot::class);
     }
 
     public function breakdowns()

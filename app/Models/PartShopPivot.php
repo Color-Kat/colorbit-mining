@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Relations\Pivot;
 
 class PartShopPivot extends Pivot
 {
-    protected $visible = ['id'];
     protected $table = 'part_shop';
 
 //    public function shop()

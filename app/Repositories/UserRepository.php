@@ -82,14 +82,15 @@ class UserRepository extends CoreRepository
             'count' => --$count
         ]);
 
+        // Create new Having for user
         $having = new Having();
         $having->part_shop_id = $shop->pivot->id;
         $having->user_id = $user->id;
-
-//        dd($good->shops->first()->pivot->id);
-
         $user->havings()->save($having);
 
-        dd($count, $good);
+        return response()->json([
+            "message" => "Товар оплачен.",
+            "status" => true
+        ]);
     }
 }
