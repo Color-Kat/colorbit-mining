@@ -228,10 +228,19 @@ const Good: IPage = React.memo(() => {
                             {/* Price & buy */}
                             <div className="good-overview__price-section flex">
                                 <div className="flex grow text-2xl tracking-wide font-roboto font-bold flex items-center mr-2 rounded-md bg-gradient-to-br from-transparent to-[#121212]">{good.price}$</div>
-                                <Button
-                                    className="py-2 px-3 text-base font-sans md:w-36 flex items-center justify-center capitalize"
-                                    onClick={confirmBuy}
-                                >Купить</Button>
+
+                                {good.count
+                                    ? <Button
+                                            className="py-2 px-3 text-base font-sans md:w-36 flex items-center justify-center capitalize"
+                                            onClick={confirmBuy}
+                                        >Купить</Button>
+                                    : <Button
+                                            className="py-2 px-3 text-base font-sans md:w-36 flex items-center justify-center normal-case bg-transparent hover:bg-transparent active:bg-transparent"
+                                            disabled
+                                        >Нет в наличии</Button>
+                                }
+
+
                             </div>
 
                             <div

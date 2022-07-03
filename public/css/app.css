@@ -1679,6 +1679,9 @@ select{
   --tw-bg-opacity: 1;
   background-color: rgb(55 65 81 / var(--tw-bg-opacity));
 }
+.bg-transparent{
+  background-color: transparent;
+}
 .bg-opacity-25{
   --tw-bg-opacity: 0.25;
 }
@@ -2221,9 +2224,16 @@ select:-webkit-autofill:focus {
   --tw-bg-opacity: 1;
   background-color: rgb(28 28 28 / var(--tw-bg-opacity));
 }
+.hover\:border:hover{
+  border-width: 1px;
+}
 .hover\:border-gray-300:hover{
   --tw-border-opacity: 1;
   border-color: rgb(209 213 219 / var(--tw-border-opacity));
+}
+.hover\:border-red-500:hover{
+  --tw-border-opacity: 1;
+  border-color: rgb(239 68 68 / var(--tw-border-opacity));
 }
 .hover\:bg-indigo-600:hover{
   --tw-bg-opacity: 1;
@@ -2262,6 +2272,9 @@ select:-webkit-autofill:focus {
 }
 .hover\:bg-white\/\[0\.12\]:hover{
   background-color: rgb(255 255 255 / 0.12);
+}
+.hover\:bg-transparent:hover{
+  background-color: transparent;
 }
 .hover\:text-gray-500:hover{
   --tw-text-opacity: 1;
@@ -2425,6 +2438,9 @@ select:-webkit-autofill:focus {
 .active\:bg-red-500:active{
   --tw-bg-opacity: 1;
   background-color: rgb(239 68 68 / var(--tw-bg-opacity));
+}
+.active\:bg-transparent:active{
+  background-color: transparent;
 }
 .active\:text-gray-700:active{
   --tw-text-opacity: 1;

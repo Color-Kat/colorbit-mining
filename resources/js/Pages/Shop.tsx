@@ -59,7 +59,10 @@ const ShopPartItem: React.FC<{ part: IShopPart, shop: IShop }> = ({part, shop}) 
                     <div className="flex sm:flex-col justify-between items-center sm:items-end mt-3 sm:m-0">
                         <h3 className="text-2xl tracking-wide font-roboto font-bold sm:mb-2">{part.price}$</h3>
 
-                        <Button className="self-end" onClick={goToProduct}>Перейти</Button>
+                        {part.pivot.count > 0
+                            ? <Button className="self-end" onClick={goToProduct}>Перейти</Button>
+                            : <Button className="self-end bg-transparent hover:bg-transparent border border-gray-500 hover:border-red-500" onClick={goToProduct}>Нет в наличии</Button>
+                        }
                     </div>
                 </div>
 
