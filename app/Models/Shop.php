@@ -21,7 +21,8 @@ class Shop extends Model
     {
         return $this
             ->belongsToMany(Part::class)
-            ->withPivot('count')
+            ->using(PartShopPivot::class)
+            ->withPivot('id', 'count')
             ->orderBy('part_id', 'DESC');
     }
 }

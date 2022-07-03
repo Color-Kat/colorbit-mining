@@ -2,6 +2,7 @@
 
 namespace App\Repositories;
 
+use App\Models\Having;
 use App\Models\Part;
 use App\Models\Shop;
 use App\Models\User;
@@ -31,12 +32,24 @@ class UserRepository extends CoreRepository
         $shop_slug = $request->shop_slug;
         $good_slug = $request->good_slug;
 
+        // Not auth
+        if(!$user) return response()->json([
+            "message" => "Вы не авторизированны",
+            "status" => false
+        ]);
+
         // Get good
         $good = Part::where('slug', $good_slug) // Select a good by a slug
             ->with(['shops' => function($query) use($shop_slug) {
                 $query->where('slug', $shop_slug);
             }])
             ->first();
+
+        // There's no such good
+        if(!$good) return response()->json([
+            "message" => "Такого товара не существует",
+            "status" => false
+        ]);
 
         // Not enough money
         if($good->price > $user->money) return response()->json([
@@ -60,9 +73,20 @@ class UserRepository extends CoreRepository
         // All is well, buy good //
         // --------------------- //
 
+        // Decrease user's money
         $user->money -= $good->price;
         $user->save();
 
+        // Decrease count of good in the shop
+        $good->shops()->attach($shop->id, [
+            'count' => $count - 1
+        ]);
+
+        $having = new Having();
+        $having->part_shop_id = $shop->pivot->id;
+        dd($shop->pivot->id, $shop->pivot);
+
+        $user->havings()->save($having);
 
         dd($count, $good);
     }

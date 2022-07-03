@@ -69,4 +69,16 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+    /**
+     * Define relationship for user's havings.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function havings()
+    {
+        return $this
+            ->belongsToMany(Having::class)
+            ->orderBy('id', 'DESC');
+    }
 }
