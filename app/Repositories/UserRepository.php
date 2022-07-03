@@ -5,6 +5,7 @@ namespace App\Repositories;
 use App\Models\Having;
 use App\Models\Part;
 use App\Models\User;
+use Illuminate\Database\Eloquent\Relations\Pivot;
 
 /**
  * Class PartRepository
@@ -37,9 +38,11 @@ class UserRepository extends CoreRepository
 
         // Get good
         $good = Part::where('slug', $good_slug) // Select a good by a slug
-            ->with(['shops' => function($query) use($shop_slug) {
-                $query->where('slug', $shop_slug);
-            }])
+            ->with([
+                'shops' => function($query) use($shop_slug) {
+                    $query->where('slug', $shop_slug)->withPivot('id');
+                }
+            ])
             ->first();
 
         // There's no such good
@@ -81,7 +84,9 @@ class UserRepository extends CoreRepository
 
         $having = new Having();
         $having->part_shop_id = $shop->pivot->id;
-        dd($shop->pivot->id, $shop->pivot);
+        $having->user_id = $user->id;
+
+//        dd($good->shops->first()->pivot->id);
 
         $user->havings()->save($having);
 

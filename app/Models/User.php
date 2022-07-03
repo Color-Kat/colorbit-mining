@@ -78,7 +78,7 @@ class User extends Authenticatable
     public function havings()
     {
         return $this
-            ->belongsToMany(Having::class)
+            ->hasMany(Having::class)
             ->orderBy('id', 'DESC');
     }
 }
