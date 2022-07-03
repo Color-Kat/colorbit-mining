@@ -4,10 +4,7 @@ namespace App\Repositories;
 
 use App\Models\Having;
 use App\Models\Part;
-use App\Models\Shop;
 use App\Models\User;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Str;
 
 /**
  * Class PartRepository
@@ -78,8 +75,8 @@ class UserRepository extends CoreRepository
         $user->save();
 
         // Decrease count of good in the shop
-        $good->shops()->attach($shop->id, [
-            'count' => $count - 1
+        $good->shops()->updateExistingPivot($shop->id, [
+            'count' => --$count
         ]);
 
         $having = new Having();
