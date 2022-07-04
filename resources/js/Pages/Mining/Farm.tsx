@@ -16,9 +16,9 @@ const Farm: IPage = React.memo(() => {
 
     const asideLinks = [
         {hrefName: "mining.farm", title: "Майнинг ферма"},
-        {hrefName: "mining.havings", title: "Сломанные комплектующие"},
-        {hrefName: "mining.havings", title: "Доставка"},
         {hrefName: "mining.havings", title: "Мои комплектующие"},
+        {hrefName: "mining.havings", title: "Сломанные комплектующие"},
+        {hrefName: "mining.havings", title: "Авито"},
     ]
 
     return (
