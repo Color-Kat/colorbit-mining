@@ -180,6 +180,8 @@ const Good: IPage = React.memo(() => {
         setIsConfirmBuy(false);
     }
 
+    console.log(shop)
+
     const buy = async () => {
         const result = await window.axios.post<any, Response<any>>(route('user.buy-good'), {
             shop_slug: shop.slug,
@@ -285,7 +287,7 @@ const Good: IPage = React.memo(() => {
                 <DialogModal.Content title={'Подтверждение'}>
                     <span>
                         Вы уверены, что хотите купить {good.name}?<br/>
-                        Время доставки {shop.deliveryTime}ч.
+                        Время доставки {shop.delivery_time}ч.
                     </span>
                 </DialogModal.Content>
                 <DialogModal.Footer>

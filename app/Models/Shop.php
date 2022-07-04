@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\traits\HasImage;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -24,5 +25,19 @@ class Shop extends Model
             ->using(PartShopPivot::class)
             ->withPivot('id', 'count')
             ->orderBy('part_id', 'DESC');
+    }
+
+    /**
+     * Get the delivery time in hours
+     *
+     * @return \Illuminate\Database\Eloquent\Casts\Attribute
+     */
+    protected  function deliveryTime(): Attribute {
+        return Attribute::make(
+            get: function ($value) {
+                $rawHours = explode(':', $value)[0];
+                return $rawHours != 00 ? +$rawHours : 0;
+            }
+        );
     }
 }

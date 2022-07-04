@@ -83,7 +83,7 @@ class UserRepository extends CoreRepository
             'count' => --$count
         ]);
 
-        BuyWithDeliveryJob::dispatch($user, $shop->pivot->id);
+        BuyWithDeliveryJob::dispatch($user, $shop->pivot->id)->delay(now()->addMinutes($shop->delivery_time));
 
 //        // Create new Having for user
 //        $having = new Having();

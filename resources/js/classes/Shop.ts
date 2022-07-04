@@ -20,9 +20,8 @@ export class Shop implements IWitsParts, IShop {
         Object.assign(this, data);
     }
 
-    get deliveryTime() {
-        const rawHours = this.delivery_time.split(':')[0];
-        return rawHours !== '00' ? rawHours : '0';
-    }
-
+    // get deliveryTime() {
+    //     const rawHours = this.delivery_time.split(':')[0];
+    //     return rawHours !== '00' ? rawHours : '0';
+    // }
 }
