@@ -9,6 +9,8 @@ use App\Http\Controllers\GoodController;
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\ShopsListController;
 
+use \App\Http\Controllers\MiningController;
+
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\PartController as AdminPartController;
 
@@ -27,10 +29,6 @@ Route::get('/', function () {
     return Inertia::render('Home');
 })->name('home');
 
-Route::get('/farms', function () {
-    return Inertia::render('Farms');
-})->name('farms');
-
 
 // Shops & products
 Route::prefix('shops')->group(function () {
@@ -41,17 +39,31 @@ Route::prefix('shops')->group(function () {
     Route::get('/{shop_slug}/{product_slug}', [GoodController::class, 'index'])->name('good');
 });
 
+
+// User's actions
 Route::middleware('auth')->prefix('user')->as('user.')->group(function () {
     // Buy good in shop
     Route::post('/buy-good', [UserController::class, 'buyGood'])->name('buy-good');
 });
 
+
+// Farms, Havings,..
+Route::middleware('auth')->prefix('mining')->as('mining.')->group(function () {
+
+    Route::get('/havings', [MiningController::class, 'havings'])->name('havings');
+    Route::get('/farm', [MiningController::class, 'farm'])->name('farm');
+});
+
+
 // Admin panel
 Route::middleware('admin')->prefix('admin')->as('admin.')->group(function() {
+    // Main admin page
     Route::get('/dashboard', [AdminController::class, 'index'])->name('dashboard');
 
+    // Page with change user's balance form
     Route::get('/change-balance', [AdminController::class, 'changeBalance'])->name('change-balance');
 
+    // Pages with all types of parts
     Route::prefix('parts')->as('parts.')->group(function() {
         Route::get('/gpu', [AdminPartController::class, 'GPU'])->name('GPU');
         Route::get('/platform', [AdminPartController::class, 'platform'])->name('platform');
@@ -63,14 +75,3 @@ Route::middleware('admin')->prefix('admin')->as('admin.')->group(function() {
     Route::resource('/parts', AdminPartController::class)->names('parts');
 
 });
-
-
-//Route::middleware([
-//    'auth:sanctum',
-//    config('jetstream.auth_session'),
-//    'verified',
-//])->group(function () {
-//    Route::get('/dashboard', function () {
-//        return Inertia::render('Dashboard');
-//    })->name('dashboard');
-//});

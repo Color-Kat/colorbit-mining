@@ -1,6 +1,6 @@
 import React, {memo} from "react";
 import {IPage} from "@/types/IPage";
-import AdminLayout from "../../components/admin/AdminLayout";
+import AdminLayout from "@components/admin/AdminLayout";
 
 const AdminDashboard: IPage = memo(() => {
     return (

@@ -55,7 +55,7 @@ const Header: React.FC = () => {
 
     const linksList = [
         // { name: 'home', text: 'Главная' },
-        { name: 'farms', text: 'Ферма' },
+        { name: 'mining.farm', text: 'Майнинг'},
         { name: 'shops', text: 'Магазины' },
         { name: 'home', text: 'Кошелёк' }
     ];

@@ -83,13 +83,10 @@ class UserRepository extends CoreRepository
             'count' => --$count
         ]);
 
-        BuyWithDeliveryJob::dispatch($user, $shop->pivot->id)->delay(now()->addMinutes($shop->delivery_time));
-
-//        // Create new Having for user
-//        $having = new Having();
-//        $having->part_shop_id = $shop->pivot->id;
-//        $having->user_id = $user->id;
-//        $user->havings()->save($having);
+        // Create new Having for user
+        // TODO change minutes to hours
+        BuyWithDeliveryJob::dispatch($user, $shop->pivot->id)
+            ->delay(now()->addMinutes($shop->delivery_time));
 
         return response()->json([
             "message" => "Товар оплачен.",
