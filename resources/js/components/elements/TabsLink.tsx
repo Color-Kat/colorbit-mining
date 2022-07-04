@@ -27,7 +27,7 @@ export const TabLinks: React.FC<{
 
                 return (
                     <li key={link.hrefName} className={className}>
-                        <CLink href={route(link.hrefName)} className="w-full h-full px-4 sm:px-5">{link.title}</CLink>
+                        <CLink href={route(link.hrefName)} className="w-full h-full px-4 sm:px-5 text-left">{link.title}</CLink>
                     </li>
                 )
             })}

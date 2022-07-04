@@ -3,40 +3,49 @@ import useRoute from "@hooks/useRoute";
 import CLink from "../CLink";
 
 import aside_bg from "@assets/aside_bg.png";
+import {TabLinks} from "../elements/TabsLink";
 
 export const WithSidebar: React.FC<{
+    asideTitle: string,
     links: {
-        name: string,
-        text: string
+        title: string,
+        hrefName: string
     }[],
     children: ReactNode
 }>
-    = React.memo(({links, children}) => {
+    = React.memo(({asideTitle, links, children}) => {
     const route = useRoute();
+    const currentRouteName = route().current();
 
     return (
         <div className="with-sidebar w-full flex">
 
-            <aside className="with-sidebar__aside rounded-lg app-bg-dark text-app shadow-md mr-4 px-5 py-5 w-72 relative overflow-hidden">
-                <h3>Майнинг</h3>
+            <aside className="hidden md:block with-sidebar__aside rounded-lg app-bg-dark text-app shadow-md mr-4 px-5 py-5 w-72 relative overflow-hidden">
 
-                <ul>
+                <h3 className="text-4xl font-play tracking-wide mb-4">{asideTitle}</h3>
+
+                <ul className="z-10 relative space-y-2">
                     {links.map(link => {
+                        const isActive = (currentRouteName == link.hrefName);
                         return (
                             <li
-                                key="link.name"
+                                className={
+                                    `w-full px-2 py-2 text-xl font-roboto rounded-md tracking-wider ${isActive ? 'app-bg-red' : ''}`
+                                }
+                                key={link.hrefName}
                             >
-                                <CLink href={route(link.name)}>{link.text}</CLink>
+                                <CLink href={route(link.hrefName)} className="text-left">{link.title}</CLink>
                             </li>
                         );
                     })}
                 </ul>
 
+                <img src={aside_bg} className="absolute h-full object-cover opacity-25 bottom-0 left-0 pointer-events-none"/>
                 {/*<img src={aside_bg} className="absolute bottom-0 left-0 w-full opacity-25 scale-y-110 -translate-y-1"/>*/}
-                <img src={aside_bg} className="absolute h-full object-cover opacity-25 bottom-0 left-0"/>
             </aside>
 
             <div className="with-sidebar__main max-w-5xl flex-1">
+
                 {children}
             </div>
 
