@@ -2,6 +2,7 @@
 
 namespace App\Repositories;
 
+use App\Jobs\BuyWithDeliveryJob;
 use App\Models\Having;
 use App\Models\Part;
 use App\Models\User;
@@ -82,11 +83,13 @@ class UserRepository extends CoreRepository
             'count' => --$count
         ]);
 
-        // Create new Having for user
-        $having = new Having();
-        $having->part_shop_id = $shop->pivot->id;
-        $having->user_id = $user->id;
-        $user->havings()->save($having);
+        BuyWithDeliveryJob::dispatch($user, $shop->pivot->id);
+
+//        // Create new Having for user
+//        $having = new Having();
+//        $having->part_shop_id = $shop->pivot->id;
+//        $having->user_id = $user->id;
+//        $user->havings()->save($having);
 
         return response()->json([
             "message" => "Товар оплачен.",

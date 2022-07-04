@@ -1658,6 +1658,9 @@ select{
   --tw-bg-opacity: 1;
   background-color: rgb(229 231 235 / var(--tw-bg-opacity));
 }
+.bg-transparent{
+  background-color: transparent;
+}
 .bg-gray-400{
   --tw-bg-opacity: 1;
   background-color: rgb(156 163 175 / var(--tw-bg-opacity));
@@ -1678,9 +1681,6 @@ select{
 .bg-gray-700{
   --tw-bg-opacity: 1;
   background-color: rgb(55 65 81 / var(--tw-bg-opacity));
-}
-.bg-transparent{
-  background-color: transparent;
 }
 .bg-opacity-25{
   --tw-bg-opacity: 0.25;
@@ -2224,9 +2224,6 @@ select:-webkit-autofill:focus {
   --tw-bg-opacity: 1;
   background-color: rgb(28 28 28 / var(--tw-bg-opacity));
 }
-.hover\:border:hover{
-  border-width: 1px;
-}
 .hover\:border-gray-300:hover{
   --tw-border-opacity: 1;
   border-color: rgb(209 213 219 / var(--tw-border-opacity));
@@ -2259,6 +2256,9 @@ select:-webkit-autofill:focus {
   --tw-bg-opacity: 1;
   background-color: rgb(249 250 251 / var(--tw-bg-opacity));
 }
+.hover\:bg-transparent:hover{
+  background-color: transparent;
+}
 .hover\:bg-gray-300\/\[0\.9\]:hover{
   background-color: rgb(209 213 219 / 0.9);
 }
@@ -2272,9 +2272,6 @@ select:-webkit-autofill:focus {
 }
 .hover\:bg-white\/\[0\.12\]:hover{
   background-color: rgb(255 255 255 / 0.12);
-}
-.hover\:bg-transparent:hover{
-  background-color: transparent;
 }
 .hover\:text-gray-500:hover{
   --tw-text-opacity: 1;
@@ -2435,12 +2432,12 @@ select:-webkit-autofill:focus {
   --tw-bg-opacity: 1;
   background-color: rgb(249 250 251 / var(--tw-bg-opacity));
 }
+.active\:bg-transparent:active{
+  background-color: transparent;
+}
 .active\:bg-red-500:active{
   --tw-bg-opacity: 1;
   background-color: rgb(239 68 68 / var(--tw-bg-opacity));
-}
-.active\:bg-transparent:active{
-  background-color: transparent;
 }
 .active\:text-gray-700:active{
   --tw-text-opacity: 1;
