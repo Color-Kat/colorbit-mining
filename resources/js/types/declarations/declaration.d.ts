@@ -1,5 +1,3 @@
-declare module "*.png";
-
 import {Axios} from "axios";
 
 declare global {
@@ -7,4 +5,3 @@ declare global {
         axios: Axios;
     }
 }
-

@@ -3,7 +3,6 @@ import useRoute from "@hooks/useRoute";
 import CLink from "../CLink";
 
 import aside_bg from "@assets/aside_bg.png";
-import {TabLinks} from "../elements/TabsLink";
 
 export const WithSidebar: React.FC<{
     asideTitle: string,
