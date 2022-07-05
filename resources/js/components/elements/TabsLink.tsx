@@ -22,12 +22,13 @@ export const TabLinks: React.FC<{
                     small ? 'h-9 text-base' : 'h-11 text-lg',
                     isActive
                         ? 'app-bg-red shadow text-white'
-                        : 'text-gray-400 bg-white/[0.08] hover:text-gray-100 hover:bg-white/[0.12]'
+                        : 'text-gray-400 bg-white/[0.08] hover:text-gray-100 hover:bg-white/[0.12]',
+                    'flex-1'
                 )
 
                 return (
                     <li key={link.hrefName} className={className}>
-                        <CLink href={route(link.hrefName)} className="w-full h-full px-4 sm:px-5 text-left">{link.title}</CLink>
+                        <CLink href={route(link.hrefName)} className="w-full h-full px-4 sm:px-5 text-center whitespace-nowrap">{link.title}</CLink>
                     </li>
                 )
             })}

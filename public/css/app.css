@@ -1189,6 +1189,15 @@ select{
 .min-h-screen{
   min-height: 100vh;
 }
+.min-h-\[100px\]{
+  min-height: 100px;
+}
+.min-h-\[1000px\]{
+  min-height: 1000px;
+}
+.min-h-\[350px\]{
+  min-height: 350px;
+}
 .w-5{
   width: 1.25rem;
 }
@@ -1964,6 +1973,9 @@ select{
 }
 .leading-4{
   line-height: 1rem;
+}
+.leading-3{
+  line-height: .75rem;
 }
 .tracking-widest{
   letter-spacing: 0.1em;

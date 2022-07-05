@@ -14,36 +14,39 @@ const HavingItem: React.FC<{ having: IHaving }> = ({having}) => {
 
     return (
         <li className="havings-list__item flex app-bg rounded-lg p-3 flex-col md:flex-row">
-            {/*<div className=" flex sm:justify-between flex-col sm:flex-row">*/}
-                <div className="flex justify-between">
-                    <div className="shrink-0 flex justify-center mb-3 mr-3 sm:mb-0">
-                        <img
-                            className="sm:h-32 md:h-36 sm:w-auto w-24 rounded-md "
-                            src={part.image}
-                            alt={part.name}
-                        />
+            <div className="flex justify-between">
+                {/* IMAGE */}
+                <div className="shrink-0 flex justify-center mb-3 mr-3 sm:mb-0">
+                    <img
+                        className="sm:h-32 md:h-36 sm:w-auto w-24 rounded-md "
+                        src={part.image}
+                        alt={part.name}
+                    />
+                </div>
+
+                {/*  */}
+                <div className="shop-list__item-info flex-1 sm:ml-5 flex flex-col justify-between">
+                    <h3 className="text-base sm:text-lg tracking-wide font-roboto leading-5 sm:leading-6">{part.name}</h3>
+
+                    <div
+                        className="hidden sm:flex tracking-wider whitespace-nowrap flex-wrap items-end text-sm space-x-1.5"
+                    >
+                        {shop.warranty
+                            ? <span className="px-2 py-0.5 rounded-md border-gray-500 border">Гарантия</span>
+                            : null}
                     </div>
-
-                    <div className="shop-list__item-info flex-1 sm:ml-5 flex flex-col justify-between">
-                        <h3 className="text-base sm:text-lg tracking-wide font-roboto leading-5 sm:leading-6">{part.name}</h3>
-
-                        <div
-                            className="hidden sm:flex tracking-wider whitespace-nowrap flex-wrap items-end text-sm space-x-1.5">
-                            {shop.warranty ? <span
-                                className="px-2 py-0.5 rounded-md border-gray-500 border">Гарантия</span> : null}
-                        </div>
-                    </div>
                 </div>
+            </div>
 
-                <div
-                    className="flex sm:hidden tracking-wider whitespace-nowrap flex-wrap justify-end text-sm mt-2 space-x-1">
-                    {shop.warranty ?
-                        <span className="px-2 py-0.5 rounded-md border-gray-500 border">Гарантия</span> : null}
-                </div>
+            <div
+                className="flex sm:hidden tracking-wider whitespace-nowrap flex-wrap justify-end text-sm mt-2 space-x-1">
+                {shop.warranty ?
+                    <span className="px-2 py-0.5 rounded-md border-gray-500 border">Гарантия</span> : null}
+            </div>
 
-                <div className="flex sm:flex-col justify-between items-center sm:items-end mt-3 sm:m-0">
-                    <h3 className="text-2xl tracking-wide font-roboto font-bold sm:mb-2">{part.price}$</h3>
-                </div>
+            <div className="flex sm:flex-col justify-between items-center sm:items-end mt-3 sm:m-0">
+                <h3 className="text-2xl tracking-wide font-roboto font-bold sm:mb-2">{part.price}$</h3>
+            </div>
         </li>
     );
 }
