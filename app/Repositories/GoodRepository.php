@@ -39,6 +39,8 @@ class GoodRepository extends CoreRepository
             ->withTrashed()
             ->first();
 
+        if (!$good) return null;
+
         // Get count so
         $good['count'] = 0;
         $good->shops->each(function($shop) use ($shop_slug, $good){

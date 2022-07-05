@@ -20,6 +20,7 @@ import SecondaryButton from "@components/profile/SecondaryButton";
 import {Shop} from "@/classes/Shop";
 import {Response} from "@/types/Response";
 import LoginModal from "@components/page/LoginModal";
+import PageError from "./PageError";
 
 const SpecLine: React.FC<{title: string, value: string|number, description?: string}> = React.memo(({title, value, description}) => {
     return (
@@ -159,6 +160,8 @@ const MainSpecs: React.FC<{good: PartT<PartType>}> = ({good}) => {
 const Good: IPage = React.memo(() => {
     const route = useRoute();
     const page = useTypedPage<{good: any, ownerShop: IShop}>();
+
+    if(!page.props.good) return <PageError title="Ууупс..." description="А такого товара не существует..." />
 
     const auth = page.props.user;
     const good = Part.createByType(page.props.good);
