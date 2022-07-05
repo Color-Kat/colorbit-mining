@@ -35,7 +35,7 @@ const ShopListItem: React.FC<{shop: Shop}> = ({shop}) => {
                         <div className="tracking-wider whitespace-nowrap flex flex-wrap items-end text-sm">
                             {shop.warranty ? <span className="bg-gray-400 text-gray-900 py-1 px-2 rounded-md mr-2 mt-2">Гарантия</span> : null}
                             {shop.used_market ? <span className="bg-gray-400 text-gray-900 py-1 px-2 rounded-md mr-2 mt-2">Б/y</span> : null}
-                            <span className="bg-gray-400 text-gray-900 py-1 px-2 rounded-md mt-2">Время доставки: {shop.deliveryTime}ч.</span>
+                            <span className="bg-gray-400 text-gray-900 py-1 px-2 rounded-md mt-2">Время доставки: {shop.delivery_time}ч.</span>
                         </div>
                     </div>
                 </div>

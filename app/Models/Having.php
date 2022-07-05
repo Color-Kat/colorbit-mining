@@ -20,7 +20,7 @@ class Having extends Model
      */
     public function good()
     {
-        return $this->hasOne(PartShopPivot::class)->with(['part', 'shop']);
+        return $this->belongsTo(PartShopPivot::class, 'part_shop_id', 'id')->with(['part', 'shop']);
     }
 
     /**

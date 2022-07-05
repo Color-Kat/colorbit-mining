@@ -8,8 +8,6 @@ const PageError: IPage<{
     title: string,
     description?: string
 }> = React.memo(({title, description = ''}) => {
-
-
     return (
         <div className="max-w-3xl w-full relative">
             <Section>

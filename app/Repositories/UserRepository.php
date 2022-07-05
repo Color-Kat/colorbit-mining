@@ -83,8 +83,8 @@ class UserRepository extends CoreRepository
             'count' => --$count
         ]);
 
-        // Create new Having for user
         // TODO change minutes to hours
+        // Create new Having for user
         BuyWithDeliveryJob::dispatch($user, $shop->pivot->id)
             ->delay(now()->addMinutes($shop->delivery_time));
 
@@ -92,5 +92,21 @@ class UserRepository extends CoreRepository
             "message" => "Товар оплачен.",
             "status" => true
         ]);
+    }
+
+    public function getHavingsWithPaginator($request) {
+        $user = $request->user();
+
+        // Not auth
+        if(!$user) return response()->json([
+            "message" => "Вы не авторизированны",
+            "status" => false
+        ]);
+
+        $havings = $user->havings()->with(['good'])->paginate(10);
+
+        dd($havings);
+
+        return $havings;
     }
 }

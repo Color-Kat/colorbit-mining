@@ -161,7 +161,8 @@ const Good: IPage = React.memo(() => {
     const route = useRoute();
     const page = useTypedPage<{good: any, ownerShop: IShop}>();
 
-    if(!page.props.good) return <PageError title="Ууупс..." description="А такого товара не существует..." />
+    if(!page.props.good)
+        return <PageError title="Ууупс..." description="А такого товара не существует..." />
 
     const auth = page.props.user;
     const good = Part.createByType(page.props.good);
