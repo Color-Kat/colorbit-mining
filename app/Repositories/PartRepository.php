@@ -155,9 +155,8 @@ class PartRepository extends CoreRepository
             ->find($id);
 
 
-        // TODO make soft delete and restore.
-        // NOT YET - The image will be deleted by HasImage trait. for not soft delete
-        $part->deleteImage(); // Delete image from storage
+        // The image will be deleted by observer when forceDeleted
+//        $part->deleteImage(); // Delete image from storage
 
         $result = $part->delete(); // Soft delete
 

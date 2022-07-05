@@ -233,7 +233,7 @@ const Good: IPage = React.memo(() => {
             <Section>
                 <div className="good-overview flex justify-between md:flex-row flex-col">
                     {/* Image Block */}
-                    <div className="good-overview__image flex flex-col md:mr-3">
+                    <div className="good-overview__image flex flex-col md:mr-3 md:max-w-md">
                         <img className="flex flex-1 max-w-full h-auto" src={good.image} alt={good.name}/>
                         <span className="text-gray-500 mt-2 hidden md:block">Код товара: {page.props.good.id}</span>
                     </div>
