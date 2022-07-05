@@ -57,7 +57,6 @@ const PartsListItem: React.FC<{ part: IBasePart }> = ({part}) => {
                     <EditButton onClick={editPart}/>
                     <DeleteButton onClick={deletePart}/>
                 </div>
-
             </div>
         </li>
     );

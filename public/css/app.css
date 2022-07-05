@@ -1181,6 +1181,11 @@ select{
 .h-0{
   height: 0px;
 }
+.h-max{
+  height: -webkit-max-content;
+  height: -moz-max-content;
+  height: max-content;
+}
 .min-h-screen{
   min-height: 100vh;
 }

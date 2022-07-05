@@ -105,8 +105,6 @@ class UserRepository extends CoreRepository
 
         $havings = $user->havings()->with(['good'])->paginate(10);
 
-        dd($havings);
-
         return $havings;
     }
 }
