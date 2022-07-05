@@ -12,7 +12,8 @@ export interface IHaving{
         part: IBasePart,
         shop: {
             id: number,
-            warranty: boolean
+            warranty: boolean,
+            used_market: boolean
         }
     }
 }

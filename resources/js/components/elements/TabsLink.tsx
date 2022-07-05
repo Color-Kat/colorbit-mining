@@ -17,13 +17,12 @@ export const TabLinks: React.FC<{
                 const isActive = route().current(link.current ?? link.hrefName);
 
                 const className =  classNames(
-                    'flex justify-center items-center rounded-lg font-play leading-5 m-0.5',
+                    'flex justify-center items-center flex-1 rounded-lg font-play leading-5 m-0.5',
                     'ring-white ring-opacity-60 ring-offset-2 ring-offset-blue-400 focus:outline-none focus:ring-2',
                     small ? 'h-9 text-base' : 'h-11 text-lg',
                     isActive
                         ? 'app-bg-red shadow text-white'
                         : 'text-gray-400 bg-white/[0.08] hover:text-gray-100 hover:bg-white/[0.12]',
-                    'flex-1'
                 )
 
                 return (

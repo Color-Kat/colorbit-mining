@@ -21,8 +21,8 @@ class Having extends Model
     public function good()
     {
         return $this->belongsTo(PartShopPivot::class, 'part_shop_id', 'id')->with([
-            'part:id,name,vendor,type,image',
-            'shop:id,warranty'
+            'part',
+            'shop:id,warranty,used_market'
         ]);
     }
 

@@ -13,7 +13,7 @@ const HavingItem: React.FC<{ having: IHaving }> = ({having}) => {
     const shop = having.good.shop;
 
     return (
-        <li className="havings-list__item flex app-bg rounded-lg p-3 flex-col md:flex-row">
+        <li className="havings-list__item flex app-bg rounded-lg p-3 flex-col">
             <div className="flex justify-between">
                 {/* IMAGE */}
                 <div className="shrink-0 flex justify-center mb-3 mr-3 sm:mb-0">
@@ -24,28 +24,60 @@ const HavingItem: React.FC<{ having: IHaving }> = ({having}) => {
                     />
                 </div>
 
-                {/*  */}
+                {/* Name-info */}
                 <div className="shop-list__item-info flex-1 sm:ml-5 flex flex-col justify-between">
                     <h3 className="text-base sm:text-lg tracking-wide font-roboto leading-5 sm:leading-6">{part.name}</h3>
 
-                    <div
-                        className="hidden sm:flex tracking-wider whitespace-nowrap flex-wrap items-end text-sm space-x-1.5"
-                    >
-                        {shop.warranty
-                            ? <span className="px-2 py-0.5 rounded-md border-gray-500 border">Гарантия</span>
-                            : null}
+                    <div className="hidden md:flex space-x-2 justify-end">
+                        {/* Warranty */}
+                        {shop.warranty ?
+                            <div
+                                className="flex tracking-wider whitespace-nowrap flex-wrap justify-end text-sm mt-2 space-x-1"
+                            >
+                                <span className="px-2 py-0.5 rounded-md border-gray-500 border">Гарантия</span>
+                            </div> : null}
+
+                        {/* Is used market */}
+                        {shop.used_market ?
+                            <div
+                                className="flex tracking-wider whitespace-nowrap flex-wrap justify-end text-sm mt-2 space-x-1"
+                            >
+                                <span className="px-2 py-0.5 rounded-md border-gray-500 border">Б/у</span>
+                            </div> : null}
+
+                        {/*  State  */}
+                        <div
+                            className="flex tracking-wider whitespace-nowrap flex-wrap justify-end text-sm mt-2 space-x-1"
+                        >
+                            <span className="px-2 py-0.5 rounded-md border-green-400 border text-green-400">&bull; Состояние: работает</span>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <div
-                className="flex sm:hidden tracking-wider whitespace-nowrap flex-wrap justify-end text-sm mt-2 space-x-1">
+            <div className="md:hidden flex space-x-2">
+                {/* Warranty */}
                 {shop.warranty ?
-                    <span className="px-2 py-0.5 rounded-md border-gray-500 border">Гарантия</span> : null}
-            </div>
+                    <div
+                        className="flex tracking-wider whitespace-nowrap flex-wrap justify-end text-sm mt-2 space-x-1"
+                    >
+                        <span className="px-2 py-0.5 rounded-md border-gray-500 border">Гарантия</span>
+                    </div> : null}
 
-            <div className="flex sm:flex-col justify-between items-center sm:items-end mt-3 sm:m-0">
-                <h3 className="text-2xl tracking-wide font-roboto font-bold sm:mb-2">{part.price}$</h3>
+                {/* Is used market */}
+                {shop.used_market ?
+                    <div
+                        className="flex tracking-wider whitespace-nowrap flex-wrap justify-end text-sm mt-2 space-x-1"
+                    >
+                        <span className="px-2 py-0.5 rounded-md border-gray-500 border">Б/у</span>
+                    </div> : null}
+
+                {/*  State  */}
+                <div
+                    className="flex tracking-wider whitespace-nowrap flex-wrap justify-end text-sm mt-2 space-x-1"
+                >
+                    <span className="px-2 py-0.5 rounded-md border-green-400 border text-green-400">&bull; Состояние: работает</span>
+                </div>
             </div>
         </li>
     );
