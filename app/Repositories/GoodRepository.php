@@ -36,6 +36,7 @@ class GoodRepository extends CoreRepository
                 $query->where('slug', $shop_slug); // the part belongs to the shop with a slug
             })
             ->with('breakdowns:title') // Add breakdowns that belongs to the part
+            ->withTrashed()
             ->first();
 
         // Get count so
@@ -44,7 +45,7 @@ class GoodRepository extends CoreRepository
             if($shop->slug == $shop_slug) $good['count'] = $shop->pivot->count;
         });
 
-        $good->setAppends(['rawName']);
+        $good->setAppends(['rawName', 'isDeleted']);
 
         return $good;
     }

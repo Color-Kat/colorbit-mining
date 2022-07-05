@@ -13,13 +13,13 @@ import {PartT} from "@/types/parts/PartT";
 import {Section} from "@components/page/Section";
 import Button from "@components/elements/Button";
 import {Inertia} from "@inertiajs/inertia";
-import {Dropdown} from "../components/elements/Dropdown";
+import {Dropdown} from "@components/elements/Dropdown";
 import {BiArrowBack} from "react-icons/all";
-import DialogModal from "../components/modal/DialogModal";
-import SecondaryButton from "../components/profile/SecondaryButton";
+import DialogModal from "@components/modal/DialogModal";
+import SecondaryButton from "@components/profile/SecondaryButton";
 import {Shop} from "@/classes/Shop";
-import {Response} from "../types/Response";
-import LoginModal from "../components/page/LoginModal";
+import {Response} from "@/types/Response";
+import LoginModal from "@components/page/LoginModal";
 
 const SpecLine: React.FC<{title: string, value: string|number, description?: string}> = React.memo(({title, value, description}) => {
     return (
@@ -180,8 +180,6 @@ const Good: IPage = React.memo(() => {
         setIsConfirmBuy(false);
     }
 
-    console.log(shop)
-
     const buy = async () => {
         const result = await window.axios.post<any, Response<any>>(route('user.buy-good'), {
             shop_slug: shop.slug,
@@ -191,6 +189,29 @@ const Good: IPage = React.memo(() => {
         console.log(result, 123)
 
         closeConfirmBuy();
+    }
+
+    const BuyButton = () => {
+        if(page.props.good.isDeleted) return (
+            <SecondaryButton
+                className="py-2 px-3 text-base font-sans md:w-36 flex items-center justify-center leading-4 normal-case"
+                disabled
+            >Нет в продаже</SecondaryButton>
+        );
+
+        if(good.count) return (
+            <Button
+                className="py-2 px-3 text-base font-sans md:w-36 flex items-center justify-center capitalize"
+                onClick={confirmBuy}
+            >Купить</Button>
+        );
+
+        return (
+            <SecondaryButton
+                className="py-2 px-3 text-base font-sans md:w-36 flex items-center justify-center leading-4 normal-case"
+                disabled
+            >Нет в наличии</SecondaryButton>
+        );
     }
 
     return (
@@ -231,17 +252,7 @@ const Good: IPage = React.memo(() => {
                             <div className="good-overview__price-section flex">
                                 <div className="flex grow text-2xl tracking-wide font-roboto font-bold flex items-center mr-2 rounded-md bg-gradient-to-br from-transparent to-[#121212]">{good.price}$</div>
 
-                                {good.count
-                                    ? <Button
-                                            className="py-2 px-3 text-base font-sans md:w-36 flex items-center justify-center capitalize"
-                                            onClick={confirmBuy}
-                                        >Купить</Button>
-                                    : <Button
-                                            className="py-2 px-3 text-base font-sans md:w-36 flex items-center justify-center normal-case bg-transparent hover:bg-transparent active:bg-transparent"
-                                            disabled
-                                        >Нет в наличии</Button>
-                                }
-
+                                <BuyButton/>
 
                             </div>
 
@@ -266,7 +277,7 @@ const Good: IPage = React.memo(() => {
             {/* Specifications section */}
             <Section>
                 <div className="good-specs lex flex-col">
-                    <h2 className="good-specs_title font-roboto text-2xl mb-5 tracking-wide">Характеристики {good.name}</h2>
+                    <h2 className="good-specs_title font-roboto text-2xl mb-5 tracking-wide">Характеристики {page.props.good.rawName ?? good.name}</h2>
 
                     <div className="good-specs specs">
                         <div className="mb-4">

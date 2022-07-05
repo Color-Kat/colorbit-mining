@@ -159,7 +159,7 @@ class PartRepository extends CoreRepository
         // NOT YET - The image will be deleted by HasImage trait. for not soft delete
         $part->deleteImage(); // Delete image from storage
 
-        $result = $part->forceDelete(); // Soft delete
+        $result = $part->delete(); // Soft delete
 
         return $result;
     }

@@ -1,22 +1,16 @@
 import React from 'react';
-import useRoute from '@hooks/useRoute';
-import useTypedPage from '@hooks/useTypedPage';
-import CLink from "../../components/CLink";
-import { IPage } from "../../types/IPage";
+import { IPage } from "@/types/IPage";
+import {Section} from "@components/page/Section";
+import MiningLayout from "@components/mining/MiningLayout";
 
-const Farm: IPage = React.memo(() => {
-    const route = useRoute();
-    const page = useTypedPage();
-
+const Havings: IPage = React.memo(() => {
     return (
-        <div>
-
-            <CLink href='/dashboard'>Farms</CLink>
-
-        </div>
+        <MiningLayout title="Ваши комплектующие" description="Распоряжайтесь купленными вами комплектующими: собирайте из них майнинг фермы, продавайте на б/у рынке.">
+            <Section>
+                123213123
+            </Section>
+        </MiningLayout>
     );
 });
 
-// Farms.layout = (page) => <AppLayout title="123" children={page} />;
-
-export default Farm;
+export default Havings;

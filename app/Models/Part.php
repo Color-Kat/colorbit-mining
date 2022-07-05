@@ -110,6 +110,17 @@ class Part extends Model
     }
 
     /**
+     * Return is part deleted
+     *
+     * @param $value
+     * @return array|mixed
+     */
+    protected function getIsDeletedAttribute()
+    {
+        return !!$this->deleted_at;
+    }
+
+    /**
      * Return raw name
      *
      * @param $value
