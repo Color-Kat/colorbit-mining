@@ -41,7 +41,6 @@ const HavingState: React.FC<{ havingState: HavingStateType }> = React.memo(({hav
 });
 
 const HavingFeatures: React.FC<{ having: IHaving }> = React.memo(({having}) => {
-    console.log(having)
     return (
         <>
             {/* Warranty */}
@@ -59,6 +58,15 @@ const HavingFeatures: React.FC<{ having: IHaving }> = React.memo(({having}) => {
                     className="px-2 py-0.5 rounded-md border-gray-500 border tracking-wider whitespace-nowrap text-sm mt-2"
                 >
                     Б/у
+                </span>
+                : null}
+
+            {/* For sale */}
+            {having.for_sale ?
+                <span
+                    className="px-2 py-0.5 rounded-md border-gray-500 border tracking-wider whitespace-nowrap text-sm mt-2"
+                >
+                    Продаётся
                 </span>
                 : null}
 
@@ -97,7 +105,7 @@ const HavingItem: React.FC<{ having: IHaving }> = React.memo(({having}) => {
             </div>
 
             {/* Having state for mobile */}
-            <div className="lg:hidden flex space-x-2">
+            <div className="lg:hidden flex space-x-2 justify-end">
                 <HavingFeatures having={having}/>
             </div>
         </li>
