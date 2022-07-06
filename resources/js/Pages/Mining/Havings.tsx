@@ -7,34 +7,36 @@ import {IPaginator} from "@/types/IPaginator";
 import Paginator from "@components/elements/Paginator";
 import {HavingStateType, IHaving} from "@/types/IHaving";
 import {TabLinks} from "@components/elements/TabsLink";
+import Button from "../../components/elements/Button";
+import SecondaryButton from "../../components/elements/SecondaryButton";
 
 const HavingState: React.FC<{ havingState: HavingStateType }> = React.memo(({havingState}) => {
     switch (havingState) {
         case 'not_used':
             return (
                 <span
-                    className="px-2 py-0.5 rounded-md border-gray-500 border tracking-wider whitespace-nowrap text-sm mt-2"
+                    className="px-2 py-0.5 rounded-md border-gray-500 border tracking-wider text-sm mt-2 whitespace-nowrap"
                 >&bull; Не используется</span>
             );
 
         case 'used':
             return (
                 <span
-                    className="px-2 py-0.5 rounded-md border-green-500 text-green-500 border tracking-wider whitespace-nowrap text-sm mt-2"
+                    className="px-2 py-0.5 rounded-md border-green-500 text-green-500 border tracking-wider text-sm mt-2 whitespace-nowrap"
                 >&bull; Используется</span>
             );
 
         case 'needs_repair':
             return (
                 <span
-                    className="px-2 py-0.5 rounded-md border-orange-500 text-orange-500 border tracking-wider whitespace-nowrap text-sm mt-2"
+                    className="px-2 py-0.5 rounded-md border-orange-500 text-orange-500 border tracking-wider text-sm mt-2 whitespace-nowrap"
                 >&bull; Нужен ремонт</span>
             );
 
         case 'broken':
             return (
                 <span
-                    className="px-2 py-0.5 rounded-md border-red-600 text-red-600 border tracking-wider whitespace-nowrap text-sm mt-2"
+                    className="px-2 py-0.5 rounded-md border-red-600 text-red-600 border tracking-wider text-sm mt-2 whitespace-nowrap"
                 >&bull; Сломано</span>
             );
     }
@@ -46,7 +48,7 @@ const HavingFeatures: React.FC<{ having: IHaving }> = React.memo(({having}) => {
             {/* Warranty */}
             {having.good.shop.warranty ?
                 <span
-                    className="px-2 py-0.5 rounded-md border-gray-500 border tracking-wider whitespace-nowrap text-sm mt-2"
+                    className="mr-2 px-2 py-0.5 rounded-md border-gray-500 border tracking-wider text-sm mt-2 whitespace-nowrap"
                 >
                         Гарантия
                 </span>
@@ -55,7 +57,7 @@ const HavingFeatures: React.FC<{ having: IHaving }> = React.memo(({having}) => {
             {/* Is used market */}
             {having.good.shop.used_market ?
                 <span
-                    className="px-2 py-0.5 rounded-md border-gray-500 border tracking-wider whitespace-nowrap text-sm mt-2"
+                    className="mr-2 px-2 py-0.5 rounded-md border-gray-500 border tracking-wider text-sm mt-2 whitespace-nowrap"
                 >
                     Б/у
                 </span>
@@ -64,7 +66,7 @@ const HavingFeatures: React.FC<{ having: IHaving }> = React.memo(({having}) => {
             {/* For sale */}
             {having.for_sale ?
                 <span
-                    className="px-2 py-0.5 rounded-md border-gray-500 border tracking-wider whitespace-nowrap text-sm mt-2"
+                    className="mr-2 px-2 py-0.5 rounded-md border-gray-500 border tracking-wider text-sm mt-2 whitespace-nowrap"
                 >
                     Продаётся
                 </span>
@@ -98,16 +100,27 @@ const HavingItem: React.FC<{ having: IHaving }> = React.memo(({having}) => {
                     <h3 className="text-base sm:text-lg tracking-wide font-roboto leading-5 sm:leading-6">{part.name}</h3>
 
                     {/* Having state for desktop */}
-                    <div className="hidden lg:flex space-x-2 justify-end">
+                    <div className="hidden lg:flex justify-end">
                         <HavingFeatures having={having}/>
                     </div>
                 </div>
             </div>
 
             {/* Having state for mobile */}
-            <div className="lg:hidden flex space-x-2 justify-end">
+            <div className="lg:hidden flex flex-wrap">
                 <HavingFeatures having={having}/>
             </div>
+
+            {/* Buttons */}
+            {/*<div className="flex mt-3 justify-end space-x-3">*/}
+            {/*    <Button className="bg-transparent border-gray-500 border text-gray-500 hover:bg-gray-400">*/}
+            {/*        Продать*/}
+            {/*    </Button>*/}
+
+            {/*    <Button>*/}
+            {/*        Посмотреть*/}
+            {/*    </Button>*/}
+            {/*</div>*/}
         </li>
     );
 });
@@ -118,8 +131,6 @@ const Havings: IPage = React.memo(() => {
     }>();
 
     const havingsPaginator = page.props.havings;
-
-    // console.log(havingsPaginator);
 
     const typesLinks = [
         {
@@ -167,7 +178,7 @@ const Havings: IPage = React.memo(() => {
                     </ul>
                 </Section>
 
-                <div className="relative rounded-lg app-bg-dark shadow -m-s p-2 pt-0.5">
+                <div className="relative rounded-lg app-bg-dark shadow -m-s p-2 pt-0.5 w-fit">
                     <Paginator paginator={havingsPaginator}/>
                 </div>
             </div>
