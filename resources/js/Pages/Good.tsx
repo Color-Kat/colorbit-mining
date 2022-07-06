@@ -168,8 +168,8 @@ const Good: IPage = React.memo(() => {
     const good = Part.createByType(page.props.good);
     const shop = new Shop(page.props.ownerShop);
 
-    const toShop = () => {
-        Inertia.visit(route('shop', shop.slug));
+    const back = () => {
+        window.history.back();
     }
 
     const [isConfirmBuy, setIsConfirmBuy] = useState(false);
@@ -228,8 +228,8 @@ const Good: IPage = React.memo(() => {
 
             <Section>
                 <div className="flex items-center cursor-pointer w-max">
-                    <BiArrowBack size="30" onClick={toShop}/>
-                    <h2 onClick={toShop} className="text-3xl font-medium font-play ml-3">{shop.name}</h2>
+                    <BiArrowBack size="30" onClick={back}/>
+                    <h2 onClick={back} className="text-3xl font-medium font-play ml-3">{shop.name}</h2>
                 </div>
             </Section>
 

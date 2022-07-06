@@ -2,7 +2,6 @@ import React from 'react';
 import useRoute from '@hooks/useRoute';
 import useTypedPage from '@hooks/useTypedPage';
 import {IPage} from "@/types/IPage";
-import {PageTitle} from "@components/page/PageTitle";
 import Paginator from "@components/elements/Paginator";
 import {IShop, IShopPart} from "@/types/shops/IShop";
 import {Inertia} from "@inertiajs/inertia";
@@ -10,6 +9,9 @@ import {Section} from "@components/page/Section";
 import Button from "@components/elements/Button";
 
 import {Shop as ShopClass} from "@/classes/Shop";
+import {Head} from "@inertiajs/inertia-react";
+import {BiArrowBack} from "react-icons/all";
+import PageError from "./PageError";
 
 
 const ShopPartItem: React.FC<{ part: IShopPart, shop: IShop }> = ({part, shop}) => {
@@ -78,9 +80,28 @@ const Shop: IPage = React.memo(() => {
     const shop = new ShopClass(page.props.shop);
     const partsPaginator = page.props.shop.parts;
 
+    const back = () => {
+        window.history.back();
+    }
+
+    if(!shop) return <PageError title="Здесь не продают комплектующие" description="Вы дверью ошиблись."/>
+
     return (
         <div className="shops-list-page max-w-3xl w-full">
-            <PageTitle title={shop.name} description={shop.description}/>
+            {/* @ts-ignore*/}
+            <Head>
+                <title>{`${shop.name} - оборудование для майнинга`}</title>
+                <meta name="description" content={shop.description} />
+            </Head>
+
+            <Section>
+                <div className="flex items-center cursor-pointer w-max">
+                    <BiArrowBack size="30" onClick={back}/>
+                    <h2 onClick={back} className="text-3xl font-medium font-play ml-3">{shop.name}</h2>
+                </div>
+            </Section>
+
+            {/*<PageTitle title={shop.name} description={shop.description}/>*/}
 
             <ul className="grid sm:block grid-cols-2 gap-2">
                 {partsPaginator.data.map(part => {
