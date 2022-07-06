@@ -122,34 +122,34 @@ const HavingItem: React.FC<{ having: IHaving }> = React.memo(({having}) => {
             {/* Buttons */}
             <div className="flex mt-3 justify-end space-x-3 border-gray-500 border-t flex-wrap">
                 {/* Sell */}
-                <Button className="bg-transparent border-gray-500 border text-gray-500 hover:bg-gray-400 mt-3">
+                <Button className="bg-transparent border-gray-500 border text-gray-500 hover:bg-gray-500 mt-3">
                     Продать
                 </Button>
 
                 {/* View */}
-                <Button onClick={goToGood} className="bg-transparent border-gray-500 border text-gray-500 hover:bg-gray-400 mt-3">
+                <Button onClick={goToGood} className="bg-transparent border-gray-500 border text-gray-500 hover:bg-gray-500 mt-3">
                     Посмотреть
                 </Button>
 
                 {/* Repair */}
                 {having.state == 'needs_repair' ?
-                    <Button className="mt-3">
+                    <Button className="mt-3 w-36 flex justify-center">
                         Починить
                     </Button> : null
                 }
 
                 {/* Use */}
                 {having.state == 'not_used' ?
-                    <Button className="mt-3">
+                    <Button className="mt-3 w-36 flex justify-center">
                         Использовать
                     </Button> : null
                 }
 
                 {/* Don't use */}
                 {having.state == 'used' ?
-                    <Button className="mt-3">
+                    <SecondaryButton className="mt-3 w-36 flex justify-center">
                         Отключить
-                    </Button> : null
+                    </SecondaryButton> : null
                 }
             </div>
         </li>

@@ -61,7 +61,8 @@ Route::middleware('admin')->prefix('admin')->as('admin.')->group(function() {
     Route::get('/dashboard', [AdminController::class, 'index'])->name('dashboard');
 
     // Page with change user's balance form
-    Route::get('/change-balance', [AdminController::class, 'changeBalance'])->name('change-balance');
+    Route::get('/change-balance', [AdminController::class, 'changeBalancePage'])->name('change-balance-page');
+    Route::post('/change-balance', [AdminController::class, 'changeBalance'])->name('change-balance');
 
     // Pages with all types of parts
     Route::prefix('parts')->as('parts.')->group(function() {

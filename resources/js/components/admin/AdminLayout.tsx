@@ -26,7 +26,7 @@ const AdminLayout: IPage<{title: string, description: string}> =({title, descrip
         },
         {
             title: 'Накрутка',
-            hrefName: 'admin.change-balance'
+            hrefName: 'admin.change-balance-page'
         },
     ];
 

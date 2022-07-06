@@ -1274,6 +1274,9 @@ select{
   width: -moz-fit-content;
   width: fit-content;
 }
+.w-36{
+  width: 9rem;
+}
 .min-w-0{
   min-width: 0px;
 }
