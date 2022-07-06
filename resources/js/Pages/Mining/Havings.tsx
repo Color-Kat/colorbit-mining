@@ -9,6 +9,8 @@ import {HavingStateType, IHaving} from "@/types/IHaving";
 import {TabLinks} from "@components/elements/TabsLink";
 import Button from "../../components/elements/Button";
 import SecondaryButton from "../../components/elements/SecondaryButton";
+import {Inertia} from "@inertiajs/inertia";
+import useRoute from "../../hooks/useRoute";
 
 const HavingState: React.FC<{ havingState: HavingStateType }> = React.memo(({havingState}) => {
     switch (havingState) {
@@ -79,8 +81,14 @@ const HavingFeatures: React.FC<{ having: IHaving }> = React.memo(({having}) => {
 });
 
 const HavingItem: React.FC<{ having: IHaving }> = React.memo(({having}) => {
+    const route = useRoute();
+
     const part = having.good.part;
     const shop = having.good.shop;
+
+    const goToGood = () => {
+        Inertia.visit(route('good', [shop.slug, part.slug]));
+    }
 
     return (
         <li className="havings-list__item flex app-bg rounded-lg p-3 flex-col">
@@ -112,15 +120,21 @@ const HavingItem: React.FC<{ having: IHaving }> = React.memo(({having}) => {
             </div>
 
             {/* Buttons */}
-            {/*<div className="flex mt-3 justify-end space-x-3">*/}
-            {/*    <Button className="bg-transparent border-gray-500 border text-gray-500 hover:bg-gray-400">*/}
-            {/*        Продать*/}
-            {/*    </Button>*/}
+            <div className="flex mt-3 justify-end space-x-3 border-gray-500 border-t flex-wrap">
+                <Button className="bg-transparent border-gray-500 border text-gray-500 hover:bg-gray-400 mt-3">
+                    Продать
+                </Button>
 
-            {/*    <Button>*/}
-            {/*        Посмотреть*/}
-            {/*    </Button>*/}
-            {/*</div>*/}
+                {having.state == 'needs_repair' ?
+                    <Button className="bg-transparent border-gray-500 border text-gray-500 hover:bg-gray-400 mt-3">
+                        Починить
+                    </Button> : null
+                }
+
+                <SecondaryButton onClick={goToGood} className="mt-3">
+                    Посмотреть
+                </SecondaryButton>
+            </div>
         </li>
     );
 });

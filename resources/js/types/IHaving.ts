@@ -13,6 +13,7 @@ export interface IHaving{
         part: IBasePart,
         shop: {
             id: number,
+            slug: string,
             warranty: boolean,
             used_market: boolean
         }

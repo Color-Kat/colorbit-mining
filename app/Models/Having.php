@@ -22,7 +22,7 @@ class Having extends Model
     {
         return $this->belongsTo(PartShopPivot::class, 'part_shop_id', 'id')->with([
             'part',
-            'shop:id,warranty,used_market'
+            'shop:id,slug,warranty,used_market'
         ]);
     }
 

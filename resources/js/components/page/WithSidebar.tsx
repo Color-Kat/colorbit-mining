@@ -19,11 +19,11 @@ export const WithSidebar: React.FC<{
     return (
         <div className="flex justify-center">
             <div className="with-sidebar flex">
-                <aside className="with-sidebar__aside hidden md:block h-max min-h-[350px] rounded-lg app-bg-dark text-app shadow-md mr-4 px-5 py-5 w-72 relative overflow-hidden">
+                <aside className="fixed with-sidebar__aside hidden md:block h-max min-h-[350px] rounded-lg app-bg-dark text-app shadow-md mr-4 px-5 py-5 w-72 relative overflow-hidden">
 
                     <h3 className="text-3xl font-play tracking-wide mb-4">{asideTitle}</h3>
 
-                    <ul className="z-10 relative space-y-2">
+                    <ul className="z-[5] relative space-y-2">
                         {links.map(link => {
                             const isActive = (currentRouteName == link.hrefName);
                             return (
