@@ -191,8 +191,10 @@ const Havings: IPage = React.memo(() => {
     ];
 
     return (
-        <MiningLayout title="Ваши комплектующие"
-                      description="Распоряжайтесь купленными вами комплектующими: собирайте из них майнинг фермы, продавайте на б/у рынке.">
+        <MiningLayout
+            title="Ваши комплектующие"
+          description="Распоряжайтесь купленными вами комплектующими: собирайте из них майнинг фермы либо перепродавайте на б/у рынке."
+        >
 
             <div className="max-w-2xl">
                 <Section>
@@ -203,7 +205,6 @@ const Havings: IPage = React.memo(() => {
 
                     <ul className="havings-list mb-5 space-y-6">
                         {havingsPaginator.data.map(having => {
-                            console.log(having);
                             return <HavingItem key={having.id} having={having}/>
                         })}
                     </ul>

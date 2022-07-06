@@ -99,6 +99,7 @@ const Shop: IPage = React.memo(() => {
                     <BiArrowBack size="30" onClick={back}/>
                     <h2 onClick={back} className="text-3xl font-medium font-play ml-3">{shop.name}</h2>
                 </div>
+                <p className="mt-1 text-md text-gray-400">{shop.description}</p>
             </Section>
 
             {/*<PageTitle title={shop.name} description={shop.description}/>*/}
