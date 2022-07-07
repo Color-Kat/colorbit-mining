@@ -30,7 +30,7 @@ class Rig extends Model
      *
      * @return \Znck\Eloquent\Relations\BelongsToThrough
      */
-    public function belongsToPart($localKey): \Znck\Eloquent\Relations\BelongsToThrough
+    public function belongsToPart(string $localKey, array $additional_columns = []): \Znck\Eloquent\Relations\BelongsToThrough
     {
         return $this
             ->belongsToThrough(
@@ -45,7 +45,13 @@ class Rig extends Model
                     PartShopPivot::class => 'part_shop_id'
                 ]
             )
-            ->orderBy('id', 'DESC');
+            ->select([
+                ...$additional_columns,
+                // 'part_id',
+                'name',
+                'image',
+                'type',
+            ]);
     }
 
     /**

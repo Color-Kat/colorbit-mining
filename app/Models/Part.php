@@ -48,7 +48,7 @@ class Part extends Model
                 $prefix = 'Видеокарта';
 
                 // Add part info if it exists
-                if(!$this->GPU_VRAM_size) break;
+                if (!$this->GPU_VRAM_size) break;
                 $postfix = join(', ', [
                     $this->GPU_VRAM_size . ' ГБ',
                     $this->GPU_VRAM_type,
@@ -60,10 +60,10 @@ class Part extends Model
                 $prefix = 'Платформа';
 
                 // Add part info if it exists
-                if(!$this->platform_cors_count) break;
+                if (!$this->platform_cors_count) break;
                 $postfix = join(', ', [
                     $this->platform_cors_count . ' x ' . $this->platform_frequency . 'ГГц',
-                    'TDP '. $this->TDP . ' Вт'
+                    'TDP ' . $this->TDP . ' Вт'
                 ]);
                 break;
 
@@ -71,9 +71,9 @@ class Part extends Model
                 $prefix = 'Оперативная память';
 
                 // Add part info if it exists
-                if(!$this->RAM_size) break;
+                if (!$this->RAM_size) break;
                 $postfix = join(', ', [
-                    $this->RAM_size . ' ГБx'. $this->RAM_channels. " шт",
+                    $this->RAM_size . ' ГБx' . $this->RAM_channels . " шт",
                     $this->RAM_frequency . ' МГц',
                 ]);
                 break;
@@ -82,7 +82,7 @@ class Part extends Model
                 $prefix = 'Блок питания';
 
                 // Add part info if it exists
-                if(!$this->PSU_power_supply) break;
+                if (!$this->PSU_power_supply) break;
                 $postfix = join(', ', [
                     $this->PSU_power_supply . ' Вт',
                     $this->PSU_efficiency !== 'none' ? "80+ $this->PSU_efficiency" : "без сертификата",
@@ -93,11 +93,11 @@ class Part extends Model
                 $prefix = '';
 
                 // Add part info if it exists
-                if(!$this->case_material) break;
+                if (!$this->case_material) break;
                 $postfix = join(', ', [
-                    $this->case_material_rus ,
+                    $this->case_material_rus,
                     "вместимость видеокарт $this->case_GPUs_count",
-                    "до $this->case_critical_temp"."°C"
+                    "до $this->case_critical_temp" . "°C"
                 ]);
                 break;
 
@@ -106,7 +106,14 @@ class Part extends Model
                 break;
         }
 
-        return "$prefix $this->vendor $value " . ($postfix ? "[$postfix] ": "");
+        // Delete empty array elements
+        // Implode remaining array items in string
+        return implode(" ", array_filter([
+            $prefix ?? "",
+            $this->vendor ?? "",
+            $value,
+            $postfix ? "[$postfix]" : ""
+        ]));
     }
 
     /**
