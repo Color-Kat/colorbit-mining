@@ -8,7 +8,7 @@ export type TabLinksType = {title: string, hrefName: string, current?: string }[
 export const TabLinks: React.FC<{
     links: TabLinksType,
     small?: boolean
-}> =  ({links, small= false}) => {
+}> = React.memo(({links, small= false}) => {
     const route = useRoute();
 
     return (
@@ -33,4 +33,4 @@ export const TabLinks: React.FC<{
             })}
         </ul>
     )
-};
+});

@@ -198,25 +198,24 @@ const Havings: IPage = React.memo(() => {
             title="Ваши комплектующие"
             description="Распоряжайтесь купленными вами комплектующими: собирайте из них майнинг фермы либо перепродавайте на б/у рынке."
         >
+            <Section>
+                {/* Select type */}
+                <div className="parts-list__links rounded-lg app-bg shadow-md mb-4">
+                    <TabLinks links={typesLinks} small/>
+                </div>
 
-            <div className="max-w-2xl">
-                <Section>
-                    {/* Select type */}
-                    <div className="parts-list__links rounded-lg app-bg shadow-md mb-4">
-                        <TabLinks links={typesLinks} small/>
-                    </div>
+                <ul className="havings-list mb-5 space-y-6">
+                    {havingsPaginator.data.map(having => {
+                        return <HavingItem key={having.id} having={having}/>
+                    })}
+                </ul>
+            </Section>
 
-                    <ul className="havings-list mb-5 space-y-6">
-                        {havingsPaginator.data.map(having => {
-                            return <HavingItem key={having.id} having={having}/>
-                        })}
-                    </ul>
-                </Section>
-
+            {havingsPaginator.last_page !== 1 &&
                 <div className="relative rounded-lg app-bg-dark shadow -m-s p-2 pt-0.5 w-fit">
                     <Paginator paginator={havingsPaginator}/>
                 </div>
-            </div>
+            }
         </MiningLayout>
     );
 });

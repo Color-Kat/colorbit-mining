@@ -43,8 +43,7 @@ export const WithSidebar: React.FC<{
                     {/*<img src={aside_bg} className="absolute bottom-0 left-0 w-full opacity-25 scale-y-110 -translate-y-1"/>*/}
                 </aside>
 
-                <div className="with-sidebar__main max-w-5xl flex-1">
-
+                <div className="with-sidebar__main max-w-3xl flex-1">
                     {children}
                 </div>
             </div>

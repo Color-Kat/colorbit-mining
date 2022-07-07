@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Repositories\CoreRepository;
 use App\Repositories\UserRepository;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -22,10 +21,10 @@ class MiningController extends BaseController
     }
 
     public function farm(Request $request) {
-        $rigs = $this->userRepository->getRigs($request);
+        $rigsPaginator = $this->userRepository->getRigsWithPaginator($request);
 
         return Inertia::render('Mining/Farm', [
-            'rigs' => $rigs
+            'rigsPaginator' => $rigsPaginator
         ]);
     }
 

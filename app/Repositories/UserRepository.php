@@ -125,7 +125,7 @@ class UserRepository extends CoreRepository
         return $havings;
     }
 
-    public function getRigs(Request $request) {
+    public function getRigsWithPaginator(Request $request) {
         $user = $request->user();
 
         // Not auth
@@ -134,7 +134,7 @@ class UserRepository extends CoreRepository
             "status" => false
         ]);
 
-        $rigs = $user->rigs()->with(['GPU', 'platform', 'RAM', 'PSU', 'case'])->get();
+        $rigs = $user->rigs()->with(['GPU', 'platform', 'RAM', 'PSU', 'case'])->paginate(5);
 
         return $rigs;
     }

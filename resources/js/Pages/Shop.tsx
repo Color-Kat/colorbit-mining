@@ -63,7 +63,9 @@ const ShopPartItem: React.FC<{ part: IShopPart, shop: IShop }> = ({part, shop}) 
 
                         {part.pivot.count > 0
                             ? <Button className="self-end" onClick={goToProduct}>Перейти</Button>
-                            : <Button className="self-end bg-transparent hover:bg-transparent border border-gray-500 hover:border-red-500" onClick={goToProduct}>Нет в наличии</Button>
+                            : <Button
+                                className="self-end bg-transparent hover:bg-transparent border border-gray-500 hover:border-red-500"
+                                onClick={goToProduct}>Нет в наличии</Button>
                         }
                     </div>
                 </div>
@@ -75,7 +77,7 @@ const ShopPartItem: React.FC<{ part: IShopPart, shop: IShop }> = ({part, shop}) 
 }
 
 const Shop: IPage = React.memo(() => {
-    const page = useTypedPage<{shop: IShop}>();
+    const page = useTypedPage<{ shop: IShop }>();
 
     const shop = new ShopClass(page.props.shop);
     const partsPaginator = page.props.shop.parts;
@@ -84,14 +86,14 @@ const Shop: IPage = React.memo(() => {
         window.history.back();
     }
 
-    if(!shop) return <PageError title="Здесь не продают комплектующие" description="Вы дверью ошиблись."/>
+    if (!shop) return <PageError title="Здесь не продают комплектующие" description="Вы дверью ошиблись."/>
 
     return (
         <div className="shops-list-page max-w-3xl w-full">
             {/* @ts-ignore*/}
             <Head>
                 <title>{`${shop.name} - оборудование для майнинга`}</title>
-                <meta name="description" content={shop.description} />
+                <meta name="description" content={shop.description}/>
             </Head>
 
             <Section>
@@ -112,9 +114,11 @@ const Shop: IPage = React.memo(() => {
                 })}
             </ul>
 
-            <div className="relative rounded-lg app-bg-dark shadow -m-s p-2 pt-0.5">
-                <Paginator paginator={partsPaginator}/>
-            </div>
+            {partsPaginator.last_page !== 1 &&
+                <div className="relative rounded-lg app-bg-dark shadow -m-s p-2 pt-0.5">
+                    <Paginator paginator={partsPaginator}/>
+                </div>
+            }
         </div>
     );
 });

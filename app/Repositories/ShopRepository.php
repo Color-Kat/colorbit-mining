@@ -52,7 +52,7 @@ class ShopRepository extends CoreRepository
             'delivery_time'
         ];
 
-        $shopsList = Shop::select($select)->paginate(2);
+        $shopsList = Shop::select($select)->paginate(15);
 
         return $shopsList;
     }

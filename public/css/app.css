@@ -2815,6 +2815,9 @@ select:-webkit-autofill:focus {
   .md\:max-w-md{
     max-width: 28rem;
   }
+  .md\:max-w-5xl{
+    max-width: 64rem;
+  }
   .md\:flex-1{
     flex: 1 1 0%;
   }

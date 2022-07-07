@@ -68,9 +68,11 @@ const ShopsList: IPage = React.memo(() => {
                 ))}
             </ul>
 
-            <div className="relative rounded-lg app-bg-dark shadow -m-s p-2 pt-0.5">
-                <Paginator paginator={shopsListPaginator}/>
-            </div>
+            {shopsListPaginator.last_page !== 1 &&
+                <div className="relative rounded-lg app-bg-dark shadow -m-s p-2 pt-0.5">
+                    <Paginator paginator={shopsListPaginator}/>
+                </div>
+            }
         </div>
     );
 });
