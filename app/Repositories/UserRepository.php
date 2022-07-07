@@ -136,8 +136,6 @@ class UserRepository extends CoreRepository
 
         $rigs = $user->rigs()->with(['GPU', 'platform', 'RAM', 'PSU', 'case'])->get();
 
-        dump($rigs);
-
         return $rigs;
     }
 }

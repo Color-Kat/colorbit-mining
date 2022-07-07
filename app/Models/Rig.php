@@ -10,6 +10,8 @@ class Rig extends Model
     use HasFactory;
     use \Znck\Eloquent\Traits\BelongsToThrough;
 
+    protected $hidden = ['GPU_id', 'platform_id', 'RAM_id', 'PSU_id', 'case_id'];
+
     /**
      * Define relationship for any part type.
      * Rigs -> havings -> PartShopPivot -> Part
@@ -25,7 +27,9 @@ class Rig extends Model
                 $localKey,
                 null,
                 [
+                    // Determine the id by which we can retrieve havings record from rigs
                     Having::class => $localKey,
+                    // Determine the id by which we can retrieve part_shop from havings
                     PartShopPivot::class => 'part_shop_id'
                 ]
             )
@@ -51,75 +55,4 @@ class Rig extends Model
     public function case(){
         return $this->belongsToPart('case_id');
     }
-
-//    /**
-//     * Define relationship for
-//     *
-//     * @return \Znck\Eloquent\Relations\BelongsToThrough
-//     */
-//    public function GPU()
-//    {
-//        $localKey = 'GPU_id';
-//
-//        return $this
-//            ->belongsToThrough(
-//                Part::class,
-//                [PartShopPivot::class, Having::class],
-//                $localKey,
-//                null,
-//                [
-//                    Having::class => $localKey,
-//                    PartShopPivot::class => 'part_shop_id'
-//                ]
-//            )
-//            ->orderBy('id', 'DESC');
-//    }
-//
-//    /**
-//     * Define relationship for
-//     *
-//     * @return \Znck\Eloquent\Relations\BelongsToThrough
-//     */
-//    public function platform()
-//    {
-//        $localKey = 'platform_id';
-//
-//        return $this
-//            ->belongsToThrough(
-//                Part::class,
-//                [PartShopPivot::class, Having::class],
-//                $localKey,
-//                null,
-//                [
-//                    Having::class => $localKey,
-//                    PartShopPivot::class => 'part_shop_id'
-//                ]
-//            )
-//            ->orderBy('id', 'DESC');
-//    }
-//
-//    /**
-//     * Define relationship for
-//     *
-//     * @return \Znck\Eloquent\Relations\BelongsToThrough
-//     */
-//    public function RAM()
-//    {
-//        $localKey = 'RAM_id';
-//
-//        return $this
-//            ->belongsToThrough(
-//                Part::class,
-//                [PartShopPivot::class, Having::class],
-//                $localKey,
-//                null,
-//                [
-//                    Having::class => $localKey,
-//                    PartShopPivot::class => 'part_shop_id'
-//                ]
-//            )
-//            ->orderBy('id', 'DESC');
-//    }
-
-
 }
