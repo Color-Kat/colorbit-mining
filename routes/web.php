@@ -49,7 +49,6 @@ Route::middleware('auth')->prefix('user')->as('user.')->group(function () {
 
 // Farms, Havings,..
 Route::middleware('auth')->prefix('mining')->as('mining.')->group(function () {
-
     Route::get('/havings', [MiningController::class, 'havings'])->name('havings');
     Route::get('/farm', [MiningController::class, 'farm'])->name('farm');
 });
@@ -74,5 +73,4 @@ Route::middleware('admin')->prefix('admin')->as('admin.')->group(function() {
     });
 
     Route::resource('/parts', AdminPartController::class)->names('parts');
-
 });

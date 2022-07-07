@@ -3,10 +3,9 @@
 namespace App\Repositories;
 
 use App\Jobs\BuyWithDeliveryJob;
-use App\Models\Having;
 use App\Models\Part;
 use App\Models\User;
-use Illuminate\Database\Eloquent\Relations\Pivot;
+use Illuminate\Http\Request;
 
 /**
  * Class PartRepository
@@ -25,6 +24,14 @@ class UserRepository extends CoreRepository
         return User::class;
     }
 
+    /**
+     * Add a good from request to user's having in $delivery_time hours
+     *
+     * Get good by $shop_slug and $part_slug
+     *
+     * @param $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function buyGood($request)
     {
         $user = $request->user();
@@ -94,7 +101,13 @@ class UserRepository extends CoreRepository
         ]);
     }
 
-    public function getHavingsWithPaginator($request) {
+    /**
+     * Get user's havings with paginator
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function getHavingsWithPaginator(Request $request) {
         $user = $request->user();
 
         // Not auth
@@ -103,8 +116,30 @@ class UserRepository extends CoreRepository
             "status" => false
         ]);
 
-        $havings = $user->havings()->with(['good'])->paginate(10);
+        $havings = $user
+            ->havings()
+            ->with(['part', 'shop'])
+            ->orderBy('id', 'DESC')
+            ->paginate(10);
+
+        dd($havings);
 
         return $havings;
+    }
+
+    public function getRigs(Request $request) {
+        $user = $request->user();
+
+        // Not auth
+        if(!$user) return response()->json([
+            "message" => "Вы не авторизированны",
+            "status" => false
+        ]);
+
+        $rigs = $user->rigs()->with('GPU')->get();
+
+        dump($rigs);
+
+        return $rigs;
     }
 }

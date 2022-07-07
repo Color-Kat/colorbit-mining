@@ -21,8 +21,12 @@ class MiningController extends BaseController
         $this->userRepository = new UserRepository();
     }
 
-    public function farm() {
-        return Inertia::render('Mining/Farm');
+    public function farm(Request $request) {
+        $rigs = $this->userRepository->getRigs($request);
+
+        return Inertia::render('Mining/Farm', [
+            'rigs' => $rigs
+        ]);
     }
 
     public function havings(Request $request) {

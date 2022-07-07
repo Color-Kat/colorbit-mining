@@ -81,4 +81,15 @@ class User extends Authenticatable
             ->hasMany(Having::class)
             ->orderBy('id', 'DESC');
     }
+
+    /**
+     * Define relationship for user's rigs.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function rigs() {
+        return $this
+            ->hasMany(Rig::class)
+            ->orderBy('id', 'DESC');
+    }
 }

@@ -18,6 +18,7 @@ return new class extends Migration
 
             $table->string('name');
             $table->string('state')->default('stopped'); // Work, stopped, broken
+            $table->foreignId('user_id');
 
             // Parts
             $table->foreignId('GPU_id')->nullable();
