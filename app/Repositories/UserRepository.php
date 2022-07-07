@@ -122,8 +122,6 @@ class UserRepository extends CoreRepository
             ->orderBy('id', 'DESC')
             ->paginate(10);
 
-        dd($havings);
-
         return $havings;
     }
 

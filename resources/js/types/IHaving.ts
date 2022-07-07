@@ -9,13 +9,11 @@ export interface IHaving{
     temperature: number;
     wear: number;
     dust: number;
-    good: {
-        part: IBasePart,
-        shop: {
-            id: number,
-            slug: string,
-            warranty: boolean,
-            used_market: boolean
-        }
+    part: IBasePart,
+    shop: {
+        id: number,
+        slug: string,
+        warranty: boolean,
+        used_market: boolean
     }
 }

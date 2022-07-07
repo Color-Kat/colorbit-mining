@@ -48,7 +48,7 @@ const HavingFeatures: React.FC<{ having: IHaving }> = React.memo(({having}) => {
     return (
         <>
             {/* Warranty */}
-            {having.good.shop.warranty ?
+            {having.shop.warranty ?
                 <span
                     className="mr-2 px-2 py-0.5 rounded-md border-gray-500 border tracking-wider text-sm mt-2 whitespace-nowrap"
                 >
@@ -57,7 +57,7 @@ const HavingFeatures: React.FC<{ having: IHaving }> = React.memo(({having}) => {
                 : null}
 
             {/* Is used market */}
-            {having.good.shop.used_market ?
+            {having.shop.used_market ?
                 <span
                     className="mr-2 px-2 py-0.5 rounded-md border-gray-500 border tracking-wider text-sm mt-2 whitespace-nowrap"
                 >
@@ -75,7 +75,7 @@ const HavingFeatures: React.FC<{ having: IHaving }> = React.memo(({having}) => {
                 : null}
 
             {/*  State  */}
-            <HavingState havingState={having.state} />
+            <HavingState havingState={having.state}/>
         </>
     );
 });
@@ -83,8 +83,8 @@ const HavingFeatures: React.FC<{ having: IHaving }> = React.memo(({having}) => {
 const HavingItem: React.FC<{ having: IHaving }> = React.memo(({having}) => {
     const route = useRoute();
 
-    const part = having.good.part;
-    const shop = having.good.shop;
+    const part = having.part;
+    const shop = having.shop;
 
     const goToGood = () => {
         Inertia.visit(route('good', [shop.slug, part.slug]));
@@ -127,9 +127,12 @@ const HavingItem: React.FC<{ having: IHaving }> = React.memo(({having}) => {
                 </Button>
 
                 {/* View */}
-                <Button onClick={goToGood} className="bg-transparent border-gray-500 border text-gray-500 hover:bg-gray-500 mt-3">
-                    Посмотреть
-                </Button>
+                {!having.shop.used_market ?
+                    <Button onClick={goToGood}
+                            className="bg-transparent border-gray-500 border text-gray-500 hover:bg-gray-500 mt-3">
+                        Посмотреть
+                    </Button> : null
+                }
 
                 {/* Repair */}
                 {having.state == 'needs_repair' ?
@@ -193,7 +196,7 @@ const Havings: IPage = React.memo(() => {
     return (
         <MiningLayout
             title="Ваши комплектующие"
-          description="Распоряжайтесь купленными вами комплектующими: собирайте из них майнинг фермы либо перепродавайте на б/у рынке."
+            description="Распоряжайтесь купленными вами комплектующими: собирайте из них майнинг фермы либо перепродавайте на б/у рынке."
         >
 
             <div className="max-w-2xl">

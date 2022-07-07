@@ -10,7 +10,6 @@ use Illuminate\Database\Eloquent\Model;
  *
  * @package App\Models
  */
-
 class Having extends Model
 {
     use \Znck\Eloquent\Traits\BelongsToThrough;
@@ -22,7 +21,8 @@ class Having extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function good() {
+    public function good()
+    {
         return $this->belongsTo(
             PartShopPivot::class,
             'part_shop_id',
@@ -43,8 +43,6 @@ class Having extends Model
             PartShopPivot::class,
             'part_shop_id'
         );
-
-
     }
 
     /**
@@ -56,7 +54,7 @@ class Having extends Model
             Shop::class,
             PartShopPivot::class,
             'part_shop_id'
-        );
+        )->select(['shop_id', 'slug', 'warranty', 'used_market']);
 
     }
 
