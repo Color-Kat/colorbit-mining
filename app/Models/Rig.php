@@ -10,7 +10,19 @@ class Rig extends Model
     use HasFactory;
     use \Znck\Eloquent\Traits\BelongsToThrough;
 
+    /**
+     * Make ids of part hidden
+     *
+     * @var string[]
+     */
     protected $hidden = ['GPU_id', 'platform_id', 'RAM_id', 'PSU_id', 'case_id'];
+
+    /**
+     * Disable snake case then laravel doesn't transform GPU to g_p_u
+     *
+     * @var bool
+     */
+    public static $snakeAttributes = false;
 
     /**
      * Define relationship for any part type.
@@ -36,6 +48,9 @@ class Rig extends Model
             ->orderBy('id', 'DESC');
     }
 
+    /**
+     * @return \Znck\Eloquent\Relations\BelongsToThrough
+     */
     public function GPU(){
         return $this->belongsToPart('GPU_id');
     }

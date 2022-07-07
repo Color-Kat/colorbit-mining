@@ -10,6 +10,7 @@ const Farm: IPage = React.memo(() => {
     }>();
 
     console.log(page.props.rigs)
+    console.log(page.props.rigs[0]['GPU'])
 
     return (
         <MiningLayout
