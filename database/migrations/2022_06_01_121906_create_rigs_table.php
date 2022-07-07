@@ -22,9 +22,9 @@ return new class extends Migration
 
             // Parts
             $table->foreignId('GPU_id')->nullable();
-            $table->foreignId('RAM_id')->nullable();
-            $table->foreignId('power_supply_id')->nullable();
             $table->foreignId('platform_id')->nullable();
+            $table->foreignId('RAM_id')->nullable();
+            $table->foreignId('PSU_id')->nullable();
             $table->foreignId('case_id')->nullable();
 
             $table->timestamps();
