@@ -56,7 +56,7 @@ class MiningController extends BaseController
      */
     public function GPU(Request $request)
     {
-        $havingsPaginator = $this->userRepository->getHavingsWithPaginator($request);
+        $havingsPaginator = $this->userRepository->getHavingsWithPaginator($request, 'GPU');
 
         return Inertia::render('Mining/Havings', [
             'havings' => $havingsPaginator
@@ -71,7 +71,7 @@ class MiningController extends BaseController
      */
     public function platform(Request $request)
     {
-        $havingsPaginator = $this->userRepository->getHavingsWithPaginator($request);
+        $havingsPaginator = $this->userRepository->getHavingsWithPaginator($request, 'platform');
 
         return Inertia::render('Mining/Havings', [
             'havings' => $havingsPaginator
@@ -86,7 +86,7 @@ class MiningController extends BaseController
      */
     public function RAM(Request $request)
     {
-        $havingsPaginator = $this->userRepository->getHavingsWithPaginator($request);
+        $havingsPaginator = $this->userRepository->getHavingsWithPaginator($request, 'RAM');
 
         return Inertia::render('Mining/Havings', [
             'havings' => $havingsPaginator
@@ -101,7 +101,7 @@ class MiningController extends BaseController
      */
     public function PSU(Request $request)
     {
-        $havingsPaginator = $this->userRepository->getHavingsWithPaginator($request);
+        $havingsPaginator = $this->userRepository->getHavingsWithPaginator($request, 'PSU');
 
         return Inertia::render('Mining/Havings', [
             'havings' => $havingsPaginator
@@ -116,10 +116,10 @@ class MiningController extends BaseController
      */
     public function case(Request $request)
     {
-        $parts = $this->partRepository->getByTypeWithPaginator('case');
+        $havingsPaginator = $this->userRepository->getHavingsWithPaginator($request, 'case');
 
-        return Inertia::render('Admin/Parts/Index', [
-            'parts' => $parts
+        return Inertia::render('Mining/Havings', [
+            'havings' => $havingsPaginator
         ]);
     }
 }
