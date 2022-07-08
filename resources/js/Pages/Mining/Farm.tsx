@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {IPage} from "@/types/IPage";
 import MiningLayout from "@components/mining/MiningLayout";
 import useTypedPage from "@hooks/useTypedPage";
@@ -12,6 +12,8 @@ import {Inertia} from "@inertiajs/inertia";
 import {partTypeRusSingular} from "@/types/toRus";
 
 import farm_bg from "@assets/farm_bg.png";
+import Button from "../../components/elements/Button";
+import {BiChevronDownCircle} from "react-icons/bi";
 
 const RigSlot: React.FC<{ part: IBasePart | null, type: PartType }> = React.memo(({part, type}) => {
     const route = useRoute();
@@ -44,8 +46,42 @@ const RigSlot: React.FC<{ part: IBasePart | null, type: PartType }> = React.memo
     );
 
     return (
-        <div className="rigs__item-slot app-bg rounded-md shadow my-2">
+        <div className="rigs__item-slot app-bg rounded-md shadow my-2 relative even:bg-[#212121] flex flex-col">
+            {/* wrapper for larger z-index than the bg image */}
+            <div className="relative z-[1] p-1.5 md:p-3 pt-3">
+                <div className="rigs__item-top-info flex justify-between">
+                    {/* IMAGE */}
+                    <div className="rigs__item-image shrink-0 flex justify-center mb-3 mr-3 sm:mb-0">
+                        <img
+                            className="sm:h-36 md:h-42 sm:w-auto h-32 rounded-md "
+                            src={part.image}
+                            alt={part.name}
+                        />
+                    </div>
 
+                    <div className="flex flex-col">
+                        {/* NAME */}
+                        <h3 className="rigs__item-name text-base sm:text-lg md:text-xl tracking-wide font-roboto leading-5 sm:leading-6">
+                            {part.name}
+                        </h3>
+
+                        {/* INFO */}
+                        <div className="rigs__item-info flex flex-col">
+                            <div className="text-sm text-red-500">
+                                Миша, всё сломалось!
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                {/* Part control */}
+                <div className="rigs__item-control flex justify-end">
+                    <Button className="self-end">Отключить</Button>
+                </div>
+            </div>
+
+            {/* BG */}
+            <img src={farm_bg} className="w-full h-full absolute top-0 left-0 object-cover z-0 opacity-10"/>
         </div>
     )
 })
@@ -58,32 +94,47 @@ const rigStates = {
 
 const RigItem: React.FC<{ rig: IRig }> = React.memo(({rig}) => {
     const state: string = rigStates[rig.state];
+    const [showMore, setShowMore] = useState(false);
+
+    const toggleShowMore = () => {setShowMore(prev => !prev)}
 
     console.log(rig)
 
     return (
         <Section>
-            <div className="rigs-list__item w-full">
-                <h2>#{rig.name}</h2>
+            <div className="rigs-list__item w-full flex flex-col">
+                <h2 className="text-xl app-bg rounded-md p-1.5 pl-2 mb-5">#{rig.name}</h2>
                 <div className="flex justify-between">
                     <div>&bull; Состояние: {state}</div>
                     <div>?</div>
                 </div>
 
-                {/* GPU */}
-                <RigSlot part={null} type="GPU"/>
+                {/* Show/Hide parts */}
+                <button className="self-end my-3 text-lg py-2 px-3 flex flex items-center text-gray-400" onClick={toggleShowMore}>
+                    {showMore ? 'Скрыть комплектующие' : 'Показать комплектующие'}
+                    <BiChevronDownCircle size="26" className={`ml-1 transition ${showMore ? '-rotate-180' : ''}`}/>
+                </button>
 
-                {/* platform */}
-                <RigSlot part={null} type="platform"/>
+                <div className={`transition-all duration-300 overflow-hidden origin-top ${showMore ? 'scale-y-1 max-h-screen' : 'scale-y-0 max-h-0 opacity-0'}`}>
+                    {/* GPU */}
+                    <RigSlot part={rig.GPU} type="GPU"/>
 
-                {/* RAM */}
-                <RigSlot part={null} type="RAM"/>
+                    {/* platform */}
+                    <RigSlot part={null} type="platform"/>
 
-                {/* PSU */}
-                <RigSlot part={null} type="PSU"/>
+                    {/* RAM */}
+                    <RigSlot part={null} type="RAM"/>
 
-                {/* case */}
-                <RigSlot part={null} type="case"/>
+                    {/* PSU */}
+                    <RigSlot part={null} type="PSU"/>
+
+                    {/* case */}
+                    <RigSlot part={null} type="case"/>
+                </div>
+
+                <div className="rigs-list__item-control border-red-600 border-t mt-3 pt-3 flex justify-end">
+                    <Button>Запустить</Button>
+                </div>
 
             </div>
         </Section>
