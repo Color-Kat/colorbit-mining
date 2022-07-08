@@ -7,3 +7,12 @@ export const partTypeRus = {
     PSU: 'Блоки питания',
     case: 'каркас'
 }
+
+
+export const partTypeRusSingular = {
+    GPU: 'видеокарта',
+    platform: 'платформа',
+    RAM: 'ОЗУ',
+    PSU: 'Блок питания',
+    case: 'каркас'
+}

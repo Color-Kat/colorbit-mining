@@ -9,20 +9,23 @@ import {IRig} from "../../types/IRig";
 import {IBasePart, PartType} from "../../types/parts/IBasePart";
 import useRoute from "../../hooks/useRoute";
 import {Inertia} from "@inertiajs/inertia";
+import {partTypeRusSingular} from "@/types/toRus";
 
-const RigSlot: React.FC<{part: IBasePart|null}> = React.memo(({part}) => {
+const RigSlot: React.FC<{part: IBasePart|null, type: PartType}> = React.memo(({part, type}) => {
     const route = useRoute();
 
     const toHavings = () => {
-        Inertia.visit(route('mining.havings'));
+        Inertia.visit(route('mining.havings.' + type));
     }
 
     if(!part) return (
-        <div className="rigs__item-slot app-bg rounded-md shadow my-2 p-3">
+        <div className="rigs__item-slot app-bg rounded-md shadow my-2 p-3 flex justify-between items-center">
             <button
                 onClick={toHavings}
                 className="app-bg-light text-app-black text-5xl font-bold w-24 h-24 rounded-md cursor-pointer"
             >+</button>
+
+            <h4 className="font-play text-3xl font-bold text-center flex-1">{partTypeRusSingular[type]}</h4>
         </div>
     );
 
@@ -54,7 +57,19 @@ const RigItem: React.FC<{rig: IRig}> = React.memo(({rig}) => {
                 </div>
 
                 {/* GPU */}
-                <RigSlot part={null} />
+                <RigSlot part={null} type="GPU"/>
+
+                {/* platform */}
+                <RigSlot part={null} type="platform"/>
+
+                {/* RAM */}
+                <RigSlot part={null} type="RAM"/>
+
+                {/* PSU */}
+                <RigSlot part={null} type="PSU"/>
+
+                {/* case */}
+                <RigSlot part={null} type="case"/>
 
             </div>
         </Section>
