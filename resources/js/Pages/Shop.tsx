@@ -10,7 +10,7 @@ import Button from "@components/elements/Button";
 
 import {Shop as ShopClass} from "@/classes/Shop";
 import {Head} from "@inertiajs/inertia-react";
-import {BiArrowBack} from "react-icons/all";
+import {BiArrowBack} from "react-icons/bi";
 import PageError from "./PageError";
 
 

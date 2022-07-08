@@ -12,9 +12,8 @@ import {PartT} from "@/types/parts/PartT";
 
 import {Section} from "@components/page/Section";
 import Button from "@components/elements/Button";
-import {Inertia} from "@inertiajs/inertia";
 import {Dropdown} from "@components/elements/Dropdown";
-import {BiArrowBack} from "react-icons/all";
+import {BiArrowBack} from "react-icons/bi";
 import DialogModal from "@components/modal/DialogModal";
 import SecondaryButton from "@components/profile/SecondaryButton";
 import {Shop} from "@/classes/Shop";

@@ -2,7 +2,7 @@ import React, {PropsWithChildren} from 'react';
 import {WithSidebar} from "@components/page/WithSidebar";
 import {TabLinks} from "@components/elements/TabsLink";
 import {Head} from "@inertiajs/inertia-react";
-import {BiArrowBack} from "react-icons/all";
+import {BiArrowBack} from "react-icons/bi";
 import {Section} from "../page/Section";
 
 interface Props {

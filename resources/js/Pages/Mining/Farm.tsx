@@ -5,9 +5,9 @@ import useTypedPage from "@hooks/useTypedPage";
 import {IPaginator} from "@/types/IPaginator";
 import Paginator from "@components/elements/Paginator";
 import {Section} from "@components/page/Section";
-import {IRig} from "../../types/IRig";
-import {IBasePart, PartType} from "../../types/parts/IBasePart";
-import useRoute from "../../hooks/useRoute";
+import {IRig} from "@/types/IRig";
+import {IBasePart, PartType} from "@/types/parts/IBasePart";
+import useRoute from "@hooks/useRoute";
 import {Inertia} from "@inertiajs/inertia";
 import {partTypeRusSingular} from "@/types/toRus";
 
@@ -21,22 +21,25 @@ const RigSlot: React.FC<{ part: IBasePart | null, type: PartType }> = React.memo
     }
 
     if (!part) return (
-        <div className="rigs__item-slot app-bg rounded-md shadow my-2 p-3 relative">
-            <div className="flex justify-between items-center z-[1] relative">
+        <div
+            onClick={toHavings}
+            className="rigs__item-slot app-bg rounded-md shadow my-2 p-3 relative even:bg-[#212121] md:hover:scale-105 transition cursor-pointer"
+        >
+            <div className="flex justify-between items-center z-[1] relative ">
                 <button
                     onClick={toHavings}
-                    className="app-bg-light text-app-black text-5xl font-bold w-20 h-20 rounded-md cursor-pointer"
-                >+</button>
+                    className="app-bg-light text-app-black text-5xl font-bold w-20 h-20 rounded-md"
+                >+
+                </button>
 
                 <h4
-                    onClick={toHavings}
                     className="font-play text-3xl font-bold text-center flex-1 cursor-pointer"
                 >
                     {partTypeRusSingular[type]}
                 </h4>
             </div>
 
-            <img src={farm_bg} className="w-full h-full absolute object-cover top-0 left-0 z-0 opacity-10"/>
+            <img src={farm_bg} className="w-full h-full absolute top-0 left-0 object-cover z-0 opacity-10"/>
         </div>
     );
 

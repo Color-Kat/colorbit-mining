@@ -12,14 +12,13 @@ const tailwindcss = require('tailwindcss');
  |
  */
 
+require('laravel-mix-bundle-analyzer');
+
+// mix.bundleAnalyzer();
+
 mix
     .ts('resources/js/app.tsx', 'public/js')
     .react()
-    // .postCss('resources/css/app.css', 'public/css', [
-    //     require('postcss-import'),
-    //     require('tailwindcss'),
-    //     require('autoprefixer'),
-    // ])
     .sass('resources/css/app.scss', 'public/css')
     .options({
         postCss: [
