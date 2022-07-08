@@ -16,8 +16,15 @@ export default React.memo(function MiningLayout({
                                                     children
                                                 }: PropsWithChildren<Props>) {
         const asideLinks = [
-            {hrefName: "mining.farm", title: "Майнинг ферма"},
-            {hrefName: "mining.havings", title: "Мои комплектующие"},
+            {
+                hrefName: "mining.farm",
+                title: "Майнинг ферма"
+            },
+            {
+                hrefName: "mining.havings.index",
+                title: "Мои комплектующие",
+                current: "mining.havings.*"
+            },
             // {hrefName: "mining.havings", title: "Сломанные комплектующие"},
             // {hrefName: "mining.havings", title: "Авито"},
         ]

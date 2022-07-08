@@ -169,27 +169,27 @@ const Havings: IPage = React.memo(() => {
     const typesLinks = [
         {
             title: 'все',
-            hrefName: 'admin.parts.index'
+            hrefName: 'mining.havings.index'
         },
         {
             title: 'Видеокарты',
-            hrefName: 'admin.parts.GPU',
+            hrefName: 'mining.havings.GPU',
         },
         {
             title: 'Платформы',
-            hrefName: 'admin.parts.platform'
+            hrefName: 'mining.havings.platform'
         },
         {
             title: 'ОЗУ',
-            hrefName: 'admin.parts.RAM'
+            hrefName: 'mining.havings.RAM'
         },
         {
             title: 'БП',
-            hrefName: 'admin.parts.PSU'
+            hrefName: 'mining.havings.PSU'
         },
         {
             title: 'Каркас',
-            hrefName: 'admin.parts.case'
+            hrefName: 'mining.havings.case'
         }
     ];
 

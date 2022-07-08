@@ -8,13 +8,13 @@ export const WithSidebar: React.FC<{
     asideTitle: string,
     links: {
         title: string,
-        hrefName: string
+        hrefName: string,
+        current?: string
     }[],
     children: ReactNode
 }>
     = React.memo(({asideTitle, links, children}) => {
     const route = useRoute();
-    const currentRouteName = route().current();
 
     return (
         <div className="flex justify-center">
@@ -25,7 +25,8 @@ export const WithSidebar: React.FC<{
 
                     <ul className="z-[5] relative space-y-2">
                         {links.map(link => {
-                            const isActive = (currentRouteName == link.hrefName);
+                            const isActive = route().current(link.current ?? link.hrefName);
+
                             return (
                                 <li
                                     className={

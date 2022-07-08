@@ -61,7 +61,7 @@ Route::middleware('auth')->prefix('mining')->as('mining.')->group(function () {
         Route::get('/case', [MiningController::class, 'case'])->name('case');
     });
     // All user's havings
-    Route::get('/havings', [MiningController::class, 'havings'])->name('havings');
+    Route::get('/havings', [MiningController::class, 'havings'])->name('havings.index');
 });
 
 
