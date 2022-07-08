@@ -951,6 +951,9 @@ select{
 .z-\[5\]{
   z-index: 5;
 }
+.z-\[1\]{
+  z-index: 1;
+}
 .col-span-6{
   grid-column: span 6 / span 6;
 }
@@ -2133,6 +2136,9 @@ select{
 }
 .opacity-\[10\%\]{
   opacity: 10%;
+}
+.opacity-10{
+  opacity: 0.1;
 }
 .shadow-sm{
   --tw-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);

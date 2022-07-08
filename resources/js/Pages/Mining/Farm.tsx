@@ -1,5 +1,5 @@
 import React from 'react';
-import { IPage } from "@/types/IPage";
+import {IPage} from "@/types/IPage";
 import MiningLayout from "@components/mining/MiningLayout";
 import useTypedPage from "@hooks/useTypedPage";
 import {IPaginator} from "@/types/IPaginator";
@@ -11,21 +11,32 @@ import useRoute from "../../hooks/useRoute";
 import {Inertia} from "@inertiajs/inertia";
 import {partTypeRusSingular} from "@/types/toRus";
 
-const RigSlot: React.FC<{part: IBasePart|null, type: PartType}> = React.memo(({part, type}) => {
+import farm_bg from "@assets/farm_bg.png";
+
+const RigSlot: React.FC<{ part: IBasePart | null, type: PartType }> = React.memo(({part, type}) => {
     const route = useRoute();
 
     const toHavings = () => {
         Inertia.visit(route('mining.havings.' + type));
     }
 
-    if(!part) return (
-        <div className="rigs__item-slot app-bg rounded-md shadow my-2 p-3 flex justify-between items-center">
-            <button
-                onClick={toHavings}
-                className="app-bg-light text-app-black text-5xl font-bold w-24 h-24 rounded-md cursor-pointer"
-            >+</button>
+    if (!part) return (
+        <div className="rigs__item-slot app-bg rounded-md shadow my-2 p-3 relative">
+            <div className="flex justify-between items-center z-[1] relative">
+                <button
+                    onClick={toHavings}
+                    className="app-bg-light text-app-black text-5xl font-bold w-20 h-20 rounded-md cursor-pointer"
+                >+</button>
 
-            <h4 className="font-play text-3xl font-bold text-center flex-1">{partTypeRusSingular[type]}</h4>
+                <h4
+                    onClick={toHavings}
+                    className="font-play text-3xl font-bold text-center flex-1 cursor-pointer"
+                >
+                    {partTypeRusSingular[type]}
+                </h4>
+            </div>
+
+            <img src={farm_bg} className="w-full h-full absolute object-cover top-0 left-0 z-0 opacity-10"/>
         </div>
     );
 
@@ -42,7 +53,7 @@ const rigStates = {
     broken: 'Не исправен'
 }
 
-const RigItem: React.FC<{rig: IRig}> = React.memo(({rig}) => {
+const RigItem: React.FC<{ rig: IRig }> = React.memo(({rig}) => {
     const state: string = rigStates[rig.state];
 
     console.log(rig)
@@ -99,9 +110,9 @@ const Farm: IPage = React.memo(() => {
             </ul>
 
             {rigsPaginator.last_page !== 1 &&
-                <div className="relative rounded-lg app-bg-dark shadow -m-s p-2 pt-0.5">
-                    <Paginator paginator={rigsPaginator}/>
-                </div>
+            <div className="relative rounded-lg app-bg-dark shadow -m-s p-2 pt-0.5">
+                <Paginator paginator={rigsPaginator}/>
+            </div>
             }
         </MiningLayout>
     );
