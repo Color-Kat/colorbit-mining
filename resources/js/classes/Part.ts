@@ -6,7 +6,8 @@ import {CaseMaterialType} from "@/types/parts/ICase";
 import {BreakdownsPartType, IPart, ShopsPartType} from "../types/parts/IPart";
 
 /**
- *
+ * Base Part class for all types
+ * Can be used as universal Part
  */
 export class Part implements IPart {
     public name: string = 'GTX 1050 TI';
@@ -71,8 +72,8 @@ export class GPU extends Part implements PartT<'GPU'> {
     public TDP: number = 100;
     public power: number = 100;
     public GPU_VRAM_size: number = 1;
-    public GPU_VRAM_frequency: number = 999;
     public GPU_VRAM_type: GPU_VRAM_type = 'GDDR5';
+    public GPU_chip_frequency: number = 999;
     public GPU_fans_count: number = 1;
     public GPU_fan_efficiency: number = 50;
 
@@ -86,8 +87,8 @@ export class GPU extends Part implements PartT<'GPU'> {
         this.TDP = partData.TDP;
         this.power = partData.power;
         this.GPU_VRAM_size = partData.GPU_VRAM_size;
-        this.GPU_VRAM_frequency = partData.GPU_VRAM_frequency;
         this.GPU_VRAM_type = partData.GPU_VRAM_type;
+        this.GPU_chip_frequency = partData.GPU_chip_frequency;
         this.GPU_fans_count = partData.GPU_fans_count;
         this.GPU_fan_efficiency = partData.GPU_fan_efficiency;
     }

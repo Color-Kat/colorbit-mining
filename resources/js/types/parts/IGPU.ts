@@ -7,8 +7,8 @@ export interface IGPU extends IBasePart {
     TDP: number;
     power: number;
     GPU_VRAM_size: number;
-    GPU_VRAM_frequency: number;
     GPU_VRAM_type: GPU_VRAM_type;
+    GPU_chip_frequency: number;
     GPU_fans_count: number;
     GPU_fan_efficiency: number;
 }

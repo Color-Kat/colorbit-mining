@@ -92,22 +92,22 @@ export const SecondStage: React.FC<{
                         name="GPU_VRAM_size"
                     />
 
-                    {/* VRAM_frequency */}
-                    <ControlledInput
-                        data={data} setData={setData} errors={errors}
-                        title="Частота видеопамяти"
-                        placeholder="в мГц"
-                        type="number"
-                        min="0"
-                        name="GPU_VRAM_frequency"
-                    />
-
                     {/* VRAM_type */}
                     <ControlledSelect
                         data={data} setData={setData}
                         title="Тип памяти"
                         name="GPU_VRAM_type"
                         options={VRAM_type_options}
+                    />
+
+                    {/* chip_frequency */}
+                    <ControlledInput
+                        data={data} setData={setData} errors={errors}
+                        title="Частота видеочипа"
+                        placeholder="в мГц"
+                        type="number"
+                        min="0"
+                        name="GPU_chip_frequency"
                     />
 
                     {/* fans_count */}

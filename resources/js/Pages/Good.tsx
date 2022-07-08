@@ -50,7 +50,7 @@ const SpecLine: React.FC<{title: string, value: string|number, description?: str
 });
 
 const MainSpecs: React.FC<{good: PartT<PartType>}> = ({good}) => {
-    switch (good.type){
+    switch (good.type)
         case 'GPU':
             return (
                 <>
@@ -58,8 +58,8 @@ const MainSpecs: React.FC<{good: PartT<PartType>}> = ({good}) => {
                         <h5 className="spec-header font-bold text-xl mb-1.5 font-sans">Основные параметры</h5>
 
                         <SpecLine title="Количество видеопамяти" value={good.GPU_VRAM_size + ' ГБ'}/>
-                        <SpecLine title="Частота видеочипа" value={good.GPU_VRAM_frequency + ' МГц'}/>
                         <SpecLine title="Тип видеопамяти" value={good.GPU_VRAM_type}/>
+                        <SpecLine title="Частота видеочипа" value={good.GPU_chip_frequency + ' МГц'}/>
                         <SpecLine title="Тепловыделение" value={good.TDP + ' Вт'}/>
                         <SpecLine title="Потребление энергии" value={good.power + ' Вт'}/>
                     </div>

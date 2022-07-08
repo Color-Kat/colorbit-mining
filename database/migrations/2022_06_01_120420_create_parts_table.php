@@ -31,8 +31,8 @@ return new class extends Migration
             // For GPU
 //            $table->unsignedInteger('GPU_frequency')->nullable(); // GPU core frequency
             $table->unsignedInteger('GPU_VRAM_size')->nullable(); // Video RAM
-            $table->unsignedInteger('GPU_VRAM_frequency')->nullable(); // Video RAM frequency
             $table->string('GPU_VRAM_type')->nullable(); // Video RAM frequency
+            $table->unsignedInteger('GPU_chip_frequency')->nullable(); // Video RAM frequency
             $table->unsignedInteger('GPU_fans_count')->nullable(); // Power consumption
             $table->unsignedInteger('GPU_fan_efficiency')->nullable(); // Power consumption
 
@@ -42,14 +42,14 @@ return new class extends Migration
             $table->unsignedInteger('platform_frequency')->nullable(); // CPU frequency
             $table->unsignedInteger('platform_RAM_slots')->nullable(); // Number of RAM slots
 
-            // Power Supply
-            $table->unsignedInteger('PSU_power_supply')->nullable(); // Power of power supply in Watt
-            $table->string('PSU_efficiency')->nullable(); // Efficiency certificate of power supply
-
             // RAM
             $table->unsignedInteger('RAM_frequency')->nullable();
             $table->unsignedInteger('RAM_size')->nullable();
             $table->unsignedInteger('RAM_channels')->nullable(); // Number of RAM channels (1 channel or 2 channel)
+
+            // Power Supply
+            $table->unsignedInteger('PSU_power_supply')->nullable(); // Power of power supply in Watt
+            $table->string('PSU_efficiency')->nullable(); // Efficiency certificate of power supply
 
             // Case (frame, carcass)
             $table->string('case_material')->nullable();
