@@ -91,7 +91,9 @@ const HavingItem: React.FC<{ having: IHaving }> = React.memo(({having}) => {
     }
 
     return (
-        <li className="havings-list__item flex app-bg rounded-lg p-3 flex-col">
+        <li
+            className={`havings-list__item flex app-bg rounded-lg p-3 flex-col relative`}
+        >
             <div className="flex justify-between">
                 {/* IMAGE */}
                 <div className="shrink-0 flex justify-center mb-3 mr-3 sm:mb-0">
@@ -155,6 +157,19 @@ const HavingItem: React.FC<{ having: IHaving }> = React.memo(({having}) => {
                     </SecondaryButton> : null
                 }
             </div>
+
+            {/* Haze that notify the part is broken or needs repair */}
+            {having.state === 'broken' ?
+                <div
+                    className="bg-red-500 opacity-[10%] w-full h-full absolute top-0 left-0 rounded-md"
+                /> : null
+            }
+
+            {having.state === 'needs_repair' ?
+                <div
+                    className="bg-orange-500 opacity-[10%] w-full h-full absolute top-0 left-0 rounded-md"
+                /> : null
+            }
         </li>
     );
 });
