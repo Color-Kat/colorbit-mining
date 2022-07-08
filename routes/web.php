@@ -49,8 +49,20 @@ Route::middleware('auth')->prefix('user')->as('user.')->group(function () {
 
 // Farms, Havings,..
 Route::middleware('auth')->prefix('mining')->as('mining.')->group(function () {
-    Route::get('/havings', [MiningController::class, 'havings'])->name('havings');
+    // My rigs/farms
     Route::get('/farm', [MiningController::class, 'farm'])->name('farm');
+
+    // User's havings by types
+    Route::prefix('havings')->as('havings.')->group(function() {
+        Route::get('/gpu', [MiningController::class, 'GPU'])->name('GPU');
+        Route::get('/platform', [MiningController::class, 'platform'])->name('platform');
+        Route::get('/ram', [MiningController::class, 'RAM'])->name('RAM');
+        Route::get('/psu', [MiningController::class, 'PSU'])->name('PSU');
+        Route::get('/case', [MiningController::class, 'case'])->name('case');
+    });
+    // All user's havings
+    Route::get('/havings', [MiningController::class, 'havings'])->name('havings');
+
 });
 
 

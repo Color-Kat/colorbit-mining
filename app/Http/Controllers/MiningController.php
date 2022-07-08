@@ -20,6 +20,12 @@ class MiningController extends BaseController
         $this->userRepository = new UserRepository();
     }
 
+    /**
+     * Display farm page with $rigsPaginator
+     *
+     * @param Request $request
+     * @return \Inertia\Response
+     */
     public function farm(Request $request) {
         $rigsPaginator = $this->userRepository->getRigsWithPaginator($request);
 
@@ -28,11 +34,92 @@ class MiningController extends BaseController
         ]);
     }
 
+    /**
+     * Display havings page with $havings (all types of part)
+     *
+     * @param Request $request
+     * @return \Inertia\Response
+     */
     public function havings(Request $request) {
         $havingsPaginator = $this->userRepository->getHavingsWithPaginator($request);
 
         return Inertia::render('Mining/Havings', [
             'havings' => $havingsPaginator
+        ]);
+    }
+
+    /**
+     * Display havings page with $havings (only GPUs)
+     *
+     * @param Request $request
+     * @return \Inertia\Response
+     */
+    public function GPU(Request $request)
+    {
+        $havingsPaginator = $this->userRepository->getHavingsWithPaginator($request);
+
+        return Inertia::render('Mining/Havings', [
+            'havings' => $havingsPaginator
+        ]);
+    }
+
+    /**
+     * Display havings page with $havings (only platforms)
+     *
+     * @param Request $request
+     * @return \Inertia\Response
+     */
+    public function platform(Request $request)
+    {
+        $havingsPaginator = $this->userRepository->getHavingsWithPaginator($request);
+
+        return Inertia::render('Mining/Havings', [
+            'havings' => $havingsPaginator
+        ]);
+    }
+
+    /**
+     * Display havings page with $havings (only RAMs)
+     *
+     * @param Request $request
+     * @return \Inertia\Response
+     */
+    public function RAM(Request $request)
+    {
+        $havingsPaginator = $this->userRepository->getHavingsWithPaginator($request);
+
+        return Inertia::render('Mining/Havings', [
+            'havings' => $havingsPaginator
+        ]);
+    }
+
+    /**
+     * Display havings page with $havings (only PSUs)
+     *
+     * @param Request $request
+     * @return \Inertia\Response
+     */
+    public function PSU(Request $request)
+    {
+        $havingsPaginator = $this->userRepository->getHavingsWithPaginator($request);
+
+        return Inertia::render('Mining/Havings', [
+            'havings' => $havingsPaginator
+        ]);
+    }
+
+    /**
+     * Display havings page with $havings (only cases)
+     *
+     * @param Request $request
+     * @return \Inertia\Response
+     */
+    public function case(Request $request)
+    {
+        $parts = $this->partRepository->getByTypeWithPaginator('case');
+
+        return Inertia::render('Admin/Parts/Index', [
+            'parts' => $parts
         ]);
     }
 }
