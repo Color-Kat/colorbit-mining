@@ -1301,9 +1301,6 @@ select{
 .max-w-3xl{
   max-width: 48rem;
 }
-.max-w-2xl{
-  max-width: 42rem;
-}
 .flex-1{
   flex: 1 1 0%;
 }
@@ -2814,9 +2811,6 @@ select:-webkit-autofill:focus {
   }
   .md\:max-w-md{
     max-width: 28rem;
-  }
-  .md\:max-w-5xl{
-    max-width: 64rem;
   }
   .md\:flex-1{
     flex: 1 1 0%;

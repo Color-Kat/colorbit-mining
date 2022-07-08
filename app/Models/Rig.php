@@ -58,22 +58,52 @@ class Rig extends Model
      * @return \Znck\Eloquent\Relations\BelongsToThrough
      */
     public function GPU(){
-        return $this->belongsToPart('GPU_id');
+        return $this->belongsToPart('GPU_id', [
+            'GPU_VRAM_size',
+            'GPU_VRAM_type',
+            'GPU_chip_frequency',
+            'GPU_fans_count',
+            'GPU_fan_efficiency',
+            'TDP',
+            'power'
+        ]);
     }
 
     public function platform(){
-        return $this->belongsToPart('platform_id');
+        return $this->belongsToPart('platform_id', [
+            'platform_cors_count',
+            'platform_threads_count',
+            'platform_frequency',
+            'platform_RAM_slots',
+            'TDP',
+            'power'
+        ]);
     }
 
     public function RAM(){
-        return $this->belongsToPart('RAM_id');
+        return $this->belongsToPart('RAM_id', [
+            'RAM_size',
+            'RAM_frequency',
+            'RAM_channels',
+            'TDP',
+            'power'
+        ]);
     }
 
     public function PSU(){
-        return $this->belongsToPart('PSU_id');
+        return $this->belongsToPart('PSU_id', [
+            'PSU_power_supply',
+            'PSU_efficiency',
+            'TDP'
+        ]);
     }
 
     public function case(){
-        return $this->belongsToPart('case_id');
+        return $this->belongsToPart('case_id', [
+            'case_material',
+            'case_material_rus',
+            'case_GPUs_count',
+            'case_critical_temp'
+        ]);
     }
 }
