@@ -50,7 +50,7 @@ const SpecLine: React.FC<{title: string, value: string|number, description?: str
 });
 
 const MainSpecs: React.FC<{good: PartT<PartType>}> = ({good}) => {
-    switch (good.type)
+    switch (good.type){
         case 'GPU':
             return (
                 <>

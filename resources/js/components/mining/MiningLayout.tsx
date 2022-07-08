@@ -48,7 +48,7 @@ export default React.memo(function MiningLayout({
                     <TabLinks links={asideLinks}/>
                 </div>
 
-                <div className="max-w-3xl w-full">
+                <div className="max-w-3xl">
                     {children}
                 </div>
             </WithSidebar>

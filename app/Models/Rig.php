@@ -15,7 +15,7 @@ class Rig extends Model
      *
      * @var string[]
      */
-    protected $hidden = ['GPU_id', 'platform_id', 'RAM_id', 'PSU_id', 'case_id'];
+    protected $hidden = ['GPU_id', 'platform_id', 'RAM_id', 'PSU_id', 'case_id', 'created_at', 'updated_at'];
 
     /**
      * Disable snake case then laravel doesn't transform GPU to g_p_u
