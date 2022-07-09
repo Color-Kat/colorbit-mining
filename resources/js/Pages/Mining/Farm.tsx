@@ -14,15 +14,17 @@ import {partTypeRusSingular} from "@/types/toRus";
 import farm_bg from "@assets/farm_bg.png";
 import Button from "../../components/elements/Button";
 import {BiChevronDownCircle} from "react-icons/bi";
+import {IHaving} from "../../types/IHaving";
 
-const RigSlot: React.FC<{ part: IBasePart | null, type: PartType }> = React.memo(({part, type}) => {
+const RigSlot: React.FC<{ having: IHaving<IBasePart> | null, type: PartType }> = React.memo(({having, type}) => {
     const route = useRoute();
 
     const toHavings = () => {
         Inertia.visit(route('mining.havings.' + type));
     }
 
-    if (!part) return (
+    // Empty slot with selector of the part
+    if (!having) return (
         <div
             onClick={toHavings}
             className="rigs__item-slot app-bg rounded-md shadow my-2 p-3 relative even:bg-[#212121] md:hover:scale-105 transition cursor-pointer"
@@ -44,6 +46,8 @@ const RigSlot: React.FC<{ part: IBasePart | null, type: PartType }> = React.memo
             <img src={farm_bg} className="w-full h-full absolute top-0 left-0 object-cover z-0 opacity-10"/>
         </div>
     );
+
+    const part = having.part;
 
     return (
         <div className="rigs__item-slot app-bg rounded-md shadow my-2 relative even:bg-[#212121] flex flex-col">
@@ -117,19 +121,19 @@ const RigItem: React.FC<{ rig: IRig }> = React.memo(({rig}) => {
 
                 <div className={`transition-all duration-300 overflow-hidden origin-top ${showMore ? 'scale-y-1 max-h-screen' : 'scale-y-0 max-h-0 opacity-0'}`}>
                     {/* GPU */}
-                    <RigSlot part={rig.GPU} type="GPU"/>
+                    <RigSlot having={rig.GPU} type="GPU"/>
 
                     {/* platform */}
-                    <RigSlot part={null} type="platform"/>
+                    <RigSlot having={null} type="platform"/>
 
                     {/* RAM */}
-                    <RigSlot part={null} type="RAM"/>
+                    <RigSlot having={null} type="RAM"/>
 
                     {/* PSU */}
-                    <RigSlot part={null} type="PSU"/>
+                    <RigSlot having={null} type="PSU"/>
 
                     {/* case */}
-                    <RigSlot part={null} type="case"/>
+                    <RigSlot having={null} type="case"/>
                 </div>
 
                 <div className="rigs-list__item-control border-red-600 border-t mt-3 pt-3 flex justify-end">

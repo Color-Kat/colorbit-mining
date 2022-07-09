@@ -25,8 +25,8 @@ trait PartRules
             'breakdown_ids' => 'array',
 
             'GPU_VRAM_size' => 'numeric|min:1',
-            'GPU_VRAM_frequency' => 'numeric|min:1',
             'GPU_VRAM_type' => 'string|in:GDDR4,GDDR5,GDDR5x,GDDR6,GDDR6x',
+            'GPU_chip_frequency' => 'numeric|min:1',
             'GPU_fans_count' => 'numeric|min:0',
             'GPU_fans_efficiency' => 'numeric|min:0|max:100',
 
@@ -64,8 +64,8 @@ trait PartRules
             'price' => 'Цена',
 
             'GPU_VRAM_size' => 'Количество видеопамяти',
-            'GPU_VRAM_frequency' => 'Количество видеопамяти',
             'GPU_VRAM_type' => 'Тип видеопамяти',
+            'GPU_chip_frequency' => 'Количество видеопамяти',
             'GPU_fans_count' => 'Кол-во вентиляторов',
             'GPU_fans_efficiency' => 'Эффективность вентиляторов',
 

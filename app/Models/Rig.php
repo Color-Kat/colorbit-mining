@@ -24,34 +24,56 @@ class Rig extends Model
      */
     public static $snakeAttributes = false;
 
+//    /**
+//     * Define relationship for any part type.
+//     * Rigs -> havings -> PartShopPivot -> Part
+//     *
+//     * @return \Znck\Eloquent\Relations\BelongsToThrough
+//     */
+//    public function belongsToPart(string $localKey, array $additional_columns = []): \Znck\Eloquent\Relations\BelongsToThrough
+//    {
+//        return $this
+//            ->belongsToThrough(
+//                Part::class,
+//                [PartShopPivot::class, Having::class],
+//                $localKey,
+//                null,
+//                [
+//                    // Determine the id by which we can retrieve havings record from rigs
+//                    Having::class => $localKey,
+//                    // Determine the id by which we can retrieve part_shop from havings
+//                    PartShopPivot::class => 'part_shop_id'
+//                ]
+//            )
+//            ->select([
+//                ...$additional_columns,
+//                // 'part_id',
+//                'name',
+//                'image',
+//                'type',
+//            ]);
+//    }
+
     /**
      * Define relationship for any part type.
      * Rigs -> havings -> PartShopPivot -> Part
      *
-     * @return \Znck\Eloquent\Relations\BelongsToThrough
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function belongsToPart(string $localKey, array $additional_columns = []): \Znck\Eloquent\Relations\BelongsToThrough
+    public function belongsToPart(string $localKey, array $additional_columns = []): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this
-            ->belongsToThrough(
-                Part::class,
-                [PartShopPivot::class, Having::class],
-                $localKey,
-                null,
-                [
-                    // Determine the id by which we can retrieve havings record from rigs
-                    Having::class => $localKey,
-                    // Determine the id by which we can retrieve part_shop from havings
-                    PartShopPivot::class => 'part_shop_id'
-                ]
-            )
-            ->select([
-                ...$additional_columns,
-                // 'part_id',
-                'name',
-                'image',
-                'type',
-            ]);
+            ->belongsTo(Having::class, $localKey)
+            ->with(['part' => function ($q) use($additional_columns) {
+                return $q->select([
+                    ...$additional_columns,
+                    // 'part_id',
+                    'name',
+                    'image',
+                    'type',
+                ]);
+            }]);
+
     }
 
     /**

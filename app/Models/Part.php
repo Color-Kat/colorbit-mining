@@ -52,7 +52,7 @@ class Part extends Model
                 $postfix = join(', ', [
                     $this->GPU_VRAM_size . ' ГБ',
                     $this->GPU_VRAM_type,
-                    $this->GPU_VRAM_frequency . ' МГц'
+                    $this->GPU_chip_frequency . ' МГц'
                 ]);
                 break;
 

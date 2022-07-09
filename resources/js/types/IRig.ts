@@ -4,6 +4,7 @@ import {IPlatform} from "./parts/IPlatform";
 import {IRAM} from "./parts/IRAM";
 import {IPSU} from "./parts/IPSU";
 import {ICase} from "./parts/ICase";
+import {IHaving} from "./IHaving";
 
 export type RigStateType = 'on' | 'off' | 'broken';
 
@@ -12,9 +13,9 @@ export interface IRig{
     name: string;
     state: RigStateType;
 
-    GPU: IGPU;
-    platform: IPlatform;
-    RAM: IRAM;
-    PSU: IPSU;
-    case: ICase;
+    GPU: IHaving<IGPU>;
+    platform: IHaving<IPlatform>;
+    RAM: IHaving<IRAM>;
+    PSU: IHaving<IPSU>;
+    case: IHaving<ICase>;
 }

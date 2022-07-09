@@ -138,7 +138,10 @@ class UserRepository extends CoreRepository
             "status" => false
         ]);
 
-        $rigs = $user->rigs()->with(['GPU', 'platform', 'RAM', 'PSU', 'case'])->paginate(5);
+        $rigs = $user
+            ->rigs()
+            ->with(['GPU', 'platform', 'RAM', 'PSU', 'case'])
+            ->paginate(5);
 
         return $rigs;
     }
