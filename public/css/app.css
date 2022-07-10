@@ -969,6 +969,9 @@ select{
 .m-3{
   margin: 0.75rem;
 }
+.m-1{
+  margin: 0.25rem;
+}
 .mx-auto{
   margin-left: auto;
   margin-right: auto;
@@ -1113,6 +1116,12 @@ select{
 .mt-7{
   margin-top: 1.75rem;
 }
+.mr-0\.5{
+  margin-right: 0.125rem;
+}
+.mr-0{
+  margin-right: 0px;
+}
 .block{
   display: block;
 }
@@ -1201,6 +1210,9 @@ select{
 }
 .max-h-0{
   max-height: 0px;
+}
+.max-h-\[100000px\]{
+  max-height: 100000px;
 }
 .min-h-screen{
   min-height: 100vh;
@@ -1326,8 +1338,14 @@ select{
 .shrink-0{
   flex-shrink: 0;
 }
+.shrink{
+  flex-shrink: 1;
+}
 .grow{
   flex-grow: 1;
+}
+.grow-0{
+  flex-grow: 0;
 }
 .origin-top-left{
   transform-origin: top left;
@@ -1753,11 +1771,26 @@ select{
   --tw-bg-opacity: 1;
   background-color: rgb(55 65 81 / var(--tw-bg-opacity));
 }
+.bg-gray-900{
+  --tw-bg-opacity: 1;
+  background-color: rgb(17 24 39 / var(--tw-bg-opacity));
+}
+.bg-slate-800{
+  --tw-bg-opacity: 1;
+  background-color: rgb(30 41 59 / var(--tw-bg-opacity));
+}
+.bg-zinc-900{
+  --tw-bg-opacity: 1;
+  background-color: rgb(24 24 27 / var(--tw-bg-opacity));
+}
 .bg-opacity-25{
   --tw-bg-opacity: 0.25;
 }
 .bg-opacity-75{
   --tw-bg-opacity: 0.75;
+}
+.bg-opacity-50{
+  --tw-bg-opacity: 0.5;
 }
 .bg-gradient-to-br{
   background-image: linear-gradient(to bottom right, var(--tw-gradient-stops));
@@ -2733,6 +2766,21 @@ select:-webkit-autofill:focus {
   .sm\:justify-between{
     justify-content: space-between;
   }
+  .sm\:space-y-1 > :not([hidden]) ~ :not([hidden]){
+    --tw-space-y-reverse: 0;
+    margin-top: calc(0.25rem * calc(1 - var(--tw-space-y-reverse)));
+    margin-bottom: calc(0.25rem * var(--tw-space-y-reverse));
+  }
+  .sm\:space-y-1\.5 > :not([hidden]) ~ :not([hidden]){
+    --tw-space-y-reverse: 0;
+    margin-top: calc(0.375rem * calc(1 - var(--tw-space-y-reverse)));
+    margin-bottom: calc(0.375rem * var(--tw-space-y-reverse));
+  }
+  .sm\:space-y-0 > :not([hidden]) ~ :not([hidden]){
+    --tw-space-y-reverse: 0;
+    margin-top: calc(0px * calc(1 - var(--tw-space-y-reverse)));
+    margin-bottom: calc(0px * var(--tw-space-y-reverse));
+  }
   .sm\:rounded-lg{
     border-radius: 0.5rem;
   }
@@ -2817,6 +2865,9 @@ select:-webkit-autofill:focus {
   .md\:mb-0{
     margin-bottom: 0px;
   }
+  .md\:mt-2{
+    margin-top: 0.5rem;
+  }
   .md\:block{
     display: block;
   }
@@ -2870,6 +2921,9 @@ select:-webkit-autofill:focus {
   }
   .md\:flex-row{
     flex-direction: row;
+  }
+  .md\:flex-col{
+    flex-direction: column;
   }
   .md\:items-center{
     align-items: center;
