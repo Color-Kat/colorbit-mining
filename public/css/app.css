@@ -1302,6 +1302,11 @@ select{
 .min-w-0{
   min-width: 0px;
 }
+.min-w-max{
+  min-width: -webkit-max-content;
+  min-width: -moz-max-content;
+  min-width: max-content;
+}
 .max-w-screen-xl{
   max-width: 1280px;
 }
@@ -1325,6 +1330,11 @@ select{
 }
 .max-w-3xl{
   max-width: 48rem;
+}
+.max-w-max{
+  max-width: -webkit-max-content;
+  max-width: -moz-max-content;
+  max-width: max-content;
 }
 .flex-1{
   flex: 1 1 0%;
@@ -2912,6 +2922,9 @@ select:-webkit-autofill:focus {
   }
   .md\:flex-1{
     flex: 1 1 0%;
+  }
+  .md\:shrink{
+    flex-shrink: 1;
   }
   .md\:grid-cols-3{
     grid-template-columns: repeat(3, minmax(0, 1fr));
