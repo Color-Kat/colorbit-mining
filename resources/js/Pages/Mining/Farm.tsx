@@ -63,14 +63,16 @@ const RigPartInfo: React.FC<{ having: IHaving<IBasePart> }> = ({having}) => {
                 </div>
 
                 {/* Temperature */}
-                <div className="flex flex-col justify-between">
-                    <span className="text-sm text-gray-300">Температура</span>
-                    <div
-                        className={`text-base text-${having.temperature < 70 ? 'green' : 'orange'}-500`}
-                    >
-                        {having.temperature} °C
+                {having.temperature &&
+                    <div className="flex flex-col justify-between">
+                        <span className="text-sm text-gray-300">Температура</span>
+                        <div
+                            className={`text-base text-${having.temperature < 70 ? 'green' : 'orange'}-500`}
+                        >
+                            {having.temperature} °C
+                        </div>
                     </div>
-                </div>
+                }
 
                 {/* Temperature MAX */}
                 <div className="flex flex-col justify-between">
@@ -82,7 +84,7 @@ const RigPartInfo: React.FC<{ having: IHaving<IBasePart> }> = ({having}) => {
                     </div>
                 </div>
 
-                {/* Power */}
+                {/* Current Power */}
                 <div className="flexflex-col justify-between">
                     <span className="text-sm text-gray-300">Потребление</span>
                     <div

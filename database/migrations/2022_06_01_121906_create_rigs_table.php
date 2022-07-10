@@ -18,6 +18,7 @@ return new class extends Migration
 
             $table->string('name');
             $table->string('state')->default('stopped'); // Work, stopped, broken
+            $table->unsignedInteger('general_temp')->default(0); // Temperature of all rig
             $table->foreignId('user_id');
 
             // Parts
