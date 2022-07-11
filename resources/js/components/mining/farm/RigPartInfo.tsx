@@ -2,6 +2,7 @@ import React from "react";
 import {IHaving} from "@/types/IHaving";
 import {BiErrorCircle} from "react-icons/bi";
 import {IBasePart} from "@/types/parts/IBasePart";
+import {getColorByValue} from "../../../utils/getColorByValue";
 
 const RigPartInfoItem: React.FC<{
     title: string,
@@ -16,26 +17,13 @@ const RigPartInfoItem: React.FC<{
 }) => {
     let intValue = parseInt(value); // Get int value
 
-    // For some parts we can inverse colors
-    // 100% - green; 0% - red
-    if (inverseColor) intValue = 100 - intValue;
-
-    // Adn define color of text info
-    // If setColor is true
-    let color = '';
-    if (setColor) {
-        color = '#65a30d';
-        if (intValue > 25) color = '#16a34a';
-        if (intValue > 50) color = '#facc15';
-        if (intValue > 75) color = '#ea580c';
-        if (intValue > 90) color = '#dc2626';
-    }
+    const color = setColor ? getColorByValue(intValue, 100, inverseColor) : '';
 
     return (
         <div className="flex flex-col justify-between">
             <span className="text-sm text-gray-300">{title}</span>
             <div
-                className={`text-base`}
+                className="text-base font-bold"
                 style={{
                     color: color
                 }}
@@ -92,6 +80,7 @@ export const RigPartInfo: React.FC<{ having: IHaving<IBasePart> }> = ({having}) 
                     /> : null
                 }
 
+                {/* Temperature */}
                 {having.temp !== null ?
                     <RigPartInfoItem
                         title="Температура"
@@ -99,6 +88,7 @@ export const RigPartInfo: React.FC<{ having: IHaving<IBasePart> }> = ({having}) 
                     /> : null
                 }
 
+                {/* Temperature MAX */}
                 {having.max_temp !== null ?
                     <RigPartInfoItem
                         title="Макс. температура"
@@ -106,6 +96,7 @@ export const RigPartInfo: React.FC<{ having: IHaving<IBasePart> }> = ({having}) 
                         }/> : null
                 }
 
+                {/* Current Power */}
                 {having.current_power !== null ?
                     <RigPartInfoItem
                         title="Потребление"
@@ -113,53 +104,6 @@ export const RigPartInfo: React.FC<{ having: IHaving<IBasePart> }> = ({having}) 
                         setColor={false}
                     /> : null
                 }
-
-                {/*{having.loading !== null ?*/}
-                {/*    <div className="flex flex-col justify-between">*/}
-                {/*        <span className="text-sm text-gray-300">Загрузка</span>*/}
-                {/*        <div*/}
-                {/*            className={`text-base text-${having.loading > 70 ? 'green' : 'orange'}-500`}*/}
-                {/*        >*/}
-                {/*            {having.loading}%*/}
-                {/*        </div>*/}
-                {/*    </div> : null*/}
-                {/*}*/}
-
-                {/* Temperature */}
-                {/*{having.temp !== null ?*/}
-                {/*    <div className="flex flex-col justify-between">*/}
-                {/*        <span className="text-sm text-gray-300">Температура</span>*/}
-                {/*        <div*/}
-                {/*            className={`text-base text-${having.temp < 70 ? 'green' : 'orange'}-500`}*/}
-                {/*        >*/}
-                {/*            {having.temp} °C*/}
-                {/*        </div>*/}
-                {/*    </div> : null*/}
-                {/*}*/}
-
-                {/* Temperature MAX */}
-                {/*{having.max_temp !== null ?*/}
-                {/*    <div className="flex flex-col justify-between">*/}
-                {/*        <span className="text-sm text-gray-300">Макс. температура</span>*/}
-                {/*        <div*/}
-                {/*            className={`text-base text-${having.max_temp < 70 ? 'green' : 'orange'}-500`}*/}
-                {/*        >*/}
-                {/*            {having.max_temp} °C*/}
-                {/*        </div>*/}
-                {/*    </div> : null*/}
-                {/*}*/}
-
-                {/* Current Power */}
-                {/*{having.current_power !== null ?*/}
-                {/*    <div className="flex flex-col justify-between">*/}
-                {/*        <span className="text-sm text-gray-300">Потребление</span>*/}
-                {/*        <div*/}
-                {/*            className={`text-base text-${having.current_power < 70 ? 'green' : 'orange'}-500`}*/}
-                {/*        >*/}
-                {/*            {having.current_power}W*/}
-                {/*        </div>*/}
-                {/*    </div> : null*/}
-                {/*}*/}
             </div>
         </>
     );

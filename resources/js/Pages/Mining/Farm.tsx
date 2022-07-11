@@ -8,6 +8,7 @@ import {Section} from "@components/page/Section";
 import {IRig} from "@/types/IRig";
 import {BiChevronDownCircle, BiInfoCircle} from "react-icons/bi";
 import {RigSlot} from "@components/mining/farm/RigSlot";
+import {getColorByValue} from "../../utils/getColorByValue";
 
 const rigStates = {
     on: 'Работает',
@@ -26,9 +27,11 @@ const RigItem: React.FC<{ rig: IRig }> = React.memo(({rig}) => {
     console.log(rig);
 
     let stateClasses = '';
-    if(rig.state == 'on') stateClasses = 'text-green-500';
+    if(rig.state == 'on') stateClasses = 'text-lime-600 font-bold';
     if(rig.state == 'off') stateClasses = 'text-gray-500';
     if(rig.state == 'broken') stateClasses = 'text-red-500';
+
+    rig.GPU = null;
 
     return (
         <Section>
@@ -43,36 +46,45 @@ const RigItem: React.FC<{ rig: IRig }> = React.memo(({rig}) => {
                 </div>
 
                 {/* Params of the rig */}
-                {rig.GPU.temp !== null ?
-                    <div className="app-bg rounded-md p-2 flex space-x-12">
-                        <div className="flex flex-col justify-between">
-                            <span className="text-sm text-gray-300">Температура рига</span>
-                            <div
-                                className={`text-base text-${rig.general_temp < 70 ? 'green' : 'orange'}-500`}
-                            >
-                                {rig.general_temp} °C
-                            </div>
+                <div className="app-bg rounded-md p-2 flex space-x-12">
+                    <div className="flex flex-col justify-between">
+                        <span className="text-sm text-gray-300">Температура рига</span>
+                        <div
+                            className={`text-base font-bold`}
+                            style={{
+                                color: getColorByValue(rig.general_temp)
+                            }}
+                        >
+                            {rig.general_temp} °C
                         </div>
+                    </div>
 
+                    {rig.GPU ?
                         <div className="flex flex-col justify-between">
                             <span className="text-sm text-gray-300">Загрузка GPU</span>
                             <div
-                                className={`text-base text-${rig.GPU.temp < 70 ? 'green' : 'orange'}-500`}
+                                className="text-base font-bold"
+                                style={{
+                                    color: getColorByValue(rig.GPU.temp ?? 0, 100, true)
+                                }}
                             >
                                 {rig.GPU.temp} °C
                             </div>
-                        </div>
+                        </div> : null
+                    }
 
-                        <div className="flex flex-col justify-between">
-                            <span className="text-sm text-gray-300">Потребление</span>
-                            <div
-                                className={`text-base text-${100 < 70 ? 'green' : 'orange'}-500`}
-                            >
-                                {100}W
-                            </div>
+                    <div className="flex flex-col justify-between">
+                        <span className="text-sm text-gray-300">Потребление</span>
+                        <div
+                            className="text-base font-bold"
+                            style={{
+                                color: getColorByValue(190, rig.PSU.part.PSU_power_supply)
+                            }}
+                        >
+                            {190}W
                         </div>
-                    </div> : null
-                }
+                    </div>
+                </div>
 
                 {/* Show/Hide parts */}
                 <button className="w-full mt-6 mb-2 text-lg flex justify-end items-center text-gray-400"
@@ -83,7 +95,7 @@ const RigItem: React.FC<{ rig: IRig }> = React.memo(({rig}) => {
 
                 {/* Slots with parts*/}
                 <div
-                    className={`transition-all duration-300 overflow-hidden origin-top ${showMore ? 'scale-y-1 max-h-[100000px]' : 'scale-y-0 max-h-0 opacity-0'}`}
+                    className={`transition-all duration-300 origin-top ${showMore ? 'scale-y-1 max-h-[100000px]' : 'scale-y-0 max-h-0 opacity-0'}`}
                 >
                     {/* GPU */}
                     <RigSlot having={rig.GPU} type="GPU"/>

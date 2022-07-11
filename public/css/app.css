@@ -2137,6 +2137,14 @@ select{
   --tw-text-opacity: 1;
   color: rgb(249 115 22 / var(--tw-text-opacity));
 }
+.text-lime-500{
+  --tw-text-opacity: 1;
+  color: rgb(132 204 22 / var(--tw-text-opacity));
+}
+.text-lime-600{
+  --tw-text-opacity: 1;
+  color: rgb(101 163 13 / var(--tw-text-opacity));
+}
 .underline{
   -webkit-text-decoration-line: underline;
           text-decoration-line: underline;
