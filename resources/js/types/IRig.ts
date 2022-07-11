@@ -1,4 +1,3 @@
-import {IBasePart} from "./parts/IBasePart";
 import {IGPU} from "./parts/IGPU";
 import {IPlatform} from "./parts/IPlatform";
 import {IRAM} from "./parts/IRAM";
@@ -15,9 +14,9 @@ export interface IRig{
     general_temp: number;
     current_power: number;
 
-    GPU: IHaving<IGPU>;
-    platform: IHaving<IPlatform>;
-    RAM: IHaving<IRAM>;
-    PSU: IHaving<IPSU>;
-    case: IHaving<ICase>;
+    GPU: IHaving<IGPU> | null;
+    platform: IHaving<IPlatform> | null;
+    RAM: IHaving<IRAM> | null;
+    PSU: IHaving<IPSU> | null;
+    case: IHaving<ICase> | null;
 }

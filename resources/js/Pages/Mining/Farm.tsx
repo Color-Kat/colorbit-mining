@@ -31,7 +31,7 @@ const RigItem: React.FC<{ rig: IRig }> = React.memo(({rig}) => {
     if(rig.state == 'off') stateClasses = 'text-gray-500';
     if(rig.state == 'broken') stateClasses = 'text-red-500';
 
-    rig.GPU = null;
+    // rig.GPU = null;
 
     return (
         <Section>
@@ -65,7 +65,7 @@ const RigItem: React.FC<{ rig: IRig }> = React.memo(({rig}) => {
                             <div
                                 className="text-base font-bold"
                                 style={{
-                                    color: getColorByValue(rig.GPU.temp ?? 0, 100, true)
+                                    color: getColorByValue(rig.GPU?.temp ?? 0, 100, true)
                                 }}
                             >
                                 {rig.GPU.temp} °C
@@ -74,11 +74,11 @@ const RigItem: React.FC<{ rig: IRig }> = React.memo(({rig}) => {
                     }
 
                     <div className="flex flex-col justify-between">
-                        <span className="text-sm text-gray-300">Потребление</span>
+                        <span className="text-sm text-gray-300">Макс. потребление</span>
                         <div
                             className="text-base font-bold"
                             style={{
-                                color: getColorByValue(190, rig.PSU.part.PSU_power_supply)
+                                color: getColorByValue(190, rig.PSU?.part.PSU_power_supply ?? 400)
                             }}
                         >
                             {190}W

@@ -24,6 +24,8 @@ class Rig extends Model
      */
     public static $snakeAttributes = false;
 
+    protected $appends = ['maxPower'];
+
 //    /**
 //     * Define relationship for any part type.
 //     * Rigs -> havings -> PartShopPivot -> Part
@@ -76,7 +78,7 @@ class Rig extends Model
     }
 
     /**
-     * @return \Znck\Eloquent\Relations\BelongsToThrough
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function GPU(){
         return $this->belongsToPart('GPU_id', [
@@ -126,5 +128,12 @@ class Rig extends Model
             'case_GPUs_count',
             'case_critical_temp'
         ]);
+    }
+
+    public function getMaxPowerAttribute() {
+        return
+            $this->GPU->part->power +
+            $this->platform->part->power +
+            $this->RAM->part->power;
     }
 }
