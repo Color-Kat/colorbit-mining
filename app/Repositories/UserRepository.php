@@ -140,6 +140,7 @@ class UserRepository extends CoreRepository
 
         $rigs = $user
             ->rigs()
+            ->with(['GPU', 'platform', 'RAM', 'PSU', 'case'])
             ->paginate(5);
 
         return $rigs;

@@ -78,10 +78,10 @@ const RigItem: React.FC<{ rig: IRig }> = React.memo(({rig}) => {
                         <div
                             className="text-base font-bold"
                             style={{
-                                color: getColorByValue(190, rig.PSU?.part.PSU_power_supply ?? 400)
+                                color: getColorByValue(rig.maxPower, rig.PSU?.part.PSU_power_supply ?? 400)
                             }}
                         >
-                            {190}W
+                            {rig.maxPower}W
                         </div>
                     </div>
                 </div>

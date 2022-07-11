@@ -12,7 +12,7 @@ export interface IRig{
     name: string;
     state: RigStateType;
     general_temp: number;
-    current_power: number;
+    maxPower: number;
 
     GPU: IHaving<IGPU> | null;
     platform: IHaving<IPlatform> | null;
