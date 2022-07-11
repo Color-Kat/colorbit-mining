@@ -20,7 +20,7 @@ return new class extends Migration
             $table->foreignId('user_id');
 
             $table->string('state')->default('not_used'); // In rig or not / broken / needs_repair
-            $table->string('message')->nullable(); // Message with breakdown text if the part is broken
+            $table->string('message')->default(''); // Message with breakdown text if the part is broken
             $table->boolean('for_sale')->default(false);
 
             $table->unsignedInteger('temp')->default(0); // Temperature of part

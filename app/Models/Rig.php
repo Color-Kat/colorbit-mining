@@ -73,7 +73,6 @@ class Rig extends Model
                     'type',
                 ]);
             }]);
-
     }
 
     /**

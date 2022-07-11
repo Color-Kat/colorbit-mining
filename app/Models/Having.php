@@ -65,4 +65,23 @@ class Having extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    // === Some parts doesn't have this parameters === //
+    public function getLoadingAttribute($value) {
+        $loading = $this->part->type === 'case' ? null : $value;
+
+        return $loading;
+    }
+
+    public function getTempAttribute($value) {
+        return $value;
+    }
+
+    public function getMaxTempAttribute($value) {
+        return $this->part->type === 'case' ? null : $value;
+    }
+
+    public function getCurrentPowerAttribute($value) {
+        return $this->part->type === 'case' || $this->part->type === 'PSU' ? null : $value;
+    }
 }

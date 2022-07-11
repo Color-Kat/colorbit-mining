@@ -12,6 +12,8 @@ export interface IRig{
     id: number;
     name: string;
     state: RigStateType;
+    general_temp: number;
+    current_power: number;
 
     GPU: IHaving<IGPU>;
     platform: IHaving<IPlatform>;
