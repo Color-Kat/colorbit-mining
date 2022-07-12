@@ -1005,6 +1005,10 @@ select{
   margin-top: 0.5rem;
   margin-bottom: 0.5rem;
 }
+.mx-5{
+  margin-left: 1.25rem;
+  margin-right: 1.25rem;
+}
 .ml-3{
   margin-left: 0.75rem;
 }
@@ -1113,6 +1117,9 @@ select{
 .mr-12{
   margin-right: 3rem;
 }
+.mb-0{
+  margin-bottom: 0px;
+}
 .mt-7{
   margin-top: 1.75rem;
 }
@@ -1122,8 +1129,11 @@ select{
 .mr-0{
   margin-right: 0px;
 }
-.mb-0{
-  margin-bottom: 0px;
+.mb-96{
+  margin-bottom: 24rem;
+}
+.-mb-96{
+  margin-bottom: -24rem;
 }
 .block{
   display: block;
@@ -1305,6 +1315,15 @@ select{
   width: -moz-fit-content;
   width: fit-content;
 }
+.w-96{
+  width: 24rem;
+}
+.w-\[120\]{
+  width: 120;
+}
+.w-\[120rem\]{
+  width: 120rem;
+}
 .min-w-0{
   min-width: 0px;
 }
@@ -1336,6 +1355,9 @@ select{
   max-width: -webkit-max-content;
   max-width: -moz-max-content;
   max-width: max-content;
+}
+.max-w-\[90vw\]{
+  max-width: 90vw;
 }
 .flex-1{
   flex: 1 1 0%;
@@ -1570,9 +1592,6 @@ select{
 }
 .overflow-y-hidden{
   overflow-y: hidden;
-}
-.overflow-x-scroll{
-  overflow-x: scroll;
 }
 .truncate{
   overflow: hidden;
@@ -2472,9 +2491,6 @@ select:-webkit-autofill:focus {
 .focus\:z-10:focus{
   z-index: 10;
 }
-.focus\:border-none:focus{
-  border-style: none;
-}
 .focus\:border-blue-300:focus{
   --tw-border-opacity: 1;
   border-color: rgb(147 197 253 / var(--tw-border-opacity));
@@ -2578,9 +2594,6 @@ select:-webkit-autofill:focus {
 }
 .focus\:ring-opacity-0:focus{
   --tw-ring-opacity: 0;
-}
-.active\:border-none:active{
-  border-style: none;
 }
 .active\:bg-gray-100:active{
   --tw-bg-opacity: 1;
@@ -2937,8 +2950,26 @@ select:-webkit-autofill:focus {
     width: -moz-max-content;
     width: max-content;
   }
+  .md\:w-auto{
+    width: auto;
+  }
   .md\:max-w-md{
     max-width: 28rem;
+  }
+  .md\:max-w-3xl{
+    max-width: 48rem;
+  }
+  .md\:max-w-xl{
+    max-width: 36rem;
+  }
+  .md\:max-w-2xl{
+    max-width: 42rem;
+  }
+  .md\:max-w-full{
+    max-width: 100%;
+  }
+  .md\:max-w-lg{
+    max-width: 32rem;
   }
   .md\:flex-1{
     flex: 1 1 0%;
@@ -3021,6 +3052,9 @@ select:-webkit-autofill:focus {
   }
   .lg\:hidden{
     display: none;
+  }
+  .lg\:max-w-3xl{
+    max-width: 48rem;
   }
   .lg\:px-8{
     padding-left: 2rem;

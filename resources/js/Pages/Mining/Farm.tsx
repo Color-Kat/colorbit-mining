@@ -143,10 +143,16 @@ const Farm: IPage = React.memo(() => {
                 {isConsoleOpened ? 'Закрыть' : 'Открыть'} консоль _
             </SecondaryButton>
 
-            <div
-                className={`${isConsoleOpened ? 'opacity-100 scale-y-100 max-h-screen mb-4' : 'opacity-0 scale-y-0 max-h-0 mb-0'} transition w-screen overflow-x-auto`}
-            >
-                <MiningConsole/>
+            <div className="relative w-[120rem]" style={{maxWidth: '90vw'}}>
+                <div
+                    className={
+                        `${isConsoleOpened
+                            ? 'opacity-100 scale-y-100 max-h-screen mb-4'
+                            : 'opacity-0 scale-y-0 max-h-0 mb-0'
+                        } transition`}
+                >
+                    <MiningConsole/>
+                </div>
             </div>
 
 

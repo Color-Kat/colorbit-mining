@@ -32,7 +32,7 @@ export const MiningConsole: React.FC<{}> = React.memo(({}) => {
         echo: {
             description: 'echo - Выводит переданную строку',
             usage: 'echo <string>',
-            fn: (...args: any[]) => args.join(' ')
+            fn: (...args: any[]) => args.join(' ') + '11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111'
         },
         "mining": {
             description:
@@ -80,11 +80,16 @@ export const MiningConsole: React.FC<{}> = React.memo(({}) => {
                             "/ /___/ /_/ / / /_/ / /  / /_/ / / /_  \n" +
                             "\\____/\\____/_/\\____/_/  /_____/_/\\__/\n "}
             promptLabel={userName + '@mining:~$'}
-            errorText="Команда `[command]` не найдена! Введите `help` для вывода списка команд"
+            errorText={"Команда `[command]` не найдена!\nВведите `help` для вывода списка команд"}
             styleEchoBack={'fullInherit'}
             noDefaults
 
-            className="h-96 no-scrollbar overflow-scroll"
+            className="h-96"
+            contentClassName="overflow-scroll no-scrollbar sm:max-w-auto"
+            contentStyle={{
+                maxWidth: '90vw',
+                // width: '100%'
+            }}
             style={{
                 overflowX: 'scroll',
                 whiteSpace: 'pre'
