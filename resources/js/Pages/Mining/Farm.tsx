@@ -6,11 +6,12 @@ import {IPaginator} from "@/types/IPaginator";
 import Paginator from "@components/elements/Paginator";
 import {Section} from "@components/page/Section";
 import {IRig} from "@/types/IRig";
-import {BiChevronDownCircle, BiExit, BiInfoCircle, BiTerminal} from "react-icons/bi";
+import {BiChevronDownCircle, BiEditAlt, BiExit, BiInfoCircle, BiTerminal} from "react-icons/bi";
 import {RigSlot} from "@components/mining/farm/RigSlot";
 import {getColorByValue} from "../../utils/getColorByValue";
 import {MiningConsole} from "../../components/mining/farm/MiningConsole";
 import SecondaryButton from "../../components/elements/SecondaryButton";
+import {EditableName} from "../../components/mining/farm/EditableName";
 
 const rigStates = {
     on: 'Работает',
@@ -20,7 +21,7 @@ const rigStates = {
 
 const RigItem: React.FC<{ rig: IRig }> = React.memo(({rig}) => {
     const state: string = rigStates[rig.state];
-    const [showMore, setShowMore] = useState(true);
+    const [showMore, setShowMore] = useState(false);
 
     const toggleShowMore = () => {
         setShowMore(prev => !prev)
@@ -39,7 +40,8 @@ const RigItem: React.FC<{ rig: IRig }> = React.memo(({rig}) => {
         <Section>
             <div className="rigs-list__item w-full flex flex-col">
                 {/* Rig name */}
-                <h2 className="text-xl app-bg rounded-md p-1.5 pl-2 mb-5">#{rig.name}</h2>
+                {/*<h2 className="text-xl app-bg rounded-md p-1.5 pl-2 mb-5">#{rig.name}</h2>*/}
+                <EditableName name={rig.name} />
 
                 {/* The rig state and info*/}
                 <div className="flex justify-between items-center mb-2">
