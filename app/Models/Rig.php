@@ -56,6 +56,10 @@ class Rig extends Model
 //            ]);
 //    }
 
+    public function user() {
+        return $this->hasOne(User::class);
+    }
+
     /**
      * Define relationship for any part type.
      * Rigs -> havings -> PartShopPivot -> Part

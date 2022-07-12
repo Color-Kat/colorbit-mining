@@ -11,7 +11,7 @@ export const EditableName: React.FC<{ name: string, rigId: number }> = React.mem
 
     const {data, setData, post, errors } = useForm({
         id: rigId,
-        name: '#' + name,
+        name: name,
     });
 
     // Set focus to input when switch on the edit mode
@@ -26,7 +26,8 @@ export const EditableName: React.FC<{ name: string, rigId: number }> = React.mem
 
         // When edit mode is disabled, send the request to change name
         if(editMode)
-            post(route('mining.change-rig-name'));
+           post(route('mining.change-rig-name'));
+
     }
 
     const changeHandle = (e: any) => {
@@ -41,22 +42,24 @@ export const EditableName: React.FC<{ name: string, rigId: number }> = React.mem
     }
 
     return (
-        <div className="relative mb-5">
-            <input
-                ref={input}
-                className="text-xl app-bg rounded-md p-1.5 pl-2 w-full"
-                value={data.name}
-                placeholder="Название рига"
-                onChange={changeHandle}
-                onKeyDown={changeHandle}
-                disabled={!editMode}
-            />
-            <BiEditAlt
-                onClick={changeModeHandle}
-                size={24}
-                className="absolute right-1.5 top-1/2 -translate-y-1/2 hover:text-gray-400"
-            />
-
+        <div className="mb-5 flex flex-col">
+            <div className="relative">
+                <input
+                    ref={input}
+                    className="text-xl app-bg rounded-md p-1.5 pl-2 w-full"
+                    value={data.name}
+                    placeholder="Название рига"
+                    onChange={changeHandle}
+                    onKeyDown={changeHandle}
+                    disabled={!editMode}
+                />
+                <BiEditAlt
+                    onClick={changeModeHandle}
+                    size={24}
+                    className="absolute right-1.5 top-1/2 -translate-y-1/2 hover:text-gray-400"
+                />
+            </div>
+            <span className="text-sm text-red-500">{(errors as any).message}</span>
         </div>
     );
 });

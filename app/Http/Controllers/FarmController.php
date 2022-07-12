@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Repositories\RigRepository;
 use App\Repositories\UserRepository;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -13,11 +14,17 @@ class FarmController extends BaseController
      */
     private UserRepository $userRepository;
 
+    /**
+     * @var RigRepository
+     */
+    private RigRepository $rigRepository;
+
     public function __construct()
     {
         parent::__construct();
 
         $this->userRepository = new UserRepository();
+        $this->rigRepository = new RigRepository();
     }
 
     /**
@@ -35,7 +42,8 @@ class FarmController extends BaseController
     }
 
     public function changeRigName(Request $request) {
-//        dump($request->input());
-        return redirect()->back();
+        $result = $this->rigRepository->changeRigName($request);
+
+        return redirect()->back()->withErrors($result);
     }
 }
