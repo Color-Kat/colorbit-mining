@@ -41,7 +41,7 @@ const RigItem: React.FC<{ rig: IRig }> = React.memo(({rig}) => {
             <div className="rigs-list__item w-full flex flex-col">
                 {/* Rig name */}
                 {/*<h2 className="text-xl app-bg rounded-md p-1.5 pl-2 mb-5">#{rig.name}</h2>*/}
-                <EditableName name={rig.name} />
+                <EditableName rigId={rig.id} name={rig.name} />
 
                 {/* The rig state and info*/}
                 <div className="flex justify-between items-center mb-2">

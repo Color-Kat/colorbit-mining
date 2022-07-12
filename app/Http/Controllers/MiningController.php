@@ -122,4 +122,8 @@ class MiningController extends BaseController
             'havings' => $havingsPaginator
         ]);
     }
+
+    public function changeRigName(Request $request) {
+        dump($request->input());
+    }
 }

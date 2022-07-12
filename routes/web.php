@@ -52,6 +52,8 @@ Route::middleware('auth')->prefix('mining')->as('mining.')->group(function () {
     // My rigs/farms
     Route::get('/farm', [MiningController::class, 'farm'])->name('farm');
 
+    Route::post('/change-rig-name', [MiningController::class, 'changeRigName'])->name('change-rig-name');
+
     // User's havings by types
     Route::prefix('havings')->as('havings.')->group(function() {
         Route::get('/gpu', [MiningController::class, 'GPU'])->name('GPU');
