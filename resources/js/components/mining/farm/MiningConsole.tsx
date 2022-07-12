@@ -84,11 +84,11 @@ export const MiningConsole: React.FC<{}> = React.memo(({}) => {
             styleEchoBack={'fullInherit'}
             noDefaults
 
-            className="h-96"
-            contentClassName="overflow-scroll no-scrollbar sm:max-w-auto"
+            className="w-full h-full"
+            contentClassName="overflow-scroll no-scrollbar"
             contentStyle={{
-                maxWidth: '90vw',
-                // width: '100%'
+                // maxWidth: '90vw',
+                // width: '100vw'
             }}
             style={{
                 overflowX: 'scroll',

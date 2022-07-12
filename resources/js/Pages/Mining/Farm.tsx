@@ -6,7 +6,7 @@ import {IPaginator} from "@/types/IPaginator";
 import Paginator from "@components/elements/Paginator";
 import {Section} from "@components/page/Section";
 import {IRig} from "@/types/IRig";
-import {BiChevronDownCircle, BiInfoCircle, BiTerminal} from "react-icons/bi";
+import {BiChevronDownCircle, BiExit, BiInfoCircle, BiTerminal} from "react-icons/bi";
 import {RigSlot} from "@components/mining/farm/RigSlot";
 import {getColorByValue} from "../../utils/getColorByValue";
 import {MiningConsole} from "../../components/mining/farm/MiningConsole";
@@ -143,14 +143,18 @@ const Farm: IPage = React.memo(() => {
                 {isConsoleOpened ? 'Закрыть' : 'Открыть'} консоль _
             </SecondaryButton>
 
-            <div className="relative w-[120rem]" style={{maxWidth: '90vw'}}>
+            <div className="">
                 <div
                     className={
                         `${isConsoleOpened
                             ? 'opacity-100 scale-y-100 max-h-screen mb-4'
                             : 'opacity-0 scale-y-0 max-h-0 mb-0'
-                        } transition`}
+                        } transition fixed lg:relative z-50 w-screen lg:w-auto h-screen lg:h-auto top-0 left-0`}
                 >
+                    <button
+                        onClick={()=>setConsoleOpened(false)}
+                        className="absolute bottom-5 md:bottom-auto md:top-5 right-5"
+                    ><BiExit size={45}/></button>
                     <MiningConsole/>
                 </div>
             </div>

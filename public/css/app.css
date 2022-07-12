@@ -933,6 +933,9 @@ select{
 .right-2{
   right: 0.5rem;
 }
+.top-5{
+  top: 1.25rem;
+}
 .z-0{
   z-index: 0;
 }
@@ -2884,6 +2887,12 @@ select:-webkit-autofill:focus {
   }
 }
 @media (min-width: 768px){
+  .md\:top-5{
+    top: 1.25rem;
+  }
+  .md\:bottom-auto{
+    bottom: auto;
+  }
   .md\:col-span-2{
     grid-column: span 2 / span 2;
   }
@@ -3044,6 +3053,12 @@ select:-webkit-autofill:focus {
   }
 }
 @media (min-width: 1024px){
+  .lg\:relative{
+    position: relative;
+  }
+  .lg\:z-50{
+    z-index: 50;
+  }
   .lg\:col-span-4{
     grid-column: span 4 / span 4;
   }
@@ -3052,6 +3067,18 @@ select:-webkit-autofill:focus {
   }
   .lg\:hidden{
     display: none;
+  }
+  .lg\:h-screen{
+    height: 100vh;
+  }
+  .lg\:h-auto{
+    height: auto;
+  }
+  .lg\:w-screen{
+    width: 100vw;
+  }
+  .lg\:w-auto{
+    width: auto;
   }
   .lg\:max-w-3xl{
     max-width: 48rem;
