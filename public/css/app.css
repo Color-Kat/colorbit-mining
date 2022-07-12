@@ -1110,14 +1110,20 @@ select{
 .mr-4{
   margin-right: 1rem;
 }
+.mr-12{
+  margin-right: 3rem;
+}
+.mt-7{
+  margin-top: 1.75rem;
+}
 .mr-0\.5{
   margin-right: 0.125rem;
 }
 .mr-0{
   margin-right: 0px;
 }
-.mt-7{
-  margin-top: 1.75rem;
+.mb-0{
+  margin-bottom: 0px;
 }
 .block{
   display: block;
@@ -1202,11 +1208,17 @@ select{
   height: -moz-max-content;
   height: max-content;
 }
+.h-96{
+  height: 24rem;
+}
 .max-h-\[100000px\]{
   max-height: 100000px;
 }
 .max-h-0{
   max-height: 0px;
+}
+.max-h-screen{
+  max-height: 100vh;
 }
 .min-h-screen{
   min-height: 100vh;
@@ -1395,6 +1407,10 @@ select{
   --tw-scale-y: 0;
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
+.scale-y-100{
+  --tw-scale-y: 1;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
 .transform{
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
@@ -1528,16 +1544,6 @@ select{
   margin-top: calc(1rem * calc(1 - var(--tw-space-y-reverse)));
   margin-bottom: calc(1rem * var(--tw-space-y-reverse));
 }
-.space-x-6 > :not([hidden]) ~ :not([hidden]){
-  --tw-space-x-reverse: 0;
-  margin-right: calc(1.5rem * var(--tw-space-x-reverse));
-  margin-left: calc(1.5rem * calc(1 - var(--tw-space-x-reverse)));
-}
-.space-x-12 > :not([hidden]) ~ :not([hidden]){
-  --tw-space-x-reverse: 0;
-  margin-right: calc(3rem * var(--tw-space-x-reverse));
-  margin-left: calc(3rem * calc(1 - var(--tw-space-x-reverse)));
-}
 .self-start{
   align-self: flex-start;
 }
@@ -1558,6 +1564,9 @@ select{
 }
 .overflow-y-hidden{
   overflow-y: hidden;
+}
+.overflow-x-scroll{
+  overflow-x: scroll;
 }
 .truncate{
   overflow: hidden;
@@ -1766,13 +1775,13 @@ select{
 .bg-white\/\[0\.08\]{
   background-color: rgb(255 255 255 / 0.08);
 }
-.bg-zinc-900{
-  --tw-bg-opacity: 1;
-  background-color: rgb(24 24 27 / var(--tw-bg-opacity));
-}
 .bg-orange-500{
   --tw-bg-opacity: 1;
   background-color: rgb(249 115 22 / var(--tw-bg-opacity));
+}
+.bg-zinc-900{
+  --tw-bg-opacity: 1;
+  background-color: rgb(24 24 27 / var(--tw-bg-opacity));
 }
 .bg-gray-700{
   --tw-bg-opacity: 1;
@@ -1959,14 +1968,11 @@ select{
 .pl-5{
   padding-left: 1.25rem;
 }
-.pt-3{
-  padding-top: 0.75rem;
-}
 .pl-2{
   padding-left: 0.5rem;
 }
-.pb-2{
-  padding-bottom: 0.5rem;
+.pt-3{
+  padding-top: 0.75rem;
 }
 .text-left{
   text-align: left;
@@ -2133,17 +2139,13 @@ select{
   --tw-text-opacity: 1;
   color: rgb(0 0 0 / var(--tw-text-opacity));
 }
-.text-orange-500{
-  --tw-text-opacity: 1;
-  color: rgb(249 115 22 / var(--tw-text-opacity));
-}
-.text-lime-500{
-  --tw-text-opacity: 1;
-  color: rgb(132 204 22 / var(--tw-text-opacity));
-}
 .text-lime-600{
   --tw-text-opacity: 1;
   color: rgb(101 163 13 / var(--tw-text-opacity));
+}
+.text-orange-500{
+  --tw-text-opacity: 1;
+  color: rgb(249 115 22 / var(--tw-text-opacity));
 }
 .underline{
   -webkit-text-decoration-line: underline;
@@ -2168,11 +2170,11 @@ select{
 .opacity-25{
   opacity: 0.25;
 }
-.opacity-10{
-  opacity: 0.1;
-}
 .opacity-\[10\%\]{
   opacity: 10%;
+}
+.opacity-10{
+  opacity: 0.1;
 }
 .shadow-sm{
   --tw-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
@@ -2336,6 +2338,17 @@ select:-webkit-autofill:focus {
   -webkit-box-shadow: none;
   -webkit-transition: background-color 5000s ease-in-out 0s;
   transition: background-color 5000s ease-in-out 0s;
+}
+/* Hide scrollbar for Chrome, Safari and Opera */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+/* Hide scrollbar for IE, Edge and Firefox */
+.no-scrollbar {
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
 }
 .marker\:text-red-600 *::marker{
   --tw-text-opacity: 1;
@@ -2906,6 +2919,11 @@ select:-webkit-autofill:focus {
   }
   .md\:w-60{
     width: 15rem;
+  }
+  .md\:w-max{
+    width: -webkit-max-content;
+    width: -moz-max-content;
+    width: max-content;
   }
   .md\:max-w-md{
     max-width: 28rem;

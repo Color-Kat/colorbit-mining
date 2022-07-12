@@ -46,7 +46,6 @@
     font-family: 'Roboto', sans-serif;
 }
 
-
 /* Change Autocomplete styles in Chrome*/
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
@@ -61,4 +60,15 @@ select:-webkit-autofill:focus {
     -webkit-text-fill-color: inherit;
     -webkit-box-shadow: none;
     transition: background-color 5000s ease-in-out 0s;
+}
+
+// Hide scrollbar
+/* Hide scrollbar for Chrome, Safari and Opera */
+.no-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+/* Hide scrollbar for IE, Edge and Firefox */
+.no-scrollbar {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
 }

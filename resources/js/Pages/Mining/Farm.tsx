@@ -6,9 +6,11 @@ import {IPaginator} from "@/types/IPaginator";
 import Paginator from "@components/elements/Paginator";
 import {Section} from "@components/page/Section";
 import {IRig} from "@/types/IRig";
-import {BiChevronDownCircle, BiInfoCircle} from "react-icons/bi";
+import {BiChevronDownCircle, BiInfoCircle, BiTerminal} from "react-icons/bi";
 import {RigSlot} from "@components/mining/farm/RigSlot";
 import {getColorByValue} from "../../utils/getColorByValue";
+import {MiningConsole} from "../../components/mining/farm/MiningConsole";
+import SecondaryButton from "../../components/elements/SecondaryButton";
 
 const rigStates = {
     on: 'Работает',
@@ -46,8 +48,8 @@ const RigItem: React.FC<{ rig: IRig }> = React.memo(({rig}) => {
                 </div>
 
                 {/* Params of the rig */}
-                <div className="app-bg rounded-md p-2 flex space-x-12">
-                    <div className="flex flex-col justify-between">
+                <div className="app-bg rounded-md p-2 flex flex-wrap">
+                    <div className="flex flex-col justify-between mr-12">
                         <span className="text-sm text-gray-300">Температура рига</span>
                         <div
                             className={`text-base font-bold`}
@@ -60,7 +62,7 @@ const RigItem: React.FC<{ rig: IRig }> = React.memo(({rig}) => {
                     </div>
 
                     {rig.GPU ?
-                        <div className="flex flex-col justify-between">
+                        <div className="flex flex-col justify-between mr-12">
                             <span className="text-sm text-gray-300">Загрузка GPU</span>
                             <div
                                 className="text-base font-bold"
@@ -123,6 +125,8 @@ const Farm: IPage = React.memo(() => {
         rigsPaginator: IPaginator<any>
     }>();
 
+    const [isConsoleOpened, setConsoleOpened] = useState(false);
+
     const rigsPaginator = page.props.rigsPaginator;
 
     return (
@@ -130,7 +134,23 @@ const Farm: IPage = React.memo(() => {
             title="Менеджер ригов"
             description="В менеджере ригов вы можете запускать и настраивать майнинг фермы, а также следить за их состоянием и износом."
         >
+            {/* Mining Console */}
+            <SecondaryButton
+                onClick={()=>setConsoleOpened(prev => !prev)}
+                className="w-full md:w-max px-5 mb-4 text-lg font-mono flex items-center"
+            >
+                <BiTerminal size={28} className="mr-1.5"/>
+                _{isConsoleOpened ? 'Закрыть' : 'Открыть'} консоль
+            </SecondaryButton>
 
+            <div
+                className={`${isConsoleOpened ? 'opacity-100 scale-y-100 max-h-screen mb-4' : 'opacity-0 scale-y-0 max-h-0 mb-0'} transition`}
+            >
+                <MiningConsole/>
+            </div>
+
+
+            {/* Rigs list */}
             <ul className="rigs-list mb-5 space-y-6">
                 {rigsPaginator.data.map(rig => {
                     return (
@@ -139,10 +159,11 @@ const Farm: IPage = React.memo(() => {
                 })}
             </ul>
 
+            {/* Paginator */}
             {rigsPaginator.last_page !== 1 &&
-            <div className="relative rounded-lg app-bg-dark shadow -m-s p-2 pt-0.5">
-                <Paginator paginator={rigsPaginator}/>
-            </div>
+                <div className="relative rounded-lg app-bg-dark shadow -m-s p-2 pt-0.5">
+                    <Paginator paginator={rigsPaginator}/>
+                </div>
             }
         </MiningLayout>
     );
