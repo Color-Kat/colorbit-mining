@@ -25,9 +25,8 @@ export const EditableName: React.FC<{ name: string, rigId: number }> = React.mem
         setEditMode(prev => !prev);
 
         // When edit mode is disabled, send the request to change name
-        if(editMode) {
+        if(editMode)
             post(route('mining.change-rig-name'));
-        }
     }
 
     const changeHandle = (e: any) => {
@@ -35,6 +34,10 @@ export const EditableName: React.FC<{ name: string, rigId: number }> = React.mem
         // '#' is always before the name
         const inputVal = e.target.value;
         setData('name', inputVal.indexOf('#') < 0 ? '#'+inputVal : inputVal);
+
+        // If user press Enter, disable edit mode and send request
+        if (e.key === 'Enter')
+            changeModeHandle();
     }
 
     return (
@@ -45,6 +48,7 @@ export const EditableName: React.FC<{ name: string, rigId: number }> = React.mem
                 value={data.name}
                 placeholder="Название рига"
                 onChange={changeHandle}
+                onKeyDown={changeHandle}
                 disabled={!editMode}
             />
             <BiEditAlt

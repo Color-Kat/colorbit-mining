@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\HavingsController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -9,7 +10,7 @@ use App\Http\Controllers\GoodController;
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\ShopsListController;
 
-use \App\Http\Controllers\MiningController;
+use \App\Http\Controllers\FarmController;
 
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\PartController as AdminPartController;
@@ -50,20 +51,20 @@ Route::middleware('auth')->prefix('user')->as('user.')->group(function () {
 // Farms, Havings,..
 Route::middleware('auth')->prefix('mining')->as('mining.')->group(function () {
     // My rigs/farms
-    Route::get('/farm', [MiningController::class, 'farm'])->name('farm');
+    Route::get('/farm', [FarmController::class, 'farm'])->name('farm');
 
-    Route::post('/change-rig-name', [MiningController::class, 'changeRigName'])->name('change-rig-name');
+    Route::post('/change-rig-name', [FarmController::class, 'changeRigName'])->name('change-rig-name');
 
     // User's havings by types
     Route::prefix('havings')->as('havings.')->group(function() {
-        Route::get('/gpu', [MiningController::class, 'GPU'])->name('GPU');
-        Route::get('/platform', [MiningController::class, 'platform'])->name('platform');
-        Route::get('/ram', [MiningController::class, 'RAM'])->name('RAM');
-        Route::get('/psu', [MiningController::class, 'PSU'])->name('PSU');
-        Route::get('/case', [MiningController::class, 'case'])->name('case');
+        Route::get('/gpu', [HavingsController::class, 'GPU'])->name('GPU');
+        Route::get('/platform', [HavingsController::class, 'platform'])->name('platform');
+        Route::get('/ram', [HavingsController::class, 'RAM'])->name('RAM');
+        Route::get('/psu', [HavingsController::class, 'PSU'])->name('PSU');
+        Route::get('/case', [HavingsController::class, 'case'])->name('case');
     });
     // All user's havings
-    Route::get('/havings', [MiningController::class, 'havings'])->name('havings.index');
+    Route::get('/havings', [HavingsController::class, 'havings'])->name('havings.index');
 });
 
 
