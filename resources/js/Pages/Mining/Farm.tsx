@@ -125,7 +125,7 @@ const Farm: IPage = React.memo(() => {
         rigsPaginator: IPaginator<any>
     }>();
 
-    const [isConsoleOpened, setConsoleOpened] = useState(false);
+    const [isConsoleOpened, setConsoleOpened] = useState(true);
 
     const rigsPaginator = page.props.rigsPaginator;
 
