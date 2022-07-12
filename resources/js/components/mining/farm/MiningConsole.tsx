@@ -10,39 +10,59 @@ export const MiningConsole: React.FC<{}> = React.memo(({}) => {
 
     const commands = {
         help: {
-            description: 'Выводит список команд.',
+            description: 'help - Выводит список команд.',
             fn: () => {
                 const helpArray = [];
-                for(let command in commands) {
-                    helpArray.push(command + ' - ' + (commands as any)[command].description);
+                for (let command in commands) {
+                    helpArray.push((commands as any)[command].description);
                 }
 
                 return helpArray.join("\n");
             }
         },
         clear: {
-            description: 'Очистить окно консоли.',
+            description: 'clear - Очистить окно консоли.',
             fn: () => {
-                if(!terminal.current) return 'Ошибка выполнения команды';
+                if (!terminal.current) return 'Ошибка выполнения команды';
 
                 terminal.current.clearStdout();
                 console.log(terminal.current)
             }
         },
         echo: {
-            description: 'Выводит переданную строку',
+            description: 'echo - Выводит переданную строку',
             usage: 'echo <string>',
             fn: (...args: any[]) => args.join(' ')
         },
-        wait: {
-            description: 'Выводит сообщение через 1.5сек',
-            fn: () => {
-                if(!terminal.current) return 'Ошибка выполнения команды';
+        "mining": {
+            description:
+                "mining run all - Запустить майнинг на всех ригах.\n" +
+                "mining run #rig-name - Запустить майнинг на риге по идентификатору.\n" +
+                "mining stop all - Остановить майнинг на всех ригах.\n" +
+                "mining stop #rig-name - остановить майнинг на риге по идентификатору.\n",
+            fn: (...args: string[]) => {
+                if (!terminal.current) return 'Ошибка выполнения команды.';
+                if (args.length === 0) return 'Команда `mining` введена неверно.';
+                if (args.length === 1) return 'Не указаны параметры команды.';
+
                 setTimeout(() => {
-                    if(terminal.current) terminal.current.pushToStdout('Майнинг запущен')
+                    if (terminal.current) {
+                        if(args[0] == 'run') {
+                            if (args[1] == 'all') terminal.current.pushToStdout('Майнинг запущен на всех ригах');
+                            else if (args[1]) {
+                                terminal.current.pushToStdout('Майнинг запущен на ригах: ' + args[1]);
+                            }
+                        } else if(args[0] == 'stop') {
+                            if (args[1] == 'all') terminal.current.pushToStdout('Майнинг остановлен на всех ригах');
+                            else if (args[1]) {
+                                terminal.current.pushToStdout('Майнинг остановлен на ригах: ' + args[1]);
+                            }
+                        }
+                    }
                 }, 1500);
 
-                return 'Запускаем, подождите...'
+                if(args[0] == 'run') return 'Запускаем, подождите...';
+                else return 'Останавливаем майнинг, подождите...';
             }
         }
     }
@@ -52,18 +72,22 @@ export const MiningConsole: React.FC<{}> = React.memo(({}) => {
             ref={terminal} // Assign ref to the terminal here
 
             commands={commands}
-            welcomeMessage={'Добро пожаловать в Color console'}
-            promptLabel={userName+'@mining:~$'}
+            welcomeMessage={"Добро пожаловать в color-console. \n" +
+                            "Введите `help` для вывода списка команд.\n" +
+                            "   ______      __           ____  _ __ \n" +
+                            "  / ____/___  / /___  _____/ __ )(_) /_\n" +
+                            " / /   / __ \\/ / __ \\/ ___/ __  / / __/\n" +
+                            "/ /___/ /_/ / / /_/ / /  / /_/ / / /_  \n" +
+                            "\\____/\\____/_/\\____/_/  /_____/_/\\__/\n "}
+            promptLabel={userName + '@mining:~$'}
             errorText="Команда `[command]` не найдена! Введите `help` для вывода списка команд"
             styleEchoBack={'fullInherit'}
             noDefaults
 
             className="h-96 no-scrollbar overflow-scroll"
             style={{
-                overflowX: 'scroll'
-            }}
-            inputTextStyle={{
-                // width: 'max-content'
+                overflowX: 'scroll',
+                whiteSpace: 'pre'
             }}
         />
     );

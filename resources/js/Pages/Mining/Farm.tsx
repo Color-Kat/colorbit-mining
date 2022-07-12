@@ -132,7 +132,7 @@ const Farm: IPage = React.memo(() => {
     return (
         <MiningLayout
             title="Менеджер ригов"
-            description="В менеджере ригов вы можете запускать и настраивать майнинг фермы, а также следить за их состоянием и износом."
+            description="В менеджере ригов вы можете запускать и настраивать майнинг фермы через color-console, а также следить за их состоянием и износом."
         >
             {/* Mining Console */}
             <SecondaryButton
@@ -140,11 +140,11 @@ const Farm: IPage = React.memo(() => {
                 className="w-full md:w-max px-5 mb-4 text-lg font-mono flex items-center"
             >
                 <BiTerminal size={28} className="mr-1.5"/>
-                _{isConsoleOpened ? 'Закрыть' : 'Открыть'} консоль
+                {isConsoleOpened ? 'Закрыть' : 'Открыть'} консоль _
             </SecondaryButton>
 
             <div
-                className={`${isConsoleOpened ? 'opacity-100 scale-y-100 max-h-screen mb-4' : 'opacity-0 scale-y-0 max-h-0 mb-0'} transition`}
+                className={`${isConsoleOpened ? 'opacity-100 scale-y-100 max-h-screen mb-4' : 'opacity-0 scale-y-0 max-h-0 mb-0'} transition w-screen overflow-x-auto`}
             >
                 <MiningConsole/>
             </div>

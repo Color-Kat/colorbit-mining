@@ -1559,6 +1559,9 @@ select{
 .overflow-scroll{
   overflow: scroll;
 }
+.overflow-x-auto{
+  overflow-x: auto;
+}
 .overflow-y-auto{
   overflow-y: auto;
 }
@@ -2469,6 +2472,9 @@ select:-webkit-autofill:focus {
 .focus\:z-10:focus{
   z-index: 10;
 }
+.focus\:border-none:focus{
+  border-style: none;
+}
 .focus\:border-blue-300:focus{
   --tw-border-opacity: 1;
   border-color: rgb(147 197 253 / var(--tw-border-opacity));
@@ -2572,6 +2578,9 @@ select:-webkit-autofill:focus {
 }
 .focus\:ring-opacity-0:focus{
   --tw-ring-opacity: 0;
+}
+.active\:border-none:active{
+  border-style: none;
 }
 .active\:bg-gray-100:active{
   --tw-bg-opacity: 1;
