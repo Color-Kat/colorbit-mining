@@ -27,14 +27,10 @@ const RigItem: React.FC<{ rig: IRig }> = React.memo(({rig}) => {
         setShowMore(prev => !prev)
     }
 
-    console.log(rig);
-
     let stateClasses = '';
     if(rig.state == 'on') stateClasses = 'text-lime-600 font-bold';
     if(rig.state == 'off') stateClasses = 'text-gray-500';
     if(rig.state == 'broken') stateClasses = 'text-red-500';
-
-    // rig.GPU = null;
 
     return (
         <Section>

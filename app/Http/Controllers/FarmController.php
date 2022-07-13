@@ -41,9 +41,26 @@ class FarmController extends BaseController
         ]);
     }
 
+    /**
+     * Change name of rig by id
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function changeRigName(Request $request) {
         $result = $this->rigRepository->changeRigName($request);
 
         return redirect()->back()->withErrors($result);
+    }
+
+    /**
+     * Run console command from frontend
+     *
+     * @param Request $request
+     * @return string
+     */
+    public function console(Request $request) {
+        $result = $this->rigRepository->console($request);
+
+        return $result;
     }
 }
