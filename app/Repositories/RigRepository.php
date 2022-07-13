@@ -67,14 +67,15 @@ class RigRepository extends CoreRepository
         $payload = $data['payload'];
 
         if (!$action) return "Неправильно введена команда.\nВведите `help` для вывода списка команд и описания работы с ними";
-        if ($action === 'run') return $this->runRig($payload);
+        if ($action === 'run') return $this->toggleRig('on', $payload);
+        if ($action === 'stop') return $this->toggleRig('off', $payload);
 
         return "Команда не выполнена. Проверьте правильность ввода команды.\nВведите `help` для справки.";
     }
 
     /* CONSOLE COMMANDS LIST */
 
-    public function runRig($payload)
+    public function toggleRig($state, $payload)
     {
         $rigRequest = $this->startConditions(); // Base request
 
@@ -87,7 +88,7 @@ class RigRepository extends CoreRepository
         $updateRequest
             ->where('state', '!=', 'broken')
             ->update([
-                'state' => 'on'
+                'state' => $state
             ]);
 
         // Get selected rigs
@@ -116,6 +117,12 @@ class RigRepository extends CoreRepository
                     ', ',
                     array_diff($payload, $foundRigs)
                 ) . ".\n";
+
+        // Return message for off rigs
+        if($state === 'off') {
+            if($foundRigs) return $result . "Майнинг остановлен на ригах: " . implode(', ', $foundRigs);
+            else return $result;
+        }
 
         // Message for broken rigs
         if ($brokenRigs)
