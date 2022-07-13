@@ -35,9 +35,9 @@ export const MiningConsole: React.FC<{}> = React.memo(({}) => {
         echo: {
             description: 'echo - Выводит переданную строку',
             usage: 'echo <string>',
-            fn: (...args: any[]) => args.join(' ') + '11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111'
+            fn: (...args: any[]) => args.join(' ')
         },
-        m: {
+        mining: {
             description: "Запустить майнинг",
             fn: (...args: string[]) => {
                 const action = args[0];

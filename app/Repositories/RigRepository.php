@@ -79,11 +79,12 @@ class RigRepository extends CoreRepository
         $rigRequest = $this->startConditions(); // Base request
 
         // Add request by rig name
-        if ($payload[0] !== 'all')
-            $rigRequest = $rigRequest->whereIn('name', ["#1"]);
+        if ($payload[0] != 'all')
+            $rigRequest = $rigRequest->whereIn('name', $payload);
 
         // Update selected rigs
-        $rigRequest
+        $updateRequest = clone $rigRequest;
+        $updateRequest
             ->where('state', '!=', 'broken')
             ->update([
                 'state' => 'on'
@@ -106,18 +107,29 @@ class RigRepository extends CoreRepository
             ->pluck('name')
             ->toArray();
 
-        dump($payload, $rigRequest->get()->toArray());
+        $result = ""; // Result message
 
-        $result = "";
+        // Add to result non-existent rigs
+        $foundRigs = $selectedRigs->pluck('name')->toArray();
+        if ($payload[0] != 'all' && $foundRigs !== $payload)
+            $result .= 'Несуществующий идентификатор рига: ' . implode(
+                    ', ',
+                    array_diff($payload, $foundRigs)
+                ) . ".\n";
+
+        // Message for broken rigs
         if ($brokenRigs)
             $result .=
                 "Не удалось запустить майнинг на ригах: " .
-                implode(', ', $brokenRigs)
-                . ".\n";
+                implode(', ', $brokenRigs) . ".\n";
 
+        // Message with names of working rigs
         if ($workingRigs)
             $result .= "Майнинг запущен на ригах: " . implode(', ', $workingRigs);
+        // No rigs are working
         else $result .= "Не удалось запустить майнинг";
+
+        $result .= "\nВведите `mining state` для получения подробной информации.";
 
         return $result;
     }
