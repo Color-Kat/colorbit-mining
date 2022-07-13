@@ -24,7 +24,7 @@ class Rig extends Model
      */
     public static $snakeAttributes = false;
 
-    protected $appends = ['maxPower'];
+//    protected $appends = ['maxPower'];
 
 //    /**
 //     * Define relationship for any part type.

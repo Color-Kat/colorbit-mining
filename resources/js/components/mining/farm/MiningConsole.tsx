@@ -44,7 +44,7 @@ export const MiningConsole: React.FC<{}> = React.memo(({}) => {
 
                 if(!action) return "Команда `mining` ожидала параметры";
 
-                setTimeout(() => {
+                // setTimeout(() => {
                     window.axios.post<any, Response<string>>(route('mining.console'), {
                         action,
                         payload: args.slice(1,args.length)
@@ -52,9 +52,9 @@ export const MiningConsole: React.FC<{}> = React.memo(({}) => {
                         console.log(res)
                         terminal.current.pushToStdout(res.data);
                     });
-                }, 500); // Add delay to make serious process
+                // }, 500); // Add delay to make serious process
 
-                return 'Ожидайте';
+                return 'Загрузка, подождите...';
             }
         }
         // mining1: {
@@ -105,6 +105,7 @@ export const MiningConsole: React.FC<{}> = React.memo(({}) => {
             promptLabel={userName + '@mining:~$'}
             errorText={"Команда `[command]` не найдена!\nВведите `help` для вывода списка команд"}
             styleEchoBack={'fullInherit'}
+            autoFocus
             noDefaults
 
             className="w-full h-full"

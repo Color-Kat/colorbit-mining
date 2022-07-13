@@ -76,30 +76,49 @@ class RigRepository extends CoreRepository
 
     public function runRig($payload)
     {
-        $updateRequest = $this
-            ->startConditions()
-            ->where('state', '!=', 'broken');
+        $rigRequest = $this->startConditions(); // Base request
 
-        if ($payload[0] !== 'all') $updateRequest->whereIn('name', $payload);
+        // Add request by rig name
+        if ($payload[0] !== 'all')
+            $rigRequest = $rigRequest->whereIn('name', ["#1"]);
 
-        $updateRequest->update([
-            'state' => 'off'
-        ]);
+        // Update selected rigs
+        $rigRequest
+            ->where('state', '!=', 'broken')
+            ->update([
+                'state' => 'on'
+            ]);
 
-        if ($payload[0] == 'all') {
-            // Run
-            $brokenRigs = $this
-                ->startConditions()
-                ->select(['name'])
-                ->where('state', 'broken')
-                ->get()
-                ->toArray();
+        // Get selected rigs
+        $selectedRigs = $rigRequest
+            ->select(['name', 'state'])
+            ->get();
+        $selectedRigs->appends = [];
 
-            if ($brokenRigs) return "Не удалось запустить майнинг на ригах: " . implode(', ', $brokenRigs);
-            else return "Майнинг запущен на всех ригах";
-        }
+        // Get broken and working rigs
+        $brokenRigs = $selectedRigs
+            ->where('state', 'broken')
+            ->pluck('name')
+            ->toArray();
 
+        $workingRigs = $selectedRigs
+            ->where('state', '!=', 'broken')
+            ->pluck('name')
+            ->toArray();
 
-        return 'Запущено';
+        dump($payload, $rigRequest->get()->toArray());
+
+        $result = "";
+        if ($brokenRigs)
+            $result .=
+                "Не удалось запустить майнинг на ригах: " .
+                implode(', ', $brokenRigs)
+                . ".\n";
+
+        if ($workingRigs)
+            $result .= "Майнинг запущен на ригах: " . implode(', ', $workingRigs);
+        else $result .= "Не удалось запустить майнинг";
+
+        return $result;
     }
 }

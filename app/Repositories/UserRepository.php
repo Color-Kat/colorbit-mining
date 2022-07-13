@@ -140,8 +140,11 @@ class UserRepository extends CoreRepository
 
         $rigs = $user
             ->rigs()
+
             ->with(['GPU', 'platform', 'RAM', 'PSU', 'case'])
             ->paginate(5);
+
+        $rigs->append('maxPower');
 
         return $rigs;
     }
