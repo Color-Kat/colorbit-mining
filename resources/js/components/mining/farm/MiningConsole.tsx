@@ -37,12 +37,18 @@ export const MiningConsole: React.FC<{}> = React.memo(({}) => {
             usage: 'echo <string>',
             fn: (...args: any[]) => args.join(' ')
         },
-        mining: {
-            description: "Запустить майнинг",
+        m: {
+            description:
+                        "mining status - получить подробную информацию о всех ригах.\n" +
+                        "mining status #rig-1 - получить подробную информацию о риге #rig-1.\n" +
+                        "mining run all - запустить майнинг на всех ригах.\n" +
+                        "mining run #rig-1 - запустить майнинг на риге #rig-1.\n" +
+                        "mining stop all - остановить майнинг на всех ригах.\n" +
+                        "mining stop #rig-1 - остановить майнинг на риге #rig-1.\n",
             fn: (...args: string[]) => {
                 const action = args[0];
 
-                if(!action) return "Команда `mining` ожидала параметры";
+                if(!action) return "Команда `mining` ожидала дополнительные параметры";
 
                 // setTimeout(() => {
                     window.axios.post<any, Response<string>>(route('mining.console'), {
@@ -54,40 +60,9 @@ export const MiningConsole: React.FC<{}> = React.memo(({}) => {
                     });
                 // }, 500); // Add delay to make serious process
 
-                return 'Загрузка, подождите...';
+                return 'Запрос выполняется, подождите...';
             }
         }
-        // mining1: {
-        //     description:
-        //         "mining run all - Запустить майнинг на всех ригах.\n" +
-        //         "mining run #rig-name - Запустить майнинг на риге по идентификатору.\n" +
-        //         "mining stop all - Остановить майнинг на всех ригах.\n" +
-        //         "mining stop #rig-name - остановить майнинг на риге по идентификатору.\n",
-        //     fn: (...args: string[]) => {
-        //         if (!terminal.current) return 'Ошибка выполнения команды.';
-        //         if (args.length === 0) return 'Команда `mining` введена неверно.';
-        //         if (args.length === 1) return 'Не указаны параметры команды.';
-        //
-        //         setTimeout(() => {
-        //             if (terminal.current) {
-        //                 if(args[0] == 'run') {
-        //                     if (args[1] == 'all') terminal.current.pushToStdout('Майнинг запущен на всех ригах');
-        //                     else if (args[1]) {
-        //                         terminal.current.pushToStdout('Майнинг запущен на ригах: ' + args[1]);
-        //                     }
-        //                 } else if(args[0] == 'stop') {
-        //                     if (args[1] == 'all') terminal.current.pushToStdout('Майнинг остановлен на всех ригах');
-        //                     else if (args[1]) {
-        //                         terminal.current.pushToStdout('Майнинг остановлен на ригах: ' + args[1]);
-        //                     }
-        //                 }
-        //             }
-        //         }, 1500);
-        //
-        //         if(args[0] == 'run') return 'Запускаем, подождите...';
-        //         else return 'Останавливаем майнинг, подождите...';
-        //     }
-        // }
     }
 
     return (

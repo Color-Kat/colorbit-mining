@@ -69,6 +69,7 @@ class RigRepository extends CoreRepository
         if (!$action) return "Неправильно введена команда.\nВведите `help` для вывода списка команд и описания работы с ними";
         if ($action === 'run') return $this->toggleRig('on', $payload);
         if ($action === 'stop') return $this->toggleRig('off', $payload);
+        if ($action === 'status') return $this->rigStatus($payload);
 
         return "Команда не выполнена. Проверьте правильность ввода команды.\nВведите `help` для справки.";
     }
@@ -80,7 +81,7 @@ class RigRepository extends CoreRepository
         $rigRequest = $this->startConditions(); // Base request
 
         // Add request by rig name
-        if ($payload[0] != 'all')
+        if ($payload && $payload[0] != 'all')
             $rigRequest = $rigRequest->whereIn('name', $payload);
 
         // Update selected rigs
@@ -95,7 +96,7 @@ class RigRepository extends CoreRepository
         $selectedRigs = $rigRequest
             ->select(['name', 'state'])
             ->get();
-        $selectedRigs->appends = [];
+//        $selectedRigs->appends = [];
 
         // Get broken and working rigs
         $brokenRigs = $selectedRigs
@@ -137,6 +138,38 @@ class RigRepository extends CoreRepository
         else $result .= "Не удалось запустить майнинг";
 
         $result .= "\nВведите `mining state` для получения подробной информации.";
+
+        return $result;
+    }
+
+    public function rigStatus($payload)
+    {
+        $rigRequest = $this->startConditions(); // Base request
+
+        // Add request by rig name
+        if ($payload && $payload[0])
+            $rigRequest = $rigRequest->whereIn('name', $payload);
+
+        // Get selected rigs
+        $selectedRigs = $rigRequest
+//            ->with(['GPU.breakdowns', 'platform', 'RAM', 'PSU', 'case'])
+            ->with(['breakdowns'])
+            ->get();
+        $selectedRigs->appends = [];
+
+        dump($selectedRigs);
+
+        $result = ""; // Result message
+
+        // Add to result non-existent rigs
+        $foundRigs = $selectedRigs->pluck('name')->toArray();
+        if ($payload[0] != 'all' && $foundRigs !== $payload)
+            $result .= 'Несуществующий идентификатор рига: ' . implode(
+                    ', ',
+                    array_diff($payload, $foundRigs)
+                ) . ".\n";
+
+
 
         return $result;
     }
