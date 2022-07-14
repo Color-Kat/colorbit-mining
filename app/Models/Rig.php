@@ -9,6 +9,7 @@ class Rig extends Model
 {
     use HasFactory;
     use \Znck\Eloquent\Traits\BelongsToThrough;
+    use \Awobaz\Compoships\Compoships;
 
     /**
      * Make ids of part hidden
@@ -24,7 +25,13 @@ class Rig extends Model
      */
     public static $snakeAttributes = false;
 
-//    protected $appends = ['maxPower'];
+    public function getMaxPowerAttribute() {
+        return
+            $this->GPU->part->power +
+            $this->platform->part->power +
+            $this->RAM->part->power;
+    }
+
 
 //    /**
 //     * Define relationship for any part type.
@@ -134,10 +141,14 @@ class Rig extends Model
         ]);
     }
 
-    public function getMaxPowerAttribute() {
-        return
-            $this->GPU->part->power +
-            $this->platform->part->power +
-            $this->RAM->part->power;
+    public function breakdowns()
+    {
+        return $this
+            ->belongsTo(Having::class, ['GPU_id', 'platform_id', 'RAM_id', 'PSU_id', 'case_id']);
+//            ->select(['id', 'message']);
+    }
+
+    public function getBreakdownsAttribute() {
+        return 123;
     }
 }

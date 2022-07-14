@@ -13,6 +13,7 @@ use Illuminate\Database\Eloquent\Model;
 class Having extends Model
 {
     use \Znck\Eloquent\Traits\BelongsToThrough;
+    use \Awobaz\Compoships\Compoships;
 
     protected $table = 'havings';
 

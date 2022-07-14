@@ -157,19 +157,17 @@ class RigRepository extends CoreRepository
             ->get();
         $selectedRigs->appends = [];
 
-        dump($selectedRigs);
+        dump($selectedRigs->toArray());
 
         $result = ""; // Result message
 
         // Add to result non-existent rigs
         $foundRigs = $selectedRigs->pluck('name')->toArray();
-        if ($payload[0] != 'all' && $foundRigs !== $payload)
+        if ($payload && $payload[0] != 'all' && $foundRigs !== $payload)
             $result .= 'Несуществующий идентификатор рига: ' . implode(
                     ', ',
                     array_diff($payload, $foundRigs)
                 ) . ".\n";
-
-
 
         return $result;
     }
