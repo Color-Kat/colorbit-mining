@@ -162,7 +162,7 @@ class Rig extends Model
     public function getBreakdownsAttribute() {
         return Having::class::
             with(['part:type,name'])
-            ->select(['part_shop_id', 'message', 'temp', 'max_temp', 'loading', 'state'])
+            ->select(['id', 'part_shop_id', 'state', 'message', 'temp', 'max_temp', 'loading'])
             ->whereIn('id', [
                 $this->GPU_id,
                 $this->platform_id,

@@ -120,8 +120,8 @@ class RigRepository extends CoreRepository
                 ) . ".\n";
 
         // Return message for off rigs
-        if($state === 'off') {
-            if($foundRigs) return $result . "Майнинг остановлен на ригах: " . implode(', ', $foundRigs);
+        if ($state === 'off') {
+            if ($foundRigs) return $result . "Майнинг остановлен на ригах: " . implode(', ', $foundRigs);
             else return $result;
         }
 
@@ -144,25 +144,61 @@ class RigRepository extends CoreRepository
 
     public function rigStatus($payload)
     {
-        $rigRequest = $this->startConditions(); // Base request
+        // Base request
+        $rigRequest = $this
+            ->startConditions()
+            ->select(['name', 'state', 'GPU_id', 'platform_id', 'RAM_id', 'PSU_id', 'case_id']);
 
         // Add request by rig name
         if ($payload && $payload[0])
             $rigRequest = $rigRequest->whereIn('name', $payload);
 
         // Get selected rigs
-        $selectedRigs = $rigRequest
-            ->get();
-
-//        dump($selectedRigs->pluck('break')->toArray());
-
-//        dump($selectedRigs->each->setAppends(['breakdowns'])->toArray());
-        dump($selectedRigs->toArray());
+        $rigs = $rigRequest
+            ->get()
+            ->toArray();
 
         $result = ""; // Result message
 
+        foreach ($rigs as $rig) {
+            $header = "\n========== Риг " . $rig['name'] . " ==========\n";
+
+            $result .= "\n" . str_repeat("=", mb_strlen($header) - 2) . "\n";
+            $result .= $header;
+            $result .= "\n" . str_repeat("=", mb_strlen($header) - 2) . "\n";
+
+            $result .= "Риг " . $rig['name'] . " - " . ($rig["state"] === "broken" ? 'неисправен' : 'исправен') . "\n";
+            $result .= "Детали: \n\n";
+
+            foreach ($rig['breakdowns'] as $breakdown) {
+
+                $result .=
+                    "---------------------\n" .
+                    "[" . $breakdown["id"] . "] " .
+                    $breakdown["part"]["name"] . " - " .
+                    ($breakdown["state"] === "broken" ? 'неисправно' : 'исправно') . "\n";
+
+                if (!is_null($breakdown['message']))
+                    $result .= "[" . $breakdown['message'] . "]\n";
+
+                if (!is_null($breakdown["temp"]))
+                    $result .= "Текущая температура: " . $breakdown["temp"] . "°C\n";
+
+                if (!is_null($breakdown["max_temp"]))
+                    $result .= "Макс. зафиксированная температура: " . $breakdown["max_temp"] . "°C\n";
+
+                if (!is_null($breakdown["loading"]))
+                    $result .= "Загрузка: " . $breakdown["loading"] . "%\n";
+
+                $result .= "---------------------\n";
+            }
+
+        }
+
+//        dump($rigs);
+
         // Add to result non-existent rigs
-        $foundRigs = $selectedRigs->pluck('name')->toArray();
+        $foundRigs = $rigRequest->pluck('name')->toArray();
         if ($payload && $payload[0] != 'all' && $foundRigs !== $payload)
             $result .= 'Несуществующий идентификатор рига: ' . implode(
                     ', ',
