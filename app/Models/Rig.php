@@ -141,14 +141,14 @@ class Rig extends Model
         ]);
     }
 
-//    public function breakdowns()
-//    {
-//        return $this
-//            ->belongsTo(Having::class, ['GPU_id', 'platform_id', 'RAM_id', 'PSU_id', 'case_id']);
-////            ->select(['id', 'message']);
-//    }
-
-    public function getBreakAttribute() {
-        return collect([$this->GPU->message, $this->platform->message]);
+    public function breakdowns()
+    {
+        return $this
+            ->belongsTo(Having::class, ['GPU_id', 'platform_id', 'RAM_id', 'PSU_id', 'case_id'], ['id', 'id', 'id', 'id', 'id']);
+//            ->select(['id', 'message']);
     }
+
+//    public function getBreakAttribute() {
+//        return collect([$this->GPU->message, $this->platform->message]);
+//    }
 }
