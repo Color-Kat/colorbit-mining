@@ -12,6 +12,9 @@ import {getColorByValue} from "../../utils/getColorByValue";
 import {MiningConsole} from "../../components/mining/farm/MiningConsole";
 import SecondaryButton from "../../components/elements/SecondaryButton";
 import {EditableName} from "../../components/mining/farm/EditableName";
+import Button from "../../components/elements/Button";
+import useRoute from "../../hooks/useRoute";
+import {Inertia} from "@inertiajs/inertia";
 
 const rigStates = {
     on: 'Работает',
@@ -119,6 +122,7 @@ const RigItem: React.FC<{ rig: IRig }> = React.memo(({rig}) => {
 });
 
 const Farm: IPage = React.memo(() => {
+    const route = useRoute();
     const page = useTypedPage<{
         rigsPaginator: IPaginator<any>
     }>();
@@ -126,6 +130,10 @@ const Farm: IPage = React.memo(() => {
     const [isConsoleOpened, setConsoleOpened] = useState(true);
 
     const rigsPaginator = page.props.rigsPaginator;
+
+    const createNewRig = () => {
+        Inertia.post(route('mining.create-new-rig'));
+    }
 
     return (
         <MiningLayout
@@ -166,6 +174,10 @@ const Farm: IPage = React.memo(() => {
                     )
                 })}
             </ul>
+
+            <Section>
+                <Button onClick={createNewRig}>Создать новый риг</Button>
+            </Section>
 
             {/* Paginator */}
             {rigsPaginator.last_page !== 1 &&
