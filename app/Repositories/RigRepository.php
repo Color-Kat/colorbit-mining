@@ -168,7 +168,9 @@ class RigRepository extends CoreRepository
             $result .= "\n" . str_repeat("=", mb_strlen($header) - 2) . "\n";
 
             $result .= "Риг " . $rig['name'] . " - " . ($rig["state"] === "broken" ? 'неисправен' : 'исправен') . "\n";
-            $result .= "Детали: \n\n";
+            $result .= "Детали: \n";
+
+            if(count($rig['breakdowns']) == 0) $result .= "Комплектующие не установлены.\n";
 
             foreach ($rig['breakdowns'] as $breakdown) {
 

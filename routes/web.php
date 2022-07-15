@@ -54,8 +54,11 @@ Route::middleware('auth')->prefix('mining')->as('mining.')->group(function () {
     Route::get('/farm', [FarmController::class, 'farm'])->name('farm');
 
     Route::post('/change-rig-name', [FarmController::class, 'changeRigName'])->name('change-rig-name');
+    Route::post('/create-new-rig', [FarmController::class, 'createNewRig'])->name('create-new-rig');
+
 
     Route::post('/console', [FarmController::class, 'console'])->name('console');
+
 
 
     // User's havings by types

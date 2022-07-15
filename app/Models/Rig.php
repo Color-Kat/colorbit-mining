@@ -11,7 +11,9 @@ class Rig extends Model
     use \Znck\Eloquent\Traits\BelongsToThrough;
     use \Awobaz\Compoships\Compoships;
 
-    /**Ё
+    protected $fillable = ['name'];
+
+    /**
      * Make ids of part hidden
      *
      * @var string[]
@@ -27,10 +29,11 @@ class Rig extends Model
 
     public function getMaxPowerAttribute()
     {
+
         return
-            $this->GPU->part->power +
-            $this->platform->part->power +
-            $this->RAM->part->power;
+            $this->GPU?->part->power +
+            $this->platform?->part->power +
+            $this->RAM?->part->power;
     }
 
 

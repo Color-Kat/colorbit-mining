@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Repositories\RigRepository;
 use App\Repositories\UserRepository;
+use Faker\Provider\Address;
+use Faker\Provider\Base;
+use Faker\Provider\en_US\Person;
+use Faker\Provider\en_US\Text;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -62,5 +66,19 @@ class FarmController extends BaseController
         $result = $this->rigRepository->console($request);
 
         return $result;
+    }
+
+    /**
+     * Create new rig for user from request
+     *
+     * @param Request $request
+     * @return string
+     */
+    public function createNewRig(Request $request) {
+        $result = $request->user()->rigs()->create([
+            "name" => "#" . Person::firstNameMale()
+        ]);
+
+        return redirect()->back();
     }
 }
