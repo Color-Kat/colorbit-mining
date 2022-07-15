@@ -25,7 +25,8 @@ class Rig extends Model
      */
     public static $snakeAttributes = false;
 
-    public function getMaxPowerAttribute() {
+    public function getMaxPowerAttribute()
+    {
         return
             $this->GPU->part->power +
             $this->platform->part->power +
@@ -63,7 +64,8 @@ class Rig extends Model
 //            ]);
 //    }
 
-    public function user() {
+    public function user()
+    {
         return $this->hasOne(User::class);
     }
 
@@ -77,21 +79,24 @@ class Rig extends Model
     {
         return $this
             ->belongsTo(Having::class, $localKey)
-            ->with(['part' => function ($q) use($additional_columns) {
-                return $q->select([
-                    ...$additional_columns,
-                    // 'part_id',
-                    'name',
-                    'image',
-                    'type',
-                ]);
-            }]);
+            ->with([
+                'part' => function ($q) use ($additional_columns) {
+                    return $q->select([
+                        ...$additional_columns,
+                        // 'part_id',
+                        'name',
+                        'image',
+                        'type',
+                    ]);
+                }
+            ]);
     }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function GPU(){
+    public function GPU()
+    {
         return $this->belongsToPart('GPU_id', [
             'GPU_VRAM_size',
             'GPU_VRAM_type',
@@ -103,7 +108,8 @@ class Rig extends Model
         ]);
     }
 
-    public function platform(){
+    public function platform()
+    {
         return $this->belongsToPart('platform_id', [
             'platform_cors_count',
             'platform_threads_count',
@@ -114,7 +120,8 @@ class Rig extends Model
         ]);
     }
 
-    public function RAM(){
+    public function RAM()
+    {
         return $this->belongsToPart('RAM_id', [
             'RAM_size',
             'RAM_frequency',
@@ -124,7 +131,8 @@ class Rig extends Model
         ]);
     }
 
-    public function PSU(){
+    public function PSU()
+    {
         return $this->belongsToPart('PSU_id', [
             'PSU_power_supply',
             'PSU_efficiency',
@@ -132,7 +140,8 @@ class Rig extends Model
         ]);
     }
 
-    public function case(){
+    public function case()
+    {
         return $this->belongsToPart('case_id', [
             'case_material',
             'case_material_rus',
@@ -141,14 +150,25 @@ class Rig extends Model
         ]);
     }
 
-    public function breakdowns()
-    {
-        return $this
-            ->belongsTo(Having::class, ['GPU_id', 'platform_id', 'RAM_id', 'PSU_id', 'case_id'], ['id', 'id', 'id', 'id', 'id']);
-//            ->select(['id', 'message']);
-    }
-
-//    public function getBreakAttribute() {
-//        return collect([$this->GPU->message, $this->platform->message]);
+//    public function breakdowns()
+//    {
+//        return $this
+//            ->belongsTo(Having::class, ['GPU_id', 'platform_id', 'RAM_id', 'PSU_id', 'case_id'], ['id', 'id', 'id', 'id', 'id']);
+////            ->select(['id', 'message']);
 //    }
+
+    public $appends = ['breakdowns'];
+
+    public function getBreakdownsAttribute() {
+        return Having::class::
+            with(['part:type,name'])
+            ->select(['part_shop_id', 'message', 'temp', 'max_temp', 'loading', 'state'])
+            ->whereIn('id', [
+                $this->GPU_id,
+                $this->platform_id,
+                $this->RAM_id,
+                $this->PSU_id,
+                $this->case_id
+            ])->get();
+    }
 }
