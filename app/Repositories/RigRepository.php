@@ -152,12 +152,12 @@ class RigRepository extends CoreRepository
 
         // Get selected rigs
         $selectedRigs = $rigRequest
-//            ->with(['GPU.breakdowns', 'platform', 'RAM', 'PSU', 'case'])
-            ->with(['breakdowns'])
+//            ->with(['GPU', 'platform', 'RAM', 'PSU', 'case'])
+//            ->with(['breakdowns'])
             ->get();
-        $selectedRigs->appends = [];
+//        $selectedRigs->appends = ['break'];
 
-        dump($selectedRigs->toArray());
+        dump($selectedRigs->pluck('break')->toArray());
 
         $result = ""; // Result message
 
