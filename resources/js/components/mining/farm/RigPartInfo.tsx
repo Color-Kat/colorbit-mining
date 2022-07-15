@@ -42,7 +42,7 @@ export const RigPartInfo: React.FC<{ having: IHaving<IBasePart> }> = ({having}) 
         <>
             {/* BROKEN */}
             {(having.state === 'broken' || having.state === 'needs_repair') &&
-            <div className="rigs_item-breakdowns p-2 px-3 rounded-md shadow-lg bg-zinc-900 bg-opacity-50 mb-2 md:mt-2">
+            <div className="rigs_item-breakdowns p-2 px-3 rounded-md shadow-lg bg-zinc-900 bg-opacity-50 mb-2 md:mt-3">
                 <h5 className="text-xl font-bold flex items-center mb-1.5">
                     <BiErrorCircle size="18" className="mr-0.5"/> Сломано
                 </h5>
@@ -69,7 +69,7 @@ export const RigPartInfo: React.FC<{ having: IHaving<IBasePart> }> = ({having}) 
 
             {/* Temp, load ... */}
             <div
-                className="rigs__item-info flex flex-col sm:flex-row justify-between space-y-1 sm:space-y-0 flex-wrap md:mt-2 p-2 px-3 rounded-md shadow-lg bg-zinc-900 bg-opacity-50"
+                className="rigs__item-info flex flex-col sm:flex-row justify-between space-y-1 sm:space-y-0 flex-wrap md:mt-3 p-2 px-3 rounded-md shadow-lg bg-zinc-900 bg-opacity-50"
             >
                 {/* Load */}
                 {having.loading !== null ?

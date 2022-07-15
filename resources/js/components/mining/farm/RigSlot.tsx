@@ -47,6 +47,8 @@ export const RigSlot: React.FC<{
 
     const part = having.part;
 
+
+
     return (
         <div className="rigs__item-slot app-bg rounded-md shadow my-2 relative even:bg-[#212121] flex flex-col">
             {/* wrapper for larger z-index than the bg image */}
@@ -66,6 +68,8 @@ export const RigSlot: React.FC<{
                         <h3 className="rigs__item-name text-base sm:text-lg md:text-xl tracking-wide font-roboto leading-5 sm:leading-6">
                             {part.name}
                         </h3>
+
+                        {having.message && <span className="mt-2 mb-1 text-red-500 text-lg font-mono">{having.message}</span>}
 
                         {/* Info on desktop */}
                         <div className="hidden md:block">
