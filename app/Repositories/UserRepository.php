@@ -104,12 +104,10 @@ class UserRepository extends CoreRepository
     /**
      * Get user's havings with paginator
      *
-     * @param Request $request
+     * @param User $user
      * @return \Illuminate\Http\JsonResponse
      */
-    public function getHavingsWithPaginator(Request $request, string $type = '') {
-        $user = $request->user();
-
+    public function getHavingsWithPaginator(User $user, string $type = '') {
         // Not auth
         if(!$user) return response()->json([
             "message" => "Вы не авторизированны",
@@ -127,6 +125,25 @@ class UserRepository extends CoreRepository
             ->paginate(10); // Add paginator
 
         return $havings;
+    }
+
+    /**
+     * Get id of all user's rigs.
+     *
+     * @param User $user
+     * @return \Illuminate\Support\Collection
+     */
+    public function getRigIds(User $user) {
+        $result = $user
+            ->with('rigs:id,user_id')
+            ->get()
+            ->pluck('rigs')[0]
+            ->map(fn($val) => $val['id'])
+        ;
+
+        dump($result);
+
+        return $result;
     }
 
     public function getRigsWithPaginator(Request $request) {

@@ -11,6 +11,7 @@ import Button from "../../components/elements/Button";
 import SecondaryButton from "../../components/elements/SecondaryButton";
 import {Inertia} from "@inertiajs/inertia";
 import useRoute from "../../hooks/useRoute";
+import {Dropdown} from "../../components/elements/Dropdown";
 
 const HavingState: React.FC<{ havingState: HavingStateType }> = React.memo(({havingState}) => {
     switch (havingState) {
@@ -90,6 +91,10 @@ const HavingItem: React.FC<{ having: IHaving }> = React.memo(({having}) => {
         Inertia.visit(route('good', [shop.slug, part.slug]));
     }
 
+    const usePart = (havingId: number) => {
+        console.log(havingId)
+    }
+
     return (
         <li
             className={`havings-list__item flex app-bg rounded-lg p-3 flex-col relative`}
@@ -145,9 +150,19 @@ const HavingItem: React.FC<{ having: IHaving }> = React.memo(({having}) => {
 
                 {/* Use */}
                 {having.state == 'not_used' ?
-                    <Button className="mt-3 w-36 flex justify-center">
-                        Использовать
-                    </Button> : null
+                    <Dropdown
+                        align="right"
+                        width="48"
+                        renderTrigger={() =>
+                            <Button
+                                className="mt-3 w-36 flex justify-center"
+                            >
+                                Использовать
+                            </Button>
+                        }
+                    >
+
+                    </Dropdown> : null
                 }
 
                 {/* Don't use */}
@@ -176,8 +191,11 @@ const HavingItem: React.FC<{ having: IHaving }> = React.memo(({having}) => {
 
 const Havings: IPage = React.memo(() => {
     const page = useTypedPage<{
-        havings: IPaginator<IHaving>
+        havings: IPaginator<IHaving>,
+        rigIds: number[]
     }>();
+
+    console.log(page.props);
 
     const havingsPaginator = page.props.havings;
 

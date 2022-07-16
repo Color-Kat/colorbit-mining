@@ -27,10 +27,12 @@ class HavingsController extends BaseController
      * @return \Inertia\Response
      */
     public function havings(Request $request) {
-        $havingsPaginator = $this->userRepository->getHavingsWithPaginator($request);
+        $havingsPaginator = $this->userRepository->getHavingsWithPaginator($request->user());
+        $rigIds = $this->userRepository->getRigIds($request->user());
 
         return Inertia::render('Mining/Havings', [
-            'havings' => $havingsPaginator
+            'havings' => $havingsPaginator,
+            'rigIds' => $rigIds
         ]);
     }
 
@@ -42,10 +44,12 @@ class HavingsController extends BaseController
      */
     public function GPU(Request $request)
     {
-        $havingsPaginator = $this->userRepository->getHavingsWithPaginator($request, 'GPU');
+        $havingsPaginator = $this->userRepository->getHavingsWithPaginator($request->user(), 'GPU');
+        $rigIds = $this->userRepository->getRigIds($request->user());
 
         return Inertia::render('Mining/Havings', [
-            'havings' => $havingsPaginator
+            'havings' => $havingsPaginator,
+            'rigIds' => $rigIds
         ]);
     }
 
@@ -57,10 +61,12 @@ class HavingsController extends BaseController
      */
     public function platform(Request $request)
     {
-        $havingsPaginator = $this->userRepository->getHavingsWithPaginator($request, 'platform');
+        $havingsPaginator = $this->userRepository->getHavingsWithPaginator($request->user(), 'platform');
+        $rigIds = $this->userRepository->getRigIds($request->user());
 
         return Inertia::render('Mining/Havings', [
-            'havings' => $havingsPaginator
+            'havings' => $havingsPaginator,
+            'rigIds' => $rigIds
         ]);
     }
 
@@ -72,10 +78,12 @@ class HavingsController extends BaseController
      */
     public function RAM(Request $request)
     {
-        $havingsPaginator = $this->userRepository->getHavingsWithPaginator($request, 'RAM');
+        $havingsPaginator = $this->userRepository->getHavingsWithPaginator($request->user(), 'RAM');
+        $rigIds = $this->userRepository->getRigIds($request->user());
 
         return Inertia::render('Mining/Havings', [
-            'havings' => $havingsPaginator
+            'havings' => $havingsPaginator,
+            'rigIds' => $rigIds
         ]);
     }
 
@@ -87,10 +95,12 @@ class HavingsController extends BaseController
      */
     public function PSU(Request $request)
     {
-        $havingsPaginator = $this->userRepository->getHavingsWithPaginator($request, 'PSU');
+        $havingsPaginator = $this->userRepository->getHavingsWithPaginator($request->user(), 'PSU');
+        $rigIds = $this->userRepository->getRigIds($request->user());
 
         return Inertia::render('Mining/Havings', [
-            'havings' => $havingsPaginator
+            'havings' => $havingsPaginator,
+            'rigIds' => $rigIds
         ]);
     }
 
@@ -102,15 +112,16 @@ class HavingsController extends BaseController
      */
     public function case(Request $request)
     {
-        $havingsPaginator = $this->userRepository->getHavingsWithPaginator($request, 'case');
+        $havingsPaginator = $this->userRepository->getHavingsWithPaginator($request->user(), 'case');
+        $rigIds = $this->userRepository->getRigIds($request->user());
 
         return Inertia::render('Mining/Havings', [
-            'havings' => $havingsPaginator
+            'havings' => $havingsPaginator,
+            'rigIds' => $rigIds
         ]);
     }
 
     public function changeRigName(Request $request) {
-        dump($request->input());
         return redirect()->back();
     }
 }

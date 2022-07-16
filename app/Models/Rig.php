@@ -160,7 +160,7 @@ class Rig extends Model
 ////            ->select(['id', 'message']);
 //    }
 
-    public $appends = ['breakdowns'];
+//    public $appends = ['breakdowns'];
 
     public function getBreakdownsAttribute() {
         return Having::class::

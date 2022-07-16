@@ -156,6 +156,7 @@ class RigRepository extends CoreRepository
         // Get selected rigs
         $rigs = $rigRequest
             ->get()
+            ->append('breakdowns')
             ->toArray();
 
         $result = ""; // Result message
@@ -176,7 +177,7 @@ class RigRepository extends CoreRepository
 
                 $result .=
                     "---------------------\n" .
-                    "[" . $breakdown["id"] . "] " .
+                    "[" . $breakdown["id"] . "]" .
                     $breakdown["part"]["name"] . " - " .
                     ($breakdown["state"] === "broken" ? 'неисправно' : 'исправно') . "\n";
 
@@ -206,6 +207,17 @@ class RigRepository extends CoreRepository
                     ', ',
                     array_diff($payload, $foundRigs)
                 ) . ".\n";
+
+        return $result;
+    }
+
+    public function insertIntoRig(User $user, $data) {
+        $result = $user
+            ->rigs()
+            ->where('rigs.id', $data["rigId"])
+            ->update([
+                'general_temp' => 123
+            ]);
 
         return $result;
     }

@@ -81,4 +81,16 @@ class FarmController extends BaseController
 
         return redirect()->back();
     }
+
+    /**
+     * Insert a part by id into user's rig by rigId
+     *
+     * @param Request $request
+     * @return string
+     */
+    public function insertIntoRig(Request $request) {
+        $result = $this->rigRepository->insertIntoRig($request->user(), $request->input());
+
+        return redirect()->back();
+    }
 }
