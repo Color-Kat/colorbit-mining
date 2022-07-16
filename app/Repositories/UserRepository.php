@@ -140,8 +140,6 @@ class UserRepository extends CoreRepository
             ->pluck('rigs')[0]
         ;
 
-        dump($result);
-
         return $result;
     }
 

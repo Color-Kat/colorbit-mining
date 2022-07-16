@@ -3029,14 +3029,6 @@ select:-webkit-autofill:focus {
   .lg\:hidden{
     display: none;
   }
-  .lg\:h-auto{
-    height: auto;
-  }
-  .lg\:h-max{
-    height: -webkit-max-content;
-    height: -moz-max-content;
-    height: max-content;
-  }
   .lg\:h-96{
     height: 24rem;
   }

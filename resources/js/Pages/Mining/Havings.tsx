@@ -94,8 +94,8 @@ const HavingItem: React.FC<{ having: IHaving, rigIds: { id: number, name: string
         Inertia.visit(route('good', [shop.slug, part.slug]));
     }
 
-    const usePart = (havingId: number) => {
-        console.log(havingId)
+    const usePart = (rigId: number, havingId: number) => {
+        console.log(rigId, havingId)
     }
 
     return (
@@ -156,20 +156,26 @@ const HavingItem: React.FC<{ having: IHaving, rigIds: { id: number, name: string
                     <Dropdown
                         align="right"
                         width="48"
-                        renderTrigger={() =>
+                        renderTrigger={() => (
                             <Button
                                 className="mt-3 w-36 flex justify-center"
                             >
                                 Использовать
                             </Button>
-                        }
+                        )}
                     >
-                        <div className="p-2">
-                            {rigIds.map((rig => {
+                        <div className="p-2 z-10 flex flex-col">
+                            {rigIds.map(rig => {
                                 return (
-                                    <div>{rig.name}</div>
-                                )
-                            }))}
+                                    <button
+                                        onClick={()=>usePart(rig.id, having.id)}
+                                        key={rig.id}
+                                        className="text-lg w-full text-left"
+                                    >
+                                        {rig.name}
+                                    </button>
+                                );
+                            })}
                         </div>
                     </Dropdown> : null
                 }
