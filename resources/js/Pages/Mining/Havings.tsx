@@ -12,6 +12,7 @@ import SecondaryButton from "../../components/elements/SecondaryButton";
 import {Inertia} from "@inertiajs/inertia";
 import useRoute from "../../hooks/useRoute";
 import {Dropdown} from "../../components/elements/Dropdown";
+import {fireErrorEvent} from "@inertiajs/inertia/types/events";
 
 const HavingState: React.FC<{ havingState: HavingStateType }> = React.memo(({havingState}) => {
     switch (havingState) {
@@ -45,7 +46,8 @@ const HavingState: React.FC<{ havingState: HavingStateType }> = React.memo(({hav
     }
 });
 
-const HavingFeatures: React.FC<{ having: IHaving }> = React.memo(({having}) => {
+const HavingFeatures: React.FC<{ having: IHaving }>
+    = React.memo(({having}) => {
     return (
         <>
             {/* Warranty */}
@@ -81,7 +83,8 @@ const HavingFeatures: React.FC<{ having: IHaving }> = React.memo(({having}) => {
     );
 });
 
-const HavingItem: React.FC<{ having: IHaving }> = React.memo(({having}) => {
+const HavingItem: React.FC<{ having: IHaving, rigIds: { id: number, name: string }[] }>
+    = React.memo(({having, rigIds}) => {
     const route = useRoute();
 
     const part = having.part;
@@ -127,7 +130,7 @@ const HavingItem: React.FC<{ having: IHaving }> = React.memo(({having}) => {
             </div>
 
             {/* Buttons */}
-            <div className="flex mt-3 justify-end space-x-3 border-gray-500 border-t flex-wrap">
+            <div className="flex mt-3 justify-end space-x-3 border-gray-500 border-t flex-wrap z-10">
                 {/* Sell */}
                 <Button className="bg-transparent border-gray-500 border text-gray-500 hover:bg-gray-500 mt-3">
                     Продать
@@ -161,7 +164,13 @@ const HavingItem: React.FC<{ having: IHaving }> = React.memo(({having}) => {
                             </Button>
                         }
                     >
-
+                        <div className="p-2">
+                            {rigIds.map((rig => {
+                                return (
+                                    <div>{rig.name}</div>
+                                )
+                            }))}
+                        </div>
                     </Dropdown> : null
                 }
 
@@ -192,10 +201,8 @@ const HavingItem: React.FC<{ having: IHaving }> = React.memo(({having}) => {
 const Havings: IPage = React.memo(() => {
     const page = useTypedPage<{
         havings: IPaginator<IHaving>,
-        rigIds: number[]
+        rigIds: { id: number, name: string }[]
     }>();
-
-    console.log(page.props);
 
     const havingsPaginator = page.props.havings;
 
@@ -239,15 +246,15 @@ const Havings: IPage = React.memo(() => {
 
                 <ul className="havings-list mb-5 space-y-6">
                     {havingsPaginator.data.map(having => {
-                        return <HavingItem key={having.id} having={having}/>
+                        return <HavingItem key={having.id} having={having} rigIds={page.props.rigIds}/>
                     })}
                 </ul>
             </Section>
 
             {havingsPaginator.last_page !== 1 &&
-                <div className="relative rounded-lg app-bg-dark shadow -m-s p-2 pt-0.5 w-fit">
-                    <Paginator paginator={havingsPaginator}/>
-                </div>
+            <div className="relative rounded-lg app-bg-dark shadow -m-s p-2 pt-0.5 w-fit">
+                <Paginator paginator={havingsPaginator}/>
+            </div>
             }
         </MiningLayout>
     );

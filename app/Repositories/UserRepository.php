@@ -128,17 +128,16 @@ class UserRepository extends CoreRepository
     }
 
     /**
-     * Get id of all user's rigs.
+     * Get id with name of all user's rigs.
      *
      * @param User $user
      * @return \Illuminate\Support\Collection
      */
     public function getRigIds(User $user) {
         $result = $user
-            ->with('rigs:id,user_id')
+            ->with('rigs:id,user_id,name')
             ->get()
             ->pluck('rigs')[0]
-            ->map(fn($val) => $val['id'])
         ;
 
         dump($result);
