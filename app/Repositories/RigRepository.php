@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Jobs\BuyWithDeliveryJob;
+use App\Models\Having;
 use App\Models\Part;
 use App\Models\Rig;
 use App\Models\User;
@@ -212,11 +213,17 @@ class RigRepository extends CoreRepository
     }
 
     public function insertIntoRig(User $user, $data) {
+        $partType = Having::select(['part_shop_id'])
+            ->where('id', $data['havingId'])
+            ->with('part:type')
+            ->first()
+            ->part->type;
+
         $result = $user
             ->rigs()
             ->where('rigs.id', $data["rigId"])
             ->update([
-                'general_temp' => 123
+                $partType . '_id' => $data['havingId']
             ]);
 
         return $result;
