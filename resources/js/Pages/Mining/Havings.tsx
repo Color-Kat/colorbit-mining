@@ -95,7 +95,10 @@ const HavingItem: React.FC<{ having: IHaving, rigIds: { id: number, name: string
     }
 
     const usePart = (rigId: number, havingId: number) => {
-        console.log(rigId, havingId)
+        Inertia.post(route('mining.use-part'), {
+            rigId,
+            havingId
+        });
     }
 
     return (
@@ -170,7 +173,7 @@ const HavingItem: React.FC<{ having: IHaving, rigIds: { id: number, name: string
                                     <button
                                         onClick={()=>usePart(rig.id, having.id)}
                                         key={rig.id}
-                                        className="text-lg w-full text-left"
+                                        className="text-lg w-full text-left hover:bg-gray-100"
                                     >
                                         {rig.name}
                                     </button>
@@ -182,7 +185,10 @@ const HavingItem: React.FC<{ having: IHaving, rigIds: { id: number, name: string
 
                 {/* Don't use */}
                 {having.state == 'used' ?
-                    <SecondaryButton className="mt-3 w-36 flex justify-center">
+                    <SecondaryButton
+                        // onClick={()=>switchUsePart(rig.id, having.id)}
+                        className="mt-3 w-36 flex justify-center"
+                    >
                         Отключить
                     </SecondaryButton> : null
                 }

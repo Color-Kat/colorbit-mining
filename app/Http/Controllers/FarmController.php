@@ -88,7 +88,7 @@ class FarmController extends BaseController
      * @param Request $request
      * @return string
      */
-    public function insertIntoRig(Request $request) {
+    public function usePart(Request $request) {
         $result = $this->rigRepository->insertIntoRig($request->user(), $request->input());
 
         return redirect()->back();
