@@ -213,18 +213,33 @@ class RigRepository extends CoreRepository
     }
 
     public function insertIntoRig(User $user, $data) {
-        $partType = Having::select(['part_shop_id'])
+        // Get having with part type
+        $having = Having::select(['id', 'part_shop_id', 'state'])
             ->where('id', $data['havingId'])
             ->with('part:type')
-            ->first()
-            ->part->type;
+            ->first();
 
+        // Can't use it
+        if(
+            $having->state == 'broken' ||
+            $having->state == 'needs_repair' ||
+            $having->state == 'used'
+        )
+            return false;
+
+        $partType = $having->part->type;
+
+        // Insert part into a rig
         $result = $user
             ->rigs()
             ->where('rigs.id', $data["rigId"])
             ->update([
                 $partType . '_id' => $data['havingId']
             ]);
+
+        // Change havings state to used
+        $having->state = 'used';
+        $having->save();
 
         return $result;
     }

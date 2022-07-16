@@ -17,6 +17,8 @@ class Having extends Model
 
     protected $table = 'havings';
 
+    protected $fillable = ['state'];
+
     /**
      * Get the good with part and shop of this having
      *
