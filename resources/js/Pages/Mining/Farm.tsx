@@ -155,7 +155,7 @@ const Farm: IPage = React.memo(() => {
                         `${isConsoleOpened
                             ? 'opacity-100 scale-y-100 max-h-screen mb-4'
                             : 'opacity-0 scale-y-0 max-h-0 mb-0'
-                        } transition fixed lg:relative z-50 w-screen lg:w-auto h-screen lg:h-auto top-0 left-0`}
+                        } transition fixed lg:relative z-50 lg:z-0 w-screen lg:w-auto h-screen lg:h-96 top-0 left-0`}
                 >
                     <button
                         onClick={()=>setConsoleOpened(false)}

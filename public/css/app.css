@@ -2894,9 +2894,6 @@ select:-webkit-autofill:focus {
   .md\:mt-3{
     margin-top: 0.75rem;
   }
-  .md\:mt-2{
-    margin-top: 0.5rem;
-  }
   .md\:block{
     display: block;
   }
@@ -3020,6 +3017,9 @@ select:-webkit-autofill:focus {
   .lg\:relative{
     position: relative;
   }
+  .lg\:z-0{
+    z-index: 0;
+  }
   .lg\:col-span-4{
     grid-column: span 4 / span 4;
   }
@@ -3031,6 +3031,14 @@ select:-webkit-autofill:focus {
   }
   .lg\:h-auto{
     height: auto;
+  }
+  .lg\:h-max{
+    height: -webkit-max-content;
+    height: -moz-max-content;
+    height: max-content;
+  }
+  .lg\:h-96{
+    height: 24rem;
   }
   .lg\:w-auto{
     width: auto;
