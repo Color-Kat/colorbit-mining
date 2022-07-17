@@ -74,7 +74,6 @@ class Having extends Model
      * @return \Awobaz\Compoships\Database\Eloquent\Relations\HasOne
      */
     public function rig() {
-        dump($this->part->type);
         return $this->hasOne(Rig::class, $this->part->type . '_id');
     }
 

@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useCallback, useMemo} from "react";
 import {IHaving} from "@/types/IHaving";
 import {BiErrorCircle} from "react-icons/bi";
 import {IBasePart} from "@/types/parts/IBasePart";
@@ -15,9 +15,13 @@ const RigPartInfoItem: React.FC<{
     setColor = true,
     inverseColor = false
 }) => {
-    let intValue = parseInt(value); // Get int value
-
-    const color = setColor ? getColorByValue(intValue, 100, inverseColor) : '';
+    const color = useMemo(
+        () => {
+            let intValue = parseInt(value); // Get int value
+            return setColor ? getColorByValue(intValue, 100, inverseColor) : '';
+        },
+        [value, setColor, inverseColor]
+    );
 
     return (
         <div className="flex flex-col justify-between">
