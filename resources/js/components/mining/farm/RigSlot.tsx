@@ -8,7 +8,6 @@ import {partTypeRusSingular} from "@/types/toRus";
 import {RigPartInfo} from "./RigPartInfo";
 import farm_bg from "@assets/farm_bg.png";
 
-
 export const RigSlot: React.FC<{
     having: IHaving<IBasePart> | null,
     type: PartType
@@ -17,6 +16,12 @@ export const RigSlot: React.FC<{
 
     const toHavings = () => {
         Inertia.visit(route('mining.havings.' + type));
+    }
+
+    const notUsePart = (havingId: number) => {
+        Inertia.post(route('mining.not-use-part'), {
+            havingId
+        });
     }
 
     // Empty slot with selector of the part
@@ -46,8 +51,6 @@ export const RigSlot: React.FC<{
     }
 
     const part = having.part;
-
-
 
     return (
         <div className="rigs__item-slot app-bg rounded-md shadow my-2 relative even:bg-[#212121] flex flex-col">
@@ -85,7 +88,10 @@ export const RigSlot: React.FC<{
 
                 {/* Part control */}
                 <div className="rigs__item-control flex justify-end mt-3">
-                    <SecondaryButton className="self-end">Отключить</SecondaryButton>
+                    <SecondaryButton
+                        onClick={()=>notUsePart(having.id)}
+                        className="self-end"
+                    >Отключить</SecondaryButton>
                 </div>
             </div>
 

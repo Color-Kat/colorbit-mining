@@ -8,12 +8,12 @@ import {Section} from "@components/page/Section";
 import {IRig} from "@/types/IRig";
 import {BiChevronDownCircle, BiEditAlt, BiExit, BiInfoCircle, BiTerminal} from "react-icons/bi";
 import {RigSlot} from "@components/mining/farm/RigSlot";
-import {getColorByValue} from "../../utils/getColorByValue";
-import {MiningConsole} from "../../components/mining/farm/MiningConsole";
-import SecondaryButton from "../../components/elements/SecondaryButton";
-import {EditableName} from "../../components/mining/farm/EditableName";
-import Button from "../../components/elements/Button";
-import useRoute from "../../hooks/useRoute";
+import {getColorByValue} from "@/utils/getColorByValue";
+import {MiningConsole} from "@components/mining/farm/MiningConsole";
+import SecondaryButton from "@components/elements/SecondaryButton";
+import {EditableName} from "@components/mining/farm/EditableName";
+import Button from "@components/elements/Button";
+import useRoute from "@hooks/useRoute";
 import {Inertia} from "@inertiajs/inertia";
 
 const rigStates = {
@@ -127,7 +127,7 @@ const Farm: IPage = React.memo(() => {
         rigsPaginator: IPaginator<any>
     }>();
 
-    const [isConsoleOpened, setConsoleOpened] = useState(true);
+    const [isConsoleOpened, setConsoleOpened] = useState(false);
 
     const rigsPaginator = page.props.rigsPaginator;
 

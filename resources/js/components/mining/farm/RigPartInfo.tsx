@@ -15,13 +15,8 @@ const RigPartInfoItem: React.FC<{
     setColor = true,
     inverseColor = false
 }) => {
-    const color = useMemo(
-        () => {
-            let intValue = parseInt(value); // Get int value
-            return setColor ? getColorByValue(intValue, 100, inverseColor) : '';
-        },
-        [value, setColor, inverseColor]
-    );
+    let intValue = parseInt(value); // Get int value
+    const color = setColor ? getColorByValue(intValue, 100, inverseColor) : '';
 
     return (
         <div className="flex flex-col justify-between">

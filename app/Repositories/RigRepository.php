@@ -263,13 +263,7 @@ class RigRepository extends CoreRepository
 
         $partType = $having->part->type;
 
-        // Insert part into a rig
-//        $result = $user
-//            ->rigs()
-//            ->where('rigs.id', $data["rigId"])
-//            ->update([
-//                $partType . '_id' => $data['havingId']
-//            ]);
+
 
         $result = $user
             ->rigs()
@@ -279,7 +273,6 @@ class RigRepository extends CoreRepository
             ]);
 
         // Change havings state to used
-
         if($having->state != 'broken' ||  $having->state != 'needs_repair'){
             $having->state = 'not_used';
             $having->save();
