@@ -15,11 +15,15 @@ export interface IHaving<T = IBasePart>{
     wear: number;
     dust: number;
 
-    part: T,
+    part: T;
     shop: {
         id: number,
         slug: string,
         warranty: boolean,
         used_market: boolean
+    };
+    rig: {
+        id: number;
+        name: string;
     }
 }

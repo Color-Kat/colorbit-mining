@@ -212,12 +212,14 @@ class RigRepository extends CoreRepository
         return $result;
     }
 
-    public function insertIntoRig(User $user, $data) {
+    public function usePart(User $user, $data) {
         // Get having with part type
         $having = Having::select(['id', 'part_shop_id', 'state'])
             ->where('id', $data['havingId'])
             ->with('part:type')
             ->first();
+
+        if(!$having) return false;
 
         // Can't use it
         if(
@@ -240,6 +242,48 @@ class RigRepository extends CoreRepository
         // Change havings state to used
         $having->state = 'used';
         $having->save();
+
+        return $result;
+    }
+
+    public function notUsePart(User $user, $data) {
+        // Get having with part type
+        $having = Having::select(['id', 'part_shop_id', 'state'])
+            ->where('id', $data['havingId'])
+            ->with('part:type')
+            ->first();
+
+        if(!$having) return false;
+
+        // Can't use it
+        if(
+            $having->state == 'not_used'
+        )
+            return false;
+
+        $partType = $having->part->type;
+
+        // Insert part into a rig
+//        $result = $user
+//            ->rigs()
+//            ->where('rigs.id', $data["rigId"])
+//            ->update([
+//                $partType . '_id' => $data['havingId']
+//            ]);
+
+        $result = $user
+            ->rigs()
+            ->where( $partType . '_id', $data['havingId'])
+            ->update([
+                $partType . '_id' => null
+            ]);
+
+        // Change havings state to used
+
+        if($having->state != 'broken' ||  $having->state != 'needs_repair'){
+            $having->state = 'not_used';
+            $having->save();
+        }
 
         return $result;
     }

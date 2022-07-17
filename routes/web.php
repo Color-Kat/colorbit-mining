@@ -56,6 +56,7 @@ Route::middleware('auth')->prefix('mining')->as('mining.')->group(function () {
     Route::post('/change-rig-name', [FarmController::class, 'changeRigName'])->name('change-rig-name');
     Route::post('/create-new-rig', [FarmController::class, 'createNewRig'])->name('create-new-rig');
     Route::post('/use-part', [FarmController::class, 'usePart'])->name('use-part');
+    Route::post('/not-use-part', [FarmController::class, 'notUsePart'])->name('not-use-part');
 
     Route::post('/console', [FarmController::class, 'console'])->name('console');
 

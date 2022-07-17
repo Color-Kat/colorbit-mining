@@ -69,6 +69,15 @@ class Having extends Model
         return $this->belongsTo(User::class);
     }
 
+    /**
+     * Get rig with this having.
+     * @return \Awobaz\Compoships\Database\Eloquent\Relations\HasOne
+     */
+    public function rig() {
+        dump($this->part->type);
+        return $this->hasOne(Rig::class, $this->part->type . '_id');
+    }
+
     // === Some parts doesn't have this parameters === //
     public function getLoadingAttribute($value) {
         $loading = $this->part->type === 'case' ? null : $value;

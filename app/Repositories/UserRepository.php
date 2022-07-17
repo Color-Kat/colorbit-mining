@@ -116,7 +116,7 @@ class UserRepository extends CoreRepository
 
         $havings = $user
             ->havings() // Get user's havings
-            ->with(['part', 'shop']) // add part and shop for every having
+            ->with(['part', 'shop', 'rig']) // add part and shop for every having
             ->whereHas('part', function ($q) use($type) {
                 if($type) $q->where('type', $type); // Sort by type if it's specified
 

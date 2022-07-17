@@ -29,7 +29,6 @@ class Rig extends Model
 
     public function getMaxPowerAttribute()
     {
-
         return
             $this->GPU?->part->power +
             $this->platform?->part->power +

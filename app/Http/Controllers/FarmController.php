@@ -89,7 +89,19 @@ class FarmController extends BaseController
      * @return string
      */
     public function usePart(Request $request) {
-        $result = $this->rigRepository->insertIntoRig($request->user(), $request->input());
+        $result = $this->rigRepository->usePart($request->user(), $request->input());
+
+        return redirect()->back();
+    }
+
+    /**
+     * Turn off a part by having id
+     *
+     * @param Request $request
+     * @return string
+     */
+    public function notUsePart(Request $request) {
+        $result = $this->rigRepository->notUsePart($request->user(), $request->input());
 
         return redirect()->back();
     }

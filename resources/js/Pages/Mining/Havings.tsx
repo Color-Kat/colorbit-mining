@@ -90,6 +90,8 @@ const HavingItem: React.FC<{ having: IHaving, rigIds: { id: number, name: string
     const part = having.part;
     const shop = having.shop;
 
+    console.log(having)
+
     const goToGood = () => {
         Inertia.visit(route('good', [shop.slug, part.slug]));
     }
@@ -97,6 +99,12 @@ const HavingItem: React.FC<{ having: IHaving, rigIds: { id: number, name: string
     const usePart = (rigId: number, havingId: number) => {
         Inertia.post(route('mining.use-part'), {
             rigId,
+            havingId
+        });
+    }
+
+    const notUsePart = (havingId: number) => {
+        Inertia.post(route('mining.not-use-part'), {
             havingId
         });
     }
@@ -184,9 +192,9 @@ const HavingItem: React.FC<{ having: IHaving, rigIds: { id: number, name: string
                 }
 
                 {/* Don't use */}
-                {having.state == 'used' ?
+                {having.rig || having.state == 'used' ?
                     <SecondaryButton
-                        // onClick={()=>switchUsePart(rig.id, having.id)}
+                        onClick={()=>notUsePart(having.id)}
                         className="mt-3 w-36 flex justify-center"
                     >
                         Отключить
