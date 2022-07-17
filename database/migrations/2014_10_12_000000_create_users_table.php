@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->foreignId('role_id')->default(1);
-            $table->bigInteger('money')->unsigned()->default(0);
+            $table->bigInteger('money')->unsigned()->default(100);
 
 
             $table->timestamp('email_verified_at')->nullable();

@@ -135,10 +135,8 @@ class UserRepository extends CoreRepository
      */
     public function getRigIds(User $user) {
         $result = $user
-            ->with('rigs:id,user_id,name')
-            ->get()
-            ->pluck('rigs')[0]
-        ;
+            ->load('rigs:id,user_id,name')
+            ->toArray()['rigs'];
 
         return $result;
     }
@@ -156,6 +154,7 @@ class UserRepository extends CoreRepository
             ->rigs()
             ->with(['GPU', 'platform', 'RAM', 'PSU', 'case'])
             ->paginate(5);
+
 
         $rigs->append('maxPower');
 

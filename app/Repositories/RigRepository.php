@@ -8,6 +8,7 @@ use App\Models\Part;
 use App\Models\Rig;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 /**
  * Class PartRepository
@@ -79,7 +80,12 @@ class RigRepository extends CoreRepository
 
     public function toggleRig($state, $payload)
     {
-        $rigRequest = $this->startConditions(); // Base request
+        $userId = Auth::id();
+
+        // Base request
+        $rigRequest = $this
+            ->startConditions()
+            ->where('user_id', $userId);
 
         // Add request by rig name
         if ($payload && $payload[0] != 'all')
@@ -97,7 +103,6 @@ class RigRepository extends CoreRepository
         $selectedRigs = $rigRequest
             ->select(['name', 'state'])
             ->get();
-//        $selectedRigs->appends = [];
 
         // Get broken and working rigs
         $brokenRigs = $selectedRigs
@@ -138,17 +143,20 @@ class RigRepository extends CoreRepository
         // No rigs are working
         else $result .= "Не удалось запустить майнинг";
 
-        $result .= "\nВведите `mining state` для получения подробной информации.";
+        $result .= "\nВведите `mining status` для получения подробной информации.";
 
         return $result;
     }
 
     public function rigStatus($payload)
     {
+        $userId = Auth::id();
+
         // Base request
         $rigRequest = $this
             ->startConditions()
-            ->select(['name', 'state', 'GPU_id', 'platform_id', 'RAM_id', 'PSU_id', 'case_id']);
+            ->select(['name', 'state', 'GPU_id', 'platform_id', 'RAM_id', 'PSU_id', 'case_id'])
+            ->where('user_id', $userId);
 
         // Add request by rig name
         if ($payload && $payload[0])
@@ -175,14 +183,13 @@ class RigRepository extends CoreRepository
             if(count($rig['breakdowns']) == 0) $result .= "Комплектующие не установлены.\n";
 
             foreach ($rig['breakdowns'] as $breakdown) {
-
                 $result .=
-                    "---------------------\n" .
-                    "[" . $breakdown["id"] . "]" .
+                    "--------------------------\n" .
+                    "[" . $breakdown["id"] . "] " .
                     $breakdown["part"]["name"] . " - " .
                     ($breakdown["state"] === "broken" ? 'неисправно' : 'исправно') . "\n";
 
-                if (!is_null($breakdown['message']))
+                if ($breakdown['message'])
                     $result .= "[" . $breakdown['message'] . "]\n";
 
                 if (!is_null($breakdown["temp"]))
@@ -194,12 +201,10 @@ class RigRepository extends CoreRepository
                 if (!is_null($breakdown["loading"]))
                     $result .= "Загрузка: " . $breakdown["loading"] . "%\n";
 
-                $result .= "---------------------\n";
+                $result .= "--------------------------\n";
             }
 
         }
-
-//        dump($rigs);
 
         // Add to result non-existent rigs
         $foundRigs = $rigRequest->pluck('name')->toArray();
@@ -262,8 +267,6 @@ class RigRepository extends CoreRepository
             return false;
 
         $partType = $having->part->type;
-
-
 
         $result = $user
             ->rigs()

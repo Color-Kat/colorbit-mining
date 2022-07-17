@@ -90,8 +90,6 @@ const HavingItem: React.FC<{ having: IHaving, rigIds: { id: number, name: string
     const part = having.part;
     const shop = having.shop;
 
-    console.log(having)
-
     const goToGood = () => {
         Inertia.visit(route('good', [shop.slug, part.slug]));
     }

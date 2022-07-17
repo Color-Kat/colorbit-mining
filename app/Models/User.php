@@ -92,4 +92,19 @@ class User extends Authenticatable
             ->hasMany(Rig::class)
             ->orderBy('id', 'DESC');
     }
+
+    /**
+     * Override trait to change color.
+     * Get the default profile photo URL if no profile photo has been uploaded.
+     *
+     * @return string
+     */
+    protected function defaultProfilePhotoUrl()
+    {
+        $name = trim(collect(explode(' ', $this->name))->map(function ($segment) {
+            return mb_substr($segment, 0, 1);
+        })->join(' '));
+
+        return 'https://ui-avatars.com/api/?name='.urlencode($name).'&color=121212&background=D1D5DB';
+    }
 }
