@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useCallback, useState} from 'react';
 import useRoute from '@hooks/useRoute';
 import useTypedPage from '@hooks/useTypedPage';
 import {Head} from "@inertiajs/inertia-react";
@@ -183,18 +183,16 @@ const Good: IPage = React.memo(() => {
         setIsConfirmBuy(false);
     }
 
-    const buy = async () => {
+    const buy = useCallback(async () => {
         const result = await window.axios.post<any, Response<any>>(route('user.buy-good'), {
             shop_slug: shop.slug,
             good_slug: good.slug
         });
 
-        console.log(result, 123)
-
         closeConfirmBuy();
-    }
+    }, []);
 
-    const BuyButton = () => {
+    const BuyButton = React.memo(() => {
         if(page.props.good.isDeleted) return (
             <SecondaryButton
                 className="py-2 px-3 text-base font-sans md:w-36 flex items-center justify-center leading-4 normal-case"
@@ -215,7 +213,7 @@ const Good: IPage = React.memo(() => {
                 disabled
             >Нет в наличии</SecondaryButton>
         );
-    }
+    });
 
     return (
         <div className="good-page max-w-5xl w-full">

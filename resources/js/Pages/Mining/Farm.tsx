@@ -121,26 +121,11 @@ const RigItem: React.FC<{ rig: IRig }> = React.memo(({rig}) => {
     )
 });
 
-const Farm: IPage = React.memo(() => {
-    const route = useRoute();
-    const page = useTypedPage<{
-        rigsPaginator: IPaginator<any>
-    }>();
-
+const ConsoleWindow = () => {
     const [isConsoleOpened, setConsoleOpened] = useState(false);
 
-    const rigsPaginator = page.props.rigsPaginator;
-
-    const createNewRig = () => {
-        Inertia.post(route('mining.create-new-rig'));
-    }
-
     return (
-        <MiningLayout
-            title="Менеджер ригов"
-            description="В менеджере ригов вы можете запускать и настраивать майнинг фермы через color-console, а также следить за их состоянием и износом."
-        >
-            {/* Mining Console */}
+        <>
             <SecondaryButton
                 onClick={()=>setConsoleOpened(prev => !prev)}
                 className="w-full md:w-max px-5 mb-4 text-lg font-mono flex items-center"
@@ -164,7 +149,29 @@ const Farm: IPage = React.memo(() => {
                     <MiningConsole/>
                 </div>
             </div>
+        </>
+    );
+}
 
+const Farm: IPage = React.memo(() => {
+    const route = useRoute();
+    const page = useTypedPage<{
+        rigsPaginator: IPaginator<any>
+    }>();
+
+    const rigsPaginator = page.props.rigsPaginator;
+
+    const createNewRig = () => {
+        Inertia.post(route('mining.create-new-rig'));
+    }
+
+    return (
+        <MiningLayout
+            title="Менеджер ригов"
+            description="В менеджере ригов вы можете запускать и настраивать майнинг фермы через color-console, а также следить за их состоянием и износом."
+        >
+            {/* Mining Console */}
+            <ConsoleWindow />
 
             {/* Rigs list */}
             <ul className="rigs-list mb-5 space-y-6">
