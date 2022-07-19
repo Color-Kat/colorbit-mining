@@ -19,7 +19,7 @@ class ApplyMiningDataJob implements ShouldQueue
      *
      * @return void
      */
-    public function __construct($applyData)
+    public function __construct($applyData = '')
     {
         Log::info($applyData);
     }
