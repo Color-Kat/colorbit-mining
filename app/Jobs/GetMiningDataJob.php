@@ -2,12 +2,14 @@
 
 namespace App\Jobs;
 
+use App\Models\Rig;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Log;
 
 class GetMiningDataJob implements ShouldQueue
 {
@@ -20,7 +22,6 @@ class GetMiningDataJob implements ShouldQueue
      */
     public function __construct()
     {
-        //
     }
 
     /**
@@ -30,6 +31,18 @@ class GetMiningDataJob implements ShouldQueue
      */
     public function handle()
     {
-        //
+        $miningData = Rig::
+            where('state', 'on')
+            ->with(
+                'GPU',
+                'platform',
+                'RAM',
+                'PSU',
+                'case'
+            )
+            ->get()
+            ->toArray();
+
+        ProcessMiningDataJob::dispatch($miningData);
     }
 }

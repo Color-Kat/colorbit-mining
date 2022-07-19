@@ -2,9 +2,14 @@
 
 namespace App\Console\Commands;
 
+use App\Jobs\ApplyMiningDataJob;
+use App\Jobs\GetMiningDataJob;
+use App\Jobs\ProcessMiningDataJob;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Bus;
+use Illuminate\Support\Facades\Log;
 
-class MiningProcessCommand extends Command
+class MiningRunCommand extends Command
 {
     /**
      * The name and signature of the console command.
@@ -27,7 +32,7 @@ class MiningProcessCommand extends Command
      */
     public function handle()
     {
-        echo 'We are mining';
-        return 0;
+        Log::info('command');
+        GetMiningDataJob::dispatch();
     }
 }

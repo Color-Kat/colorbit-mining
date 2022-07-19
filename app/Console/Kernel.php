@@ -17,7 +17,7 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')->hourly();
 
-        $schedule->command('mining:process')->daily();
+        $schedule->command('mining:run')->everyMinute();
     }
 
     /**
