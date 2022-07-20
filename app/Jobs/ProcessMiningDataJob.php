@@ -57,23 +57,25 @@ class ProcessMiningDataJob implements ShouldQueue
             $GPU = $mData['GPU']['part'];
 
             $GPU_VRAM_coefficient = 0.5;
-            if($GPU['GPU_VRAM_type'] === 'GDDR4') $GPU_VRAM_coefficient = 0.3;
-            if($GPU['GPU_VRAM_type'] === 'GDDR5') $GPU_VRAM_coefficient = 0.6;
-            if($GPU['GPU_VRAM_type'] === 'GDDR5x') $GPU_VRAM_coefficient = 0.85;
-            if($GPU['GPU_VRAM_type'] === 'GDDR6') $GPU_VRAM_coefficient = 0.95;
-            if($GPU['GPU_VRAM_type'] === 'GDDR6x') $GPU_VRAM_coefficient = 1;
+            if($GPU['GPU_VRAM_type'] === 'GDDR4') $GPU_VRAM_coefficient = 2;
+            if($GPU['GPU_VRAM_type'] === 'GDDR5') $GPU_VRAM_coefficient = 8;
+            if($GPU['GPU_VRAM_type'] === 'GDDR5x') $GPU_VRAM_coefficient = 12;
+            if($GPU['GPU_VRAM_type'] === 'GDDR6') $GPU_VRAM_coefficient = 16;
+            if($GPU['GPU_VRAM_type'] === 'GDDR6x') $GPU_VRAM_coefficient = 24;
 
+            $GPU_performance_coefficient = 24.53421747;
             $GPU_performance =
-                $GPU['GPU_VRAM_size'] * $GPU_VRAM_coefficient *
-                ($GPU['GPU_chip_frequency'] / 1000)
-                * 2;
+                $GPU['GPU_VRAM_size'] ** 2 *
+                $GPU_VRAM_coefficient ** (0.6) *
+                $GPU['GPU_chip_frequency'] ** (0.1)
+                / 1000 * 3 * $GPU_performance_coefficient;
 
-            $GPU_loading_coefficient = $platform_performance * $GPU_performance + 25;
-            $GPU_loading = ($GPU_loading_coefficient < 100 ? $GPU_loading_coefficient : 100);
-            $GPU_performance *= $GPU_loading/100;
+//            $GPU_loading_coefficient = $platform_performance * $GPU_performance + 25;
+//            $GPU_loading = ($GPU_loading_coefficient < 100 ? $GPU_loading_coefficient : 100);
+//            $GPU_performance *= $GPU_loading/100;
 
             Log::info($mData['name']);
-            Log::info($GPU_loading);
+//            Log::info($GPU_loading);
             Log::info($GPU_performance);
             Log::info($platform_performance);
         }
