@@ -63,6 +63,8 @@ class ProcessMiningDataJob implements ShouldQueue
             if($GPU['GPU_VRAM_type'] === 'GDDR6') $GPU_VRAM_coefficient = 16;
             if($GPU['GPU_VRAM_type'] === 'GDDR6x') $GPU_VRAM_coefficient = 24;
 
+            // = КОРЕНЬ(B4) * КОРЕНЬ(E4) * ЕСЛИ(F4 > 600; LOG(F4); КОРЕНЬ(F4)) * ЕСЛИ(F4<190; 1,1; 1) * ( КОРЕНЬ(H4) * ЕСЛИ(H4 < 5; 1,1; 1) ) / ЕСЛИ(F4 > 600; 140; 1100) * ЕСЛИ(B4<1300;  ЕСЛИ(B4>1000; 1,4; 2 ); 1 )
+
             $GPU_performance_coefficient = 24.53421747;
             $GPU_performance =
                 $GPU['GPU_VRAM_size'] ** 2 *
