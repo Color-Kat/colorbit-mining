@@ -59,7 +59,7 @@ class PartRepository extends CoreRepository
         $data = $request->all();
 
         // Create slug
-        if (empty($data['slug'])) $data['slug'] = Str::slug($data['name']);
+        if (empty($data['slug'])) $data['slug'] = Str::slug($data['vendor'] . "-" . $data['name']);
         else $data['slug'] = Str::slug($data['slug']);
 
         // Set default image url (Accessor returns default image for any type)
@@ -78,7 +78,6 @@ class PartRepository extends CoreRepository
             ->attach($data['shop_ids'] ?? [], ['count' => $data['count']]);
 
         if ($data['_image']) $result->updateImage($data['_image'], 'parts');
-
 
         return $result;
     }
@@ -121,7 +120,7 @@ class PartRepository extends CoreRepository
             ->find($id);
 
         // Create slug
-        if (empty($data['slug'])) $data['slug'] = Str::slug($data['name']);
+        if (empty($data['slug'])) $data['slug'] = Str::slug($data['vendor'] . "-" . $data['name']);
         else $data['slug'] = Str::slug($data['slug']);
 
         // Delete image url to not rewrite it

@@ -67,7 +67,7 @@ const Header: React.FC = () => {
     }, [location]);
 
     return (
-        <header className="flex sticky top-0 w-full h-16 justify-center shadow-xl z-10 app-bg-dark text-app-light shrink-0">
+        <header className="flex sticky top-0 w-full h-16 justify-center shadow-xl z-20 app-bg-dark text-app-light shrink-0">
             <div className="container relative flex items-center justify-between px-5 z-30">
                 {/* LOGO */}
                 <CLink href="/">
