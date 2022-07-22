@@ -43,7 +43,6 @@ class ProcessMiningDataJob implements ShouldQueue
                 !$mData['PSU'] ||
                 !$mData['case']
             ) continue;
-//            Log::info( $mData['GPU']);
 
             /* ----- Platform ----- */
             $platform = $mData['platform']['part'];
@@ -56,21 +55,32 @@ class ProcessMiningDataJob implements ShouldQueue
             /* ----- GPU ----- */
             $GPU = $mData['GPU']['part'];
 
-            $GPU_VRAM_coefficient = 0.5;
-            if($GPU['GPU_VRAM_type'] === 'GDDR4') $GPU_VRAM_coefficient = 2;
-            if($GPU['GPU_VRAM_type'] === 'GDDR5') $GPU_VRAM_coefficient = 8;
-            if($GPU['GPU_VRAM_type'] === 'GDDR5x') $GPU_VRAM_coefficient = 12;
-            if($GPU['GPU_VRAM_type'] === 'GDDR6') $GPU_VRAM_coefficient = 16;
-            if($GPU['GPU_VRAM_type'] === 'GDDR6x') $GPU_VRAM_coefficient = 24;
-
             // = КОРЕНЬ(B4) * КОРЕНЬ(E4) * ЕСЛИ(F4 > 600; LOG(F4); КОРЕНЬ(F4)) * ЕСЛИ(F4<190; 1,1; 1) * ( КОРЕНЬ(H4) * ЕСЛИ(H4 < 5; 1,1; 1) ) / ЕСЛИ(F4 > 600; 140; 1100) * ЕСЛИ(B4<1300;  ЕСЛИ(B4>1000; 1,4; 2 ); 1 )
 
-            $GPU_performance_coefficient = 24.53421747;
+            $st_processors_multiplier =
+                sqrt($GPU['GPU_st_processors']) *
+                ($GPU['GPU_st_processors'] < 1300
+                    ? ($GPU['GPU_st_processors'] > 1000 ? 1.4 : 2)
+                    : 1
+                );
+
+            $VRAM_bandwidth_multiplier =
+                ($GPU['GPU_VRAM_bandwidth'] > 600
+                    ? log($GPU['GPU_VRAM_bandwidth']) / 140
+                    : sqrt($GPU['GPU_VRAM_bandwidth']) / 1100
+                ) *
+                ($GPU['GPU_VRAM_bandwidth'] < 190 ? 1.1 : 1);
+
+            $VRAM_size_multiplier =
+                sqrt($GPU['GPU_VRAM_size']) *
+                ($GPU['GPU_VRAM_size'] < 5 ? 1.1 : 1);
+
             $GPU_performance =
-                $GPU['GPU_VRAM_size'] ** 2 *
-                $GPU_VRAM_coefficient ** (0.6) *
-                $GPU['GPU_chip_frequency'] ** (0.1)
-                / 1000 * 3 * $GPU_performance_coefficient;
+                $st_processors_multiplier *
+                sqrt($GPU['GPU_VRAM_bit']) *
+                $VRAM_bandwidth_multiplier *
+                $VRAM_size_multiplier
+            ;
 
 //            $GPU_loading_coefficient = $platform_performance * $GPU_performance + 25;
 //            $GPU_loading = ($GPU_loading_coefficient < 100 ? $GPU_loading_coefficient : 100);

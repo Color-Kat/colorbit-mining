@@ -102,6 +102,9 @@ class Rig extends Model
         return $this->belongsToPart('GPU_id', [
             'GPU_VRAM_size',
             'GPU_VRAM_type',
+            'GPU_VRAM_bit',
+            'GPU_VRAM_bandwidth',
+            'GPU_st_processors',
             'GPU_chip_frequency',
             'GPU_fans_count',
             'GPU_fan_efficiency',
