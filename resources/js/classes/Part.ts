@@ -73,6 +73,9 @@ export class GPU extends Part implements PartT<'GPU'> {
     public power: number = 100;
     public GPU_VRAM_size: number = 1;
     public GPU_VRAM_type: GPU_VRAM_type = 'GDDR5';
+    public GPU_VRAM_bit: number = 128;
+    public GPU_VRAM_bandwidth: number = 224;
+    public GPU_st_processors: number = 2560;
     public GPU_chip_frequency: number = 999;
     public GPU_fans_count: number = 1;
     public GPU_fan_efficiency: number = 50;
@@ -88,6 +91,9 @@ export class GPU extends Part implements PartT<'GPU'> {
         this.power = partData.power;
         this.GPU_VRAM_size = partData.GPU_VRAM_size;
         this.GPU_VRAM_type = partData.GPU_VRAM_type;
+        this.GPU_VRAM_bit = partData.GPU_VRAM_bit;
+        this.GPU_VRAM_bandwidth = partData.GPU_VRAM_bandwidth;
+        this.GPU_st_processors = partData.GPU_st_processors;
         this.GPU_chip_frequency = partData.GPU_chip_frequency;
         this.GPU_fans_count = partData.GPU_fans_count;
         this.GPU_fan_efficiency = partData.GPU_fan_efficiency;

@@ -33,7 +33,7 @@ return new class extends Migration
             $table->string('GPU_VRAM_type')->nullable(); // Video RAM frequency
             $table->unsignedInteger('GPU_VRAM_bit')->nullable(); // Video RAM interface width, bit
             $table->unsignedInteger('GPU_VRAM_bandwidth')->nullable(); // Video RAM Bandwidth, GB/sec
-            $table->unsignedInteger('GPU_sh_blocks')->nullable(); // Count of shader blocks (cuda for nvidia)
+            $table->unsignedInteger('GPU_st_processors')->nullable(); // Number of streaming processors (cuda for nvidia)
             $table->unsignedInteger('GPU_chip_frequency')->nullable(); // Video RAM frequency
             $table->unsignedInteger('GPU_fans_count')->nullable(); // Power consumption
             $table->unsignedInteger('GPU_fan_efficiency')->nullable(); // Power consumption

@@ -76,7 +76,7 @@ export const SecondStage: React.FC<{
     setData: (name: string, data: any) => void,
     errors: any
 }>
-    = ({data, setData, errors}) => {
+    = (({data, setData, errors}) => {
 
     switch (data.type) {
         case 'GPU':
@@ -85,7 +85,7 @@ export const SecondStage: React.FC<{
                     {/* VRAM_size */}
                     <ControlledInput
                         data={data} setData={setData} errors={errors}
-                        title="Количество видеопамяти"
+                        title="Количество видеопамяти, ГБ"
                         placeholder="в ГБ"
                         type="number"
                         min="0"
@@ -100,11 +100,41 @@ export const SecondStage: React.FC<{
                         options={VRAM_type_options}
                     />
 
+                    {/* VRAM_bit */}
+                    <ControlledInput
+                        data={data} setData={setData} errors={errors}
+                        title="Разрядность шины памяти, бит"
+                        placeholder=""
+                        type="number"
+                        min="0"
+                        name="GPU_VRAM_bit"
+                    />
+
+                    {/* VRAM_bandwidth */}
+                    <ControlledInput
+                        data={data} setData={setData} errors={errors}
+                        title="Пропускная способность памяти, ГБ/с"
+                        placeholder="в Гбайт/сек"
+                        type="number"
+                        min="0"
+                        name="GPU_VRAM_bandwidth"
+                    />
+
+                    {/* Number of streaming processors */}
+                    <ControlledInput
+                        data={data} setData={setData} errors={errors}
+                        title="Кол-во потоковых процессоров"
+                        placeholder="Cuda для nvidia"
+                        type="number"
+                        min="0"
+                        name="GPU_st_processors"
+                    />
+
                     {/* chip_frequency */}
                     <ControlledInput
                         data={data} setData={setData} errors={errors}
-                        title="Частота видеочипа"
-                        placeholder="в мГц"
+                        title="Частота видеочипа, МГц"
+                        placeholder="в МГц"
                         type="number"
                         min="0"
                         name="GPU_chip_frequency"
@@ -123,7 +153,7 @@ export const SecondStage: React.FC<{
                     {/* fans_efficiency */}
                     <ControlledInput
                         data={data} setData={setData} errors={errors}
-                        title="Эффективность вентиляторов в %"
+                        title="Эффективность вентиляторов, %"
                         placeholder="От 0 до 100"
                         type="number"
                         min="0"
@@ -134,7 +164,7 @@ export const SecondStage: React.FC<{
                     {/* TDP */}
                     <ControlledInput
                         data={data} setData={setData} errors={errors}
-                        title="TDP"
+                        title="TDP, Ватт"
                         placeholder="В Ватт"
                         type="number"
                         min="0"
@@ -144,7 +174,7 @@ export const SecondStage: React.FC<{
                     {/* Power */}
                     <ControlledInput
                         data={data} setData={setData} errors={errors}
-                        title="Потребление энергии"
+                        title="Потребление энергии, Ватт"
                         placeholder="В Ватт"
                         type="number"
                         min="0"
@@ -177,7 +207,7 @@ export const SecondStage: React.FC<{
                     {/* frequency */}
                     <ControlledInput
                         data={data} setData={setData} errors={errors}
-                        title="Частота ЦП"
+                        title="Частота ЦП, ГГц"
                         type="number"
                         min="0.1"
                         placeholder="В ГГц"
@@ -196,7 +226,7 @@ export const SecondStage: React.FC<{
                     {/* TDP */}
                     <ControlledInput
                         data={data} setData={setData} errors={errors}
-                        title="TDP"
+                        title="TDP, Ватт"
                         placeholder="В Ватт"
                         type="number"
                         min="0"
@@ -206,7 +236,7 @@ export const SecondStage: React.FC<{
                     {/* Power */}
                     <ControlledInput
                         data={data} setData={setData} errors={errors}
-                        title="Потребление энергии"
+                        title="Потребление энергии, Ватт"
                         placeholder="В Ватт"
                         type="number"
                         min="0"
@@ -221,7 +251,7 @@ export const SecondStage: React.FC<{
                     {/* size */}
                     <ControlledInput
                         data={data} setData={setData} errors={errors}
-                        title="Объём ОЗУ"
+                        title="Объём ОЗУ, ГБ"
                         placeholder="В ГБ"
                         type="number"
                         min="1"
@@ -231,7 +261,7 @@ export const SecondStage: React.FC<{
                     {/* frequency */}
                     <ControlledInput
                         data={data} setData={setData} errors={errors}
-                        title="Частота ОЗУ"
+                        title="Частота ОЗУ, МГц"
                         placeholder="В МГц"
                         type="number"
                         min="1"
@@ -250,7 +280,7 @@ export const SecondStage: React.FC<{
                     {/* TDP */}
                     <ControlledInput
                         data={data} setData={setData} errors={errors}
-                        title="TDP"
+                        title="TDP, Ватт"
                         placeholder="В Ватт"
                         type="number"
                         min="0"
@@ -260,7 +290,7 @@ export const SecondStage: React.FC<{
                     {/* Power */}
                     <ControlledInput
                         data={data} setData={setData} errors={errors}
-                        title="Потребление энергии"
+                        title="Потребление энергии, Ватт"
                         placeholder="В Ватт"
                         type="number"
                         min="0"
@@ -275,7 +305,7 @@ export const SecondStage: React.FC<{
                     {/* power supply */}
                     <ControlledInput
                         data={data} setData={setData} errors={errors}
-                        title="Мощность БП"
+                        title="Мощность БП, Ватт"
                         placeholder="В Ватт"
                         type="number"
                         min="1"
@@ -293,7 +323,7 @@ export const SecondStage: React.FC<{
                     {/* TDP */}
                     <ControlledInput
                         data={data} setData={setData} errors={errors}
-                        title="TDP"
+                        title="TDP, Ватт"
                         placeholder="В Ватт"
                         type="number"
                         min="0"
@@ -345,4 +375,4 @@ export const SecondStage: React.FC<{
         default:
             return <span>Такого типа не существует</span>
     }
-}
+});

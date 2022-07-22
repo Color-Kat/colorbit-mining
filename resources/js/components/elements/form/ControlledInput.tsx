@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import React, {forwardRef, InputHTMLAttributes} from 'react';
+import React, {forwardRef, InputHTMLAttributes, useCallback} from 'react';
 import Input from "./Input";
 import InputError from "./InputError";
 import Label from "./Label";
@@ -24,6 +24,9 @@ export const ControlledInput: React.FC<ControlledInputProps & InputHTMLAttribute
     errors,
     ...props
 }) => {
+    // UseCallback breaks the business logic
+    const changeHandler = (e: any) => setData(name, e.currentTarget.value)
+
     return (
         <div className="control-input">
             <Label htmlFor={name} value={title}/>
@@ -32,7 +35,7 @@ export const ControlledInput: React.FC<ControlledInputProps & InputHTMLAttribute
                 type={type}
                 className="mt-1 block w-full"
                 value={data[name]}
-                onChange={e => setData(name, e.currentTarget.value)}
+                onChange={changeHandler}
                 {...props}
             />
             <InputError message={errors[name]} className="mt-2"/>

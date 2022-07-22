@@ -29,7 +29,7 @@ const AdminPartCreate: IPage = React.memo(() => {
         }
     }
 
-    useEffect(createPart, [stage])
+    useEffect(createPart, [stage]);
 
     return (
         <AdminPartsListLayout
