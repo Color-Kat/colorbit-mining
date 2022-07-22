@@ -58,6 +58,9 @@ const MainSpecs: React.FC<{good: PartT<PartType>}> = ({good}) => {
 
                         <SpecLine title="Количество видеопамяти" value={good.GPU_VRAM_size + ' ГБ'}/>
                         <SpecLine title="Тип видеопамяти" value={good.GPU_VRAM_type}/>
+                        <SpecLine title="Разрядность шины памяти" value={good.GPU_VRAM_bit + ' бит'}/>
+                        <SpecLine title="Пропускная способность памяти" value={good.GPU_VRAM_bandwidth + ' Гбайт/сек'}/>
+                        <SpecLine title="Число потоковых процессоров" value={good.GPU_st_processors}/>
                         <SpecLine title="Частота видеочипа" value={good.GPU_chip_frequency + ' МГц'}/>
                         <SpecLine title="Тепловыделение" value={good.TDP + ' Вт'}/>
                         <SpecLine title="Потребление энергии" value={good.power + ' Вт'}/>
