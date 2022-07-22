@@ -20,6 +20,7 @@ import {Shop} from "@/classes/Shop";
 import {Response} from "@/types/Response";
 import LoginModal from "@components/page/LoginModal";
 import PageError from "./PageError";
+import Modal from "../components/modal/Modal";
 
 const SpecLine: React.FC<{title: string, value: string|number, description?: string}> = React.memo(({title, value, description}) => {
     return (
@@ -175,6 +176,7 @@ const Good: IPage = React.memo(() => {
     }
 
     const [isConfirmBuy, setIsConfirmBuy] = useState(false);
+    const [errorMessage, setErrorMessage] = useState('');
     const [loginModal, setLoginModal] = useState(false);
 
     function confirmBuy() {
@@ -182,15 +184,24 @@ const Good: IPage = React.memo(() => {
         if(auth) setIsConfirmBuy(true);
     }
 
-    const closeConfirmBuy = () => {
-        setIsConfirmBuy(false);
-    }
+    const closeConfirmBuy = useCallback(
+        () => setIsConfirmBuy(false),
+        []
+    );
+
+    const closeErrorModal = useCallback(
+        () => setErrorMessage(''),
+        []
+    );
 
     const buy = useCallback(async () => {
-        const result = await window.axios.post<any, Response<any>>(route('user.buy-good'), {
+        const result = (await window.axios.post<any, Response<any>>(route('user.buy-good'), {
             shop_slug: shop.slug,
             good_slug: good.slug
-        });
+        })).data;
+
+        console.log(result)
+        if(!result.status) setErrorMessage(result.message);
 
         closeConfirmBuy();
     }, []);
@@ -316,6 +327,14 @@ const Good: IPage = React.memo(() => {
                     </Button>
                 </DialogModal.Footer>
             </DialogModal>
+
+            <Modal isOpen={!!errorMessage} onClose={closeErrorModal} maxWidth="md">
+                <div className="mx-6 my-4 tracking-wider flex flex-col">
+                    <h3 className="text-xl mb-2">Не удалось оплатить товар</h3>
+                    <span className="text-base">{errorMessage}!</span>
+                    <Button className="self-end mt-3" onClick={closeErrorModal}>Жаль:(</Button>
+                </div>
+            </Modal>
 
             <LoginModal loginModal={loginModal} setLoginModal={setLoginModal} />
         </div>
