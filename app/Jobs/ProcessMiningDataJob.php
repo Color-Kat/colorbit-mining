@@ -97,7 +97,7 @@ class ProcessMiningDataJob implements ShouldQueue
                     )
                 );
 
-            // Calculate hash rate
+            // Calculate the max hash rate
             // by number of stream processors, vram bit, vram bandwidth and vram size
             $GPU_hashrate =
                 $st_processors_multiplier *
@@ -105,20 +105,27 @@ class ProcessMiningDataJob implements ShouldQueue
                 $VRAM_bandwidth_multiplier *
                 $VRAM_size_multiplier;
 
-            // Loading algorithm - =1/КОРЕНЬ(КОРЕНЬ(A2)) * $I$5 ^ (1/6) * 225
+            // Loading algorithm for CPU - =1/КОРЕНЬ(КОРЕНЬ(A2)) * $I$5 ^ (1/6) * 225
             // Calculate loading by gpu hashrate and platform performance.
-            $GPU_loading_coefficient =
+            $GPU_loading_by_CPU =
                 1 / pow($GPU_hashrate, 1 / 4) *
                 pow($platform_performance, 1 / 6) *
                 225;
 
-//            $GPU_loading = ($GPU_loading_coefficient < 100 ? $GPU_loading_coefficient : 100);
-//            $GPU_performance *= $GPU_loading/100;
+            // Change hashrate by GPU loading
+            $GPU_hashrate *= ($GPU_loading_by_CPU > 100 ? 100 : $GPU_loading_by_CPU) / 100;
+
+            // Calculate CPU loading (platform)
+            if($GPU_loading_by_CPU - 100 <= 0) $CPU_loading = 100;
+            else $CPU_loading = 100 - ($GPU_loading_by_CPU - 100);
+
+            // Change hashrate by GPU loading
+            $GPU_hashrate *= ($GPU_loading_by_CPU > 100 ? 100 : $GPU_loading_by_CPU) / 100;
 
             Log::info($mData['name']);
-            Log::info('Loading: ' . $GPU_loading_coefficient);
             Log::info('Hashrate: ' . $GPU_hashrate);
-            Log::info('Platform performance: ' . $platform_performance);
+            Log::info('GPU Loading: ' . $GPU_loading_by_CPU . '%');
+            Log::info('CPU Loading: ' . $CPU_loading . '%');
         }
 
         ApplyMiningDataJob::dispatch();
