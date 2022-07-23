@@ -41,7 +41,7 @@ return new class extends Migration
             // Platform (motherboard + CPU)
             $table->unsignedInteger('platform_cors_count')->nullable(); // CPU cors count
             $table->unsignedInteger('platform_threads_count')->nullable(); // CPU threads count
-            $table->unsignedInteger('platform_frequency')->nullable(); // CPU frequency
+            $table->unsignedFloat('platform_frequency')->nullable(); // CPU frequency
             $table->unsignedInteger('platform_RAM_slots')->nullable(); // Number of RAM slots
 
             // RAM
