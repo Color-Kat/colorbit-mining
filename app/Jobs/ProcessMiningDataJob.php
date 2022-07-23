@@ -36,7 +36,7 @@ class ProcessMiningDataJob implements ShouldQueue
         $applyMiningData = [];
 
         foreach ($this->miningData as $mData) {
-            if(
+            if (
                 !$mData['GPU'] ||
                 !$mData['platform'] ||
                 !$mData['RAM'] ||
@@ -48,9 +48,8 @@ class ProcessMiningDataJob implements ShouldQueue
             $platform = $mData['platform']['part'];
             $platform_performance =
                 ($platform['platform_cors_count'] + $platform['platform_threads_count'])
-                * $platform['platform_frequency']
-                / 100 * 4;
-            ;
+                * $platform['platform_frequency'] ** 2
+                / 100 * 3;;
 
             /* ----- GPU ----- */
             $GPU = $mData['GPU']['part'];
@@ -59,14 +58,25 @@ class ProcessMiningDataJob implements ShouldQueue
             // = КОРЕНЬ(B4) * КОРЕНЬ(E4) * ЕСЛИ(F4 > 600; LOG(F4); КОРЕНЬ(F4)) * ЕСЛИ(F4<190; 1,1; 1) * ( КОРЕНЬ(H4) * ЕСЛИ(H4 < 5; 1,1; 1) ) / ЕСЛИ(F4 > 600; 140; 1100) * ЕСЛИ(B4<1300;  ЕСЛИ(B4>1000; 1,4; 2 ); 1 )
 
             // Multiplier by stream processors
-            $st_processors_multiplier =
-                sqrt($GPU['GPU_st_processors']) *
-                ($GPU['GPU_st_processors'] < 1300
-                    ? ($GPU['GPU_st_processors'] > 1000 ? 1.4 : 2)
-                    : 1
-                );
+            // Reduce speed of increasing hashrate for powerful cards
+            // using sqrt and smaller coefficients for powerful cards
+            $st_processors_multiplier = sqrt($GPU['GPU_st_processors']);
+//                ($GPU['GPU_st_processors'] < 1300
+//                    ? ($GPU['GPU_st_processors'] > 1000 ? 1.4 : 2)
+//                    : 1
+//                );
+            if ($GPU['GPU_st_processors'] < 1000)
+                $st_processors_multiplier *= 2; // Increase hashrate by st_processors for weak cards
+            else if ($GPU['GPU_st_processors'] < 1300)
+                $st_processors_multiplier *= 1.4;
+            else if ($GPU['GPU_st_processors'] > 10000)
+                $st_processors_multiplier *= 0.77; // Decrease hashrate for powerful cards
+            else
+                $st_processors_multiplier *= 1;
 
             // Multiplier by bandwidth
+            // So reduce speed of increasing hashrate for powerful cards
+            // using logarithm and sqrt (for powerful and not cards)
             $VRAM_bandwidth_multiplier =
                 ($GPU['GPU_VRAM_bandwidth'] > 600
                     ? log($GPU['GPU_VRAM_bandwidth']) / 250
@@ -75,27 +85,40 @@ class ProcessMiningDataJob implements ShouldQueue
                 ($GPU['GPU_VRAM_bandwidth'] < 190 ? 1.1 : 1);
 
             // Multiplier by vram size
+            // Sqrt reduce the different between every next numbers,
+            // It make speed of increasing hashrate quick for weak GPUs and slow for powerful GPUs
             $VRAM_size_multiplier =
                 sqrt($GPU['GPU_VRAM_size']) *
-                ($GPU['GPU_VRAM_size'] < 5 ? 1.1 : 1);
+                ($GPU['GPU_VRAM_size'] < 5
+                    ? 1.1
+                    : ($GPU['GPU_VRAM_size'] > 10
+                        ? 0.7
+                        : 1
+                    )
+                );
 
             // Calculate hash rate
-            $GPU_performance =
+            // by number of stream processors, vram bit, vram bandwidth and vram size
+            $GPU_hashrate =
                 $st_processors_multiplier *
                 sqrt($GPU['GPU_VRAM_bit']) *
                 $VRAM_bandwidth_multiplier *
-                $VRAM_size_multiplier
-            ;
+                $VRAM_size_multiplier;
 
             // Loading algorithm - =1/КОРЕНЬ(КОРЕНЬ(A2)) * $I$5 ^ (1/6) * 225
-//            $GPU_loading_coefficient = $platform_performance * $GPU_performance + 25;
+            // Calculate loading by gpu hashrate and platform performance.
+            $GPU_loading_coefficient =
+                1 / pow($GPU_hashrate, 1 / 4) *
+                pow($platform_performance, 1 / 6) *
+                225;
+
 //            $GPU_loading = ($GPU_loading_coefficient < 100 ? $GPU_loading_coefficient : 100);
 //            $GPU_performance *= $GPU_loading/100;
 
             Log::info($mData['name']);
-//            Log::info($GPU_loading);
-            Log::info($GPU_performance);
-            Log::info($platform_performance);
+            Log::info('Loading: ' . $GPU_loading_coefficient);
+            Log::info('Hashrate: ' . $GPU_hashrate);
+            Log::info('Platform performance: ' . $platform_performance);
         }
 
         ApplyMiningDataJob::dispatch();
