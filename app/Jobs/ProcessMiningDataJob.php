@@ -193,6 +193,8 @@ class ProcessMiningDataJob implements ShouldQueue
                 !$mData['case']
             ) continue;
 
+            $GPU = $mData['GPU']['part'];
+
             Log::info($mData['name']);
 
             /* ----- CPU ----- */
@@ -202,7 +204,7 @@ class ProcessMiningDataJob implements ShouldQueue
             $RAM_performance = $this->calculate_RAM_preformance($mData['RAM']['part']);
 
             /* ----- GPU ----- */
-            $GPU_hashrate = $this->calculate_GPU_hashrate($mData['GPU']['part']);
+            $GPU_hashrate = $this->calculate_GPU_hashrate($GPU);
 
             Log::info('Max Hashrate: ' . $GPU_hashrate);
 
@@ -211,6 +213,15 @@ class ProcessMiningDataJob implements ShouldQueue
 
             // Apply GPU loading to change hashrate by CPU loading (in shares - 0-1)
             $GPU_hashrate *= $loadings['GPU'];
+
+            /* --- Temperatures --- */
+            $RAM_temperature = $loadings['RAM'] * $mData['RAM']['part']['TDP'];
+
+            // = (B2 * A2 / 100) * 1/C2/(D2/1,5) * 12,5 + 32
+            $GPU_temperature =
+                $loadings['GPU'] *
+                $GPU['TDP'] *
+                $GPU['GPU_fan_efficiency'] / 100;
 
             $processedData[] = [
                 'id' => $mData['id'],
@@ -226,8 +237,6 @@ class ProcessMiningDataJob implements ShouldQueue
             Log::info("CPU Loading ({$mData['platform']['part']['name']}): " . $loadings['CPU'] . '%');
             Log::info("RAM Loading ({$mData['RAM']['part']['name']}): " . $loadings['RAM'] . '%');
             Log::info('----------------------');
-
-
         }
 
         ApplyMiningDataJob::dispatch();
