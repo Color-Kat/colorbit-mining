@@ -128,7 +128,8 @@ class ProcessMiningDataJob implements ShouldQueue
     private function calculateLoadings(
         int|float $GPU_hashrate,
         int|float $CPU_performance,
-        int|float $RAM_performance
+        int|float $RAM_performance,
+        array $mData
     ) {
         $loadings = [];
 
@@ -167,9 +168,18 @@ class ProcessMiningDataJob implements ShouldQueue
             $RAM_loading = 1 - ($GPU_loading_by_RAM - 1);
         }
 
+        // Calculate PSU loading
+        $PSU_loading =
+            (
+                $mData['GPU']['part']['power'] +
+                $mData['platform']['part']['power'] +
+                $mData['RAM']['part']['power']
+            ) / $mData['PSU']['part']['PSU_power_supply'] * 100;
+
         $loadings['GPU'] = ceil($GPU_loading * 100);
         $loadings['CPU'] = ceil($CPU_loading * 100);
         $loadings['RAM'] = ceil($RAM_loading * 100);
+        $loadings['PSU'] = ceil($PSU_loading);
 
         return $loadings;
     }
@@ -209,7 +219,12 @@ class ProcessMiningDataJob implements ShouldQueue
             Log::info('Max Hashrate: ' . $GPU_hashrate);
 
             /* --- Loading --- */
-            $loadings = $this->calculateLoadings($GPU_hashrate, $CPU_performance, $RAM_performance);
+            $loadings = $this->calculateLoadings(
+                $GPU_hashrate,
+                $CPU_performance,
+                $RAM_performance,
+                $mData
+            );
 
             // Apply GPU loading to change hashrate by CPU loading (in shares - 0-1)
             $GPU_hashrate *= $loadings['GPU'] / 100;
@@ -231,19 +246,22 @@ class ProcessMiningDataJob implements ShouldQueue
                 (($GPU['GPU_fans_count'] > 0 ? $GPU['GPU_fans_count'] : 0.4) / 1.5) *
                 12.5 + 32; // HSF ϴca depends on fans
 
+
+
             $case_temperature = max($CPU_temperature, $RAM_temperature, $GPU_temperature);
             $case_temperature = $case_temperature > 40 ? $case_temperature - 20 : $case_temperature;
 
             $processedData[] = [
-                'id'          => $mData['id'],
+                'rig_id'      => $mData['id'],
                 'hashrate'    => $GPU_hashrate,
                 'GPU_loading' => $loadings['GPU'],
                 'CPU_loading' => $loadings['CPU'],
                 'RAM_loading' => $loadings['RAM'],
+                'PSU_loading' => $loadings['PSU'],
 
-                'CPU_temperature' => $CPU_temperature,
-                'RAM_temperature' => $RAM_temperature,
-                'GPU_temperature' => $GPU_temperature,
+                'CPU_temperature'  => $CPU_temperature,
+                'RAM_temperature'  => $RAM_temperature,
+                'GPU_temperature'  => $GPU_temperature,
                 'case_temperature' => $case_temperature,
             ];
 
