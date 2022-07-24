@@ -214,21 +214,27 @@ class ProcessMiningDataJob implements ShouldQueue
             // Apply GPU loading to change hashrate by CPU loading (in shares - 0-1)
             $GPU_hashrate *= $loadings['GPU'];
 
-            /* --- Temperatures --- */
-            $RAM_temperature = $loadings['RAM'] * $mData['RAM']['part']['TDP'];
+            /* ------------ Temperatures ------------- */
+            /* --- (tCase°C - tAmbient°C)/(HSF ϴca) --- */
+            $RAM_temperature =
+                $loadings['RAM'] * $mData['RAM']['part']['TDP']
+                * 10 + 32; // HSF ϴca = 10
 
-            // = (B2 * A2 / 100) * 1/C2/(D2/1,5) * 12,5 + 32
             $GPU_temperature =
-                $loadings['GPU'] *
-                $GPU['TDP'] *
-                $GPU['GPU_fan_efficiency'] / 100;
+                $GPU['TDP'] * $loadings['GPU'] *
+                1 / $GPU['GPU_fan_efficiency'] /
+                ($GPU['GPU_fans_count'] != 0 ? $GPU['GPU_fans_count'] : 0.4) / 1.5 *
+                12.5 + 32; // HSF ϴca depends on fans
 
             $processedData[] = [
-                'id' => $mData['id'],
-                'hashrate' => $GPU_hashrate,
+                'id'          => $mData['id'],
+                'hashrate'    => $GPU_hashrate,
                 'GPU_loading' => $loadings['GPU'],
                 'CPU_loading' => $loadings['CPU'],
                 'RAM_loading' => $loadings['RAM'],
+
+                'RAM_temperature' => $RAM_temperature,
+                'GPU_temperature' => $GPU_temperature
             ];
 
             Log::info($processedData);
