@@ -49,23 +49,21 @@ class ProcessMiningDataJob implements ShouldQueue
     }
 
     /**
-     * Calculate the coefficient of influence of RAM on the hashrate
-     * The smaller the performance of memory, the smaller hashrate. But it doesn't affect that much
+     * Calculate the performance of RAM.
+     * The smaller the performance of memory, the smaller hashrate. But it doesn't affect that much.
      *
      * @param $CPU
      * @return float|int
      */
-    private function calculate_RAM_coefficient($RAM)
+    private function calculate_RAM_preformance($RAM)
     {
-        $RAM_coefficient =
-            sqrt(sqrt(sqrt(32))) *
-            sqrt(sqrt(2666)) *
-            ($RAM['RAM_channels'] > 1 ? 1.14 : 1.1)
-            / 10;
+        // E9^(1/3)*КОРЕНЬ(F9*G9/2)/60
+        $RAM_performance =
+            pow($RAM['RAM_size'], 1 / 3) *
+            sqrt($RAM['RAM_frequency'] * $RAM['RAM_channels'] / 2)
+            / 60;
 
-        if ($RAM_coefficient > 1) $RAM_coefficient = 1;
-
-        return $RAM_coefficient;
+        return $RAM_performance;
     }
 
     /**
@@ -145,26 +143,41 @@ class ProcessMiningDataJob implements ShouldQueue
                 !$mData['case']
             ) continue;
 
+            Log::info($mData['name']);
+
             /* ----- CPU ----- */
             $CPU_performance = $this->calculate_CPU_performance($mData['platform']['part']);
 
             /* ----- RAM ----- */
-            $RAM_coefficient = $this->calculate_RAM_coefficient($mData['RAM']['part']);
+            $RAM_performance = $this->calculate_RAM_preformance($mData['RAM']['part']);
 
             /* ----- GPU ----- */
             $GPU_hashrate = $this->calculate_GPU_hashrate($mData['GPU']['part']);
 
-            // Calculate loading by gpu hashrate and platform performance. In %
+            Log::info('Max Hashrate: ' . $GPU_hashrate);
+
+            /* --- Loading --- */
+            // Calculate loading of GPU by GPU hashrate and platform performance. In %
             $GPU_loading_by_CPU =
                 1 / pow($GPU_hashrate, 1 / 4) *
                 pow($CPU_performance, 1 / 6) *
                 225 / 100;
 
-            // Apply GPU loading to change hashrate by CPU loading (in shares - 0-1)
-            $GPU_hashrate *=
-                ($GPU_loading_by_CPU > 1 ? 1 : $GPU_loading_by_CPU) *
-                $RAM_coefficient
+            // Calculate loading of GPU by GPU hashrate and RAM performance. In %
+            $GPU_loading_by_RAM =
+                1/pow($GPU_hashrate, 1/4) *
+                pow($RAM_performance, 1/4) *
+                290 / 100
             ;
+
+            $GPU_loading =
+                ($GPU_loading_by_CPU > 1 ? 1 : $GPU_loading_by_CPU) *
+                ($GPU_loading_by_RAM > 1 ? 1 : $GPU_loading_by_RAM);
+
+            if($GPU_loading > 1) $GPU_loading = 1;
+
+            // Apply GPU loading to change hashrate by CPU loading (in shares - 0-1)
+            $GPU_hashrate *= $GPU_loading;
 
             // Calculate CPU loading
             if ($GPU_loading_by_CPU - 1 <= 0) {
@@ -173,11 +186,18 @@ class ProcessMiningDataJob implements ShouldQueue
                 $CPU_loading = 1 - ($GPU_loading_by_CPU - 1);
             }
 
-            Log::info($mData['name']);
+            // Calculate RAM loading
+            if ($GPU_loading_by_RAM - 1 <= 0) {
+                $RAM_loading = 1;
+            } else {
+                $RAM_loading = 1 - ($GPU_loading_by_RAM - 1);
+            }
+
             Log::info('Hashrate: ' . $GPU_hashrate);
-            Log::info('GPU Loading: ' . $GPU_loading_by_CPU . '%');
-            Log::info("CPU Loading ({$mData['platform']['part']['name']}): " . $CPU_loading . '%');
-            Log::info("RAM Loading ({$mData['RAM']['part']['name']}): " . $RAM_coefficient . '%');
+            Log::info('GPU Loading: ' . $GPU_loading_by_CPU * 100 . '%');
+            Log::info("CPU Loading ({$mData['platform']['part']['name']}): " . $CPU_loading * 100 . '%');
+            Log::info("RAM Loading ({$mData['RAM']['part']['name']}): " . $RAM_loading * 100 . '%');
+            Log::info('----------------------');
         }
 
         ApplyMiningDataJob::dispatch();
