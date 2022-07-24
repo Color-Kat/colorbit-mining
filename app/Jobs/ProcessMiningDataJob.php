@@ -246,7 +246,9 @@ class ProcessMiningDataJob implements ShouldQueue
                 (($GPU['GPU_fans_count'] > 0 ? $GPU['GPU_fans_count'] : 0.4) / 1.5) *
                 12.5 + 32; // HSF ϴca depends on fans
 
-
+            $PSU_temperature =
+                $loadings['PSU'] * $mData['PSU']['part']['TDP'] / 100
+                * 4 + 32; // HSF ϴca = 4
 
             $case_temperature = max($CPU_temperature, $RAM_temperature, $GPU_temperature);
             $case_temperature = $case_temperature > 40 ? $case_temperature - 20 : $case_temperature;
@@ -262,6 +264,7 @@ class ProcessMiningDataJob implements ShouldQueue
                 'CPU_temperature'  => $CPU_temperature,
                 'RAM_temperature'  => $RAM_temperature,
                 'GPU_temperature'  => $GPU_temperature,
+                'PSU_temperature'  => $PSU_temperature,
                 'case_temperature' => $case_temperature,
             ];
 
