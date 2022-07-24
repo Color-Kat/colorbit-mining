@@ -125,6 +125,55 @@ class ProcessMiningDataJob implements ShouldQueue
         return $GPU_hashrate;
     }
 
+    private function calculateLoadings(
+        int|float $GPU_hashrate,
+        int|float $CPU_performance,
+        int|float $RAM_performance
+    ) {
+        $loadings = [];
+
+        // Calculate loading of GPU by GPU hashrate and platform performance. In %
+        $GPU_loading_by_CPU =
+            1 / pow($GPU_hashrate, 1 / 4) *
+            pow($CPU_performance, 1 / 6) *
+            225 / 100;
+
+        // Calculate loading of GPU by GPU hashrate and RAM performance. In %
+        $GPU_loading_by_RAM =
+            1 / pow($GPU_hashrate, 1 / 4) *
+            pow($RAM_performance, 1 / 4) *
+            290 / 100;
+
+        // Calculate GPU loading by CPU and RAM loadings
+        $GPU_loading =
+            1 *
+            ($GPU_loading_by_CPU > 1 ? 1 : $GPU_loading_by_CPU) *
+            ($GPU_loading_by_RAM > 1 ? 1 : $GPU_loading_by_RAM);
+
+        // The max loading is 100%
+        if ($GPU_loading > 1) $GPU_loading = 1;
+
+        // Calculate CPU loading
+        if ($GPU_loading_by_CPU - 1 <= 0) {
+            $CPU_loading = 1;
+        } else {
+            $CPU_loading = 1 - ($GPU_loading_by_CPU - 1);
+        }
+
+        // Calculate RAM loading
+        if ($GPU_loading_by_RAM - 1 <= 0) {
+            $RAM_loading = 1;
+        } else {
+            $RAM_loading = 1 - ($GPU_loading_by_RAM - 1);
+        }
+
+        $loadings['GPU'] = ceil($GPU_loading * 100);
+        $loadings['CPU'] = ceil($CPU_loading * 100);
+        $loadings['RAM'] = ceil($RAM_loading * 100);
+
+        return $loadings;
+    }
+
     /**
      * Execute the job.
      *
@@ -132,7 +181,8 @@ class ProcessMiningDataJob implements ShouldQueue
      */
     public function handle()
     {
-        $applyMiningData = [];
+        $processedData = [];
+        $time = microtime(true);
 
         foreach ($this->miningData as $mData) {
             if (
@@ -157,51 +207,32 @@ class ProcessMiningDataJob implements ShouldQueue
             Log::info('Max Hashrate: ' . $GPU_hashrate);
 
             /* --- Loading --- */
-            // Calculate loading of GPU by GPU hashrate and platform performance. In %
-            $GPU_loading_by_CPU =
-                1 / pow($GPU_hashrate, 1 / 4) *
-                pow($CPU_performance, 1 / 6) *
-                225 / 100;
-
-            // Calculate loading of GPU by GPU hashrate and RAM performance. In %
-            $GPU_loading_by_RAM =
-                1/pow($GPU_hashrate, 1/4) *
-                pow($RAM_performance, 1/4) *
-                290 / 100
-            ;
-
-            $GPU_loading =
-                ($GPU_loading_by_CPU > 1 ? 1 : $GPU_loading_by_CPU) *
-                ($GPU_loading_by_RAM > 1 ? 1 : $GPU_loading_by_RAM);
-
-            if($GPU_loading > 1) $GPU_loading = 1;
+            $loadings = $this->calculateLoadings($GPU_hashrate, $CPU_performance, $RAM_performance);
 
             // Apply GPU loading to change hashrate by CPU loading (in shares - 0-1)
-            $GPU_hashrate *= $GPU_loading;
+            $GPU_hashrate *= $loadings['GPU'];
 
-            // Calculate CPU loading
-            if ($GPU_loading_by_CPU - 1 <= 0) {
-                $CPU_loading = 1;
-            } else {
-                $CPU_loading = 1 - ($GPU_loading_by_CPU - 1);
-            }
+            $processedData[] = [
+                'id' => $mData['id'],
+                'hashrate' => $GPU_hashrate,
+                'GPU_loading' => $loadings['GPU'],
+                'CPU_loading' => $loadings['CPU'],
+                'RAM_loading' => $loadings['RAM'],
+            ];
 
-            // Calculate RAM loading
-            if ($GPU_loading_by_RAM - 1 <= 0) {
-                $RAM_loading = 1;
-            } else {
-                $RAM_loading = 1 - ($GPU_loading_by_RAM - 1);
-            }
-
+            Log::info($processedData);
             Log::info('Hashrate: ' . $GPU_hashrate);
-            Log::info('GPU Loading: ' . $GPU_loading_by_CPU * 100 . '%');
-            Log::info("CPU Loading ({$mData['platform']['part']['name']}): " . $CPU_loading * 100 . '%');
-            Log::info("RAM Loading ({$mData['RAM']['part']['name']}): " . $RAM_loading * 100 . '%');
+            Log::info('GPU Loading: ' . $loadings['GPU'] . '%');
+            Log::info("CPU Loading ({$mData['platform']['part']['name']}): " . $loadings['CPU'] . '%');
+            Log::info("RAM Loading ({$mData['RAM']['part']['name']}): " . $loadings['RAM'] . '%');
             Log::info('----------------------');
+
+
         }
 
         ApplyMiningDataJob::dispatch();
 
-        Log::info($this->miningData);
+        Log::info("TIME: " . microtime(true) - $time);
+//        Log::info($this->miningData);
     }
 }
