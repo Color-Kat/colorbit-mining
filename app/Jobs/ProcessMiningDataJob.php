@@ -125,6 +125,15 @@ class ProcessMiningDataJob implements ShouldQueue
         return $GPU_hashrate;
     }
 
+    /**
+     * Calculate loadings of GPU, CPU, RAM
+     *
+     * @param int|float $GPU_hashrate
+     * @param int|float $CPU_performance
+     * @param int|float $RAM_performance
+     * @param array $mData
+     * @return array
+     */
     private function calculateLoadings(
         int|float $GPU_hashrate,
         int|float $CPU_performance,
@@ -185,6 +194,47 @@ class ProcessMiningDataJob implements ShouldQueue
     }
 
     /**
+     * Calculate temperature of all parts by its loading and specs
+     *
+     * @param $loadings
+     * @param $mData
+     * @return array
+     */
+    private function calculateTemperature($loadings, $mData)
+    {
+        $GPU = $mData['GPU'];
+
+        $CPU_temperature =
+            $loadings['CPU'] * $mData['platform']['part']['TDP'] / 100
+            * 0.444 + 32; // HSF ϴca = 0.444
+
+        $RAM_temperature =
+            $loadings['RAM'] * $mData['RAM']['part']['TDP'] / 100
+            * 10 + 32; // HSF ϴca = 10
+
+        $GPU_temperature =
+            $GPU['TDP'] * $loadings['GPU'] / 100 *
+            1 / $GPU['GPU_fan_efficiency'] /
+            (($GPU['GPU_fans_count'] > 0 ? $GPU['GPU_fans_count'] : 0.4) / 1.5) *
+            12.5 + 32; // HSF ϴca depends on fans
+
+        $PSU_temperature =
+            $loadings['PSU'] * $mData['PSU']['part']['TDP'] / 100
+            * 4 + 32; // HSF ϴca = 4
+
+        $case_temperature = max($CPU_temperature, $RAM_temperature, $GPU_temperature);
+        $case_temperature = $case_temperature > 40 ? $case_temperature - 20 : $case_temperature;
+
+        return [
+            'CPU_temperature'  => $CPU_temperature,
+            'RAM_temperature'  => $RAM_temperature,
+            'GPU_temperature'  => $GPU_temperature,
+            'PSU_temperature'  => $PSU_temperature,
+            'case_temperature' => $case_temperature,
+        ];
+    }
+
+    /**
      * Execute the job.
      *
      * @return void
@@ -231,27 +281,7 @@ class ProcessMiningDataJob implements ShouldQueue
 
             /* ------------ Temperatures ------------- */
             /* --- (tCase°C - tAmbient°C)/(HSF ϴca) --- */
-
-            $CPU_temperature =
-                $loadings['CPU'] * $mData['platform']['part']['TDP'] / 100
-                * 0.444 + 32; // HSF ϴca = 0.444
-
-            $RAM_temperature =
-                $loadings['RAM'] * $mData['RAM']['part']['TDP'] / 100
-                * 10 + 32; // HSF ϴca = 10
-
-            $GPU_temperature =
-                $GPU['TDP'] * $loadings['GPU'] / 100 *
-                1 / $GPU['GPU_fan_efficiency'] /
-                (($GPU['GPU_fans_count'] > 0 ? $GPU['GPU_fans_count'] : 0.4) / 1.5) *
-                12.5 + 32; // HSF ϴca depends on fans
-
-            $PSU_temperature =
-                $loadings['PSU'] * $mData['PSU']['part']['TDP'] / 100
-                * 4 + 32; // HSF ϴca = 4
-
-            $case_temperature = max($CPU_temperature, $RAM_temperature, $GPU_temperature);
-            $case_temperature = $case_temperature > 40 ? $case_temperature - 20 : $case_temperature;
+            $temperatures = $this->calculateTemperature($loadings, $mData);
 
             $processedData[] = [
                 'rig_id'      => $mData['id'],
@@ -260,12 +290,11 @@ class ProcessMiningDataJob implements ShouldQueue
                 'CPU_loading' => $loadings['CPU'],
                 'RAM_loading' => $loadings['RAM'],
                 'PSU_loading' => $loadings['PSU'],
-
-                'CPU_temperature'  => $CPU_temperature,
-                'RAM_temperature'  => $RAM_temperature,
-                'GPU_temperature'  => $GPU_temperature,
-                'PSU_temperature'  => $PSU_temperature,
-                'case_temperature' => $case_temperature,
+                'CPU_temperature'  => $temperatures['CPU_temperature'],
+                'RAM_temperature'  => $temperatures['RAM_temperature'],
+                'GPU_temperature'  => $temperatures['GPU_temperature'],
+                'PSU_temperature'  => $temperatures['PSU_temperature'],
+                'case_temperature' => $temperatures['case_temperature'],
             ];
 
             Log::info($processedData);
