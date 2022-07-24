@@ -202,7 +202,7 @@ class ProcessMiningDataJob implements ShouldQueue
      */
     private function calculateTemperature($loadings, $mData)
     {
-        $GPU = $mData['GPU'];
+        $GPU = $mData['GPU']['part'];
 
         $CPU_temperature =
             $loadings['CPU'] * $mData['platform']['part']['TDP'] / 100
@@ -222,7 +222,7 @@ class ProcessMiningDataJob implements ShouldQueue
             $loadings['PSU'] * $mData['PSU']['part']['TDP'] / 100
             * 4 + 32; // HSF ϴca = 4
 
-        $case_temperature = max($CPU_temperature, $RAM_temperature, $GPU_temperature);
+        $case_temperature = max($CPU_temperature, $RAM_temperature, $GPU_temperature, $PSU_temperature);
         $case_temperature = $case_temperature > 40 ? $case_temperature - 20 : $case_temperature;
 
         return [
@@ -285,6 +285,7 @@ class ProcessMiningDataJob implements ShouldQueue
 
             $processedData[] = [
                 'rig_id'      => $mData['id'],
+                'mData'       => $mData,
                 'hashrate'    => $GPU_hashrate,
                 'GPU_loading' => $loadings['GPU'],
                 'CPU_loading' => $loadings['CPU'],
@@ -305,7 +306,7 @@ class ProcessMiningDataJob implements ShouldQueue
             Log::info('----------------------');
         }
 
-        ApplyMiningDataJob::dispatch();
+        MiningBreakdownsJob::dispatch();
 
         Log::info("TIME: " . microtime(true) - $time);
 //        Log::info($this->miningData);
